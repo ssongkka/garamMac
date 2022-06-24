@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="modalPaper0"
+        class="modal fade"
+        id="modalPaper0"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="modalPaper0Label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalPaper0Ti">운행 관련 서류 생성</h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="paperCtm" value="">
+                    <input type="hidden" id="paperDay" value="">
+                    <div class="paper0">
+                        <!-- <div class="paper0-item">
+                            <blockquote>
+                                <p id="paperTitle"></p>
+                            </blockquote>
+                        </div> -->
+                        <div class="mdMakePaper">
+                            <div class="mdMakePaper-item card">
+                                <button class="btn btn-outline-primary" id="btnContPaper">
+                                    <i class="fa-solid fa-file-signature"></i>계약서
+                                </button>
+                            </div>
+                            <div class="mdMakePaper-item card">
+                                <button class="btn btn-outline-primary" id="btnAlloPaper">
+                                    <i class="fa-solid fa-file-invoice"></i>배차서류
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        th:fragment="modalPaper1"
+        class="modal fade"
+        id="modalPaper1"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="modalPaper1Label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">계약서 생성</h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+                    <button type="button" class="btn btn-primary">입 력</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        th:fragment="modalPaper2"
+        class="modal fade"
+        id="modalPaper2"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="modalPaper2Label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalPaper2title">운행 배차 서류 생성</h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body md-bd-paper2">
+                    <div class="paper2-item card-song">
+                        <h3>
+                            <i class="fa-solid fa-building"></i>운행 회사 선택</h3>
+                        <select class="form-select" aria-label="Default select" id="selCompa">
+                            <option
+                                th:each="compa : ${compa}"
+                                th:value="${compa.company}"
+                                th:label="${compa.company}"
+                                th:data-value="${compa.company}"></option>
+                        </select>
+                        <h3>
+                            <i class="fa-solid fa-file-signature"></i>배차 서류 목록
+                        </h3>
+                        <div class="table-responsive">
+                            <table
+                                class="table table-striped table-hover table-bordered"
+                                id="tb-make-order">
+                                <colgroup>
+                                    <col width="10%">
+                                    <col width="15%">
+                                    <col width="auto">
+                                    <col width="10%">
+                                    <col width="10%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>선택</th>
+                                        <th>서류</th>
+                                        <th>위</th>
+                                        <th>아래</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tb-paper2">
+                                    <tr>
+                                        <td>1</td>
+                                        <td><input type="checkbox" checked="checked" name="paperCh" value="1"></td>
+                                        <td>기사배치표</td>
+                                        <td>
+                                            <button class="btn btn-default btnUp">
+                                                <i class="fas fa-angle-up"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnDown">
+                                                <i class="fas fa-angle-down"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td><input type="checkbox" checked="checked" name="paperCh" value="2"></td>
+                                        <td>음주측정확인서</td>
+                                        <td>
+                                            <button class="btn btn-default btnUp">
+                                                <i class="fas fa-angle-up"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnDown">
+                                                <i class="fas fa-angle-down"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td><input type="checkbox" checked="checked" name="paperCh" value="3"></td>
+                                        <td>직영차량 운행 각서
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnUp">
+                                                <i class="fas fa-angle-up"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnDown">
+                                                <i class="fas fa-angle-down"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td><input type="checkbox" checked="checked" name="paperCh" value="4"></td>
+                                        <td>차량안전점검표
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnUp">
+                                                <i class="fas fa-angle-up"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnDown">
+                                                <i class="fas fa-angle-down"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td><input type="checkbox" checked="checked" name="paperCh" value="5"></td>
+                                        <td>차량등록증
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnUp">
+                                                <i class="fas fa-angle-up"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnDown">
+                                                <i class="fas fa-angle-down"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td><input type="checkbox" checked="checked" name="paperCh" value="6"></td>
+                                        <td>차량보험증
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnUp">
+                                                <i class="fas fa-angle-up"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnDown">
+                                                <i class="fas fa-angle-down"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td><input type="checkbox" checked="checked" name="paperCh" value="7"></td>
+                                        <td>교통안전통보서
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnUp">
+                                                <i class="fas fa-angle-up"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btnDown">
+                                                <i class="fas fa-angle-down"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <form th:action="@{/dashboard/makePapper}" id="formPapper">
+                            <input type="hidden" name="companyyy" id="companyyy" value="">
+                            <input type="hidden" name="dayyy" id="dayyy" value="">
+                            <input type="hidden" name="ctmmm" id="ctmmm" value="">
+                            <input type="hidden" name="rsvttt" id="rsvttt" value="">
+                            <input type="hidden" name="paperCh" id="paperCh" value="">
+                            <input type="hidden" name="ctmmmName" id="ctmmmName" value="">
+                        </form>
+                    </div>
+                    <div class="paper2-item card-song">
+                        <div class="baeTile">
+                            <h3>
+                                <i class="fa-solid fa-bus-simple"></i>운행 및 배차 목록
+                            </h3>
+                            <div class="baeTile-item">
+                                <small>서류1 - 차량등록증
+                                </small>
+                                <small>서류2 - 차량보험
+                                </small>
+                                <small>서류3 - 교통안전통보서
+                                </small>
+                            </div>
+                        </div>
+                        <div id="paper2-allo">
+                            <div class="paper2-allo-item">
+                                <div>
+                                    <h4>
+                                        <i class="fas fa-map-marker-alt"></i>목적지</h4>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                        <colgroup>
+                                            <col width="5%">
+                                            <col width="20%">
+                                            <col width="10%">
+                                            <col width="10%">
+                                            <col width="25%">
+                                            <col width="10%">
+                                            <col width="10%">
+                                            <col width="10%">
+                                        </colgroup>
+                                        <thead>
+                                            <th>#</th>
+                                            <th>차량번호</th>
+                                            <th>운행승무원</th>
+                                            <th>서류</th>
+                                            <th>비고</th>
+                                            <th>서류1</th>
+                                            <th>서류2</th>
+                                            <th>서류3</th>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td class="thNone">1</td>
+                                                <td class="thNone">1</td>
+                                                <td class="thNone">1</td>
+                                                <td>1</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <input type="text" class="form-control">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="gap: 2rem;">
+                    <div style="flex: 1;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    </div>
+                    <span id="btnFootCont" style="padding-right: 1rem;"></span>
+                    <button type="button" class="btn btn-primary" id="btnPapperMake">배차서류생성<i class="fa-solid fa-check" style="color: darkgreen;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

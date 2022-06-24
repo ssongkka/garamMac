@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="main-body">
+        <!-- 자동완성 방지용 -->
+        <input type="text" style="width:0px;height:0px;position: absolute;">
+        <input type="password" style="width:0px;height:0px;position: absolute;">
+        <!-- 자동완성 방지용 -->
+        <header>
+            <div>
+                <div class="dash-cal-h">
+                    <div class="">
+                        <a class="btn" id="fnDownMonth">
+                            <i class="fas fa-chevron-left fa-lg"></i>
+                        </a>
+                    </div>
+                    <div class="dash-cal-h-item dash-cal-h-item2" id="">
+                        <strong><input type="month" id="yearMonth" value=""></strong>
+                    </div>
+                    <div class="">
+                        <a class="btn" id="fnUpMonth">
+                            <i class="fas fa-chevron-right fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="hdCompa">
+                <ul class="nav nav-pills" id="regCompa-tab" role="tablist"></ul>
+            </div>
+            <div class="deTail">
+                <div class="deTail-item">
+                    <blockquote>계약기간</blockquote>
+                    <span id="stDD"></span>
+                    <span>&#126;</span>
+                    <span id="edDD"></span>
+                </div>
+                <div class="deTail-item">
+                    <blockquote>주소</blockquote>
+                    <span id="adD"></span>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-success" id="btnAllAllo">일괄배차</button>
+            </div>
+        </header>
+        <main>
+            <div class="main-reg-main table-responsive">
+                <input type="hidden" value="" id="rgconum">
+                <table class="table table-bordered table-striped tbRegAllo">
+                    <colgroup>
+                        <col width="7%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                        <col width="3%"/>
+                    </colgroup>
+                    <thead id="thDays"></thead>
+                    <tbody id="tbAllo"></tbody>
+                    <tfoot id="tfBtn"></tfoot>
+                </table>
+            </div>
+
+            <div
+                class="modal fade"
+                id="regAlloMd"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="regAlloDeTi"></h3>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            <input type="hidden" value="">
+                            <input type="hidden" value="">
+                            <input type="hidden" value="">
+                            <input type="hidden" value="">
+                            <input type="hidden" value="">
+                            <input type="hidden" value="">
+                            <input type="hidden" value="">
+                            <input type="hidden" value="">
+                            <input type="hidden" value="">
+                        </div>
+                        <div class="modal-body" id="regAlloDeMd"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+                            <button type="button" class="btn btn-primary" id="insertAlloDe">입 력</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="modal fade"
+                id="regAllAlloMd"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id=""></h3>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            <input type="hidden" id="alloDayMd" value="">
+                        </div>
+                        <div class="modal-body" id="regAllAlloMdMb"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+                            <button type="button" class="btn btn-primary" id="btnMdAll">입력</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            const user =/*[[${user}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const opt =/*[[${opt}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbCompa =/*[[${compa}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbVe =/*[[${ve}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbEmp =/*[[${emp}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbothercompa =/*[[${othercompa}]]*/
+            'default';
+            /*]]>*/
+        </script>
+        <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+        <script src="/js/regular/regularAlloBody.js?v=2020051201"></script>
+        <script src="/js/openTemplates/offCustomer.js?v=2020051201"></script>
+        <script src="/js/openTemplates/insertCustomer.js?v=2020051201"></script>
+        <script src="/js/openTemplates/updateCustomer.js?v=2020051201"></script>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.manage {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.main-manage {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+    margin-right: 30rem;
+    padding: 1rem 10rem;
+}
+
+.main-manage-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding: 2rem;
+}
+
+.manageAside {
+    padding: 1rem;
+}
+
+@media (max-width:1024px) {}
+
+@media (max-width:768px) {}

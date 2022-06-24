@@ -1,0 +1,109 @@
+.paper0 {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.paper0-item {
+    padding-left: 1rem;
+}
+
+.paper0-item blockquote {
+    font-size: 1.5rem;
+    padding-left: 2rem;
+}
+
+.mdMakePaper {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.mdMakePaper-item {
+    flex: 1;
+}
+
+.mdMakePaper-item button,
+.mdMakePaper-item svg {
+    font-size: 1.5rem;
+}
+
+.mdMakePaper-item button {
+    height: 8rem;
+}
+
+.md-bd-paper2 {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    min-height: calc(100vh - 15rem);
+}
+
+#tb-paper2 .btn {
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+}
+
+#modalPaper2 h4 {
+    margin: 0;
+}
+
+.paper2-item {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    height: 100%;
+}
+
+.paper2-item:nth-child(1) {
+    position: fixed;
+    width: 50rem;
+    height: calc(100vh - 16rem);
+}
+
+.paper2-item:nth-child(2) {
+    margin-left: 51rem;
+    width: 100%;
+}
+
+.baeTile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.baeTile-item {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+#paper2-allo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+}
+
+.paper2-allo-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.paper2-allo-item h4 {
+    text-align: left;
+}
+
+.papperTitleRsvt {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+}

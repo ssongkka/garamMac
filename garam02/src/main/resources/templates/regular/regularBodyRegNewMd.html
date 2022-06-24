@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div
+        th:fragment="reg-MD-Reginsert"
+        class="modal fade"
+        id="modal-rginsert"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="staticBackdropLabel">신규 정기운행 입력</h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-rgbody">
+                    <div class="modal-rgbody-item card">
+                        <h3>
+                            1. 거래처 정보(계약처)
+                        </h3>
+                        <div th:replace="openTemplates/updateCustomer :: upCust"></div>
+                    </div>
+                    <div class="modal-rgbody-item card">
+                        <form name="formReg" method="post" id="formregin">
+                            <h3>
+                                2. 운행회사 정보(실 운행처)
+                                <small>
+                                    <input type="checkbox" id="chsame" style="margin-left: 3rem;">
+                                    <label class="form-label" for="chsame">거래처와 동일</label>
+                                </small>
+                            </h3>
+                            <input type="hidden" id="ctmnoReal" name="ctmno">
+                            <input type="hidden" id="conum" name="conum">
+                            <input type="hidden" id="regseq" name="regseq">
+                            <input type="hidden" id="regtrash" name="regtrash">
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <label class="form-label" for="regcompany">회사이름</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control input-sm"
+                                        id="regcompany"
+                                        name="regcompany"
+                                        placeholder="실 운행처 회사이름 입력"
+                                        required="required">
+                                </div>
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-pen"></i>
+                                    <label class="form-label" for="regaddress">주소</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control input-sm"
+                                        id="regaddress"
+                                        name="regaddress"
+                                        placeholder="실 운행처 회사주소 입력"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <label class="form-label" for="regperson">담당</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control input-sm"
+                                        id="regperson"
+                                        name="regperson"
+                                        placeholder="담당자 또는 담당부서 이름"
+                                        required="required">
+                                </div>
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-pen"></i>
+                                    <label class="form-label" for="regphone">담당자연락처</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control input-sm"
+                                        id="regphone"
+                                        name="regphone"
+                                        placeholder="담당자 또는 담당부서 전화번호"
+                                        required="required">
+                                </div>
+                            </div>
+                            <hr>
+                            <h3>
+                                3. 운행내용 정보
+                                <small></small>
+                            </h3>
+                            <div class="row">
+                                <div class="form-group  col-sm-12 col-md-6">
+                                    <i class="fas fa-calendar-day"></i>
+                                    <label class="form-label" for="regstartd">계약시작일
+                                        <label class="checkbox-inline" style="padding-left: 3rem;">
+                                            <input type="checkbox" id="noPeriod" value="option1">
+                                            계약기간없음
+                                        </label>
+                                    </label>
+                                    <input
+                                        type="date"
+                                        onfocus="this.select()"
+                                        class="form-control input-sm"
+                                        id="regstartd"
+                                        name="regstartd"
+                                        required="required">
+                                </div>
+                                <div class="form-group  col-sm-12 col-md-6">
+                                    <i class="fas fa-calendar-day"></i>
+                                    <label class="form-label" for="regendd">
+                                        <span>계약종료일</span>
+                                        <span id="daynight"></span>
+                                    </label>
+                                    <input
+                                        type="date"
+                                        onfocus="this.select()"
+                                        class="form-control input-sm"
+                                        id="regendd"
+                                        name="regendd"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group  col-sm-12 col-md-6">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <label class="form-label" for="regcontract">계약형태</label>
+                                    <select
+                                        class="form-select input-sm"
+                                        id="regcontract"
+                                        name="regcontract"
+                                        required="required">
+                                        <option value="계약" label="직접 계약"></option>
+                                        <option value="입찰" label="입찰"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group  col-sm-12 col-md-6">
+                                    <i class="fas fa-pen"></i>
+                                    <label class="form-label" for="regmoney">계약금액</label>
+                                    <input
+                                        type="text"
+                                        data-type="currency"
+                                        onfocus="this.select()"
+                                        class="form-control input-sm datacurr"
+                                        id="regmoney"
+                                        name="regmoney"
+                                        value="0">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group  col-sm-12 col-md-12">
+                                    <i class="fas fa-pen"></i>
+                                    <label class="form-label" for="regmemo">특이사항</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control input-sm"
+                                        id="regmemo"
+                                        name="regmemo"
+                                        placeholder="계약 및 운행에 관한 특이사항 입력"
+                                        required="required">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer modal-footBtn">
+                    <div class="modal-footBtn-item">
+                        <button type="button" class="btn btn-danger" id="btn-rgEnd">계약 만료</button>
+                    </div>
+                    <div class="modal-footBtn-item">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫&nbsp;기</button>
+                    </div>
+                    <div class="modal-footBtn-item">
+                        <button type="button" class="btn btn-primary" id="btn-rginsert">신규 입력</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

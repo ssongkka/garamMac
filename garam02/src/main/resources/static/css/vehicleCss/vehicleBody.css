@@ -1,0 +1,511 @@
+.main-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: calc(100vh - 0rem);
+    padding: 3rem;
+}
+
+.main-aside-item:nth-child(1) {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main-aside-item-head-item:nth-child(1) {
+    width: 150px;
+}
+.main-aside-item-head-item:nth-child(2) {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+.ve-title {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.title-img {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.carousel {
+    width: 100%;
+}
+
+.title-content {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* padding: 0 2rem 3rem 5rem; */
+}
+
+.title-content blockquote {
+    padding: 0 1rem;
+    margin: 0;
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+}
+
+.title-content-head {
+    display: flex;
+    height: 100%;
+}
+
+.title-content-head blockquote {}
+
+.title-content-item {
+    padding: 2rem 1.5rem;
+}
+
+.title-content-item:nth-child(1) {
+    flex: 1;
+}
+.title-content-item:nth-child(2) {
+    flex: 1;
+}
+.title-content-item:nth-child(3) {
+    flex: 1;
+}
+.title-content-item:nth-child(4) {
+    flex: 1;
+}
+
+.title-content-head-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+
+    font-size: 1.6rem;
+    font-weight: 600;
+    flex: 1;
+}
+
+.title-content-head-item1 {
+    font-size: 1.4rem;
+    color: #8390A2;
+}
+.title-content-head-item2 {
+    flex: 1;
+    font-size: 1.8rem;
+}
+
+.title-content-title1 {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    height: 100%;
+}
+
+.title-content-title1-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+
+    font-size: 1.4rem;
+    font-weight: 500;
+    flex: 1;
+
+    letter-spacing: 0.1rem;
+}
+
+.tct-item1:nth-child(1) {
+    flex: 1;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #8390A2;
+}
+.tct-item1:nth-child(2) {
+    flex: 1;
+    font-size: 1.8rem;
+    font-weight: 600;
+    align-items: flex-end;
+}
+.hide-ve-tel {
+    display: none;
+}
+
+.tct-item:nth-child(1) {
+    flex: 1;
+    font-size: 1.2rem;
+    color: #8390A2;
+}
+.tct-item:nth-child(2) {
+    flex: 1;
+}
+
+/* .title-content-title1 blockquote {
+    flex: 1;
+    padding: 0.5rem;
+} */
+
+.card {
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0 1px rgb(20 20 31 / 5%), 0 1px 3px 0 rgb(20 20 31 / 15%);
+    background: white;
+}
+
+.iimmgg {
+    height: 150px;
+    width: 150px;
+    object-fit: contain;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    background-image: none;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mdf-insert {
+    display: flex;
+    gap: 2rem;
+}
+
+.modal-btn:nth-child(1) {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+.modal-btn:nth-child(2) {
+    padding-right: 2rem;
+}
+
+#ve-form {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.cardImg {
+    /* height: 150px; */
+    width: 100%;
+    object-fit: contain;
+}
+
+.ve-nth-item:nth-child(1) {
+    flex: 1;
+}
+.ve-nth-item:nth-child(2) {
+    flex: 2;
+}
+
+.ve-insert {
+    padding: 0 5rem;
+}
+
+.ve-pics {
+    flex: 1;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ve-insert-item:nth-child(2) {
+    flex: 1;
+    padding-left: 3rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+.ve-insert-item:nth-child(3) {
+    flex: 2;
+}
+
+.ve-pic {
+    display: flex;
+    flex-direction: column;
+}
+
+.insert-vehicle {
+    display: flex;
+    gap: 1rem;
+}
+
+.md-file {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.md-file a {
+    flex: 1;
+    color: rgb(40, 40, 40);
+
+    min-width: 46px;
+    height: 36px;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    background: #e2e2e2;
+
+    border-radius: 3px;
+}
+
+.btn-excel {
+    color: #1D6F42;
+    font-size: 2rem;
+}
+
+.btn-pdf {
+    color: #c80a0a;
+    font-size: 2rem;
+}
+
+.title-content-item-down {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.title-content-item-down .title-content-item {
+    flex: 1;
+}
+.title-content-item-down .title-content-item:nth-child(2) {
+    display: flex;
+}
+.title-content-item-down .title-content-item:nth-child(2) .title-content-title1 {
+    width: 100%;
+}
+.title-content-item-down .title-content-item:nth-child(2) .title-content-title1 blockquote {
+    flex: 1;
+}
+
+.tct-item-btn {
+    padding: 0.1rem 0;
+    width: 15rem;
+}
+
+.mdb-reg {
+    display: flex;
+    flex-direction: column;
+}
+.mdb-reg-item:nth-child(1) {
+    height: 100vh;
+}
+
+.mdb-reg-juk {
+    height: 100%;
+}
+
+.mdb-reg-item:nth-child(2) {
+    display: flex;
+}
+.mdb-reg-item:nth-child(2) label {
+    width: 100%;
+}
+
+.mdb-reg-item-a {
+    width: 100%;
+    height: 100%;
+}
+
+.cont {
+    min-height: 48.5vh;
+
+    padding: 2rem;
+}
+
+/* #ve02 {
+    letter-spacing: 0.5rem;
+} */
+
+.nohide-tel {
+    font-size: 1.4rem;
+    color: #8390A2;
+    font-weight: 500;
+    padding-left: 0.5rem;
+}
+
+.emp-nth:nth-child(7) {
+    display: flex;
+    padding: 0;
+}
+.emp-nth:nth-child(7) .btn-group {
+    flex: 1;
+    width: 100%;
+}
+
+.paperIn {
+    display: flex;
+    gap: 2rem;
+}
+
+.endDVisu {
+    display: none;
+}
+
+.accVe,
+.inspecVe,
+.insumain,
+.maintenanceVe,
+.moneyVe,
+.operVe {
+    padding: 3rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.moneyMainIng {
+    display: flex;
+    flex-direction: column;
+}
+
+.Ingtables {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.maintenanceMain {}
+
+.veOperTitle {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-end;
+}
+
+.veOperTitle-item:nth-child(1) {
+    font-size: 1.5rem;
+}
+.veOperTitle-item:nth-child(2) {
+    text-align: right;
+}
+
+.mdaccFoot {
+    display: flex;
+    flex-direction: row;
+}
+
+.choAcc,
+.choempAcc {
+    cursor: pointer;
+}
+
+.table-scroll-body-ve {
+    position: relative;
+    overflow-y: scroll;
+    width: 100%;
+    min-height: calc(100vh - 21rem);
+    max-height: calc(100vh - 21rem);
+}
+
+@media (max-width:768px) {
+    #ve01 {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+    #ve02 {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .ve-title {
+        flex-direction: column-reverse;
+    }
+
+    .title-content-item-down {
+        gap: 1rem;
+        flex-direction: column;
+    }
+
+    .iimmgg {
+        min-height: 15rem;
+        max-height: 15rem;
+    }
+
+    .tct-item1:nth-child(1) {
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+    .tct-item1:nth-child(2) {
+        display: flex;
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+
+    .tct-item:nth-child(1) {
+        font-size: 1.4rem;
+    }
+    .tct-item:nth-child(2) {
+        font-size: 1.6rem;
+    }
+
+    .title-content-title1 {
+        flex-direction: column;
+    }
+
+    .title-content-title1 blo {
+        flex-direction: column;
+    }
+
+    .title-content blockquote {
+        padding: 1rem 2rem;
+    }
+
+    .hide-ve-tel {
+        display: block;
+    }
+    .hide-ve-tel i {
+        background: var(--sub-color);
+        color: var(--main-color);
+        padding: 0.3rem;
+        border-radius: 10%;
+    }
+    .hide-ve-tel:nth-child(3) {
+        flex: 1;
+        text-align: right;
+        padding-right: 1rem;
+    }
+
+    .title-content-item {
+        padding: 2rem;
+    }
+
+    .iimmgg {
+        min-height: 20rem;
+        max-height: 20rem;
+        object-fit: contain;
+    }
+
+    #ve-form {
+        flex-direction: column;
+    }
+
+    .accVe,
+    .inspecVe,
+    .insumain,
+    .maintenanceVe,
+    .moneyVe,
+    .operVe {
+        padding: 1rem;
+
+        gap: 1rem;
+    }
+}

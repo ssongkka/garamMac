@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="adminStats1-body">
+        <aside th:replace="admin/adminSide :: adminSide"></aside>
+        <main class="main">
+            <div class="statsMain">
+                <div class="card-song statsMain-title1">
+                    <div class="statsMain-item row" style="height: 100%;">
+                        <div class="col-md-3 statsMain-item1 statsYearMonth">
+                            <div>
+                                <a class="btn" id="fnDownMonthStatic">
+                                    <i class="fas fa-chevron-left fa-lg"></i>
+                                </a>
+                            </div>
+                            <div><input type="month" class="input-group" id="staticMonth"></div>
+                            <div>
+                                <a class="btn" id="fnUpMonthStatic">
+                                    <i class="fas fa-chevron-right fa-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 statsMain-item2" id="stCompaD"></div>
+                        <div class="col-md-3 statsMain-item3" id="stCompaT"></div>
+                    </div>
+                </div>
+                <div class="card-song statsMain-title2">
+                    <div class="statsMain-item row">
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="">
+                                <div class="vtTitle">수 익</div>
+                                <div class="vtCont">
+                                    <div class="vtCont-item1">
+                                        <p>
+                                            <span>₩</span><span id="veStaticCompaInM">0</span>
+                                        </p>
+                                        <span class="" id="veStaticinMMAveCompa"></span>
+                                    </div>
+                                    <div class="vtCont-item2">
+                                        <div id="staticCompa01"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 stLine">
+                            <div class="">
+                                <div class="vtTitle">비 용</div>
+                                <div class="vtCont">
+                                    <div class="vtCont-item1">
+                                        <p>
+                                            <span>₩</span><span id="veStaticCompaOutM">0</span>
+                                        </p>
+                                        <span class="" id="veStaticOutMAveCompa"></span>
+                                    </div>
+                                    <div class="vtCont-item2">
+                                        <div id="staticCompa02"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 stLine">
+                            <div class="">
+                                <div class="vtTitle">이 익</div>
+                                <div class="vtCont">
+                                    <div class="vtCont-item1">
+                                        <p>
+                                            <span>₩</span><span id="veStaticCompaAllM">0</span>
+                                        </p>
+                                        <span class="" id="veStaticAllMAveCompa"></span>
+                                    </div>
+                                    <div class="vtCont-item2">
+                                        <div id="staticCompa03"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 stLine">
+                            <div class="">
+                                <div class="vtTitle">연 비</div>
+                                <div class="vtCont" style="padding-bottom: 2.1rem;">
+                                    <div class="vtCont-item1">
+                                        <div class="vtCont-item1">
+                                            <p>
+                                                <span id="veStaticCompaGas1">0</span><span>Km/L</span>
+                                            </p>
+                                            <span class="" id="veStaticGasAveCompa1"></span>
+                                        </div>
+                                    </div>
+                                    <div class="vtCont-item3">
+                                        <div class="vtCont-item1">
+                                            <p>
+                                                <span id="veStaticCompaGas2">0</span><span>&#8361;/Km</span>
+                                            </p>
+                                            <span class="" id="veStaticGasAveCompa2"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-song">
+                    <div class="statsMain-item row" id="chartVeAllCompaDiv">
+                        <canvas id="chartVeAllCompa" height="300"></canvas>
+                    </div>
+                </div>
+                <div class="card-song">
+                    <div class="statsMain-item row" id="chartVeAllYearCompaDiv">
+                        <canvas id="chartVeAllYearCompa" height="300"></canvas>
+                    </div>
+                </div>
+                <div class="card-song">
+                    <div class="statsMain-item">
+                        <table class="table table-bordered table-hover tb-stats1">
+                            <colgroup>
+                                <col width="6%">
+                                <col width="auto">
+                                <col width="auto">
+                                <col width="auto">
+                                <col width="auto">
+                                <col width="auto">
+                                <col width="6%">
+                                <col width="3%">
+                                <col width="6%">
+                                <col width="3%">
+                                <col width="6%">
+                                <col width="3%">
+                                <col width="6%">
+                                <col width="6%">
+                                <col width="6%">
+                                <col width="6%">
+                                <col width="6%">
+                                <col width="6%">
+                                <col width="6%">
+                            </colgroup>
+                            <thead class="table-light">
+                                <tr>
+                                    <th rowspan="3" class="sortNumStatic incur">차량번호</th>
+                                    <th rowspan="3" class="sortNumStatic inTh incur">총 수입</th>
+                                    <th rowspan="3" class="sortNumStatic outTh incur">총 비용</th>
+                                    <th rowspan="3" class="sortNumStatic allTh incur">이 익</th>
+                                    <th colspan="2" rowspan="2" class="gasTh incur">연비</th>
+                                    <th colspan="7" class="inTh">수 익</th>
+                                    <th colspan="6" class="outTh">비 용</th>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2" class="sortNumStatic inTh incur">정기운행</th>
+                                    <th colspan="2" class="inTh">일 반</th>
+                                    <th colspan="2" class="inTh">학생단체</th>
+                                    <th colspan="2" class="inTh">거래처</th>
+                                    <th rowspan="2" class="sortNumStatic outTh incur">급 여</th>
+                                    <th rowspan="2" class="sortNumStatic outTh incur">유류비</th>
+                                    <th rowspan="2" class="sortNumStatic outTh incur">대 출</th>
+                                    <th rowspan="2" class="sortNumStatic outTh incur">차량보험</th>
+                                    <th rowspan="2" class="sortNumStatic outTh incur">정 비</th>
+                                    <th rowspan="2" class="sortNumStatic outTh incur">사 고</th>
+                                </tr>
+                                <tr>
+                                    <th class="sortNumStatic gasTh inGun static7 incur">Km/L</th>
+                                    <th class="sortNumStatic gasTh inGun static8 incur">&#8361;/Km</th>
+                                    <th class="sortNumStatic inTh inGun static1 incur">운행</th>
+                                    <th class="sortNumStatic inTh inGun static2 incur">금액</th>
+                                    <th class="sortNumStatic inTh inGun static3 incur">운행</th>
+                                    <th class="sortNumStatic inTh inGun static4 incur">금액</th>
+                                    <th class="sortNumStatic inTh inGun static5 incur">운행</th>
+                                    <th class="sortNumStatic inTh inGun static6 incur">금액</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbVeAllCompa"></tbody>
+                            <tfoot id="tfVeAllCompa"></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div th:replace="admin/adminMDVeCompa :: adMDVeCompa"></div>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            const opt =/*[[${opt}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbuser =/*[[${user}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbCompa =/*[[${compa}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbVe =/*[[${ve}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbEmp =/*[[${emp}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+        </script>
+        <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+            integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/admin/adminStats1.js?v=2020051201"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/admin/adminMDVeCompa.js?v=2020051201"></script>
+    </body>
+
+</html>

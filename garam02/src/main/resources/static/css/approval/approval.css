@@ -1,0 +1,42 @@
+.approvalMain {
+    margin-left: 30rem;
+    min-height: 100vh;
+    background: #f6f7f9;
+}
+
+#apprTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 2rem 0;
+    text-align: center;
+    letter-spacing: 0.3rem;
+}
+
+#apprSummary {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#apprCont {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.apprContT {
+    text-align: left;
+    font-size: 1.5rem;
+    padding-left: 0.5rem;
+    font-weight: 600;
+}
+
+.apprContT svg {
+    color: var(--text-grey);
+}
+
+table > .theadApprTh > tr {
+    background: #0000001a;
+}

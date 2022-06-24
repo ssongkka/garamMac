@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.garam.web.employee.mapper.EmployeeMapper">
+
+	<select id="selectDealVe" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
+
+		(SELECT
+
+		vehicleinfo.*,
+		employeeinfo.*,
+		vehicleinfo.owner AS coconum
+
+		FROM
+
+		operation_info
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		operation_info.opercar = vehicleinfo.carnumber
+
+		LEFT JOIN
+
+		employeeinfo
+
+		ON
+
+		vehicleinfo.id = employeeinfo.id
+
+		<where>
+			operation_info.opercom != vehicleinfo.company
+			<if test="name != null">AND (employeeinfo.name Like CONCAT('%',#{name},'%') </if>
+			<if test="name != null">OR vehicleinfo.vehicle Like CONCAT('%',#{name},'%')) </if>
+		</where>
+
+		GROUP BY
+
+		vehicleinfo.carnumber)
+
+		UNION
+
+		(SELECT
+
+		vehicleinfo.*,
+		employeeinfo.*,
+		vehicleinfo.owner AS coconum
+
+		FROM
+
+		vehicleinfo
+
+		LEFT JOIN
+
+		employeeinfo
+
+		ON
+
+		vehicleinfo.id =
+		employeeinfo.id
+
+		<where>
+			vehicleinfo.company != vehicleinfo.owner
+			<if test="name != null">AND (employeeinfo.name Like CONCAT('%',#{name},'%') </if>
+			<if test="name != null">OR vehicleinfo.vehicle Like CONCAT('%',#{name},'%')) </if>
+		</where>
+
+		)
+
+	</select>
+
+	<select id="dealInMoney" parameterType="com.garam.web.employee.dto.Empsalary"
+		resultType="com.garam.web.employee.dto.Empsalary">
+
+		SELECT
+
+		*
+
+		FROM
+
+		personnaldealplus
+
+		LEFT JOIN
+
+		personnaldeal
+
+		ON
+
+		personnaldealplus.carnumber = personnaldeal.carnumber
+
+		WHERE
+
+		personnaldeal.carnumber = #{carnumber}
+
+		AND
+
+		personnaldealplus.sday = #{sday}
+
+		AND
+
+		personnaldeal.date = #{sday}
+
+	</select>
+
+	<select id="dealOutMoney" parameterType="com.garam.web.employee.dto.Empsalary"
+		resultType="com.garam.web.employee.dto.Empsalary">
+
+		SELECT
+
+		*
+
+		FROM
+
+		personnaldealminus
+
+		LEFT JOIN
+
+		personnaldeal
+
+		ON
+
+		personnaldealminus.carnumber = personnaldeal.carnumber
+
+		WHERE
+
+		personnaldeal.carnumber = #{carnumber}
+
+		AND
+
+		personnaldealminus.sday = #{sday}
+
+		AND
+
+		personnaldeal.date = #{sday}
+	</select>
+
+	<select id="dealAllMoney" parameterType="com.garam.web.employee.dto.EmpsalaryAll"
+		resultType="com.garam.web.employee.dto.EmpsalaryAll">
+
+
+		(SELECT
+
+		*
+
+		FROM
+
+		personnaldeal
+
+		<where>
+			<if test="carnumber != null"> AND
+				personnaldeal.carnumber = #{carnumber}
+			</if>
+
+			<if test="id != null"> AND
+				personnaldeal.id = #{id}
+			</if>
+
+			<if test="datein != null"> AND
+				personnaldeal.date = #{datein}
+			</if>
+
+		</where>
+
+		ORDER BY
+
+		personnaldeal.date
+		)
+
+		UNION
+
+		(SELECT
+
+		*
+
+		FROM
+
+		personnaldeal
+
+		<where>
+			<if test="carnumber != null"> AND
+				personnaldeal.carnumber = #{carnumber}
+			</if>
+
+			<if test="id != null"> AND
+				personnaldeal.id = #{id}
+			</if>
+
+			<if test="date != null"> AND
+
+				personnaldeal.date = #{date}
+
+			</if>
+
+		</where>
+
+		ORDER BY
+
+		personnaldeal.date
+		)
+	</select>
+
+	<delete id="delDealInM" parameterType="com.garam.web.employee.dto.Empsalary">
+		DELETE
+
+		personnaldealplus
+
+		FROM
+
+		personnaldealplus
+
+		LEFT JOIN
+
+		personnaldeal
+
+		ON
+
+		personnaldealplus.carnumber = personnaldeal.carnumber
+
+		WHERE
+
+		personnaldeal.carnumber = #{carnumber}
+
+		AND
+
+		personnaldealplus.sday =
+		#{sday};
+	</delete>
+	<delete id="delDealOutM" parameterType="com.garam.web.employee.dto.Empsalary">
+		DELETE
+
+		personnaldealminus
+
+		FROM
+
+		personnaldealminus
+
+		LEFT JOIN
+
+		personnaldeal
+
+		ON
+
+		personnaldealminus.carnumber = personnaldeal.carnumber
+
+		WHERE
+
+		personnaldeal.carnumber = #{carnumber}
+
+		AND
+
+		personnaldealminus.sday
+		= #{sday};
+	</delete>
+
+	<insert id="insertDealInM" parameterType="java.util.HashMap">
+		INSERT
+
+		INTO
+
+		personnaldealplus
+
+
+		VALUES
+
+		<foreach collection="imM" item="value" separator=",">
+			(
+			null,
+			#{value.sday},
+			#{value.carnumber},
+			#{value.separation},
+			#{value.date},
+			#{value.contents},
+			#{value.money},
+			#{value.strash}
+			)
+		</foreach>
+	</insert>
+	<insert id="insertDealOutM" parameterType="java.util.HashMap">
+		INSERT
+
+		INTO
+
+		personnaldealminus
+
+		VALUES
+
+		<foreach collection="outM" item="value" separator=",">
+			(
+			null,
+			#{value.sday},
+			#{value.carnumber},
+			#{value.separation},
+			#{value.date},
+			#{value.contents},
+			#{value.money},
+			#{value.strash}
+			)
+		</foreach>
+	</insert>
+
+	<insert id="insertDealAllMoney" parameterType="com.garam.web.employee.dto.EmpsalaryAll">
+
+		INSERT INTO
+
+		personnaldeal
+
+		(dealno,
+		id,
+		carnumber,
+		date,
+		per,
+		opercnt,
+		opermoney,
+		inm,
+		outm,
+		janm,
+		empin,
+		datein,
+		strash)
+
+		VALUES
+
+		(null,
+		#{id},
+		#{carnumber},
+		#{date},
+		#{per},
+		#{opercnt},
+		#{opermoney},
+		#{inm},
+		#{outm},
+		#{janm},
+		#{empin},
+		NOW(),
+		1);
+	</insert>
+
+	<select id="selectEmpOperPerListCnt" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+		resultType="com.garam.web.employee.dto.EmpRsvtDTO">
+
+		SELECT
+
+		operation_info.opernum, COUNT(*) AS cnt
+
+		FROM
+
+		operation_info
+		left
+		join rsvt on
+		operation_info.rsvt =
+		rsvt.rsvt
+
+		WHERE
+
+		operation_info.opernum IN
+		(SELECT
+
+		operation_info.opernum
+
+		FROM
+
+		operation_info
+
+		WHERE
+
+		(operation_info.operday
+		BETWEEN
+		#{stday} AND
+		#{endday})
+
+		AND
+
+		operation_info.opercar = #{opercar}
+
+		GROUP BY
+		operation_info.opernum)
+
+		AND
+
+		operation_info.opercar = #{opercar}
+
+		GROUP
+		BY
+		operation_info.opernum
+
+		ORDER BY
+		rsvt.stday,
+		operation_info.opernum,
+		operation_info.operday,
+		rsvt.stt;
+
+	</select>
+	<select id="selectEmpOperPerList" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+		resultType="com.garam.web.employee.dto.EmpRsvtDTO">
+
+		SELECT
+		rsvt.rsvtseq, rsvt.desty, rsvt.stday, rsvt.endday,
+		operation_info.operseq,
+		operation_info.opernum,
+		operation_info.rsvt,
+		operation_info.operday,
+		operation_info.operno,
+		rsvt.numm,
+		operation_info.atlm,
+		operation_info.opertype,
+		operation_info.operid,
+		operation_info.opercar,
+		IFNULL((SELECT
+		vehicleinfo.vehicle FROM
+		vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		operation_info.opercar),
+		operation_info.opercar)
+		AS
+		vehicle,
+		(SELECT
+		customer.ctmname FROM
+		customer
+		WHERE
+		customer.ctmno
+		=
+		rsvt.ctmno)
+		AS
+		ctmname,
+		operation_info.operconfirm,
+		operation_info.opertrash
+
+		FROM
+
+		operation_info
+		left
+		join rsvt on
+		operation_info.rsvt =
+		rsvt.rsvt
+
+		WHERE
+
+		(operation_info.operday
+		BETWEEN
+		#{stday} AND #{endday})
+
+		AND
+
+		operation_info.opercar = #{opercar}
+
+		AND
+
+		operation_info.dayst =
+		1
+
+		ORDER BY
+		rsvt.stday,
+		operation_info.opernum,
+		operation_info.operday,
+		rsvt.stt;
+
+	</select>
+
+	<select id="selEmpRegOperPerList" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+
+		SELECT
+
+		operation_reg.*
+
+		FROM
+
+		operation_reg
+
+		WHERE
+
+		operation_reg.regopercar =
+		#{regopercar}
+
+		AND
+
+		operation_reg.regoperday
+		BETWEEN
+		#{regstartd} AND
+		#{regendd}
+
+		GROUP BY
+		operation_reg.conum,
+		operation_reg.codenum
+
+		ORDER BY
+		operation_reg.operregseq,
+		operation_reg.regoperday
+	</select>
+
+	<select id="selEmpRegOperPerList2" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+
+		SELECT
+
+		operation_reg.*,
+		regular.*,
+		regulardetail.*,
+
+		IFNULL((SELECT
+		vehicleinfo.vehicle
+		FROM
+		vehicleinfo
+		WHERE
+		vehicleinfo.carnumber
+		=
+		operation_reg.regopercar),
+		operation_reg.regopercar) AS
+		idvehicle,
+
+		IFNULL((SELECT
+		vehicleinfo.id
+		FROM
+		vehicleinfo
+		WHERE
+		vehicleinfo.carnumber
+		=
+		operation_reg.regopercar),
+		operation_reg.regopercar) AS
+		idid,
+
+		IFNULL((SELECT
+		employeeinfo.name
+		FROM
+		employeeinfo
+		WHERE
+		employeeinfo.id
+		=
+		operation_reg.regoperid),
+		operation_reg.regoperid) AS
+		idname
+
+		FROM
+
+		operation_reg
+
+		LEFT JOIN
+
+		regular
+
+		ON
+
+		operation_reg.conum = regular.conum
+
+		LEFT JOIN
+
+		regulardetail
+
+		ON
+
+		operation_reg.codenum =
+		regulardetail.codenum
+
+		WHERE
+
+		operation_reg.regopercar =
+		#{regopercar}
+
+		AND
+
+		operation_reg.regoperday
+		BETWEEN
+		#{regstartd} AND
+		#{regendd}
+
+		ORDER BY
+		operation_reg.regoperday,
+		regulardetail.rdnum,
+		operation_reg.operregseq
+
+	</select>
+	<select id="selectEmpAllAlloPer" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+		resultType="com.garam.web.employee.dto.EmpRsvtDTO">
+
+		SELECT
+		rsvt.rsvtseq, rsvt.desty, rsvt.stday, rsvt.endday,
+		operation_info.operseq,
+		operation_info.opernum,
+		operation_info.rsvt,
+		operation_info.operday,
+		operation_info.operno,
+		rsvt.numm,
+		operation_info.atlm,
+		operation_info.opertype,
+		operation_info.operid,
+		operation_info.opercar,
+		IFNULL((SELECT
+		vehicleinfo.vehicle FROM
+		vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		operation_info.opercar),
+		operation_info.opercar)
+		AS
+		vehicle,
+		(SELECT
+		customer.ctmname FROM
+		customer
+		WHERE
+		customer.ctmno
+		=
+		rsvt.ctmno)
+		AS
+		ctmname,
+		operation_info.operconfirm,
+		operation_info.opertrash
+
+		FROM
+
+		operation_info
+		left
+		join rsvt on
+		operation_info.rsvt =
+		rsvt.rsvt
+
+		WHERE
+
+		operation_info.opercar =
+		#{opercar}
+
+		AND
+
+		operation_info.operconfirm = #{operconfirm}
+
+		AND
+
+		operation_info.dayst
+		=
+		1
+
+		ORDER
+		BY
+		rsvt.stday,
+		operation_info.opernum,
+		operation_info.operday,
+		rsvt.stt;
+
+	</select>
+
+	<select id="selectEmpAllAllo1Per" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+
+		SELECT
+
+		operation_reg.*,
+		regular.*,
+		regulardetail.*,
+
+		IFNULL((SELECT
+		vehicleinfo.vehicle
+		FROM
+		vehicleinfo
+		WHERE
+		vehicleinfo.carnumber
+		=
+		operation_reg.regopercar),
+		operation_reg.regopercar) AS
+		idvehicle,
+
+		IFNULL((SELECT
+		vehicleinfo.id
+		FROM
+		vehicleinfo
+		WHERE
+		vehicleinfo.carnumber
+		=
+		operation_reg.regopercar),
+		operation_reg.regopercar) AS
+		idid,
+
+		IFNULL((SELECT
+		employeeinfo.name
+		FROM
+		employeeinfo
+		WHERE
+		employeeinfo.id
+		=
+		operation_reg.regoperid),
+		operation_reg.regoperid) AS
+		idname,
+
+		IFNULL((SELECT
+		regularcourse.rcsepa
+		FROM
+		regularcourse
+		WHERE
+		regularcourse.conum
+		=
+		operation_reg.conum
+		AND
+		regularcourse.codenum
+		=
+		operation_reg.codenum
+		AND
+		regularcourse.goutnum
+		=
+		operation_reg.regoperno
+		GROUP BY
+		operation_reg.regoperno
+		),
+		operation_reg.regoperid) AS
+		rcsepa
+
+		FROM
+
+		operation_reg
+
+		LEFT JOIN
+
+		regular
+
+		ON
+
+		operation_reg.conum =
+		regular.conum
+
+		LEFT JOIN
+
+		regulardetail
+
+		ON
+
+		operation_reg.codenum = regulardetail.codenum
+
+		WHERE
+
+		operation_reg.regopercar =
+		#{regopercar}
+
+		AND
+
+		operation_reg.regoperconfirm =
+		#{regoperconfirm}
+
+		ORDER BY
+		operation_reg.regoperday,
+		regulardetail.rdnum,
+		operation_reg.operregseq
+	</select>
+
+	<update id="updateVeBaseM" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		UPDATE
+
+		vehicleinfo
+
+		SET
+
+		vehicleinfo.vebasem = #{vebasem}
+
+		WHERE
+
+		vehicleinfo.carnumber = #{carnumber}
+
+	</update>
+</mapper>

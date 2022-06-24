@@ -1,0 +1,33 @@
+.gascal {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.modalGasBd {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    height: 100vh;
+}
+
+.spanGas {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1rem;
+}
+
+.gascalTable {
+    overflow-y: auto;
+}
+
+.gascal-cont {
+    flex: 1;
+    text-align: right;
+
+    padding-right: 2rem;
+}

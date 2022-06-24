@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.garam.web.employee.mapper.EmployeeMapper">
+
+	<sql id="empColumns">
+		employeeinfo.id, employeeinfo.company, employeeinfo.kind,
+		employeeinfo.joind, employeeinfo.endd,
+		employeeinfo.name,
+		employeeinfo.gender, employeeinfo.birthday, employeeinfo.phone1,
+		employeeinfo.phone2,
+		employeeinfo.address, employeeinfo.garage,
+		employeeinfo.bosum,
+		employeeinfo.bobuj, employeeinfo.drvl,
+		employeeinfo.busl,
+		employeeinfo.memo, employeeinfo.bank,
+		employeeinfo.gye,
+		employeeinfo.gyename,
+		employeeinfo.basem,
+		employeeinfo.kukm,
+		employeeinfo.gunm, employeeinfo.gom,
+		employeeinfo.sanm, employeeinfo.img, employeeinfo.trash,
+		vehicleinfo.carnumber,
+		vehicleinfo.vehicle
+	</sql>
+
+	<insert id="insertEmp" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO">
+		INSERT INTO
+
+		employeeinfo
+
+		VALUES
+
+		(
+		#{id},
+		#{company},
+		#{kind},
+		#{joind},
+		#{endd},
+		#{name},
+		#{gender},
+		#{birthday},
+		#{phone1},
+		#{phone2},
+		#{address},
+		#{garage},
+		#{bosum},
+		#{bobuj},
+		#{drvl},
+		#{busl},
+		#{memo},
+		#{bank},
+		#{gye},
+		#{gyename},
+		#{basem},
+		#{kukm},
+		#{gunm},
+		#{gom},
+		#{sanm},
+		#{img},
+		1,
+		null
+		);
+	</insert>
+
+	<update id="updateEmp" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO">
+
+		UPDATE
+
+		employeeinfo
+
+		SET
+
+		company = #{company},
+		kind = #{kind},
+		joind =
+		#{joind},
+		endd = #{endd},
+		name = #{name},
+		gender =
+		#{gender},
+		birthday =
+		#{birthday},
+		phone1 = #{phone1},
+		phone2 = #{phone2},
+		address =
+		#{address},
+		garage = #{garage},
+		bosum =
+		#{bosum},
+		bobuj = #{bobuj},
+		drvl =
+		#{drvl},
+		busl = #{busl},
+		memo = #{memo},
+		bank = #{bank},
+		gye = #{gye},
+		gyename =
+		#{gyename},
+		trash = #{trash},
+		<if test="img != null and img != '' ">img = #{img},</if>
+		id = #{id}
+
+		WHERE
+
+		id = #{id};
+	</update>
+
+	<update id="deleteEmp" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO">
+
+		UPDATE
+
+		employeeinfo
+
+		SET
+
+		endD = #{endd},
+		trash = 0
+
+		WHERE
+
+		id =
+		#{id};
+	</update>
+
+	<select id="selectEmpAll" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
+
+		SELECT
+
+		employeeinfo.id, employeeinfo.name, employeeinfo.birthday,
+		employeeinfo.kind, employeeinfo.trash,
+		vehicleinfo.vehicle,
+		vehicleinfo.bus
+
+		FROM
+		employeeinfo
+
+		LEFT JOIN
+		vehicleinfo
+
+		ON
+		employeeinfo.id =
+		vehicleinfo.id
+
+		<where>
+			<if test="name != null">OR employeeinfo.name Like CONCAT('%',#{name},'%') </if>
+			<if test="name != null">OR vehicleinfo.vehicle Like CONCAT('%',#{name},'%') </if>
+		</where>
+
+		GROUP BY employeeinfo.id
+
+		ORDER BY name;
+
+	</select>
+
+	<select id="selectEmpNameList" resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
+
+		SELECT
+
+		employeeinfo.*
+
+		FROM
+		employeeinfo
+
+		ORDER BY name
+	</select>
+
+	<select id="selectEmpName" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
+
+		SELECT
+
+		<include refid="empColumns" />
+
+		FROM employeeinfo
+
+		LEFT JOIN vehicleinfo
+
+		ON employeeinfo.id =
+		vehicleinfo.id
+
+		WHERE employeeinfo.name = #{name}
+
+		ORDER BY
+		name;
+
+	</select>
+
+	<select id="selectEmpDetail" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		employeeinfo
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		employeeinfo.id =
+		vehicleinfo.id
+
+		LEFT JOIN
+
+		regulardetail
+
+		ON
+
+		regulardetail.opercar = vehicleinfo.carnumber
+
+		LEFT JOIN
+
+		regular
+
+		ON
+
+		regular.conum = regulardetail.conum
+
+		WHERE
+		employeeinfo.id = #{id}
+
+		ORDER BY name;
+	</select>
+
+	<select id="selectEmpOperList" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+		resultType="com.garam.web.employee.dto.EmpRsvtDTO">
+
+		SELECT
+		rsvt.rsvtseq, rsvt.desty, rsvt.stday, rsvt.endday,
+		operation_info.operseq,
+		operation_info.opernum,
+		operation_info.rsvt,
+		operation_info.operday,
+		operation_info.operno,
+		rsvt.numm,
+		operation_info.atlm,
+		operation_info.opertype,
+		operation_info.operid,
+		operation_info.opercar,
+		IFNULL((SELECT
+		vehicleinfo.vehicle FROM
+		vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		operation_info.opercar),
+		operation_info.opercar)
+		AS
+		vehicle,
+		(SELECT
+		customer.ctmname FROM
+		customer
+		WHERE
+		customer.ctmno
+		=
+		rsvt.ctmno)
+		AS
+		ctmname,
+		operation_info.operconfirm,
+		operation_info.opertrash
+
+		FROM
+
+		operation_info
+		left
+		join rsvt on
+		operation_info.rsvt =
+		rsvt.rsvt
+
+		WHERE
+
+		(operation_info.operday
+		BETWEEN
+		#{stday} AND #{endday})
+
+		AND
+
+		operation_info.operid = #{operid}
+
+		AND
+
+		operation_info.dayst =
+		1
+
+		ORDER BY
+		rsvt.stday,
+		operation_info.opernum,
+		operation_info.operday,
+		rsvt.stt;
+
+	</select>
+
+	<select id="selectEmpOperListCnt" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+		resultType="com.garam.web.employee.dto.EmpRsvtDTO">
+
+		SELECT
+
+		operation_info.opernum, COUNT(*) AS cnt
+
+		FROM
+
+		operation_info
+		left
+		join rsvt on
+		operation_info.rsvt =
+		rsvt.rsvt
+
+		WHERE
+
+		operation_info.opernum IN
+		(SELECT
+
+		operation_info.opernum
+
+		FROM
+
+		operation_info
+
+		WHERE
+
+		(operation_info.operday
+		BETWEEN
+		#{stday} AND
+		#{endday})
+
+		AND
+
+		operation_info.operid = #{operid}
+
+		GROUP BY
+		operation_info.opernum)
+
+		AND
+
+		operation_info.operid = #{operid}
+
+		GROUP
+		BY
+		operation_info.opernum
+
+		ORDER BY
+		rsvt.stday,
+		operation_info.opernum,
+		operation_info.operday,
+		rsvt.stt;
+
+	</select>
+
+	<select id="selectempOperMonth" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+		SELECT
+
+		CONCAT(YEAR(operation_info.operday), '-',
+		MONTH(operation_info.operday)) AS ctmaddress,
+
+		SUM(operation_info.atlm) AS
+		ctmtrash,
+
+		SUM(rsvt.numm) AS
+		opertype,
+
+		COUNT(operation_info.operseq) AS conm
+
+		FROM
+
+		operation_info
+
+		LEFT JOIN
+
+		rsvt
+
+		ON
+
+		operation_info.rsvt = rsvt.rsvt
+
+		WHERE
+
+		operation_info.dayst = 1
+
+		AND
+
+		operation_info.operid = #{id}
+
+		GROUP
+		BY
+		ctmaddress
+
+		ORDER BY
+		YEAR(operation_info.operday) DESC,
+		MONTH(operation_info.operday) DESC
+
+
+	</select>
+
+	<select id="selectempOperSepa" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		operation_info
+
+		LEFT JOIN
+
+		rsvt
+
+		ON
+
+		operation_info.rsvt = rsvt.rsvt
+
+		LEFT JOIN
+
+		customer
+
+		ON
+
+		rsvt.ctmno =
+		customer.ctmno
+
+		WHERE
+
+		operation_info.dayst = 1
+
+		AND
+
+		operation_info.operid = #{id}
+
+		ORDER BY
+		operation_info.operday
+		DESC;
+
+	</select>
+
+	<select id="selectMainEmpSal" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+		resultType="com.garam.web.employee.dto.EmpsalaryAll">
+
+		SELECT
+
+		*
+
+		FROM
+
+		personnalsalary
+
+		WHERE
+
+		personnalsalary.id = #{id}
+
+
+	</select>
+
+	<select id="selectEmpveAcc" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veacc
+
+		WHERE
+
+		veacc.id = #{id}
+
+	</select>
+</mapper>

@@ -1,0 +1,67 @@
+.apprMd-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.apprMd-second table {
+    width: 100%;
+}
+
+#apprUpcontents table {
+    width: 100%;
+}
+
+.apprMd-second {
+    padding: 0 2rem;
+}
+
+#apprKan {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#apprKan table > tbody > tr > td {
+    width: 8rem;
+}
+
+#spCham,
+#spHelp {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding-left: 3rem;
+}
+
+.apprMd-second table > tbody > tr {
+    height: 3rem;
+}
+
+#apprMD .modal-footer {
+    display: flex;
+    gap: 2rem;
+}
+#apprMD .modal-footer button {
+    width: 10rem;
+}
+
+#apprFoot {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding: 0 3rem;
+}
+
+.apprMdfootday {
+    margin-left: 3rem;
+    color: var(--text-grey);
+}
+
+.apprMdfootUser {
+    font-weight: 600;
+}
+
+.apprMdfootcont {
+    margin-top: 1rem;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <!-- Modal -->
+    <div
+        th:fragment="ve-MD-jukView"
+        class="modal fade"
+        id="modal-jukView"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-jukView-mh"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body mdb-reg">
+                    <div class="mdb-reg-item">
+                        <iframe class="mdb-reg-item-a" src="" frameborder="0" id="jukView-frame"></iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫&nbsp;기</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="main-body5">
+        <header th:replace="dashboard/dashboardMainHead :: main-head"></header>
+        <aside th:replace="dashboard/dashboardMainAside :: main-aside"></aside>
+        <main class="main">
+            <div class="tab-pane" role="tabpanel">
+                <div class="dd-main-nav">
+                    <div th:replace="dashboard/dashboardMainDay :: main-day"></div>
+                </div>
+                <!-- Tab panes -->
+                <div class="tab-content tab-cont">
+                    <div
+                        th:insert="dashboard5/mainManage :: main-manage"
+                        class="tab-pane fade show active"
+                        id="manage"
+                        role="tabpanel"
+                        aria-labelledby="pills-manage-tab"></div>
+                </div>
+            </div>
+        </main>
+        <div th:replace="openTemplates/modaNewRsvt :: mainNewrsvt"></div>
+        <div th:replace="openTemplates/modalSetting :: mdSetting"></div>
+        <div th:replace="openTemplates/modalCustomer :: modalCust"></div>
+        <div th:replace="openTemplates/modalCustomerUp :: modalCustUp"></div>
+        <div th:replace="openTemplates/modalRsvt :: modalRsvt"></div>
+        <div th:replace="openTemplates/modalRsvtMoney :: modalRsvtMoney"></div>
+        <div th:replace="openTemplates/dataVeEmp :: dataVeEmp"></div>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            const opt =/*[[${opt}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbuser =/*[[${user}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbCompa =/*[[${compa}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbVe =/*[[${ve}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbEmp =/*[[${emp}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbCutomer =/*[[${customer}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dayyy =/*[[${dayyy}]]*/
+            'default';
+            /*]]>*/
+        </script>
+
+        <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+        <th:block th:replace="dashboard/dashlinkGroupScript :: dashLinkScript"></th:block>
+    </body>
+</html>

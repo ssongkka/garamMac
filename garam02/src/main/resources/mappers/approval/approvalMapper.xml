@@ -1,0 +1,1274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.garam.web.approval.mapper.ApprovalMapper">
+
+	<select id="selectapppaper" resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		approvalpaper
+
+
+	</select>
+
+	<select id="selectapppaperline" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		approvalpaperline
+
+		LEFT JOIN
+
+		user
+
+		ON
+
+		user.id = approvalpaperline.id
+
+		WHERE
+
+		approvalpaperline.approvalpapername = #{approvalpapername}
+
+	</select>
+
+	<select id="selectapppaperhelp" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		approvalpaperhelp
+
+		LEFT JOIN
+
+		user
+
+		ON
+
+		user.id = approvalpaperhelp.id
+
+		WHERE
+
+		approvalpaperhelp.approvalpapername = #{approvalpapername}
+
+	</select>
+
+	<select id="selectapppapercham" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		approvalpapercham
+
+		LEFT JOIN
+
+		user
+
+		ON
+
+		user.id = approvalpapercham.id
+
+		WHERE
+
+		approvalpapercham.approvalpapername = #{approvalpapername}
+
+	</select>
+
+	<select id="selectApprEmp" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		employeeinfo
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		employeeinfo.approvalno =
+		approval.approvalno
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		employeeinfo.id = vehicleinfo.id
+
+		WHERE
+
+		(
+		employeeinfo.approvalno IS
+		NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0
+		)
+
+		AND
+
+		employeeinfo.company = #{company}
+
+		ORDER BY
+		employeeinfo.name
+
+	</select>
+
+	<select id="selectApprVe" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*,
+		IFNULL((SELECT
+		employeeinfo.name FROM employeeinfo
+		WHERE
+		employeeinfo.id=vehicleinfo.owner), vehicleinfo.owner)
+		AS inspecplace
+
+		FROM
+
+		vehicleinfo
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		vehicleinfo.approvalno =
+		approval.approvalno
+
+		LEFT JOIN
+
+		employeeinfo
+
+		ON
+
+		employeeinfo.id = vehicleinfo.id
+
+		WHERE
+
+		(
+		vehicleinfo.approvalno IS
+		NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0
+		)
+
+		AND
+
+		vehicleinfo.company = #{company}
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+	</select>
+
+	<select id="selectApprAcc" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*,
+		(SELECT
+		employeeinfo.name FROM
+		employeeinfo WHERE employeeinfo.id =
+		veacc.id) AS name
+
+		FROM
+
+		veacc
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		veacc.approvalno = approval.approvalno
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		veacc.carnumber =
+		vehicleinfo.carnumber
+
+		WHERE
+
+		(
+		veacc.approvalno IS NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0
+		)
+
+		AND
+
+		vehicleinfo.company = #{company}
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+	</select>
+
+	<select id="selectApprSal" parameterType="com.garam.web.employee.dto.EmpsalaryAll"
+		resultType="com.garam.web.employee.dto.EmpsalaryAll">
+
+		SELECT
+
+		*,
+		(SELECT
+		vehicleinfo.vehicle FROM
+		vehicleinfo WHERE vehicleinfo.id
+		=
+		personnalsalary.id) AS
+		vehicle,
+		(SELECT
+		employeeinfo.name FROM employeeinfo
+		WHERE employeeinfo.id = personnalsalary.id) AS name
+
+		FROM
+
+		personnalsalary
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		personnalsalary.approvalno =
+		approval.approvalno
+
+		LEFT JOIN
+
+		employeeinfo
+
+		ON
+
+		personnalsalary.id = employeeinfo.id
+
+		WHERE
+
+		(
+		personnalsalary.approvalno IS NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0
+		)
+
+		AND
+
+		employeeinfo.company = #{company}
+
+		ORDER BY
+		vehicle
+
+	</select>
+
+	<select id="selectApprRsvtMoney" parameterType="com.garam.web.dashboard.dto.RsvtDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		SELECT
+
+		*,
+		rsvtmoney.rsvtmoneyseq AS operno,
+		rsvtmoney.moneymoney AS atlm,
+		rsvtmoney.moneymemo AS opercom,
+		(SELECT
+		customer.ctmname FROM customer WHERE
+		customer.ctmno = rsvt.ctmno) AS
+		opermemo,
+		(SELECT rsvt.conm -
+		SUM(rsvtmoney.moneymoney) FROM rsvtmoney WHERE
+		rsvtmoney.rsvt = rsvt.rsvt) AS opertype,
+		(SELECT
+		SUM(rsvtmoney.moneymoney) FROM rsvtmoney WHERE rsvtmoney.rsvt =
+		rsvt.rsvt) AS opertrash
+		FROM
+
+		rsvtmoney
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		rsvtmoney.approvalno = approval.approvalno
+
+		LEFT JOIN
+
+		rsvt
+
+		ON
+
+		rsvtmoney.rsvt = rsvt.rsvt
+
+		WHERE
+
+		(
+		rsvtmoney.approvalno
+		IS NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0
+		)
+
+		AND
+
+		rsvtmoney.moneyuser = #{opercar}
+
+		GROUP BY
+		rsvtmoney.rsvtmoneyseq
+
+		ORDER BY
+		rsvt.stday,
+		rsvtmoney.rsvt,
+		rsvtmoney.moneyindt
+
+	</select>
+
+	<select id="selectApprRsvt" parameterType="com.garam.web.dashboard.dto.RsvtDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		SELECT
+
+		*,
+		(SELECT
+		customer.ctmname FROM customer WHERE
+		customer.ctmno = rsvt.ctmno) AS
+		opermemo
+
+		FROM
+
+		rsvt
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		rsvt.approvalno = approval.approvalno
+
+		WHERE
+
+		(rsvt.approvalno IS NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0)
+
+		AND
+
+		rsvt.empin = #{opercar}
+
+		ORDER BY
+		rsvt.stday
+
+	</select>
+
+	<select id="selectApprInsu" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veinsurance
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		veinsurance.approvalno = approval.approvalno
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		veinsurance.carnumber =
+		vehicleinfo.carnumber
+
+		WHERE
+
+		(veinsurance.approvalno IS NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0)
+
+		AND
+
+
+		vehicleinfo.company = #{company}
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+	</select>
+
+	<select id="selectApprInsuSepa" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veinsurancesepa
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		veinsurancesepa.approvalno = approval.approvalno
+
+		LEFT JOIN
+
+		veinsurance
+
+		ON
+
+		veinsurancesepa.insuno = veinsurance.insuno
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		vehicleinfo.carnumber =
+		veinsurance.carnumber
+
+
+		WHERE
+
+		(veinsurancesepa.approvalno IS NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0)
+
+		AND
+
+
+		vehicleinfo.company = #{company}
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+	</select>
+
+	<select id="selectApprLoan" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veloan
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		veloan.approvalno = approval.approvalno
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		vehicleinfo.carnumber =
+		veloan.carnumber
+
+
+		WHERE
+
+		(veloan.approvalno IS NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0)
+
+		AND
+
+
+		vehicleinfo.company = #{company}
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+	</select>
+
+
+	<select id="selectApprLoanSepa" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*,
+		(SELECT SUM(veloansepa.loansepamoney) FROM veloansepa WHERE veloansepa.loanno = veloan.loanno) AS veaccmoney,
+		(SELECT veloan.loan - SUM(veloansepa.loansepamoney) FROM veloansepa WHERE veloansepa.loanno = veloan.loanno) AS
+		veacctrash
+
+		FROM
+
+		veloansepa
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		veloansepa.approvalno = approval.approvalno
+
+		LEFT JOIN
+
+		veloan
+
+		ON
+
+		veloansepa.loanno
+		= veloan.loanno
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		vehicleinfo.carnumber =
+		veloan.carnumber
+
+
+		WHERE
+
+		(veloansepa.approvalno IS NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0)
+
+		AND
+
+		vehicleinfo.company = #{company}
+
+		GROUP BY
+		veloansepa.loansepano
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+	</select>
+
+	<select id="selectApprInspec" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veinspection
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		veinspection.approvalno = approval.approvalno
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		vehicleinfo.carnumber =
+		veinspection.carnumber
+
+
+		WHERE
+
+		(veinspection.approvalno IS NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0)
+
+		AND
+
+		vehicleinfo.company = #{company}
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+	</select>
+
+	<select id="selectApprMaint" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		vemaintenance
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		vemaintenance.approvalno = approval.approvalno
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		vehicleinfo.carnumber =
+		vemaintenance.carnumber
+
+
+		WHERE
+
+		(vemaintenance.approvalno IS NULL
+
+		OR
+
+		approval.approvalcondi <![CDATA[<]]>
+		0)
+
+		AND
+
+		vehicleinfo.company = #{company}
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+	</select>
+
+	<insert id="insertAppr" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+		INSERT
+
+		INTO
+
+		approval
+
+		VALUES
+		(
+		null,
+		#{approvalno},
+		#{id},
+		#{approvalposition},
+		#{approvalpaper},
+		#{approvalday},
+		#{approvaltitle},
+		#{approvalcont},
+		NOW(),
+		1,
+		1
+		);
+	</insert>
+
+	<update id="updateAppr" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+
+		UPDATE
+
+		approval
+
+		SET
+
+		approvalcondi = #{approvalcondi}
+
+		WHEW
+
+		approvalno =
+		#{approvalno}
+
+	</update>
+
+	<insert id="insertApprFoot" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+
+		INSERT
+
+		INTO
+
+		approvalfoot
+
+		VALUES
+		(
+		null,
+		#{approvalno},
+		#{id},
+		#{approvalfootposition},
+		IFNULL((SELECT MAX(approvalfootnum) FROM approvalfoot ALIAS_FOR_SUBQUERY WHERE
+		approvalno =
+		#{approvalno}), 0) + 1,
+		NOW(),
+		null,
+		#{approvalfootcont},
+		1
+		);
+
+	</insert>
+
+	<insert id="insertApprLine" parameterType="java.util.HashMap">
+
+		INSERT
+
+		INTO
+
+		approvalline
+
+		VALUES
+
+		<foreach collection="apprOthers" item="value" separator=",">
+			(
+			null,
+			#{value.approvalno},
+			#{value.id},
+			#{value.approvallineposition},
+			#{value.approvallineorder},
+			#{value.approvallinesepa},
+			null,
+			1
+			)
+		</foreach>
+
+	</insert>
+
+	<update id="updateApprLine" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+
+		UPDATE
+
+		approvalline
+
+		SET
+
+		approvallinesepa = #{approvallinesepa},
+		approvallineday = NOW()
+
+		WHERE
+
+		approvalno =
+		#{approvalno}
+
+		AND
+
+		id= #{id}
+
+	</update>
+
+	<insert id="insertApprHelp" parameterType="java.util.HashMap">
+
+		INSERT
+
+		INTO
+
+		approvalhelp
+
+		VALUES
+
+		<foreach collection="apprOthers" item="value" separator=",">
+			(
+			null,
+			#{value.approvalno},
+			#{value.id},
+			#{value.approvalhelpposition},
+			#{value.approvalhelporder},
+			1
+			)
+		</foreach>
+	</insert>
+
+	<insert id="insertApprCham" parameterType="java.util.HashMap">
+
+		INSERT
+
+		INTO
+
+		approvalcham
+
+		VALUES
+
+		<foreach collection="apprOthers" item="value" separator=",">
+			(
+			null,
+			#{value.approvalno},
+			#{value.id},
+			#{value.approvalchamposition},
+			#{value.approvalchamorder},
+			1
+			)
+		</foreach>
+
+	</insert>
+
+	<update id="updateApprFoot" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+
+		UPDATE
+
+		approvalfoot
+
+		SET
+
+		approvalfootchtime = NOW(),
+		approvalfootcont =
+		#{approvalfootcont},
+		approvalfoottrash = 1
+
+		WHERE
+
+		approvalfootseq = #{approvalfootseq};
+
+	</update>
+
+	<delete id="deleteApprFoot" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+
+		DELETE
+
+		FROM
+
+		approvalfoot
+
+		WHERE
+
+		approvalfootseq = #{approvalfootseq};
+
+	</delete>
+
+	<update id="updateApprEmp" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			employeeinfo
+
+			SET
+
+			employeeinfo.approvalno =
+			#{value.approvalno}
+
+			WHERE
+
+			employeeinfo.id =
+			#{value.id}
+		</foreach>
+	</update>
+
+	<update id="updateApprVe" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			vehicleinfo
+
+			SET
+
+			vehicleinfo.approvalno =
+			#{value.approvalno}
+
+			WHERE
+
+			vehicleinfo.carnumber =
+			#{value.carnumber}
+		</foreach>
+	</update>
+
+	<update id="updateApprAcc" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			veacc
+
+			SET
+
+			veacc.approvalno =
+			#{value.approvalno}
+
+			WHERE
+
+			veacc.veaccseq =
+			#{value.veaccseq}
+		</foreach>
+	</update>
+
+	<update id="updateApprSal" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			personnalsalary
+
+			SET
+
+			personnalsalary.approvalno = #{value.approvalno}
+
+			WHERE
+
+			personnalsalary.salno =
+			#{value.salno}
+		</foreach>
+	</update>
+
+	<update id="updateApprRsvtMoney" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			rsvtmoney
+
+			SET
+
+			rsvtmoney.approvalno =
+			#{value.approvalno}
+
+			WHERE
+
+			rsvtmoney.rsvtmoneyseq =
+			#{value.rsvtmoneyseq}
+		</foreach>
+	</update>
+
+	<update id="updateApprRsvt" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			rsvt
+
+			SET
+
+			rsvt.approvalno =
+			#{value.approvalno}
+
+			WHERE
+
+			rsvt.rsvt =
+			#{value.rsvt}
+		</foreach>
+	</update>
+
+	<update id="updateApprInsu" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			veinsurance
+
+			SET
+
+			veinsurance.approvalno =
+			#{value.approvalno}
+
+			WHERE
+
+			veinsurance.insuno =
+			#{value.insuno}
+		</foreach>
+	</update>
+
+	<update id="updateApprInsuSepa" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			veinsurancesepa
+
+			SET
+
+			veinsurancesepa.approvalno = #{value.approvalno}
+
+			WHERE
+
+			veinsurancesepa.insusepano =
+			#{value.insusepano}
+		</foreach>
+	</update>
+
+	<update id="updateApprLoan" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			veloan
+
+			SET
+
+			veloan.approvalno =
+			#{value.approvalno}
+
+			WHERE
+
+			veloan.loanno =
+			#{value.loanno}
+		</foreach>
+	</update>
+
+	<update id="updateApprLoanSepa" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			veloansepa
+
+			SET
+
+			veloansepa.approvalno =
+			#{value.approvalno}
+
+			WHERE
+
+			veloansepa.loansepano =
+			#{value.loansepano}
+		</foreach>
+	</update>
+
+	<update id="updateApprInsepc" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			veinspection
+
+			SET
+
+			veinspection.approvalno =
+			#{value.approvalno}
+
+			WHERE
+
+			veinspection.inspecseq =
+			#{value.inspecseq}
+		</foreach>
+	</update>
+
+	<update id="updateApprMaint" parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index" separator=";">
+			UPDATE
+
+			vemaintenance
+
+			SET
+
+			vemaintenance.approvalno = #{value.approvalno}
+
+			WHERE
+
+			vemaintenance.vemaintenanceseq =
+			#{value.vemaintenanceseq}
+		</foreach>
+	</update>
+
+	<select id="selectApprIng" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		approvalline.approvallineseq, approvalline.approvalno, approvalline.id,
+		approvalline.approvallineposition, approvalline.approvallineorder,
+		approvalline.approvallinesepa,
+		approvalline.approvallineday, approvalline.approvallinetrash,
+		approval.approvalseq, approval.approvalno, approval.id AS
+		name,
+		approval.approvalposition, approval.approvalpaper, approval.approvalday,
+		approval.approvaltitle,
+		approval.approvalupday, approval.approvalcondi, approval.approvaltrash
+
+		FROM
+
+		approvalline
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		approvalline.approvalno = approval.approvalno
+
+		WHERE
+
+		approval.approvalcondi > 0
+
+		AND
+
+		approvalline.approvallineorder =
+		approval.approvalcondi
+
+		AND
+
+		approvalline.id = #{id}
+
+		AND
+
+		approvalline.approvallineday IS
+		NULL
+
+	</select>
+
+	<select id="selectApprNo" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		*,
+		(SELECT
+		user.name FROM
+		user WHERE user.id =
+		approval.id) AS name
+
+		FROM
+
+		approval
+
+		WHERE
+
+		approval.approvalno =
+		#{approvalno}
+
+	</select>
+
+	<select id="selectApprLine" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		*,
+		(SELECT
+		user.name FROM
+		user WHERE user.id =
+		approvalline.id) AS name
+
+		FROM
+
+		approvalline
+
+		WHERE
+
+		approvalline.approvalno = #{approvalno}
+
+	</select>
+
+	<select id="selectApprHelp" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		*,
+		(SELECT
+		user.name FROM
+		user WHERE user.id =
+		approvalhelp.id) AS name
+
+		FROM
+
+		approvalhelp
+
+		WHERE
+
+		approvalhelp.approvalno = #{approvalno}
+
+	</select>
+
+	<select id="selectApprCham" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		*,
+		(SELECT
+		user.name FROM
+		user WHERE user.id =
+		approvalcham.id) AS name
+
+		FROM
+
+		approvalcham
+
+		WHERE
+
+		approvalcham.approvalno = #{approvalno}
+
+	</select>
+
+	<select id="selectApprFoot" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		*,
+		(SELECT
+		user.name FROM
+		user WHERE user.id =
+		approvalfoot.id) AS name
+
+		FROM
+
+		approvalfoot
+
+		WHERE
+
+		approvalfoot.approvalno = #{approvalno}
+
+	</select>
+</mapper>

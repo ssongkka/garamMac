@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="dataVeEmp">
+        <datalist id="car-info">
+            <option
+                th:each="ve : ${ve}"
+                th:value="${ve.vehicle2}"
+                th:label="${ve.vehicle2}"
+                th:data-value="${ve.carnumber}"
+                th:data-owner="${ve.owner}"
+                th:data-id="${ve.id}"></option>
+            <option
+                th:each="othercompa : ${othercompa}"
+                th:value="${othercompa.ctmname}"
+                th:label="${othercompa.ctmname}"
+                th:data-value="${othercompa.ctmname}"
+                th:data-owner="${othercompa.ctmname}"
+                th:data-id="${othercompa.ctmname}"></option>
+        </datalist>
+        <datalist id="per-info">
+            <option
+                id="aaaccc"
+                th:each="emp : ${emp}"
+                th:value="${emp.name}"
+                th:label="${emp.name}"
+                th:data-value="${emp.id}"></option>
+        </datalist>
+    </div>
+</html>

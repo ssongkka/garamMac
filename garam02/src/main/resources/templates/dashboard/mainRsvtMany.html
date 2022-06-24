@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>일괄 예약 입력</title>
+
+        <th:block th:replace="layout/linkGroupCss :: linkCss"></th:block>
+
+        <link rel="stylesheet" href="/css/dashboardCss/rsvtMany.css?v=2020051201">
+        <link rel="stylesheet" href="/css/openTemplates/offCustomer.css?v=2020051201">
+        <link
+            rel="stylesheet"
+            href="/css/openTemplates/insertCustomer.css?v=2020051201">
+    </head>
+
+    <body>
+        <!-- 자동완성 방지용 -->
+        <input type="text" style="width:0px;height:0px;position: absolute;">
+        <input type="password" style="width:0px;height:0px;position: absolute;">
+        <!-- 자동완성 방지용 -->
+        <header>
+            <input
+                type="hidden"
+                id="empin"
+                name="empin"
+                th:value="${user.position}+''+${user.name}">
+            <input type="hidden" id="m-no" value="">
+            <span id="t-btn">
+                <button class="btn btn-default" id="backMain">
+                    <i class="fa-solid fa-arrow-left"></i>홈으로
+                </button>
+            </span>
+            <div id="t-cnt">
+                <span id="t-name">이름</span>
+                <span id="t-tel">연락처</span>
+                <span id="t-stp">출발지</span>
+                <span id="t-add">주소</span>
+                <button class="btn btn-default" id="asdBtn">
+                    <i class="fa-solid fa-user-group"></i>고객정보입력</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="table-responsive">
+                <table class="table table-striped" id="rsvt-tb">
+                    <colgroup>
+                        <col width="auto">
+                        <col width="auto">
+                        <col width="6%">
+                        <col width="4%">
+                        <col width="auto">
+                        <col width="auto">
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="6%">
+                        <col width="7%">
+                        <col width="3%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>출 발 일</th>
+                            <th>도 착 일</th>
+                            <th>차 량</th>
+                            <th>대 수</th>
+                            <th>출 발 시 간</th>
+                            <th>종 료 시 간</th>
+                            <th>출 발 장 소</th>
+                            <th>목 적 지</th>
+                            <th>특 이 사 항</th>
+                            <th>부 가 세</th>
+                            <th>운 행 금 액</th>
+                            <th>삭 제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbMany">
+                        <tr>
+                            <td><input type="date" class="form-control input-sm" id="std" onchange="ccc(this)"></td>
+                            <td><input type="date" class="form-control input-sm" id="edd"></td>
+                            <td>
+                                <select id="bus" name="bus" class="form-select input-sm">
+                                    <option value="대형">대형</option>
+                                    <option value="중형">중형</option>
+                                    <option value="우등">우등</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-select input-sm">
+                                    <option
+                                        th:each="i : ${#numbers.sequence(1, 50)}"
+                                        th:value="${i}"
+                                        th:text="${i}">Num</option>
+                                </select>
+                            </td>
+                            <td><input type="time" class="form-control input-sm" value="08:30">
+                            </td>
+                            <td><input type="time" class="form-control input-sm"></td>
+                            <td><input
+                                type="text"
+                                class="form-control input-sm"
+                                id="stp"
+                                onfocus="this.select()"></td>
+                            <td><input type="text" class="form-control input-sm" onfocus="this.select()"></td>
+                            <td><input type="text" class="form-control input-sm" onfocus="this.select()"></td>
+                            <td>
+                                <select class="form-select input-sm">
+                                    <option value="포함">포함</option>
+                                    <option value="미포함">미포함</option>
+                                    <option value="카드">카드</option>
+                                </select>
+                            </td>
+                            <td><input
+                                type="text"
+                                data-type="currency"
+                                class="form-control input-sm"
+                                value="0"
+                                style="text-align: right;"
+                                onfocus="this.select()"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="btng" role="group" aria-label="...">
+                <button class="btn btn-default" id="plus-btn">
+                    추가<i class="fa-solid fa-plus"></i>
+                </button>
+                <button class="btn btn-primary" id="insert-many">
+                    입력<i class="fa-solid fa-download"></i>
+                </button>
+            </div>
+            <datalist id="name-cho">
+                <option
+                    th:each="custom : ${customer}"
+                    th:value="${custom.ctmname}"
+                    th:label="${custom.ctmtel1}"
+                    th:data-value="${custom.ctmno}"></option>
+            </datalist>
+        </main>
+        <div
+            style="background: transparent;"
+            id="modal-ctm"
+            class="modal fade"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="">고객정보입력</h3>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                        <input type="hidden" id="md-rsvtNum" value="">
+                    </div>
+                    <div class="modal-body md-rsvt-bdc" id="md-rsvt-bd">
+                        <h2>
+                            고객 정보
+                        </h2>
+                        <div th:replace="openTemplates/updateCustomer :: upCust"></div>
+                    </div>
+                    <div class="modal-footer mf-ch-rsvt">
+                        <div class="mf-ch-rsvt-item">
+                            <button type="button" class="btn btn-primary" id="btn-ctm-insert">입력</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="openTemplates/offCustomer :: offCustomer"></div>
+        <div th:replace="openTemplates/modalCustomerUp :: modalCustUp"></div>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            const opt =/*[[${opt}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbuser =/*[[${user}]]*/
+            'default';
+            /*]]>*/
+        </script>
+        <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/dashboard/rsvtMany.js?v=2020051201"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/openTemplates/offCustomer.js?v=2020051201"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/openTemplates/insertCustomer.js?v=2020051201"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/openTemplates/updateCustomer.js?v=2020051201"></script>
+    </body>
+</html>

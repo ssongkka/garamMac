@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:fragment="ve-inspec" class="inspecVe">
+        <div class="maintenanceMain">
+            <h3>검사내역</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="15%">
+                        <col width="5%">
+                    </colgroup>
+                    <thead class="table-light">
+                        <tr>
+                            <th colspan="2">검사유효기간</th>
+                            <th>검사시행일</th>
+                            <th>검사시행장</th>
+                            <th>주행거리</th>
+                            <th colspan="2">검사구분</th>
+                        </tr>
+                        <tr>
+                            <th><input
+                                type="date"
+                                class="form-control"
+                                id="daystInspec"
+                                style="max-width: 10rem;"></th>
+                            <th><input
+                                type="date"
+                                class="form-control"
+                                id="dayedInspec"
+                                style="max-width: 10rem;"></th>
+                            <th><input
+                                type="date"
+                                class="form-control"
+                                id="dayInspec"
+                                style="max-width: 10rem;"></th>
+                            <th><input type="text" class="form-control" id="compaInspec"></th>
+                            <th>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" data-type="currency" id="distInspec">
+                                    <div class="input-group-text">Km</div>
+                                </div>
+                            </th>
+                            <th>
+                                <select class="form-select" id="sepaInspec">
+                                    <option value="종합" label="종합"></option>
+                                    <option value="정기" label="정기"></option>
+                                </select>
+                            </th>
+                            <th style="vertical-align: middle;">
+                                <a class="" id="btnInspec">
+                                    <i class="fa-solid fa-circle-arrow-down"></i>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="inspecBd">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</html>

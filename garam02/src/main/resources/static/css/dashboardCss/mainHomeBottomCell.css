@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+.main-bottom {
+    display: none;
+}
+
+@media (max-width:1024px) {}
+
+@media (max-width:768px) {
+
+    .main-bottom {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+
+        position: fixed;
+        bottom: 2rem;
+        left: 1rem;
+        right: 1rem;
+
+        padding: 0 1rem;
+
+        height: 5rem;
+
+        background: #d5d5d5d4;
+
+        border-radius: 10px;
+
+        z-index: 1054;
+    }
+    .cellBottom svg:hover {
+        color: var(--main-color);
+    }
+
+    .cellBottom svg {
+        font-size: 2rem;
+        color: #727272;
+    }
+
+    .h2chEnd,
+    .h2chEventgrade {
+        display: flex;
+        align-items: center;
+    }
+
+    .h2chEnd svg,
+    .h2chEventgrade svg {
+        font-size: 1rem;
+    }
+
+    table > tbody > tr > .h2chEventgrade {
+        justify-content: center;
+    }
+
+    #md-rsvt-bd {}
+}

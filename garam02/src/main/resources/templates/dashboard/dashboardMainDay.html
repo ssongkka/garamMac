@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="main-day" class="card-song dash-cal-d" id="dash-phone">
+        <div class="dash-cal-d-item">
+            <a class="btn" id="fnDownDay">
+                <i class="fas fa-chevron-left fa-lg"></i>
+            </a>
+        </div>
+        <div class="dash-cal-d-item dash-cal-d-item2" id="">
+            <strong><input type="date" id="yearMonthDay"></strong>
+        </div>
+        <div class="dash-cal-d-item">
+            <a class="btn" id="fnUpDay">
+                <i class="fas fa-chevron-right fa-lg"></i>
+            </a>
+        </div>
+        <div class="dash-cal-d-item dash-cal-d-item4">
+            <!-- <button type="button" class="btn btn-primary btn-xs" id="btnYesD"
+            control-id="ControlID-1">어제</button> -->
+            <button type="button" class="btn btn-secondary btn-xs" id="btnToD">오늘</button>
+            <button type="button" class="btn btn-secondary btn-xs" id="btnTomD">내일</button>
+        </div>
+    </div>
+</html>

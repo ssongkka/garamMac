@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var msg = /*[[ ${message} ]]*/null;
+		alert(msg);
+		var rdrt = /*[[ ${redirectUri} ]]*/null;
+		location.href = rdrt;
+		/*]]>*/
+	</script>
+</body>
+</html>

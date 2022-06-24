@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="main-body">
+        <!-- 자동완성 방지용 -->
+        <input type="text" style="width:0px;height:0px;position: absolute;">
+        <input type="password" style="width:0px;height:0px;position: absolute;">
+        <!-- 자동완성 방지용 -->
+        <aside class="nomal-aside">
+            <div class="nomal-aside-main">
+                <div class="nomal-aside-search">
+                    <div class="logo">
+                        <span
+                            class="detail-user-1"
+                            th:text="${user.company}"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="left"
+                            title="홈으로"></span>
+                        <span class="detail-user-2">차량정보</span>
+                    </div>
+                    <div class="hd-search">
+                        <div class="hd-serach-group">
+                            <div class="hd-search-icon">
+                                <i class=" fas fa-search"></i>
+                            </div>
+                            <input
+                                type="text"
+                                id="ve-search"
+                                autocomplete="off"
+                                oninput="getVeAll(this.value)"
+                                placeholder="검색">
+                            <button id="btn-x">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="hd-name">
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs nav-justified evNav shadow-sm" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button
+                                    class="nav-link active"
+                                    id="all-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#all"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="all"
+                                    aria-selected="true">
+                                    <div class="tab-flex-ve">
+                                        <span>전체</span>
+                                        <span class="badge bg-secondary" id="bgAll">00</span>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button
+                                    class="nav-link"
+                                    id="dae-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#dae"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="dae"
+                                    aria-selected="false">
+                                    <div class="tab-flex-ve">
+                                        <span>대형</span>
+                                        <span class="badge bg-secondary" id="bgDae">00</span>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button
+                                    class="nav-link"
+                                    id="jung-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#jung"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="jung"
+                                    aria-selected="false">
+                                    <div class="tab-flex-ve">
+                                        <span>중형</span>
+                                        <span class="badge bg-secondary" id="bgJung">00</span>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button
+                                    class="nav-link"
+                                    id="udong-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#udong"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="udong"
+                                    aria-selected="false">
+                                    <div class="tab-flex-ve">
+                                        <span>우등</span>
+                                        <span class="badge bg-secondary" id="bgUdong">00</span>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button
+                                    class="nav-link"
+                                    id="compa-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#compa"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="compa"
+                                    aria-selected="false">
+                                    <div class="tab-flex-ve">
+                                        <span>회사</span>
+                                        <span class="badge bg-secondary" id="bgCompa">00</span>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button
+                                    class="nav-link"
+                                    id="gae-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#gae"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="gae"
+                                    aria-selected="false">
+                                    <div class="tab-flex-ve">
+                                        <span>개인</span>
+                                        <span class="badge bg-secondary" id="bgGae">00</span>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button
+                                    class="nav-link"
+                                    id="end-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#end"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="end"
+                                    aria-selected="false">
+                                    <div class="tab-flex-ve">
+                                        <span>만료</span>
+                                        <span class="badge bg-secondary" id="bgEnd">00</span>
+                                    </div>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content hd-tb">
+                        <div
+                            class="tab-pane fade show active table-responsive"
+                            id="all"
+                            role="tabpanel"
+                            aria-labelledby="all-tab">
+                            <div class="table-scroll">
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="18%"/>
+                                                <col width="15%"/>
+                                                <col width="32%"/>
+                                                <col width="13%"/>
+                                                <col width="22%"/>
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th class="sortNum">차량번호</th>
+                                                    <th class="sortStr">승무원</th>
+                                                    <th class="sortStr">소속</th>
+                                                    <th class="sortStr">등급</th>
+                                                    <th class="sortStr">차량등록일</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-scroll-body-ve scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="18%"/>
+                                            <col width="15%"/>
+                                            <col width="32%"/>
+                                            <col width="13%"/>
+                                            <col width="22%"/>
+                                        </colgroup>
+                                        <tbody id="ve-tb-all"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="dae" role="tabpanel" aria-labelledby="dae-tab">
+                            <div class="table-scroll">
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="18%"/>
+                                                <col width="15%"/>
+                                                <col width="32%"/>
+                                                <col width="13%"/>
+                                                <col width="22%"/>
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th class="sortNum">차량번호</th>
+                                                    <th class="sortStr">승무원</th>
+                                                    <th class="sortStr">소속</th>
+                                                    <th class="sortStr">등급</th>
+                                                    <th class="sortStr">차량등록일</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-scroll-body-ve scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="18%"/>
+                                            <col width="15%"/>
+                                            <col width="32%"/>
+                                            <col width="13%"/>
+                                            <col width="22%"/>
+                                        </colgroup>
+                                        <tbody id="ve-tb-dae"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="jung" role="tabpanel" aria-labelledby="jung-tab">
+                            <div class="table-scroll">
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="18%"/>
+                                                <col width="15%"/>
+                                                <col width="32%"/>
+                                                <col width="13%"/>
+                                                <col width="22%"/>
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th class="sortNum">차량번호</th>
+                                                    <th class="sortStr">승무원</th>
+                                                    <th class="sortStr">소속</th>
+                                                    <th class="sortStr">등급</th>
+                                                    <th class="sortStr">차량등록일</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-scroll-body-ve scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="18%"/>
+                                            <col width="15%"/>
+                                            <col width="32%"/>
+                                            <col width="13%"/>
+                                            <col width="22%"/>
+                                        </colgroup>
+                                        <tbody id="ve-tb-jung"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="tab-pane fade"
+                            id="udong"
+                            role="tabpanel"
+                            aria-labelledby="udong-tab">
+                            <div class="table-scroll">
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="18%"/>
+                                                <col width="15%"/>
+                                                <col width="32%"/>
+                                                <col width="13%"/>
+                                                <col width="22%"/>
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th class="sortNum">차량번호</th>
+                                                    <th class="sortStr">승무원</th>
+                                                    <th class="sortStr">소속</th>
+                                                    <th class="sortStr">등급</th>
+                                                    <th class="sortStr">차량등록일</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-scroll-body-ve scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="18%"/>
+                                            <col width="15%"/>
+                                            <col width="32%"/>
+                                            <col width="13%"/>
+                                            <col width="22%"/>
+                                        </colgroup>
+                                        <tbody id="ve-tb-udong"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="tab-pane fade"
+                            id="compa"
+                            role="tabpanel"
+                            aria-labelledby="compa-tab">
+                            <div class="table-scroll">
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="18%"/>
+                                                <col width="15%"/>
+                                                <col width="32%"/>
+                                                <col width="13%"/>
+                                                <col width="22%"/>
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th class="sortNum">차량번호</th>
+                                                    <th class="sortStr">승무원</th>
+                                                    <th class="sortStr">소속</th>
+                                                    <th class="sortStr">등급</th>
+                                                    <th class="sortStr">차량등록일</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-scroll-body-ve scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="18%"/>
+                                            <col width="15%"/>
+                                            <col width="32%"/>
+                                            <col width="13%"/>
+                                            <col width="22%"/>
+                                        </colgroup>
+                                        <tbody id="ve-tb-compa"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="gae" role="tabpanel" aria-labelledby="gae-tab">
+                            <div class="table-scroll">
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="18%"/>
+                                                <col width="15%"/>
+                                                <col width="32%"/>
+                                                <col width="13%"/>
+                                                <col width="22%"/>
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th class="sortNum">차량번호</th>
+                                                    <th class="sortStr">승무원</th>
+                                                    <th class="sortStr">소속</th>
+                                                    <th class="sortStr">등급</th>
+                                                    <th class="sortStr">차량등록일</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-scroll-body-ve scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="18%"/>
+                                            <col width="15%"/>
+                                            <col width="32%"/>
+                                            <col width="13%"/>
+                                            <col width="22%"/>
+                                        </colgroup>
+                                        <tbody id="ve-tb-gae"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="end" role="tabpanel" aria-labelledby="end-tab">
+                            <div class="table-scroll">
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="25%"/>
+                                                <col width="30%"/>
+                                                <col width="20%"/>
+                                                <col width="25%"/>
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th class="sortNum">차량번호</th>
+                                                    <th class="sortStr">소속</th>
+                                                    <th class="sortStr">등급</th>
+                                                    <th class="sortStr">차량등록일</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-scroll-body-ve scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="25%"/>
+                                            <col width="30%"/>
+                                            <col width="20%"/>
+                                            <col width="25%"/>
+                                        </colgroup>
+                                        <tbody id="ve-tb-end"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nomal-aside-btn">
+                    <div class="nomal-aside-btn-item btn-group" role="group">
+                        <button type="button" class="btn btn-default" id="md-New">신규입력<i class="fas fa-plus-square"></i>
+                        </button>
+                    </div>
+                    <div class="nomal-aside-btn-item btn-group" role="group">
+                        <button type="button" class="btn btn-default" id="md-File">
+                            차량명세서
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="nomal-aside-btn-item btn-group" role="group">
+                        <button type="button" class="btn btn-default " id="md-Juk">
+                            교통안전
+                            <i class="fas fa-file-upload"></i>
+                        </button>
+                    </div>
+                    <div class="nomal-aside-btn-item btn-group" role="group">
+                        <button type="button" class="btn btn-default " id="md-gas">
+                            연비정보
+                            <i class="fa-solid fa-gas-pump"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <header class="nomal-head">
+            <div class="nomal-head-item"></div>
+            <div class="nomal-head-item">
+                <a id="show-aside">
+                    <input type="hidden" value="0" id="show-aside-hd">
+                    <i class="fas fa-bars"></i>
+                </a>
+            </div>
+        </header>
+        <main class="nomal-main">
+            <div class="main-aside">
+                <div class="main-aside-item">
+                    <div class="main-aside-item-head emp-nth card-song">
+                        <div class="main-aside-item-head-item img-thumbnail">
+                            <input type="hidden" id="ve00">
+                            <div id="carouselExampleFade" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <a href="img/vehicle/bus1.png" target='_blank' id="ve16-1">
+                                            <img
+                                                src="img/vehicle/bus1.png"
+                                                onerror="this.src='img/vehicle/bus1.png'"
+                                                alt=""
+                                                class="iimmgg d-block w-100"
+                                                id="ve16">
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a href="img/vehicle/bus2.png" target='_blank' id="ve17-1">
+                                            <img
+                                                src="img/vehicle/bus2.png"
+                                                onerror="this.src='img/vehicle/bus2.png'"
+                                                alt=""
+                                                class="iimmgg center-block d-block w-100"
+                                                id="ve17">
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a href="img/vehicle/bus3.png" target='_blank' id="ve18-1">
+                                            <img
+                                                src="img/vehicle/bus3.png"
+                                                onerror="this.src='img/vehicle/bus3.png'"
+                                                alt=""
+                                                class="iimmgg center-block d-block w-100"
+                                                id="ve18">
+                                        </a>
+                                    </div>
+                                </div>
+                                <button
+                                    class="carousel-control-prev"
+                                    type="button"
+                                    data-bs-target="#carouselExampleFade"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button
+                                    class="carousel-control-next"
+                                    type="button"
+                                    data-bs-target="#carouselExampleFade"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="main-aside-item-head-item">
+                            <div class="emp-head-detail" id="ve20">회사</div>
+                            <div class="emp-head-detail" id="ve05">소속</div>
+                            <div class="emp-head-detail" id="ve02">
+                                <span>차량번호</span></div>
+                            <div class="emp-head-detail" id="ve04">승무원</div>
+                            <div class="emp-head-detail" id="ve06">
+                                제조사
+                            </div>
+
+                            <div class="emp-head-detail" id="ve03">승차인원</div>
+                            <div class="emp-head-detail" id="ve07">차명</div>
+                            <div class="emp-head-detail" id="ve10">연료</div>
+                            <div class="emp-head-detail" id="ve08">등급</div>
+                            <div
+                                class="emp-head-detail"
+                                id="ve14"
+                                style="background: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0); border-radius: 3px;">색상</div>
+                        </div>
+                    </div>
+
+                    <div class="emp-nth card-song">
+                        <blockquote>
+                            <div class="main-aside-item-add">
+                                <div class="emp-add-detail emp-ttt">차량구입(인수)일</div>
+                                <div class="emp-add-detail" id="ve24"></div>
+                                <div class="emp-add-detail emp-ttt endDVisu">차량판매일</div>
+                                <div class="emp-add-detail endDVisu" id="ve25"></div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div class="emp-nth card-song">
+                        <blockquote>
+                            <div class="main-aside-item-add">
+                                <div class="emp-add-detail emp-ttt">차량등록일</div>
+                                <div class="emp-add-detail" id="ve11"></div>
+                                <div class="emp-add-detail emp-ttt">차량만료일</div>
+                                <div class="emp-add-detail" id="ve12"></div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div class="emp-nth card-song">
+                        <blockquote>
+                            <div class="main-aside-item-add">
+                                <div class="emp-add-detail emp-ttt">차대번호</div>
+                                <div class="emp-add-detail" id="ve19"></div>
+                                <div class="emp-add-detail emp-ttt">출고가</div>
+                                <div class="emp-add-detail" id="ve13"></div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div class="emp-nth card-song">
+                        <input type="hidden" id="ve21-1" value="">
+                        <input type="hidden" id="ve22-1" value="">
+                        <input type="hidden" id="ve23-1" value="">
+                        <blockquote>
+                            <div class="main-aside-item-add">
+                                <div class="emp-add-detail emp-ttt">차량등록증</div>
+                                <div class="emp-add-detail" id="ve21"></div>
+                                <div class="emp-add-detail emp-ttt">보험증서</div>
+                                <div class="emp-add-detail" id="ve22"></div>
+                                <div class="emp-add-detail emp-ttt">교통안전통보서</div>
+                                <div class="emp-add-detail" id="ve23"></div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div class="emp-nth card-song">
+                        <blockquote>
+                            <div class="main-aside-item-add">
+                                <div class="emp-add-detail emp-ttt">메모</div>
+                                <div class="emp-add-detail" id="ve15"></div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div
+                        class="btn-group btn-group-justified emp-nth"
+                        role="group"
+                        aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-secondary" id="md-Ch">수&nbsp;정</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-aside-item card-song">
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <div class="dd-nav2-Main">
+                            <ul class="nav nav-pills nav-justified dd-nav dd-nav2" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button
+                                        class="nav-link active"
+                                        id="veTitleOper"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#operve"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="operve-profile"
+                                        aria-selected="false">운행내역</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button
+                                        class="nav-link"
+                                        id="veTitleInsu"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#insuve"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="insuve-profile"
+                                        aria-selected="false">보험</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button
+                                        class="nav-link"
+                                        id="veTitleMoney"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#moneyve"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="moneyve-profile"
+                                        aria-selected="false">대출</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button
+                                        class="nav-link"
+                                        id="veTitleInspec"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#inspecve"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="inspecve-profile"
+                                        aria-selected="false">검사</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button
+                                        class="nav-link"
+                                        id="veTitlemaintenance"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#maintenanceve"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="maintenanceve-profile"
+                                        aria-selected="false">정비</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button
+                                        class="nav-link"
+                                        id="veTitleacc"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#accve"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="accve-profile"
+                                        aria-selected="false">사고</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div
+                                th:insert="vehicle/vehicleOper :: ve-oper"
+                                class="tab-pane fade show active"
+                                id="operve"
+                                role="tabpanel"
+                                aria-labelledby="pills-operemp-tab"></div>
+                            <div
+                                th:insert="vehicle/vehicleinsu :: ve-insu"
+                                class="tab-pane fade"
+                                id="insuve"
+                                role="tabpanel"
+                                aria-labelledby="pills-infoemp-tab"></div>
+                            <div
+                                th:insert="vehicle/vehicleMoney :: ve-money"
+                                class="tab-pane fade"
+                                id="moneyve"
+                                role="tabpanel"
+                                aria-labelledby="pills-moneyemp-tab"></div>
+                            <div
+                                th:insert="vehicle/vehicleInspec :: ve-inspec"
+                                class="tab-pane fade"
+                                id="inspecve"
+                                role="tabpanel"
+                                aria-labelledby="pills-inspecve-tab"></div>
+                            <div
+                                th:insert="vehicle/vehiclemaintenance :: ve-maintenance"
+                                class="tab-pane fade"
+                                id="maintenanceve"
+                                role="tabpanel"
+                                aria-labelledby="pills-maintenanceve-tab"></div>
+                            <div
+                                th:insert="vehicle/vehicleAcc :: ve-acc"
+                                class="tab-pane fade"
+                                id="accve"
+                                role="tabpanel"
+                                aria-labelledby="pills-accve-tab"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div th:replace="dashboard/dashboardBottom :: main-bottom"></div>
+    <div th:replace="vehicle/vehicleInsertMD :: ve-MD-insert"></div>
+    <div th:replace="vehicle/vehicleFileMD :: ve-MD-file"></div>
+    <div th:replace="vehicle/vehicleRegMD :: ve-MD-reg"></div>
+    <div th:replace="vehicle/vehicleInsuMD :: ve-MD-insu"></div>
+    <div th:replace="vehicle/vehicleJukMD :: ve-MD-juk"></div>
+    <div th:replace="vehicle/vehicleJukViewMD :: ve-MD-jukView"></div>
+    <div th:replace="openTemplates/vehicleInsuContMD :: ve-MD-insuCont"></div>
+    <div th:replace="openTemplates/vehicleLoanContMD :: ve-MD-loanCont"></div>
+    <div th:replace="openTemplates/vehicleAccMD :: ve-MD-accCont"></div>
+    <div th:replace="openTemplates/vehicleGasMD :: ve-MD-gasCont"></div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const user =/*[[${user}]]*/
+        'default';
+        /*]]>*/
+        /*<![CDATA[*/
+        const opt =/*[[${opt}]]*/
+        'default';
+        /*]]>*/
+        /*<![CDATA[*/
+        const dbCompa =/*[[${company}]]*/
+        'default';
+        /*]]>*/
+        /*<![CDATA[*/
+        const dbVe =/*[[${ve}]]*/
+        'default';
+        /*]]>*/
+        /*<![CDATA[*/
+        const dbEmp =/*[[${emp}]]*/
+        'default';
+        /*]]>*/
+        /*<![CDATA[*/
+        const dbcarn =/*[[${carn}]]*/
+        'default';
+        /*]]>*/
+    </script>
+
+    <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+    <script
+        language="javascript"
+        type="text/javascript"
+        src="/js/vehicle/vehicleBody.js?v=2020051201"></script>
+    <script
+        language="javascript"
+        type="text/javascript"
+        src="/js/openTemplates/vehicleInsuContMD.js?v=2020051201"></script>
+    <script
+        language="javascript"
+        type="text/javascript"
+        src="/js/openTemplates/vehicleloanContMD.js?v=2020051201"></script>
+    <script
+        language="javascript"
+        type="text/javascript"
+        src="/js/openTemplates/vehicleAccContMD.js?v=2020051201"></script>
+    <script
+        language="javascript"
+        type="text/javascript"
+        src="/js/openTemplates/vehicleGasMD.js?v=2020051201"></script>
+    <script
+        language="javascript"
+        type="text/javascript"
+        src="/js/dashboard/mainHomeCell.js?v=2020051201"></script>
+</body>
+</html>

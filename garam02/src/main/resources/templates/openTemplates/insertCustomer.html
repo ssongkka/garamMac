@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div class="inCustomerBody" id="InFormCutomer" th:fragment="inCust">
+        <input type="hidden" id="ctmnoIn" value="">
+        <div class="row">
+            <div class="form-group col-xs-8 col-lg-8">
+                <div class="form-check form-check-inline">
+                    <input
+                        class="form-check-input"
+                        id="inCustSepa1"
+                        type="radio"
+                        name="ctmsepaIn"
+                        value="0"
+                        checked="checked">
+                    <label class="form-check-label" for="inCustSepa1">일반</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input
+                        class="form-check-input"
+                        id="inCustSepa2"
+                        type="radio"
+                        name="ctmsepaIn"
+                        value="1">
+                    <label class="form-check-label" for="inCustSepa2">학생단체</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input
+                        class="form-check-input"
+                        id="inCustSepa3"
+                        type="radio"
+                        name="ctmsepaIn"
+                        value="2">
+                    <label class="form-check-label" for="inCustSepa3">거래처</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-12 col-md-6">
+                <i class="fa-solid fa-user-tie"></i>
+                <label for="ctmnameIn">이름&#42;</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    list="name-cho"
+                    class="form-control"
+                    id="ctmnameIn"
+                    placeholder="이름을 입력해주세요."
+                    value="">
+                <datalist id="name-cho">
+                    <option
+                        th:each="custom : ${customer}"
+                        th:value="${custom.ctmname}"
+                        th:label="${custom.ctmtel1}"
+                        th:data-value="${custom.ctmno}"></option>
+                </datalist>
+            </div>
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-phone-alt"></i>
+                <label for="ctmtel1In">연락처&#42;</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmtel1In"
+                    placeholder="전화번호 형식으로 입력"
+                    value="">
+            </div>
+        </div>
+        <div class="row cusPbtn">
+            <div class="form-group col-xs-12 col-lg-12">
+                <button class="btn btn-secondary" id="btnCusP">더보기<i class="fa-solid fa-angles-down"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row cusP">
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-map-marker-alt"></i>
+                <label for="ctmstpIn">출발지</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmstpIn"
+                    placeholder="출발지가 고정된 예약자일 경우 입력"></input>
+            </div>
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-pen"></i>
+                <label for="ctmdetailIn">메모</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmdetailIn"></input>
+            </div>
+        </div>
+        <div class="row cusP">
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-phone-alt"></i>
+                <label for="ctmtel2In">비상연락처</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmtel2In"
+                    placeholder="010-0000-0000">
+            </div>
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-map"></i>
+                <label for="ctmaddressIn">주소</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmaddressIn"
+                    placeholder="주소를 입력해주세요.">
+            </div>
+        </div>
+        <div class="row cusP">
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="far fa-envelope"></i>
+                <label for="ctmemailIn">이메일</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmemailIn"
+                    placeholder="mail@mail.com">
+            </div>
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="far fa-building"></i>
+                <label for="ctmcompanumIn">사업자등록번호</label>
+                <input
+                    type="email"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmcompanumIn"
+                    placeholder="사업자등록번호 형식으로 입력해주세요.">
+            </div>
+        </div>
+        <div class="row cusP">
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-fax"></i>
+                <label for="ctmfaxIn">팩스</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmfaxIn"
+                    placeholder="팩스 번호를 입력해주세요.">
+            </div>
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-home"></i>
+                <label for="ctmhomepageIn">홈페이지</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmhomepageIn"
+                    placeholder="홈페이지 주소를 입력해주세요.">
+            </div>
+        </div>
+    </div>
+</html>

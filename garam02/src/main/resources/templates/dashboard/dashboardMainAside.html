@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <aside th:fragment="main-aside" class="aside">
+        <div class="ad-cal">
+            <input type="hidden" id="today">
+            <div class="ad-cal-items ad-cal-items-1 card-song" id="calendar">
+                <div class="dash-cal">
+                    <div class="dash-cal-h">
+                        <div class="">
+                            <a class="btn fnDownMonth">
+                                <i class="fas fa-chevron-left fa-lg"></i>
+                            </a>
+                        </div>
+                        <div class="dash-cal-h-item dash-cal-h-item2">
+                            <strong><input type="month" class="yearMonth" value=""></strong>
+                        </div>
+                        <div class="">
+                            <a class="btn fnUpMonth">
+                                <i class="fas fa-chevron-right fa-lg"></i>
+                            </a>
+                        </div>
+                        <div class="dash-cal-h-item dash-cal-h-item4">
+                            <button type="button" class="btn btn-secondary btn-xs btnToD">오늘</button>
+                            <button type="button" class="btn btn-secondary btn-xs btnTomD">내일</button>
+                        </div>
+                    </div>
+                    <div class="dash-cal-con" id="dash-cal-contents"></div>
+                </div>
+            </div>
+            <div class="home-main-item-2">
+                <a
+                    th:href="@{/vehicle}"
+                    class="home-main-item-22 card-song"
+                    id="card-ve"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    data-bs-original-title="차량정보 바로가기"></a>
+                <a
+                    th:href="@{/employee}"
+                    class="home-main-item-22 card-song"
+                    id="card-emp"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    data-bs-original-title="인사정보 바로가기"></a>
+                <a
+                    th:href="@{/regular}"
+                    class="home-main-item-22 card-song"
+                    id="card-reg"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    data-bs-original-title="정기운행정보 바로가기">
+                    <div class="home-main-item-222">
+                        <i class="fa-solid fa-retweet"></i>
+                    </div>
+                    <div class="home-main-item-222">
+                        <div class="home-main-item-222-span">계&nbsp;약</div>
+                        <div class="home-main-item-222-span" id="cardRegGye"></div>
+                    </div>
+                    <div class="home-main-item-222">
+                        <div class="home-main-item-222-span">노&nbsp;선</div>
+                        <div class="home-main-item-222-span" id="cardRegNo"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="ad-cal-comp card-song">
+                <div class="comp-item-con1">
+                    <div>
+                        <span id="comp-name"></span>
+                        <span id="comp-ceo"></span>
+                    </div>
+                    <div class="">
+                        <div id="comp-add"></div>
+                    </div>
+                </div>
+                <hr>
+                <div class="comp-item-con2">
+                    <div class="comp-item">
+                        <div class="comp-itemT">사업자등록번호</div>
+                        <div id="comp-num1"></div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-itemT">대표번호</div>
+                        <div id="comp-tel"></div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-itemT">이메일</div>
+                        <div id="comp-email"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</html>

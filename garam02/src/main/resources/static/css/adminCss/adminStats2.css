@@ -1,0 +1,149 @@
+:root {
+    --st-c1: rgb(104, 167, 173);
+    --st-c1: rgb(153, 196, 200);
+    --st-c1: rgb(229, 203, 159);
+    --st-c1: rgb(238, 228, 171);
+    --st-c1: rgb(223, 221, 204);
+
+    --st-cc1: rgba(104, 167, 173, 0.2);
+    --st-cc1: rgba(153, 196, 200, 0.2);
+    --st-cc1: rgba(229, 203, 159, 0.2);
+    --st-cc1: rgba(238, 228, 171, 0.2);
+    --st-cc1: rgba(223, 221, 204, 0.2);
+}
+
+.onestt {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    height: 44rem;
+
+    padding: 2rem 0;
+}
+
+#chartVeAllPerDiv1 {}
+
+#chartVeAllPerDiv2,
+#chartVeAllYearPerDiv {
+    padding: 2rem;
+}
+
+#chartVeAllPerDiv1 canvas {
+    width: 106px;
+    height: 106px;
+}
+
+.onestt-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+    padding: 0 5rem;
+}
+
+.onestt-item div {
+    flex: 1;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: rgba(77, 89, 105,1);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.onewttt {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.onewttt div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    padding-left: 1rem;
+}
+
+.onewttt div span {
+    flex: 1;
+}
+
+.tPerOne {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+}
+
+.tPerOneCol1 {
+    background-color: rgb(104, 167, 173);
+}
+
+.tPerOneCol2 {
+    background-color: rgb(153, 196, 200);
+}
+
+.tPerOneCol3 {
+    background-color: rgb(229, 203, 159);
+}
+
+.tPerOneCol4 {
+    background-color: rgb(238, 228, 171);
+}
+
+.tPerOneCol5 {
+    background-color: rgb(242, 241, 238);
+}
+
+.tb-stats2 > thead > tr > .th11 {
+    background: rgb(104, 167, 173);
+}
+
+.tb-stats2 > thead > tr > .th22 {
+    background: rgb(153, 196, 200);
+}
+
+.tb-stats2 > thead > tr > .th33 {
+    background: rgb(229, 203, 159);
+}
+
+.tb-stats2 > thead > tr > .th44 {
+    background: rgb(238, 228, 171);
+}
+
+.tb-stats2 > thead > tr > .th55 {
+    background: rgb(242, 241, 238);
+}
+
+.tb-stats2 > tbody > tr > .td11,
+.tb-stats2 > tfoot > tr > .td11 {
+    background: rgba(104, 167, 173, 0.2);
+}
+
+.tb-stats2 > tbody > tr > .td22,
+.tb-stats2 > tfoot > tr > .td22 {
+    background: rgba(153, 196, 200, 0.2);
+}
+
+.tb-stats2 > tbody > tr > .td33,
+.tb-stats2 > tfoot > tr > .td33 {
+    background: rgba(229, 203, 159, 0.2);
+}
+
+.tb-stats2 > tbody > tr > .td44,
+.tb-stats2 > tfoot > tr > .td44 {
+    background: rgba(238, 228, 171, 0.2);
+}
+
+.tb-stats2 > tbody > tr > .td55,
+.tb-stats2 > tfoot > tr > .td55 {
+    background: rgba(242, 241, 238,0.5);
+}

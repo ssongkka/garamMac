@@ -1,0 +1,142 @@
+.approvalUp {
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    height: 100%;
+}
+
+.approvalUp-he {
+    min-height: calc(100vh - 4rem);
+}
+
+.apprUp {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.approvalBtn {
+    text-align: right;
+}
+
+.approvalUp-cont {
+    flex: 1;
+
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.approvalUp-set {
+    flex: 1;
+
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.giLineTable > tbody > tr > td {
+    padding: 0.5rem 0;
+}
+
+.approvalUp-cont-title {
+    display: flex;
+    flex-direction: row;
+}
+
+.approvalUpDojang > tbody > tr > td {
+    text-align: center;
+    padding: 0 0.5rem;
+
+    border: 1px solid #00000014;
+    border-collapse: collapse;
+}
+
+.approvalUpDojang > tbody > tr {
+    height: 4rem;
+}
+
+.approvalUpDojang > tbody > tr > .colorG {
+    background: #0000000a;
+    font-weight: 600;
+}
+.approvalUpDojang > tbody > tr > .colorUp1 {
+    border-top: 1px solid black;
+}
+.approvalUpDojang > tbody > tr > .colorUp {
+    border-top: 2px solid black;
+}
+.approvalUpDojang > tbody > tr > .colorDown {
+    border-bottom: 2px solid black;
+}
+.approvalUpDojang > tbody > tr > .colorUpNo {
+    border-top: 0 solid transparent;
+}
+.approvalUpDojang > tbody > tr > .colorDownNo {
+    border-bottom: 0 solid transparent;
+}
+
+.approvalUpDojang > tbody > .giJik {
+    height: 3rem;
+    letter-spacing: 0.3rem;
+}
+.approvalUpDojang > tbody > .giName {
+    height: 5rem;
+}
+.approvalUpDojang > tbody > .giDay {
+    height: 3rem;
+    font-size: 1rem;
+}
+
+.approvalUpDojang table > tfoot > tr {
+    background: #0000001a;
+    border-top: double 0.3rem black;
+}
+
+.approvalUp-cont-title-item1 {
+    width: 60%;
+
+    display: flex;
+    font-size: 1.8rem;
+}
+
+.approvalUp-cont-title-item2 {
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tablefir {
+    width: 100%;
+}
+.tablefir table {
+    width: 100%;
+}
+
+.clHelpCham {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+
+.clHelpCham-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+#spCham,
+#spHelp {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}

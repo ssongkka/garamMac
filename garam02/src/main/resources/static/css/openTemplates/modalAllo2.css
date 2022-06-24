@@ -1,0 +1,284 @@
+.modalAllo2BD {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    padding: 2rem 3rem;
+}
+
+.allTitle {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 1rem;
+}
+
+.allTitle-atM {
+    text-align: right;
+}
+
+.btnAlloCh {
+    padding: 0.5rem;
+}
+
+.allTitle-Ch {
+    flex: 1;
+    text-align: left;
+}
+
+.allTitle-Ch a svg {
+    font-size: 2rem;
+}
+
+.allTitle-desty {
+    letter-spacing: 0.1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.allTitle-busnum {
+    padding: 0 0.5rem;
+}
+
+.alloAll {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 3rem;
+}
+
+.alloTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem 1rem 1rem 3rem;
+}
+
+.alloTitle-item1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.alloTitle-item4 {
+    flex: 1;
+    text-align: right;
+}
+
+.allNum,
+.alloEmp,
+.alloM,
+.alloVe {
+    height: 100%;
+}
+
+.allNum {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 4rem;
+
+}
+
+.alloEmp,
+.alloM,
+.alloOwner,
+.alloVe {
+    border-radius: 0;
+    width: 12rem;
+    border-left-width: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 1.3rem;
+}
+
+.alloOwner {
+    flex: 1;
+    height: 100%;
+}
+
+.alloOne,
+.alloX {
+    width: 6rem;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.allo {
+    border: 0 solid transparent;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.alloAllM {
+    padding-right: 0.5rem;
+    background: #fcf8e3;
+    width: 12rem;
+    height: 3rem;
+}
+
+#modalAllo2 table {
+    width: 100%;
+}
+
+#modalAllo2 .alloNumClk {
+    cursor: pointer;
+}
+
+#modalAllo2 .alloNumClkDe {
+    background: var(--main-color);
+    border: 1px solid var(--main-color);
+
+    color: var(--sub-color);
+}
+
+.alloAllo {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    border-top: 1px solid #dee2e6;
+}
+
+#modalAllo2 .form-control,
+#modalAllo2 .input-group-text {
+    border-radius: 0;
+    text-align: center;
+}
+
+#modalAllo2 .form-control {
+    border-right: 0 solid transparent;
+}
+
+#modalAllo2 .input-group {
+    border: 1px solid #dee2e6;
+}
+
+#modalAllo2 .table {
+    width: 100%;
+}
+
+.alloAllo input:focus {
+    outline: none;
+}
+
+.alloCont {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.alloCont-item {
+    border: 1px solid #dee2e6;
+
+}
+
+.alloDelX {
+    border-left: 0 solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    background: transparent;
+}
+
+.alloDelX a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alloDelX svg {
+    color: var(--text-grey);
+    font-size: 1rem;
+}
+
+#modalAllo2 .allo1 {
+    background: var(--compa-color);
+    border-right: 0 solid transparent;
+}
+#modalAllo2 .allo2 {
+    background: var(--person-color);
+    border-right: 0 solid transparent;
+}
+#modalAllo2 .allo3 {
+    background: var(--otherCompa-color);
+    border-right: 0 solid transparent;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#modalAllo2 .allo11 {
+    background: var(--compa-color);
+    border-left: 0 solid transparent;
+}
+#modalAllo2 .allo21 {
+    background: var(--person-color);
+    border-left: 0 solid transparent;
+}
+#modalAllo2 .allo31 {
+    background: var(--otherCompa-color);
+    border-left: 0 solid transparent;
+}
+#modalAllo2 .alloComp svg {
+    color: transparent;
+}
+
+#modalAllo2 .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin-left: 0;
+}
+
+@media (max-width:768px) {
+    .allTitle {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        padding: 1rem;
+    }
+
+    .alloTitle {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    .alloTitle-item1 {
+        grid-column: 1/3;
+        grid-row: 1/2;
+    }
+    .alloTitle-item2 {
+        grid-column: 1/3;
+        grid-row: 2/3;
+    }
+    .alloTitle-item3 {
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+    .alloTitle-item4 {
+        grid-column: 2/3;
+        grid-row: 3/4;
+    }
+
+    .alloAllo {
+        grid-template-columns: 1fr;
+    }
+
+    .allTitle-item {
+        text-align: left;
+    }
+}

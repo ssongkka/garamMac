@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <!-- Modal -->
+    <div
+        th:fragment="ve-MD-loanCont"
+        class="modal fade"
+        id="modal-loanCont"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" value="" id="loanCarNum">
+                    <input type="hidden" value="" id="loancontNum">
+                    <h3 class="modal-title" id="modal-loanCont-mh"></h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="loanContX"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="md-loanitem">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="loanbank" class="form-label">대출처</label>
+                                <input type="text" class="form-control" id="loanbank">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="loanmoney" class="form-label">대출금액</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    data-type="currency"
+                                    onfocus="this.select()"
+                                    value="0"
+                                    id="loanmoney">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="loanmonthm" class="form-label">월납입금</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    data-type="currency"
+                                    onfocus="this.select()"
+                                    value="0"
+                                    id="loanmonthm">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="loanStDay" class="form-label">대출일</label>
+                                <input type="date" class="form-control" id="loanStDay">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="loanEndDay" class="form-label">만기일</label>
+                                <input type="date" class="form-control" id="loanEndDay">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="loanPeri" class="form-label">대출기간</label>
+                                <div class="input-group">
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="loanPeri"
+                                        style="text-align: right;">
+                                    <div class="input-group-text">개월</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="loanday" class="form-label">기산일</label>
+                                <div class="input-group">
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="loanday"
+                                        style="text-align: right;">
+                                    <div class="input-group-text">일</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 loanShow">
+                                <label for="loanAllmoney" class="form-label">총 납입금</label>
+                                <div class="input-group">
+                                    <div class="input-group-text" id="loancontLabel"></div>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        data-type="currency"
+                                        value="0"
+                                        disabled="disabled"
+                                        id="loanAllmoney">
+                                </div>
+                            </div>
+                            <div class="col-md-6 loanShow">
+                                <label for="loanjanM" class="form-label">잔액</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    data-type="currency"
+                                    value="0"
+                                    disabled="disabled"
+                                    id="loanjanM">
+                            </div>
+                        </div>
+                        <div class="loanShow table-responsive">
+                            <table class="table table-bordered">
+                                <colgroup>
+                                    <col width="15%">
+                                    <col width="20%">
+                                    <col width="25%">
+                                    <col width="35%">
+                                    <col width="5%">
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>회차</th>
+                                        <th>회차월</th>
+                                        <th>납부일</th>
+                                        <th colspan="2">납부액</th>
+                                    </tr>
+                                    <tr>
+                                        <th id="tbloansepaNum">
+                                            <input type="text" class="form-control" id="inputLoanNumInsert">
+                                        </th>
+                                        <th>
+                                            <input
+                                                type="month"
+                                                class="form-control"
+                                                id="inputLoanMonthInsert"
+                                                style="width: 11rem; font-weight: 500; letter-spacing: 0;">
+                                        </th>
+                                        <th>
+                                            <input
+                                                type="date"
+                                                class="form-control"
+                                                id="inputLoanDayInsert"
+                                                style="width: 11rem;">
+                                        </th>
+                                        <th>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="inputLoanMonetInsert"
+                                                data-type="currency"
+                                                onfocus="this.select()"
+                                                value="0">
+                                        </th>
+                                        <th style="vertical-align: middle; text-align: center;">
+                                            <a class="" id="btnLoan">
+                                                <i class="fa-solid fa-circle-arrow-down"></i>
+                                            </a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tb-md-loancont">
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" value="">
+                                        </td>
+                                        <td><input type="date" class="form-control"></td>
+                                        <td><input
+                                            type="text"
+                                            class="form-control inLoanSepaInput"
+                                            data-type="currency"
+                                            onfocus="this.select()"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mdloanFoot">
+                    <div style="flex: 1;">
+                        <button type="button" class="btn btn-danger" id="loanCont-del">삭&nbsp;제</button>
+                    </div>
+                    <div>
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            id="loanContBtn"
+                            data-bs-dismiss="modal">닫&nbsp;기</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" id="loanCont-insert">입&nbsp;력</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

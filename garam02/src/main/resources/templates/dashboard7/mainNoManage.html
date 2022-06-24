@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="main-NoManage" class="manage">
+        <div class="main-nomanage">
+            <div class="no-manage-title2 card-song">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link active"
+                            id="pills-Il-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-Il"
+                            type="button"
+                            role="tab"
+                            aria-controls="pills-Il"
+                            aria-selected="true">일 반</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link"
+                            id="pills-Hak-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-Hak"
+                            type="button"
+                            role="tab"
+                            aria-controls="pills-Hak"
+                            aria-selected="false">학생단체</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link"
+                            id="pills-Gu-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-Gu"
+                            type="button"
+                            role="tab"
+                            aria-controls="pills-Gu"
+                            aria-selected="false">거래처</button>
+                    </li>
+                </ul>
+                <div class="tab-content noManage-tab-cont" id="pills-tabContent">
+                    <div
+                        class="tab-pane fade show active"
+                        id="pills-Il"
+                        role="tabpanel"
+                        aria-labelledby="pills-Il-tab">
+                        <div>
+                            <table class="table table-bordered">
+                                <colgroup>
+                                    <col width="21%"/>
+                                    <col width="10%"/>
+                                    <col width="15%"/>
+                                    <col width="27%"/>
+                                    <col width="27%"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>고객이름</th>
+                                        <th>예약(건)</th>
+                                        <th>미수금</th>
+                                        <th>연락처1</th>
+                                        <th>연락처2</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="accordion" id="accoIl"></div>
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="pills-Hak"
+                        role="tabpanel"
+                        aria-labelledby="pills-Hak-tab">
+                        <div>
+                            <table class="table table-bordered">
+                                <colgroup>
+                                    <col width="21%"/>
+                                    <col width="10%"/>
+                                    <col width="15%"/>
+                                    <col width="27%"/>
+                                    <col width="27%"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>학교이름</th>
+                                        <th>예약(건)</th>
+                                        <th>미수금</th>
+                                        <th>연락처1</th>
+                                        <th>연락처2</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="accordion" id="accoHak"></div>
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="pills-Gu"
+                        role="tabpanel"
+                        aria-labelledby="pills-Gu-tab">
+                        <div>
+                            <table class="table table-bordered">
+                                <colgroup>
+                                    <col width="21%"/>
+                                    <col width="10%"/>
+                                    <col width="15%"/>
+                                    <col width="27%"/>
+                                    <col width="27%"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>거래처이름</th>
+                                        <th>예약(건)</th>
+                                        <th>미수금</th>
+                                        <th>연락처1</th>
+                                        <th>연락처2</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="accordion" id="accoGu"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="allo-side">
+                <div class="no-manage-title">
+                    <div class="no-manage-title1">
+                        <div class="card-song no-manage-title1-items">
+                            <div class="nmtis1">전 체</div>
+                            <div class="nmtis2">
+                                <div id="noManageTitle11"></div>
+                                <div id="noManageTitle12"></div>
+                            </div>
+                            <div class="nmtis3" id="noManageTitle13"></div>
+                        </div>
+                    </div>
+                    <div class="no-manage-title1">
+                        <div class="card-song no-manage-title1-items">
+                            <div class="nmtis1">일 반</div>
+                            <div class="nmtis2">
+                                <div id="noManageTitle21"></div>
+                                <div id="noManageTitle22"></div>
+                            </div>
+                            <div class="nmtis3" id="noManageTitle23"></div>
+                        </div>
+                    </div>
+                    <div class="no-manage-title1">
+                        <div class="card-song no-manage-title1-items">
+                            <div class="nmtis1">학생단체</div>
+                            <div class="nmtis2">
+                                <div id="noManageTitle31"></div>
+                                <div id="noManageTitle32"></div>
+                            </div>
+                            <div class="nmtis3" id="noManageTitle33"></div>
+                        </div>
+                    </div>
+                    <div class="no-manage-title1">
+                        <div class="card-song no-manage-title1-items">
+                            <div class="nmtis1">거래처</div>
+                            <div class="nmtis2">
+                                <div id="noManageTitle41"></div>
+                                <div id="noManageTitle42"></div>
+                            </div>
+                            <div class="nmtis3" id="noManageTitle43"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </html>

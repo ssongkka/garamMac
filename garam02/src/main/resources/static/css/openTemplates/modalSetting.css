@@ -1,0 +1,154 @@
+.settingMain {
+    display: flex;
+    flex-direction: column;
+}
+
+.settingMain-item {
+    display: flex;
+}
+
+.settingMain-item:nth-child(1) {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 5rem;
+}
+
+.settingMain-item-1:nth-child(1) {
+    font-size: 1.5rem;
+    color: dimgray;
+}
+
+.settingMain-item-1:nth-child(2) {
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    font-weight: 600;
+}
+
+.settingMain-item-1:nth-child(3) {
+    font-size: 1.5rem;
+    color: dimgray;
+}
+
+.settingMain-item-2 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 1rem;
+
+    padding: 2rem;
+}
+
+.settingMain-item-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+}
+
+.setting-theme {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem 0.5rem;
+}
+
+.setting-theme-2 {
+    width: 100%;
+}
+
+.setting-theme-up label {
+    width: 100%;
+    height: 100%;
+}
+.setting-theme-down label {
+    width: 100%;
+    height: 100%;
+}
+
+.setting-theme-up1 {
+    height: 3rem;
+    background: #62207a;
+}
+.setting-theme-down1 {
+    height: 3rem;
+    background: #DCC4DC;
+}
+
+.setting-theme-up2 {
+    height: 3rem;
+    background: #0757a4;
+}
+.setting-theme-down2 {
+    height: 3rem;
+    background: #cdecf8;
+}
+
+.setting-theme-up3 {
+    height: 3rem;
+    background: #346cb0;
+}
+.setting-theme-down3 {
+    height: 3rem;
+    background: #eeeeee;
+}
+
+.setting-theme-up4 {
+    height: 3rem;
+    background: #02343F;
+}
+.setting-theme-down4 {
+    height: 3rem;
+    background: #F0EDCC;
+}
+
+.setting-theme-up5 {
+    height: 3rem;
+    background: #50586C;
+}
+.setting-theme-down5 {
+    height: 3rem;
+    background: #DCE2F0;
+}
+
+.setting-theme-up6 {
+    height: 3rem;
+    background: #815854;
+}
+.setting-theme-down6 {
+    height: 3rem;
+    background: #F9EBDE;
+}
+
+.setting-theme-up7 {
+    height: 3rem;
+    background: #2E3C7E;
+}
+.setting-theme-down7 {
+    height: 3rem;
+    background: #FBEAEB;
+}
+
+.setting-theme-up8 {
+    height: 3rem;
+    background: #101820;
+}
+.setting-theme-down8 {
+    height: 3rem;
+    background: #F2AA4C;
+}
+
+.setting-theme-up9 {
+    height: 3rem;
+    background: #990011;
+}
+.setting-theme-down9 {
+    height: 3rem;
+    background: #FCF6F5;
+}
+
+#savePw {
+    font-size: 1.3rem;
+    padding: 0.375rem 0.75rem;
+}

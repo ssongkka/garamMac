@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:fragment="main-search" class="search">
+        <div>
+            <div class="search-title">
+                <h2 class="search-title-item1">검색 결과</h2>
+                <div class="search-title-item2">
+                    <span>전체</span>
+                    <span id="seachAllNum"></span>
+                    <span>건</span>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="search-cont card-song">
+            <div class="search-cont-title">
+                <div class="search-title-item0">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+                <h3 class="search-title-item1">
+                    승무원 정보
+                </h3>
+                <div class="search-title-item2">
+                    <span id="seachEmpNum"></span>
+                    <span>건</span>
+                </div>
+            </div>
+            <div class="search-cont-item table-responsive">
+                <table class="table tbSearchEmp">
+                    <colgroup>
+                        <col width="15%" style="text-align: left;"/>
+                        <col width="15%" style="text-align: left;"/>
+                        <col width="5%"/>
+                        <col width="auto"/>
+                    </colgroup>
+                    <tbody id="searchTbEmp">
+                        <tr>
+                            <td class="leftPad searchT">
+                                <p>상록수역</p>
+                                <small>시곡초등학교 출발</small>
+                            </td>
+                            <td class="leftPad">
+                                <p>3507</p>
+                                <small>현대</small>
+                                <small>노블</small>
+                                <small>47인승</small>
+                            </td>
+                            <td>
+                                <a href="tel:01000000000">
+                                    <i class="fa-solid fa-phone-flip"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="sms:01000000000">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="search-cont card-song">
+            <div class="search-cont-title">
+                <div class="search-title-item0">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+                <h3 class="search-title-item1">
+                    차량 정보
+                </h3>
+                <div class="search-title-item2">
+                    <span id="seachVeNum"></span>
+                    <span>건</span>
+                </div>
+            </div>
+            <div class="search-cont-item table-responsive">
+                <table class="table tbSearchEmp">
+                    <colgroup>
+                        <col width="15%" style="text-align: left;"/>
+                        <col width="15%" style="text-align: left;"/>
+                        <col width="5%"/>
+                        <col width="auto"/>
+                    </colgroup>
+                    <tbody id="searchTbVe">
+                        <tr>
+                            <td class="leftPad searchT">
+                                <p>3507</p>
+                                <small>현대</small>
+                                <small>노블</small>
+                                <small>47인승</small>
+                            </td>
+                            <td class="leftPad">
+                                <p>상록수역</p>
+                                <small>시곡초등학교 출발</small>
+                            </td>
+                            <td>
+                                <a href="tel:01000000000">
+                                    <i class="fa-solid fa-phone-flip"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="sms:01000000000">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="search-cont card-song">
+            <div class="search-cont-title">
+                <div class="search-title-item0">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+                <h3 class="search-title-item1">
+                    예약 정보
+                </h3>
+                <div class="search-title-item2">
+                    <span id="seachRsvtNum"></span>
+                    <span>건</span>
+                </div>
+            </div>
+            <div class="search-cont-item table-responsive">
+                <table class="table tbSearchEmp">
+                    <colgroup>
+                        <col width="15%" style="text-align: left;"/>
+                        <col width="15%" style="text-align: left;"/>
+                        <col width="5%"/>
+                        <col width="auto"/>
+                    </colgroup>
+                    <tbody id="searchTbRsvt">
+                        <tr>
+                            <td class="leftPad searchT">
+                                <p>시곡초등학교</p>
+                            </td>
+                            <td class="leftPad">
+                                <p>상록수역</p>
+                                <small>시곡초등학교 출발</small>
+                            </td>
+                            <td>
+                                대형
+                            </td>
+                            <td>
+                                8대
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="search-cont card-song">
+            <div class="search-cont-title">
+                <div class="search-title-item0">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+                <h3 class="search-title-item1">
+                    운행 정보
+                </h3>
+                <div class="search-title-item2">
+                    <span id="seachOperNum"></span>
+                    <span>건</span>
+                </div>
+            </div>
+            <div class="search-cont-item table-responsive">
+                <table class="table tbSearchEmp">
+                    <colgroup>
+                        <col width="15%" style="text-align: left;"/>
+                        <col width="15%" style="text-align: left;"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="auto"/>
+                    </colgroup>
+                    <tbody id="searchTbOper">
+                        <tr>
+                            <td class="leftPad searchT">
+                                <p>시곡초등학교</p>
+                            </td>
+                            <td class="leftPad">
+                                <p>상록수역</p>
+                                <small>시곡초등학교 출발</small>
+                            </td>
+                            <td>
+                                대형
+                            </td>
+                            <td>
+                                8대
+                            </td>
+                            <td>
+                                <span>3507</span><span>3507</span><span>3507</span><span>3507</span><span>3507</span><span>3507</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="allo-side">
+            asdasdasd
+        </div>
+    </div>
+</html>

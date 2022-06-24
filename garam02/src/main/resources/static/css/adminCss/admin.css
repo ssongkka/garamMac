@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+main {
+    background: #f6f7f9;
+    margin-left: 30rem;
+    min-height: 100vh;
+    padding: 3rem 8rem;
+}
+
+.amdinSignForm {}

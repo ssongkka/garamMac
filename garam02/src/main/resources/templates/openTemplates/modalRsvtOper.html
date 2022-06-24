@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="modalRsvtOper"
+        class="modal fade"
+        id="modalRsvtOper"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="modalRsvtOperLabel"
+        aria-hidden="true">
+        <input type="hidden" id="sepaModal" value="">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" id="RsvtOperDay">
+                    <input type="hidden" id="RsvtOperCtmNo">
+                    <h3 class="modal-title" id="modalRsvtOperLabel"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="btnMdRsvtOperX"></button>
+                </div>
+                <div class="modal-body" id="modalRsvtOperBD"></div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        id="btnMdRsvtOperBtn">닫 기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

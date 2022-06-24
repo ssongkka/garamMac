@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="approvalGo-body">
+        <aside th:replace="approval/approvalSide :: approvalSide"></aside>
+        <main class="approvalMain approvalGoMain">
+            <div class="apprGoMain card-song">
+                <div class="" id="apprTitle"></div>
+                <div>
+                    <table class="table-bordered">
+                        <colgroup>
+                            <col width="20%"/>
+                            <col width="auto"/>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td>협조</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <table class="table-bordered">
+                        <colgroup>
+                            <col width="20%"/>
+                            <col width="auto"/>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td>수신참조</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="apprUpcontents" colspan="6" class="colorUp1"></div>
+            </div>
+
+        </main>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            const opt =/*[[${opt}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbuser =/*[[${user}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbCompa =/*[[${compa}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbVe =/*[[${ve}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbEmp =/*[[${emp}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+        </script>
+
+        <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/approval/approval.js"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/approval/approvalGo.js"></script>
+    </body>
+
+</html>

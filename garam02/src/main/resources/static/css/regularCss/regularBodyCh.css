@@ -1,0 +1,190 @@
+@charset "UTF-8";
+body {
+    background: #f6f7f9;
+}
+
+header {
+    background: #e6e8ed;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.title1 {
+    flex: 1;
+    text-align: center;
+    display: flex;
+}
+
+.title1-item:nth-child(2) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+.title1-item:nth-child(2) h2 {
+    margin: 0;
+    letter-spacing: 0.5rem;
+}
+
+.title1-item:nth-child(1) {}
+
+.title2 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 7rem;
+}
+
+.title2 blockquote {
+    padding: 0 1.5rem;
+    flex: 1;
+}
+
+.title2 h5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.titlejae {
+    color: #888c9b;
+}
+
+#md-rgCh {
+    padding: 1rem;
+}
+
+.cont {
+    min-height: calc(100vh - 20rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cont-item {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cont-item2 {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+}
+
+.rg-tb-ch {}
+
+.rg-tb-ch .btn {
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+}
+
+.tdno {
+    display: none;
+}
+
+.rgip {
+    text-align: center;
+}
+
+.rg-tb-ch > thead > tr > td,
+.rg-tb-ch > thead > tr > th {
+    vertical-align: middle;
+}
+
+#rgch-tbb {}
+
+.rcBody {
+    display: flex;
+    flex-direction: column;
+}
+
+#gogogogogo,
+#goutgoutgout {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#gogogogogo .btn-primary {
+    padding: 0.2rem 0.4rem;
+}
+#goutgoutgout .btn-primary {
+    padding: 0.2rem 0.4rem;
+}
+
+.gogo-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.gogo-item2 {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
+.modal-body .input-group-addon {
+    padding: 0 0.1rem;
+}
+
+.modal-body .input-sm {
+    height: 25px;
+    width: 100%;
+    background: transparent;
+}
+.modal-body .table > thead > tr > th {
+    padding: 0.2rem;
+}
+
+.modal-body .table > tbody > tr > td {
+    padding: 0;
+}
+
+.rcBody-item {
+    padding: 1rem;
+}
+
+.rcBody-item .btnn {
+    padding: 0;
+    width: 2.1rem;
+    height: 2.1rem;
+}
+
+.rcBody-item .btngout {
+    padding: 0 0.5rem;
+    margin-bottom: 5px;
+    margin-left: 3rem;
+}
+
+.gogo-item2 .btn {
+    padding: 0.2rem 0.3rem;
+}
+
+.rcBody-item:nth-child(1) {}
+.rcBody-item:nth-child(2) {}
+
+#regModal input {
+    font-size: 1.3rem;
+    padding: 0 0.3rem;
+}
+
+#chchchch {
+    font-size: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width:768px) {
+    .title2 {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 1rem;
+    }
+}

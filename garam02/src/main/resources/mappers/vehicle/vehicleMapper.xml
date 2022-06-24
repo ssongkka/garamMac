@@ -1,0 +1,1225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.garam.web.vehicle.mapper.VehicleMapper">
+
+	<sql id="veColumns">
+		vehicleinfo.carnumber, vehicleinfo.vehicle,
+		vehicleinfo.company,
+		IFNULL((SELECT
+		employeeinfo.name FROM
+		employeeinfo
+		WHERE
+		employeeinfo.id=vehicleinfo.owner),
+		vehicleinfo.owner) AS owner,
+		vehicleinfo.id, vehicleinfo.bus,
+		vehicleinfo.brand,
+		vehicleinfo.vename, vehicleinfo.grade, vehicleinfo.fuel,
+		vehicleinfo.num,
+		vehicleinfo.color,
+		vehicleinfo.carn,
+		vehicleinfo.regist, vehicleinfo.expire,
+		vehicleinfo.price,
+		vehicleinfo.special, vehicleinfo.img1,
+		vehicleinfo.img2,
+		vehicleinfo.img3, vehicleinfo.regd, vehicleinfo.reg,
+		vehicleinfo.insud,
+		vehicleinfo.insu,
+		vehicleinfo.jukd, vehicleinfo.juk,
+		vehicleinfo.trash,
+		employeeinfo.name,
+		employeeinfo.phone1,
+		employeeinfo.phone2
+	</sql>
+
+	<insert id="insertVe" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		INSERT
+
+		INTO
+
+		vehicleinfo
+
+		VALUES
+		(
+		#{carnumber},
+		#{vehicle},
+		#{company},
+		#{owner},
+		#{id},
+		#{bus},
+		#{brand},
+		#{vename},
+		#{grade},
+		#{fuel},
+		#{num},
+		#{color},
+		#{carn},
+		#{regist},
+		#{expire},
+		#{price},
+		#{inday},
+		null,
+		#{special},
+		#{img1},
+		#{img2},
+		#{img3},
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		0,
+		1,
+		null
+		);
+
+	</insert>
+
+	<update id="updateVe" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+		UPDATE
+
+		vehicleinfo
+
+		SET
+
+		vehicle = #{vehicle},
+		company = #{company},
+		owner =
+		#{owner},
+		id = #{id},
+		bus = #{bus},
+		brand =
+		#{brand},
+		vename = #{vename},
+		grade = #{grade},
+		fuel = #{fuel},
+		num = #{num},
+		color = #{color},
+		carn =
+		#{carn},
+		regist =
+		#{regist},
+		expire = #{expire},
+		inday = #{inday},
+		outday
+		= #{outday},
+		price = #{price},
+
+		<if test="img1 != null and img1 != '' ">
+			img1 = #{img1},
+		</if>
+		<if test="img2 != null and img2 != '' ">
+			img2 = #{img2},
+		</if>
+		<if test="img3 != null and img3 != '' ">
+			img3 = #{img3},
+		</if>
+		special = #{special},
+		trash = #{trash}
+
+		WHERE
+
+		carnumber = #{carnumber};
+	</update>
+
+	<update id="updateVePDF" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		UPDATE vehicleinfo SET
+
+		<if test="regd != null and regd != '' ">
+			regd = #{regd},
+		</if>
+		<if test="reg != null and reg != '' ">
+			reg = #{reg},
+		</if>
+
+		<if test="insud != null and insud != '' ">
+			insud = #{insud},
+		</if>
+		<if test="insu != null and insu != '' ">
+			insu = #{insu},
+		</if>
+
+		<if test="jukd != null and jukd != '' ">
+			jukd = #{jukd},
+		</if>
+		<if test="juk != null and juk != '' ">
+			juk = #{juk},
+		</if>
+		trash = 1
+
+		WHERE carnumber = #{carnumber};
+
+	</update>
+
+	<update id="deleteVe" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		UPDATE vehicleinfo
+
+		SET trash = 0
+
+		WHERE
+
+		carnumber =
+		#{carnumber};
+
+	</update>
+
+	<select id="selectVeAll" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT vehicleinfo.carnumber, vehicleinfo.vehicle, vehicleinfo.num,
+		vehicleinfo.company,
+		IFNULL((SELECT
+		employeeinfo.name FROM employeeinfo
+		WHERE
+		employeeinfo.id=vehicleinfo.owner), vehicleinfo.owner) AS owner,
+		vehicleinfo.regist, vehicleinfo.bus, vehicleinfo.grade,
+		vehicleinfo.trash, employeeinfo.id,
+		employeeinfo.name FROM
+		vehicleinfo
+		LEFT JOIN
+		employeeinfo ON
+		vehicleinfo.id = employeeinfo.id
+
+		<where>
+			<if test="vehicle != null">OR vehicleinfo.vehicle Like CONCAT('%',#{vehicle},'%')
+			</if>
+			<if test="vehicle != null">OR owner Like CONCAT('%',#{vehicle},'%')
+			</if>
+			<if test="vehicle != null">OR employeeinfo.name Like CONCAT('%',#{vehicle},'%')
+			</if>
+			<if test="vehicle != null">OR vehicleinfo.grade Like CONCAT('%',#{vehicle},'%')
+			</if>
+		</where>
+
+		ORDER BY vehicleinfo.vehicle;
+	</select>
+
+	<select id="selectVeId" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		(SELECT name FROM employeeinfo WHERE employeeinfo.id
+		= vehicleinfo.id) AS name,
+
+		(SELECT jukday FROM
+		jukfile WHERE
+		jukfile.jukname
+		= vehicleinfo.juk) AS jukday
+
+		FROM
+		vehicleinfo
+
+		WHERE
+
+		vehicleinfo.carnumber =
+		#{carnumber};
+
+	</select>
+
+	<select id="selectVeNameList" resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+		vehicleinfo
+
+		ORDER BY
+		vehicle;
+	</select>
+
+	<select id="selectVeAllPrint" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+		*
+		FROM
+		vehicleinfo
+
+		WHERE
+		company = #{compa}
+		AND
+		trash = 1
+
+		ORDER BY
+		vehicle;
+	</select>
+
+	<select id="selectVeDetail" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		vehicleinfo.*,
+
+		IFNULL((SELECT
+		employeeinfo.name FROM
+		employeeinfo
+		WHERE
+		employeeinfo.id=vehicleinfo.owner),
+		vehicleinfo.owner) AS owner,
+
+		(SELECT jukday FROM jukfile WHERE
+		jukfile.jukname
+		=
+		vehicleinfo.juk)
+		AS jukday,
+
+		employeeinfo.name,
+		employeeinfo.phone1,
+		employeeinfo.phone2
+
+		FROM
+
+		vehicleinfo
+
+		LEFT JOIN
+
+		employeeinfo
+
+		ON
+
+		vehicleinfo.id =
+		employeeinfo.id
+
+		WHERE
+
+		vehicleinfo.carnumber = #{carnumber}
+	</select>
+
+	<insert id="insertJuk" parameterType="com.garam.web.vehicle.dto.JukfileDTO">
+
+		INSERT
+
+		INTO
+
+		jukfile
+
+		VALUES
+
+		(
+		null,
+
+		#{jukday},
+
+		#{jukname},
+
+		#{ve1},
+
+		#{id1},
+
+		#{ve2},
+
+		#{id2},
+
+		#{ve3},
+
+		#{id3},
+
+		#{ve4},
+
+		#{id4},
+
+		#{ve5},
+
+		#{id5},
+
+		1
+		);
+	</insert>
+
+	<update id="updateVeJuk" parameterType="java.util.HashMap">
+		<foreach collection="upjuk" item="value" index="index" separator=";">
+			UPDATE
+
+			vehicleinfo
+
+			SET
+
+			jukd = #{value.jukd},
+			juk
+			=
+			#{value.juk}
+
+			WHERE
+
+			carnumber = #{value.carnumber}
+		</foreach>
+	</update>
+
+	<insert id="insertInsu" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+		INSERT
+
+		INTO
+
+		veinsurance
+
+		VALUES
+		(
+		#{insuno},
+		#{carnumber},
+		#{insudatestart},
+		#{insudateend},
+		#{insutime},
+		#{insumoney},
+		1,
+		null
+		);
+	</insert>
+
+	<update id="updateInsu" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		UPDATE
+
+		veinsurance
+
+		SET
+
+		insutrash = #{insutrash}
+
+		WHERE
+
+		insuno = #{insuno};
+
+	</update>
+
+	<insert id="insertInsuSepa" parameterType="java.util.HashMap">
+		INSERT
+
+		INTO
+
+		veinsurancesepa
+
+		VALUES
+		<foreach collection="insusepa" item="value" separator=",">
+			(
+			null,
+			#{value.insuno},
+			#{value.insusepapayment},
+			#{value.insusepamoney},
+			#{value.insusepaday},
+			#{value.insusepatime},
+			1,
+			null
+			)
+		</foreach>
+	</insert>
+
+	<select id="selectInsuCar" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veinsurance
+
+		WHERE
+
+		veinsurance.carnumber = #{carnumber}
+
+		ORDER BY
+		veinsurance.insudatestart DESC;
+
+	</select>
+
+	<select id="selectInsuNum" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veinsurance
+
+		WHERE
+
+		veinsurance.insuno = #{insuno}
+	</select>
+
+	<select id="selectInsuSepaCar" parameterType="java.util.HashMap"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veinsurancesepa
+
+		WHERE
+
+		veinsurancesepa.insuno IN
+		<foreach collection="insusepanum" item="value" index="index" separator="," open="(" close=")">
+			#{value.insuno}
+		</foreach>
+
+		ORDER BY
+		veinsurancesepa.insusepano,
+		veinsurancesepa.insusepatime
+	</select>
+
+	<select id="selectInsuSepaNum" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+		SELECT
+
+		*
+
+		FROM
+
+		veinsurancesepa
+
+		WHERE
+
+		veinsurancesepa.insuno = #{insuno}
+	</select>
+
+	<update id="updateInsuSepaM" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		UPDATE veinsurancesepa
+
+		SET
+
+		veinsurancesepa.insusepaday =
+		#{insusepaday},
+
+		veinsurancesepa.insusepapayment = #{insusepapayment},
+
+		veinsurancesepa.insusepamoney = #{insusepamoney},
+
+		veinsurancesepa.insusepatrash = #{insusepatrash}
+
+		WHERE
+
+		veinsurancesepa.insusepano =
+		#{insusepano}
+
+	</update>
+
+	<delete id="deleteInsu" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+		DELETE
+
+		FROM
+
+		veinsurancesepa
+
+		WHERE
+
+		veinsurancesepa.insuno = #{insuno};
+
+
+
+		DELETE
+
+		FROM
+
+		veinsurance
+
+		WHERE
+
+		veinsurance.insuno = #{insuno};
+
+	</delete>
+
+	<select id="selectLoanCar" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+
+		SELECT
+
+		*, SUM(veloansepa.loansepamoney) AS price
+
+		FROM
+
+		veloan
+
+		LEFT JOIN
+
+		veloansepa
+
+		ON
+
+		veloan.loanno =
+		veloansepa.loanno
+
+		WHERE
+
+		veloan.carnumber = #{carnumber}
+
+		GROUP BY
+
+		veloan.loanno
+	</select>
+
+	<select id="selectLoanNo" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+
+		SELECT
+
+		*, SUM(veloansepa.loansepamoney) AS price, MAX(veloansepa.loansepatime) AS jukseq
+
+		FROM
+
+		veloan
+
+		LEFT
+		JOIN
+
+		veloansepa
+
+		ON
+
+		veloan.loanno =
+		veloansepa.loanno
+
+		WHERE
+
+		veloan.loanno = #{loanno}
+
+	</select>
+
+
+
+	<select id="selectLoanSepaCar" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+		SELECT
+
+		*
+
+		FROM
+
+		veloansepa
+
+		WHERE
+
+		veloansepa.loanno = #{loanno}
+
+		ORDER BY
+
+		veloansepa.loansepano DESC
+	</select>
+
+	<insert id="insertloan" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+		INSERT INTO veloan
+
+		VALUES
+		(
+		#{loanno},
+		#{loan},
+		#{carnumber},
+		#{loanmonth},
+		#{loandatestart},
+		#{loandateend},
+		#{loanperiod},
+		#{loandayloan},
+		#{loanbank},
+		1,
+		null
+		)
+	</insert>
+
+	<update id="updateloan" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		UPDATE
+
+		veloan
+
+		SET
+
+		veloan.loantrash = #{loantrash}
+
+		WHERE
+
+		veloan.loanno =
+		#{loanno}
+
+	</update>
+
+	<insert id="insertlaonSepa" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		INSERT INTO veloansepa
+
+		VALUES
+		(
+		null,
+		#{loanno},
+		#{loansepamonth},
+		#{loansepaday},
+		#{loansepamoney},
+		#{loansepatime},
+		1,
+		null
+		);
+
+	</insert>
+	<update id="updateLoanSepa" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		UPDATE
+
+		veloansepa
+
+		SET
+
+		loansepaday = #{loansepaday},
+		loansepamoney =
+		#{loansepamoney}
+
+		WHERE
+
+		loansepano = #{loansepano};
+
+	</update>
+
+	<delete id="deleteLoan" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		DELETE FROM
+
+		veloansepa
+
+		WHERE
+
+		loanno = #{loanno};
+
+
+
+		DELETE FROM
+
+		veloan
+
+		WHERE
+		loanno
+		= #{loanno};
+
+	</delete>
+
+	<delete id="deleteLoanSepa" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		DELETE FROM
+
+		veloansepa
+
+		WHERE
+
+		veloansepa.loansepano = #{loansepano};
+
+	</delete>
+
+	<select id="selectMainteMonth" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		CONCAT(YEAR(vemaintenancedate), '-',
+		MONTH(vemaintenancedate)) AS loanbank,
+
+		SUM(vemaintenancemoney) AS
+		vemaintenancemoney,
+
+		COUNT(vemaintenanceseq) AS vemaintenancekind
+
+		FROM
+
+		vemaintenance
+
+		WHERE
+
+		vemaintenance.carnumber =
+		#{carnumber}
+
+		GROUP BY
+		loanbank
+
+		ORDER BY
+		loanbank DESC;
+
+	</select>
+
+	<select id="selectMainteAll" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		vemaintenance
+
+		WHERE
+
+		vemaintenance.carnumber = #{carnumber}
+
+		ORDER BY
+
+		vemaintenance.vemaintenancedate
+		DESC
+
+	</select>
+
+	<insert id="insertMainte" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		INSERT INTO vemaintenance
+
+		VALUES
+		(
+		null,
+		#{carnumber},
+		#{vemaintenancedate},
+		#{vemaintenancekind},
+		#{vemaintenancecontents},
+		#{vemaintenancenum},
+		#{vemaintenancecompany},
+		#{vemaintenancemoney},
+		1,
+		null
+		);
+
+	</insert>
+
+	<delete id="delMainte" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		DELETE
+
+		FROM
+
+		vemaintenance
+
+		WHERE
+
+		vemaintenance.vemaintenanceseq =
+		#{vemaintenanceseq}
+	</delete>
+
+	<select id="selectInspec" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veinspection
+
+		WHERE
+
+		veinspection.carnumber = #{carnumber}
+
+		ORDER BY
+
+		veinspection.inspecdatestart DESC
+
+	</select>
+
+	<insert id="insertInspec" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		INSERT
+
+		INTO
+
+		veinspection
+
+		VALUES
+		(
+		null,
+		#{carnumber},
+		#{inspecdatestart},
+		#{inspecdateend},
+		#{inspecdate},
+		#{inspecdistance},
+		#{inspecplace},
+		#{inspecsepa},
+		1,
+		null
+		);
+
+	</insert>
+
+	<delete id="deleteInspec" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+		DELETE
+
+		FROM
+
+		veinspection
+
+		WHERE
+
+		veinspection.inspecseq = #{inspecseq}
+	</delete>
+
+	<select id="selectOperMonth" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+		SELECT
+
+		CONCAT(YEAR(operation_info.operday), '-',
+		MONTH(operation_info.operday)) AS ctmaddress,
+
+		SUM(operation_info.atlm) AS
+		ctmtrash,
+
+		SUM(rsvt.numm) AS
+		opertype,
+
+		COUNT(operation_info.operseq) AS conm
+
+		FROM
+
+		operation_info
+
+		LEFT JOIN
+
+		rsvt
+
+		ON
+
+		operation_info.rsvt = rsvt.rsvt
+
+		WHERE
+
+		operation_info.dayst = 1
+
+		AND
+
+		operation_info.opercar = #{carnumber}
+
+		GROUP BY
+		ctmaddress
+
+		ORDER BY
+		YEAR(operation_info.operday) DESC,
+		MONTH(operation_info.operday) DESC
+
+
+	</select>
+
+	<select id="selectOperSepa" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		operation_info
+
+		LEFT JOIN
+
+		rsvt
+
+		ON
+
+		operation_info.rsvt = rsvt.rsvt
+
+		LEFT JOIN
+
+		customer
+
+		ON
+
+		rsvt.ctmno =
+		customer.ctmno
+
+		WHERE
+
+		operation_info.dayst = 1
+
+		AND
+
+		operation_info.opercar = #{carnumber}
+
+		ORDER BY
+		operation_info.operday
+		DESC;
+
+	</select>
+
+	<select id="selectveAcc" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veacc
+
+		WHERE
+
+		veacc.carnumber = #{carnumber}
+
+	</select>
+	<select id="selectveAccSeq" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		veacc
+
+		WHERE
+
+		veacc.veaccseq = #{veaccseq}
+
+	</select>
+
+	<insert id="insertveAcc" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		INSERT INTO veacc
+
+		VALUES
+		(
+		null,
+		#{carnumber},
+		#{id},
+		#{veacccont},
+		#{veaccdate},
+		#{veacctime},
+		#{veaccenddate},
+		#{veaccinsu},
+		#{veaccmoney},
+		1,
+		null
+		)
+
+	</insert>
+	<update id="updateveAcc" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		UPDATE veacc
+
+		SET
+
+		id = #{id},
+		veacccont =
+		#{veacccont},
+		veaccdate =
+		#{veaccdate},
+		veacctime = #{veacctime},
+		veaccenddate = #{veaccenddate},
+		veaccinsu =
+		#{veaccinsu},
+		veaccmoney =
+		#{veaccmoney}
+
+		WHERE
+
+		veaccseq = #{veaccseq}
+
+	</update>
+
+	<delete id="deleteveAcc" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+		DELETE
+
+		FROM
+
+		veacc
+
+		WHERE
+
+		veacc.veaccseq = #{veaccseq}
+	</delete>
+
+	<select id="selectGasVe" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		vehicleinfo
+
+		WHERE
+
+		(vehicleinfo.inday  <![CDATA[<=]]>
+		#{inday} )
+
+		AND
+
+		((vehicleinfo.outday  <![CDATA[>=]]>
+		#{outday} ) OR (vehicleinfo.outday IS NULL))
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+	</select>
+
+	<select id="selectGasMonth" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		vegas
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		vegas.carnumber = vehicleinfo.carnumber
+
+		WHERE
+
+		vegas.vegasyearmonth =
+		#{vegasyearmonth}
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+	</select>
+
+	<insert id="insertGas" parameterType="java.util.HashMap">
+
+		INSERT
+
+		INTO
+
+		vegas
+
+		VALUES
+
+		<foreach collection="vegasin" item="value" separator=",">
+			(
+			NULL,
+			#{value.carnumber},
+			#{value.vegasid},
+			#{value.vegasyearmonth},
+			#{value.km},
+			#{value.liter},
+			#{value.vegasmoney},
+			#{value.kml},
+			#{value.wonkm},
+			1,
+			null
+			)
+		</foreach>
+	</insert>
+
+	<update id="updateGas" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+		UPDATE vegas
+
+		SET
+
+		km =
+		#{km},
+		liter =
+		#{liter},
+		vegasmoney = #{vegasmoney},
+		kml =
+		#{kml},
+		wonkm =
+		#{wonkm}
+
+		WHERE
+
+		vegasseq = #{vegasseq}
+	</update>
+
+	<update id="updateManyGas" parameterType="java.util.HashMap">
+		<foreach collection="vegasup" item="value" index="index" separator=";">
+			UPDATE vegas
+
+			SET
+
+			km =
+			#{value.km},
+			liter =
+			#{value.liter},
+			vegasmoney = #{value.vegasmoney},
+			kml =
+			#{value.kml},
+			wonkm =
+			#{value.wonkm}
+
+			WHERE
+
+			vegasseq =
+			#{value.vegasseq}
+		</foreach>
+	</update>
+
+
+	<delete id="delGas" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		DELETE
+
+		FROM
+
+		vegas
+
+		WHERE
+
+		vegasseq = #{vegasseq};
+
+	</delete>
+
+	<select id="selAlloVeCh" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		SELECT
+
+		*,
+		(SELECT
+
+		operation_info.opernum
+
+		FROM
+
+		operation_info
+
+		WHERE
+
+		operation_info.opercar = vehicleinfo.carnumber
+
+		AND
+
+		operation_info.operday = #{insudatestart}
+
+		GROUP BY
+
+		operation_info.opercar) AS insudatestart
+
+		FROM
+
+		vehicleinfo
+
+		WHERE
+
+		vehicleinfo.inday <![CDATA[<=]]>
+		#{insudatestart}
+
+		AND
+
+		(vehicleinfo.outday IS NULL OR vehicleinfo.outday <![CDATA[>=]]>
+		#{insudatestart})
+
+		ORDER BY
+		vehicleinfo.vehicle
+
+
+	</select>
+
+
+
+</mapper>

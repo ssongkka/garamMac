@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="modalRsvtSuk"
+        class="modal fade"
+        id="modalRsvtMoney"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalRsvtSukTitle"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="modalRsvtSukX"></button>
+                </div>
+                <div class="modal-body rsvtSuk-main"></div>
+                <div class="modal-footer">
+                    <div>
+                        <span></span></div>
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        id="modalRsvtSukEnd">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

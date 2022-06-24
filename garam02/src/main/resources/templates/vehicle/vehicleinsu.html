@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:fragment="ve-insu" class="insuVe">
+        <div class="insumain">
+            <div class="insuitem">
+                <h3>보험가입내역</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>계약번호</th>
+                                <th colspan="2">공제기간</th>
+                                <th>총 분담금</th>
+                                <th>횟수</th>
+                                <th>수납일(예정일)</th>
+                                <th>방법</th>
+                                <th>수납액</th>
+                                <th>더보기</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbinsu"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="insuitem">
+                <button type="button" class="btn btn-secondary" id="newInsuCont">신규보험정보</button>
+            </div>
+        </div>
+    </div>
+</html>

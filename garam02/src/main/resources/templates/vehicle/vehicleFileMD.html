@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <!-- Modal -->
+    <div
+        th:fragment="ve-MD-file"
+        class="modal fade"
+        id="modal-file"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-file-mh"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="get" id="down-form" class="row">
+                        <div class="form-group">
+                            <label for="compa-file" class="form-label">회사선택</label>
+                            <select class="form-select" id="compa-file" name="compa">
+                                <option
+                                    th:each="company : ${company}"
+                                    th:value="${company.company}"
+                                    th:label="${company.company}"
+                                    th:data-value="${company.company}"></option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="md-file">
+                        <a id="btn-excel-d" class="">EXCEL 파일 생성
+                            <i class="far fa-file-excel btn-excel"></i>
+                        </a>
+                        <a id="btn-pdf-d" class="">PDF 파일 생성
+                            <i class="far fa-file-pdf btn-pdf"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,139 @@
+#staticMonth {
+    font-size: 2rem;
+    align-items: center;
+}
+
+.statsMain {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.statsMain-item1 {
+    margin: 1rem 0;
+    padding: 0 2rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.statsMain-item2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+
+.statsMain-item2 input,
+.statsMain-item2 label {
+    font-size: 1.5rem;
+}
+
+.statsMain-item3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stLine {
+    border-left: 0.1rem solid #d8e2ef;
+}
+
+.tb-stats1 > tbody > tr > td,
+.tb-stats1 > tbody > tr > th,
+.tb-stats1 > tfoot > tr > td,
+.tb-stats1 > tfoot > tr > th {
+    text-align: right;
+}
+
+.tb-stats1 > thead > tr > th {
+    letter-spacing: 0.3rem;
+    padding: 0.3rem;
+}
+
+.tb-stats1 > thead > tr > .incur {
+    cursor: pointer;
+}
+
+.tb-stats1 > thead > tr > .inGun {
+    font-size: 1rem;
+}
+
+.tb-stats1 > thead > tr > .inTh {
+    background: rgba(68, 114, 196, 1);
+}
+
+.tb-stats1 > thead > tr > .outTh {
+    background: rgb(237, 125, 49, 1);
+}
+
+.tb-stats1 > thead > tr > .allTh {
+    background: rgb(112, 173, 71);
+
+}
+
+.tb-stats1 > thead > tr > .gasTh {
+    background: rgb(255, 192, 0);
+}
+
+.tb-stats1 > tbody > tr > .carTd,
+.tb-stats1 > tfoot > tr > .carTd {
+    background: #f8f9fa;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.2rem;
+}
+
+.tb-stats1 > tbody > tr > .inTd,
+.tb-stats1 > tfoot > tr > .inTd {
+    background: rgba(68, 114, 196, 0.1);
+}
+
+.tb-stats1 > tbody > tr > .outTd,
+.tb-stats1 > tfoot > tr > .outTd {
+    background: rgb(237, 125, 49, 0.1);
+}
+
+.tb-stats1 > tbody > tr > .allTd,
+.tb-stats1 > tfoot > tr > .allTd {
+    background: rgba(112, 173, 71, 0.1);
+}
+
+.tb-stats1 > tbody > tr > .gasTd,
+.tb-stats1 > tfoot > tr > .gasTd {
+    background: rgba(255, 192, 0, 0.1);
+}
+
+#staticCompa01 canvas,
+#staticCompa02 canvas,
+#staticCompa03 canvas,
+#staticCompa04 canvas {
+    width: 106px;
+    height: 106px;
+}
+
+#staticCompa01,
+#staticCompa02,
+#staticCompa03,
+#staticCompa04 {
+    width: 106px;
+    height: 106px;
+    margin-top: -4rem;
+}
+
+.statsMain-title1 {
+    height: 10rem;
+}
+
+.statsMain-title2 {
+    padding: 1rem 0;
+}
+
+#chartVeAllCompaDiv,
+#chartVeAllYearCompaDiv {
+    padding: 2rem;
+}

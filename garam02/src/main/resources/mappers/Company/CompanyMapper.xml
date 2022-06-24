@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.garam.company.mapper.CompanyMapper">
+
+	<sql id="companyColumns">
+		company,
+		ceo,
+		ceonum,
+		no1,
+		no2,
+		adress,
+		hompage,
+		telephone,
+		fax,
+		email,
+		business1,
+		business2,
+		day
+	</sql>
+
+	<select id="selectCompany"
+		resultType="com.garam.company.dto.CompanyDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		company
+
+		ORDER BY
+
+		day
+	</select>
+
+	<update id="updateComnpany">
+
+		UPDATE
+
+		company
+
+		SET
+
+		ceo = #{ceo},
+		ceonum = #{ceonum},
+		no1 =
+		#{no1},
+		no2 = #{no2},
+		adress = #{adress},
+		hompage = #{hompage},
+		telephone
+		= #{telephone},
+		fax =
+		#{fax},
+		email = #{email},
+		business1 = #{business1},
+		business2 = #{business2},
+		day = #{day}
+
+		WHERE
+
+		company.company = #{company}
+
+	</update>
+</mapper>

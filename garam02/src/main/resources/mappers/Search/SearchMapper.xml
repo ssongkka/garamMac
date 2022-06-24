@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.garam.web.dashboard.mapper.SearchMapper">
+
+	<select id="selectSearchEmp" parameterType="com.garam.web.dashboard.dto.SearchDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		(SELECT
+
+		*,
+		employeeinfo.phone1 AS loanbank
+
+		FROM
+
+		employeeinfo
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		employeeinfo.id =
+		vehicleinfo.id
+
+		WHERE
+
+		employeeinfo.name LIKE
+		CONCAT('%',#{param},'%')
+		)
+
+		UNION
+
+		(SELECT
+
+		*,
+		employeeinfo.phone1 AS loanbank
+
+		FROM
+
+		employeeinfo
+
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		employeeinfo.id = vehicleinfo.id
+
+		WHERE
+
+		employeeinfo.phone1 LIKE
+		CONCAT('%',#{param},'%')
+		)
+
+	</select>
+
+	<select id="selectSearchVe" parameterType="com.garam.web.dashboard.dto.SearchDTO"
+		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+
+		(SELECT
+
+		*,
+		employeeinfo.phone1 AS loanbank
+
+		FROM
+
+		vehicleinfo
+
+		LEFT JOIN
+
+		employeeinfo
+
+		ON
+
+		vehicleinfo.id =
+		employeeinfo.id
+
+		WHERE
+
+		vehicleinfo.vehicle LIKE
+		CONCAT('%',#{param},'%')
+		)
+
+		UNION
+
+		(SELECT
+
+		*,
+		employeeinfo.phone1 AS loanbank
+
+		FROM
+
+		vehicleinfo
+
+		LEFT JOIN
+
+		employeeinfo
+
+		ON
+
+		vehicleinfo.id =
+		employeeinfo.id
+
+		WHERE
+
+		vehicleinfo.bus LIKE
+		CONCAT('%',#{param},'%')
+		)
+
+		UNION
+
+		(SELECT
+
+		*,
+		employeeinfo.phone1 AS loanbank
+
+		FROM
+
+		vehicleinfo
+
+		LEFT JOIN
+
+		employeeinfo
+
+		ON
+
+		vehicleinfo.id =
+		employeeinfo.id
+
+		WHERE
+
+		vehicleinfo.brand LIKE CONCAT('%',#{param},'%')
+		)
+
+		UNION
+
+		(SELECT
+
+		*,
+		employeeinfo.phone1
+		AS loanbank
+
+		FROM
+
+		vehicleinfo
+
+		LEFT
+		JOIN
+
+		employeeinfo
+
+		ON
+
+		vehicleinfo.id = employeeinfo.id
+
+		WHERE
+
+		vehicleinfo.vename LIKE
+		CONCAT('%',#{param},'%')
+		)
+
+		UNION
+
+		(SELECT
+
+		*,
+		employeeinfo.phone1 AS loanbank
+
+		FROM
+
+		vehicleinfo
+
+		LEFT JOIN
+
+		employeeinfo
+
+		ON
+
+		vehicleinfo.id = employeeinfo.id
+
+		WHERE
+
+		vehicleinfo.grade LIKE
+		CONCAT('%',#{param},'%')
+		)
+
+	</select>
+
+	<select id="selectSearchRsvt" parameterType="com.garam.web.dashboard.dto.SearchDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		(SELECT
+
+		*,
+		COUNT(operation_info.rsvt)
+
+		FROM
+
+		rsvt
+
+		LEFT JOIN
+
+		customer
+
+		ON
+
+		rsvt.ctmno = customer.ctmno
+
+		JOIN
+
+		operation_info
+
+		ON
+
+		rsvt.rsvt = operation_info.rsvt
+
+		WHERE
+
+		rsvt.desty LIKE CONCAT('%',#{param},'%')
+
+
+		GROUP BY
+
+		rsvt.rsvt
+
+		)
+
+		UNION
+
+		(SELECT
+
+		*,
+		COUNT(operation_info.rsvt)
+
+		FROM
+
+		rsvt
+
+		LEFT JOIN
+
+		customer
+
+		ON
+
+		rsvt.ctmno = customer.ctmno
+
+		JOIN
+
+		operation_info
+
+		ON
+
+		rsvt.rsvt = operation_info.rsvt
+
+		WHERE
+
+		rsvt.rsvpstp LIKE CONCAT('%',#{param},'%')
+
+
+		GROUP BY
+
+		rsvt.rsvt
+		)
+
+		UNION
+
+		(SELECT
+
+		*,
+		COUNT(operation_info.rsvt)
+
+		FROM
+
+		rsvt
+
+		LEFT JOIN
+
+		customer
+
+		ON
+
+		rsvt.ctmno = customer.ctmno
+
+		JOIN
+
+		operation_info
+
+		ON
+
+		rsvt.rsvt =
+		operation_info.rsvt
+
+		WHERE
+
+		customer.ctmname LIKE CONCAT('%',#{param},'%')
+
+
+		GROUP BY
+
+		rsvt.rsvt)
+
+
+	</select>
+
+
+</mapper>
+

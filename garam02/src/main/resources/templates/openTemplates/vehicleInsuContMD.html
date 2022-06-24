@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <!-- Modal -->
+    <div
+        th:fragment="ve-MD-insuCont"
+        class="modal fade"
+        id="modal-insuCont"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" value="" id="insuCarNum">
+                    <input type="hidden" value="" id="insucontNum">
+                    <h3 class="modal-title" id="modal-insuCont-mh"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="md-insuitem">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="insuContName" class="form-label">계약번호</label>
+                                <input type="text" class="form-control" id="insuContName">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="insuStDay" class="form-label">공제기간</label>
+                                <input type="date" class="form-control" id="insuStDay">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="insuEndDay" class="form-label">&nbsp;</label>
+                                <input type="date" class="form-control" id="insuEndDay">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="insuNum" class="form-label">분할분담 횟수</label>
+                                <select id="insuNum" class="form-select">
+                                    <option value="1">1회</option>
+                                    <option value="2">2회</option>
+                                    <option value="3">3회</option>
+                                    <option value="4">4회</option>
+                                    <option value="5">5회</option>
+                                    <option value="6">6회</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputZip" class="form-label">총 분담금</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    data-type="currency"
+                                    onfocus="this.select()"
+                                    id="inputZip">
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <colgroup>
+                                    <col width="10%">
+                                    <col width="28%">
+                                    <col width="20%">
+                                    <col width="25%">
+                                    <col width="17%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>횟수</th>
+                                        <th>납부일(예정일)</th>
+                                        <th>방법</th>
+                                        <th>수납액</th>
+                                        <th>납부</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tb-md-insucont"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mdInsuFoot">
+                    <div style="flex: 1;">
+                        <button type="button" class="btn btn-danger" id="insuCont-del">삭&nbsp;제</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫&nbsp;기</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" id="insuCont-insert">입&nbsp;력</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

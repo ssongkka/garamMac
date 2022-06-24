@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="main-bottom" class="main-bottom">
+        <div class="cellBottom">
+            <a th:href="@{/dashboard}">
+                <i class="fa-solid fa-calendar-days"></i>
+            </a>
+        </div>
+        <div class="cellBottom">
+            <a th:href="@{/dashboardcal}">
+                <i class="fa-solid fa-calendar-check"></i>
+            </a>
+        </div>
+        <div class="cellBottom">
+            <a th:href="@{/employee}">
+                <i class="fa-solid fa-user-tie"></i>
+            </a>
+        </div>
+        <div class="cellBottom">
+            <a th:href="@{/vehicle}">
+                <i class="fa-solid fa-bus"></i>
+            </a>
+        </div>
+        <div class="cellBottom">
+            <a href="javascript:location.reload()">
+                <i class="fa-solid fa-rotate-right"></i>
+            </a>
+        </div>
+        <div class="cellBottom">
+            <a href="javascript:history.back()">
+                <i class="fa-solid fa-angle-left"></i>
+            </a>
+        </div>
+        <div class="cellBottom">
+            <a href="javascript:history.forward()">
+                <i class="fa-solid fa-angle-right"></i>
+            </a>
+        </div>
+    </div>
