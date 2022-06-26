@@ -1,22 +1,21 @@
 function makeModalIl(dday, cctono, rsvt) {
+    const daysss = dday.split("-")[0] + "년 " + dday.split("-")[1] + "월 " + dday.split(
+        "-"
+    )[2] + "일 운행정보";
 
-    const daysss = dday.split('-')[0] + '년 ' + dday.split('-')[1] + '월 ' + dday.split(
-        '-'
-    )[2] + '일 운행정보';
-
-    $('#modalAllo2Label').text(daysss);
+    $("#modalAllo2Label").text(daysss);
 
     LoadingWithMask()
-        .then(showAlloMd2)
         .then(getAllo1)
         .then(getAllo2)
+        .then(showAlloMd2)
         .then(closeLoadingWithMask);
 
     function showAlloMd2() {
         return new Promise(function (resolve, reject) {
-            $('#modalAllo2').modal('show');
+            $("#modalAllo2").modal("show");
             resolve();
-        })
+        });
     }
 
     function getAllo1(result) {
@@ -28,9 +27,9 @@ function makeModalIl(dday, cctono, rsvt) {
             };
 
             const params = {
-                "ctmno": cctono,
-                "stday": dday,
-                "rsvt": rsvt
+                ctmno: cctono,
+                stday: dday,
+                rsvt: rsvt
             };
 
             $.ajax({
@@ -42,20 +41,19 @@ function makeModalIl(dday, cctono, rsvt) {
                 data: JSON.stringify(params),
 
                 success: function (r) {
-
-                    $('.alloTitle').removeClass('ctm-ttt-back1');
-                    $('.alloTitle').removeClass('ctm-ttt-back2');
-                    $('.alloTitle').removeClass('ctm-ttt-back3');
+                    $(".alloTitle").removeClass("ctm-ttt-back1");
+                    $(".alloTitle").removeClass("ctm-ttt-back2");
+                    $(".alloTitle").removeClass("ctm-ttt-back3");
 
                     switch (parseInt(r[0].ctmsepa)) {
                         case 0:
-                            $('.alloTitle').addClass('ctm-ttt-back1');
+                            $(".alloTitle").addClass("ctm-ttt-back1");
                             break;
                         case 1:
-                            $('.alloTitle').addClass('ctm-ttt-back2');
+                            $(".alloTitle").addClass("ctm-ttt-back2");
                             break;
                         case 2:
-                            $('.alloTitle').addClass('ctm-ttt-back3');
+                            $(".alloTitle").addClass("ctm-ttt-back3");
                             break;
                     }
 
@@ -65,11 +63,11 @@ function makeModalIl(dday, cctono, rsvt) {
                         tell = r[0].ctmtel1;
                         tell1 = r[0]
                             .ctmtel1
-                            .replaceAll('-', '');
+                            .replaceAll("-", "");
                         const aaa = `<a href="tel:` + tell1 + `">` + tell + `<a>`;
-                        $('#alloMdctoTel').html(aaa);
+                        $("#alloMdctoTel").html(aaa);
                     } else {
-                        $('#alloMdctoTel').text(tell);
+                        $("#alloMdctoTel").text(tell);
                     }
 
                     let addd = ``;
@@ -77,12 +75,12 @@ function makeModalIl(dday, cctono, rsvt) {
                         addd = r[0].ctmaddress;
                     }
 
-                    $('#alloMdctmNo').val(r[0].ctmno);
-                    $('#alloMdDay').val(dday);
-                    $('#alloMdStDay').val(r[0].stday);
-                    $('#alloMdEdDay').val(r[0].endday);
-                    $('#alloMdctoName').text(r[0].ctmname);
-                    $('#alloMdctoAdd').text(addd);
+                    $("#alloMdctmNo").val(r[0].ctmno);
+                    $("#alloMdDay").val(dday);
+                    $("#alloMdStDay").val(r[0].stday);
+                    $("#alloMdEdDay").val(r[0].endday);
+                    $("#alloMdctoName").text(r[0].ctmname);
+                    $("#alloMdctoAdd").text(addd);
 
                     let arrTmp = new Array();
 
@@ -90,33 +88,32 @@ function makeModalIl(dday, cctono, rsvt) {
 
                     let htmls = ``;
                     for (let i = 0; i < r.length; i++) {
-
                         arrTmp.push(r[i].rsvt);
 
-                        let stt = '미정';
+                        let stt = "미정";
                         if (r[i].stt) {
                             stt = r[i].stt;
                         }
 
-                        let edt = '/미정';
+                        let edt = "/미정";
                         if (r[i].endt) {
-                            edt = '/' + r[i].endt;
+                            edt = "/" + r[i].endt;
                         }
 
                         let buss = ``;
                         switch (r[i].bus) {
-                            case '대형':
-                                buss = `big45`
+                            case "대형":
+                                buss = `big45`;
                                 break;
-                            case '중형':
-                                buss = `big25`
+                            case "중형":
+                                buss = `big25`;
                                 break;
-                            case '우등':
-                                buss = `big28`
+                            case "우등":
+                                buss = `big28`;
                                 break;
                         }
 
-                        let daybaks = '';
+                        let daybaks = "";
                         if (r[i].stday != r[i].endday) {
                             daybaks = betweenDate(r[i].stday, dday, r[i].endday);
                         }
@@ -136,10 +133,10 @@ function makeModalIl(dday, cctono, rsvt) {
                                 r[i].desty + `<br/>` + daybaks +
                                 `</div>
                                                 <div class="allTitle-item allTitle-busnum ` +
-                                buss + `">` + r[i].bus + ' ' + r[i].num +
+                                buss + `">` + r[i].bus + " " + r[i].num +
                                 `</div>
                                                 <div class="allTitle-item allTitle-conm">` +
-                                AddComma(r[i].conm) + '(' + AddComma(r[i].numm) + ')' +
+                                AddComma(r[i].conm) + "(" + AddComma(r[i].numm) + ")" +
                                 `</div>
                                                 <div class="allTitle-item allTitle-cont">` +
                                 r[i].cont +
@@ -174,19 +171,18 @@ function makeModalIl(dday, cctono, rsvt) {
                             <div class="alloAllo">`;
 
                         for (let k = 0; k < r[i].num; k++) {
-
-                            let veTool = '';
-                            let hocha = (k + 1) + '호차 자세히';
+                            let veTool = "";
+                            let hocha = k + 1 + "호차 자세히";
                             if (parseInt(r[0].ctmno) == 0) {
-                                veTool = '고객정보 입력 후 배차해주세요';
+                                veTool = "고객정보 입력 후 배차해주세요";
                                 hocha = ``;
                             }
 
-                            let numm = '';
+                            let numm = "";
                             if (k < 9) {
                                 numm = `0` + (k + 1);
                             } else {
-                                numm = (k + 1);
+                                numm = k + 1;
                             }
 
                             htmls += `
@@ -241,24 +237,24 @@ function makeModalIl(dday, cctono, rsvt) {
                     </div>`;
                     }
 
-                    $('#alloContMd').html(htmls);
-                    $("input[data-type='currency']").bind('keyup keydown', function () {
+                    $("#alloContMd").html(htmls);
+                    $("input[data-type='currency']").bind("keyup keydown", function () {
                         inputNumberFormat(this);
                     });
                     var tooltipTriggerList = []
                         .slice
-                        .call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                        .call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
                     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                        return new bootstrap.Tooltip(tooltipTriggerEl)
-                    })
+                        return new bootstrap.Tooltip(tooltipTriggerEl);
+                    });
 
                     resolve(arrTmp);
                 },
-                error: (jqXHR) => {
+                error: jqXHR => {
                     loginSession(jqXHR.status);
                 }
-            })
-        })
+            });
+        });
     }
 
     function getAllo2(result) {
@@ -273,7 +269,7 @@ function makeModalIl(dday, cctono, rsvt) {
 
             for (let i = 0; i < result.length; i++) {
                 const asd = {
-                    "rsvt": result[i]
+                    rsvt: result[i]
                 };
                 params.push(asd);
             }
@@ -288,13 +284,12 @@ function makeModalIl(dday, cctono, rsvt) {
 
                 success: function (r) {
                     $('div[name="allTitle"]').each(function () {
-
                         const aaa = $(this).children();
                         const rsvttt = $(aaa[0]).val();
 
                         let tmpAlm = new Array();
                         for (let i = 0; i < r.length; i++) {
-                            if (rsvttt == r[i].rsvt && r[i].opertype == 1 && $('#alloMdDay').val() == r[i].operday) {
+                            if (rsvttt == r[i].rsvt && r[i].opertype == 1 && $("#alloMdDay").val() == r[i].operday) {
                                 tmpAlm.push(r[i].atlm);
                             }
                         }
@@ -368,16 +363,15 @@ function makeModalIl(dday, cctono, rsvt) {
 
                         const nums = parseInt($(aaa[0]).text());
 
-                        if (parseInt($('#alloMdctmNo').val()) == 0) {
-                            $(aaa[1]).attr('disabled', true);
-                            $(aaa[15]).attr('disabled', true);
+                        if (parseInt($("#alloMdctmNo").val()) == 0) {
+                            $(aaa[1]).attr("disabled", true);
+                            $(aaa[15]).attr("disabled", true);
                             const lll = $(aaa[15]).children()[0];
-                            $(lll).removeClass('alloDelXBtn');
+                            $(lll).removeClass("alloDelXBtn");
                         }
 
                         for (let i = 0; i < r.length; i++) {
-
-                            if (rsvt == r[i].rsvt && nums == r[i].operno && r[i].opertype == 1 && $('#alloMdDay').val() == r[i].operday) {
+                            if (rsvt == r[i].rsvt && nums == r[i].operno && r[i].opertype == 1 && $("#alloMdDay").val() == r[i].operday) {
                                 $(aaa[3]).val(r[i].opernum);
                                 $(aaa[6]).val(r[i].dayst);
                                 $(aaa[7]).val(r[i].operno);
@@ -389,7 +383,7 @@ function makeModalIl(dday, cctono, rsvt) {
                                 $(aaa[13]).val(r[i].operconfirm);
                                 $(aaa[14]).val(r[i].opertrash);
 
-                                let veh = '';
+                                let veh = "";
                                 let veCnt = 0;
                                 for (let k = 0; k < dbVe.length; k++) {
                                     if (r[i].opercar == dbVe[k].carnumber) {
@@ -401,37 +395,37 @@ function makeModalIl(dday, cctono, rsvt) {
                                         let cntCom = 0;
                                         for (let l = 0; l < dbCompa.length; l++) {
                                             if (r[i].opercom == dbCompa[l].company) {
-                                                $(aaa[1]).addClass('allo1');
-                                                $(aaa[15]).addClass('allo11');
+                                                $(aaa[1]).addClass("allo1");
+                                                $(aaa[15]).addClass("allo11");
                                                 cntCom++;
                                             }
                                         }
 
                                         if (cntCom < 1) {
-                                            $(aaa[1]).addClass('allo2');
-                                            $(aaa[15]).addClass('allo21');
+                                            $(aaa[1]).addClass("allo2");
+                                            $(aaa[15]).addClass("allo21");
                                         }
                                     }
                                 }
 
                                 if (veCnt < 1) {
-                                    $(aaa[1]).addClass('allo3');
-                                    $(aaa[15]).addClass('allo31');
+                                    $(aaa[1]).addClass("allo3");
+                                    $(aaa[15]).addClass("allo31");
                                     veh = r[i].opercar;
                                 }
 
                                 $(aaa[1]).val(veh);
 
                                 if (r[i].operconfirm) {
-                                    $(aaa[1]).attr('disabled', true);
-                                    $(aaa[15]).attr('disabled', true);
+                                    $(aaa[1]).attr("disabled", true);
+                                    $(aaa[15]).attr("disabled", true);
                                     const lll = $(aaa[15]).children()[0];
-                                    $(lll).removeClass('alloDelXBtn');
+                                    $(lll).removeClass("alloDelXBtn");
                                     $(lll)
                                         .parent()
                                         .html(`<i class="fa-solid fa-check" style="color: green;"></i>`);
 
-                                    $(aa).attr('data-bs-original-title', '마감된 배차');
+                                    $(aa).attr("data-bs-original-title", "마감된 배차");
                                 }
 
                                 $('div[name="allTitle"]').each(function () {
@@ -441,52 +435,52 @@ function makeModalIl(dday, cctono, rsvt) {
                                     if (rsvttt == r[i].rsvt) {
                                         const ccc = $(qqq[8]).children()[0];
 
-                                        if (parseInt(r[i].atlm) != parseInt($(ccc).val().replaceAll(',', '')) && $('#alloMdDay').val() == r[i].operday) {
-                                            $(aaa[0]).addClass('alloNumClkDe');
+                                        if (parseInt(r[i].atlm) != parseInt($(ccc).val().replaceAll(",", "")) && $("#alloMdDay").val() == r[i].operday) {
+                                            $(aaa[0]).addClass("alloNumClkDe");
                                         }
                                     }
                                 });
                             }
 
                             if (rsvt == r[i].rsvt && nums == r[i].operno && r[i].opertype > 1) {
-                                $(aaa[0]).addClass('alloNumClkDe');
+                                $(aaa[0]).addClass("alloNumClkDe");
                             }
                         }
                     });
 
                     resolve();
                 },
-                error: (jqXHR) => {
+                error: jqXHR => {
                     loginSession(jqXHR.status);
                 }
-            })
-        })
+            });
+        });
     }
 
     function goTab() {
         return new Promise(function (resolve, reject) {
-            $('[tabindex=1]').focus();
+            $("[tabindex=1]").focus();
             resolve();
-        })
+        });
     }
 }
 
-$(document).on('keyup', '.allinde', function (eInner) {
+$(document).on("keyup", ".allinde", function (eInner) {
     var keyValue = eInner.which;
     if (keyValue == 37) {
-        const tabnum = $(this).attr('tabindex');
-        $('[tabindex=' + (
+        const tabnum = $(this).attr("tabindex");
+        $("[tabindex=" + (
             parseInt(tabnum) - 1
-        ) + ']').focus();
+        ) + "]").focus();
     } else if (keyValue == 39) {
-        const tabnum = $(this).attr('tabindex');
-        $('[tabindex=' + (
+        const tabnum = $(this).attr("tabindex");
+        $("[tabindex=" + (
             parseInt(tabnum) + 1
-        ) + ']').focus();
+        ) + "]").focus();
     }
 });
 
-$(document).on('keyup', '.veAllo', function (eInner) {
+$(document).on("keyup", ".veAllo", function (eInner) {
     var keyValue = eInner.which;
     if (keyValue == 13) {
         insertOper2(this);
@@ -494,7 +488,6 @@ $(document).on('keyup', '.veAllo', function (eInner) {
 });
 
 function insertOper2(doms) {
-
     LoadingWithMask()
         .then(setAllo21)
         .then(insetAllo21)
@@ -503,16 +496,16 @@ function insertOper2(doms) {
     function setAllo21() {
         return new Promise(function (resolve, reject) {
             var val = $(doms).val();
-            var carnum = $('#car-info option')
+            var carnum = $("#car-info option")
                 .filter(function () {
                     return this.value == val;
                 })
-                .data('value');
-            var carowner = $('#car-info option')
+                .data("value");
+            var carowner = $("#car-info option")
                 .filter(function () {
                     return this.value == val;
                 })
-                .data('owner');
+                .data("owner");
 
             if (!carnum) {
                 alert("차량정보가없습니다. 확인해주세요.");
@@ -521,11 +514,11 @@ function insertOper2(doms) {
                 return;
             }
 
-            var caridid = $('#car-info option')
+            var caridid = $("#car-info option")
                 .filter(function () {
                     return this.value == val;
                 })
-                .data('id');
+                .data("id");
 
             if (!caridid) {
                 alert("해당 차량의 승무원정보가없습니다. 확인해주세요.");
@@ -537,7 +530,7 @@ function insertOper2(doms) {
             const aa = $(doms).parent();
             const aaa = $(aa).children();
 
-            let veh = '';
+            let veh = "";
             let veCnt = 0;
             for (let k = 0; k < dbVe.length; k++) {
                 if (carnum == dbVe[k].carnumber) {
@@ -546,19 +539,19 @@ function insertOper2(doms) {
                     let cntCom = 0;
                     for (let l = 0; l < dbCompa.length; l++) {
                         if (carowner == dbCompa[l].company) {
-                            veh = 'allo1';
+                            veh = "allo1";
                             cntCom++;
                         }
                     }
 
                     if (cntCom < 1) {
-                        veh = 'allo2';
+                        veh = "allo2";
                     }
                 }
             }
 
             if (veCnt < 1) {
-                veh = 'allo3';
+                veh = "allo3";
             }
 
             let atmatmatmm = 0;
@@ -568,7 +561,7 @@ function insertOper2(doms) {
 
                 if (rsvttt == $(aaa[2]).val()) {
                     const ccc = $(qqq[8]).children()[0];
-                    atmatmatmm = parseInt($(ccc).val().replaceAll(',', ''));
+                    atmatmatmm = parseInt($(ccc).val().replaceAll(",", ""));
                 }
             });
 
@@ -581,12 +574,11 @@ function insertOper2(doms) {
             $(aaa[12]).val(1);
 
             resolve(veh);
-        })
+        });
     }
 
     function insetAllo21(result) {
         return new Promise(function (resolve, reject) {
-
             const aa = $(doms).parent();
             const aaa = $(aa).children();
 
@@ -606,21 +598,20 @@ function insertOper2(doms) {
             const beetween = betweenDateNum(operddddd, eddayyy);
 
             for (let i = 0; i < beetween; i++) {
-
                 let date = new Date(operddddd);
 
                 const ddd = toStringByFormatting(date.addDays(i));
                 const asd = {
-                    "opernum": opernnn,
-                    "rsvt": rsvttt,
-                    "operday": ddd,
-                    "dayst": (i + 1),
-                    "operno": opsernono,
-                    "opercom": opercomcom,
-                    "opercar": opercaracar,
-                    "operid": operididid,
-                    "atlm": operatmatm,
-                    "opertype": opertypetype
+                    opernum: opernnn,
+                    rsvt: rsvttt,
+                    operday: ddd,
+                    dayst: i + 1,
+                    operno: opsernono,
+                    opercom: opercomcom,
+                    opercar: opercaracar,
+                    operid: operididid,
+                    atlm: operatmatm,
+                    opertype: opertypetype
                 };
                 params.push(asd);
             }
@@ -640,7 +631,6 @@ function insertOper2(doms) {
                 data: JSON.stringify(params),
 
                 success: function (r) {
-
                     showAlloVeWhat(operddddd);
 
                     $(aaa[3]).val(r[0].opernum);
@@ -649,44 +639,43 @@ function insertOper2(doms) {
                     const qwert = $(doms).parent();
                     const qwert1 = $(qwert).children()[15];
 
-                    $(doms).removeClass('allo1');
-                    $(doms).removeClass('allo2');
-                    $(doms).removeClass('allo3');
+                    $(doms).removeClass("allo1");
+                    $(doms).removeClass("allo2");
+                    $(doms).removeClass("allo3");
 
                     $(doms).addClass(result);
-                    $(qwert1).addClass(result + '1');
+                    $(qwert1).addClass(result + "1");
 
-                    const tabnum = $(doms).attr('tabindex');
+                    const tabnum = $(doms).attr("tabindex");
 
-                    $('[tabindex=' + (
+                    $("[tabindex=" + (
                         parseInt(tabnum) + 1
-                    ) + ']').focus();
+                    ) + "]").focus();
 
                     resolve();
                 },
-                error: (jqXHR) => {
+                error: jqXHR => {
                     loginSession(jqXHR.status);
                 }
-            })
-        })
+            });
+        });
     }
 }
 
-$(document).on('click', '.btnAlloCh', function () {
+$(document).on("click", ".btnAlloCh", function () {
     const aaa = $(this).parent();
     const aaa1 = $(aaa).parent();
     const aaa2 = $(aaa1).children()[0];
 
     const rsvttt = $(aaa2).val();
 
-    const ctmnonono = $('#alloMdctmNo').val();
+    const ctmnonono = $("#alloMdctmNo").val();
 
     getRsvtCh(rsvttt, ctmnonono);
 });
 
 function getRsvtCh(rsvttt, ctmnonono) {
-
-    $('#modalAllo2').modal('hide');
+    $("#modalAllo2").modal("hide");
 
     LoadingWithMask()
         .then(getRsvtDe)
@@ -696,15 +685,14 @@ function getRsvtCh(rsvttt, ctmnonono) {
 
     function getRsvtDe(result) {
         return new Promise(function (resolve, reject) {
-
-            $('#md-rsvtNum').val(rsvttt);
+            $("#md-rsvtNum").val(rsvttt);
 
             const url = "/allo/chRSVT";
             const headers = {
                 "Content-Type": "application/json"
             };
             const params = {
-                "rsvt": rsvttt
+                rsvt: rsvttt
             };
 
             $.ajax({
@@ -717,40 +705,40 @@ function getRsvtCh(rsvttt, ctmnonono) {
                 cache: false,
                 success: function (r) {
                     if (r.length > 0) {
-                        $('#stday-1').val(r[0].stday);
-                        $('#endday-1').val(r[0].endday);
-                        $('#bus-1').val(r[0].bus);
-                        $('#num-1').val(r[0].num);
-                        $('#stt-1').val(r[0].stt);
-                        $('#endt-1').val(r[0].endt);
-                        $('#rsvpstp-1').val(r[0].rsvpstp);
-                        $('#desty-1').val(r[0].desty);
-                        $('#rsvtdetail-1').val(r[0].rsvtdetail);
-                        $('#cont-1').val(r[0].cont);
-                        $('#conm-1').val(AddComma(r[0].conm));
-                        $('#numm-1').val(r[0].numm);
+                        $("#stday-1").val(r[0].stday);
+                        $("#endday-1").val(r[0].endday);
+                        $("#bus-1").val(r[0].bus);
+                        $("#num-1").val(r[0].num);
+                        $("#stt-1").val(r[0].stt);
+                        $("#endt-1").val(r[0].endt);
+                        $("#rsvpstp-1").val(r[0].rsvpstp);
+                        $("#desty-1").val(r[0].desty);
+                        $("#rsvtdetail-1").val(r[0].rsvtdetail);
+                        $("#cont-1").val(r[0].cont);
+                        $("#conm-1").val(AddComma(r[0].conm));
+                        $("#numm-1").val(r[0].numm);
                     } else {
-                        $('#stday-1').val('');
-                        $('#endday-1').val('');
-                        $('#bus-1').val('');
-                        $('#num-1').val('');
-                        $('#stt-1').val('');
-                        $('#endt-1').val('');
-                        $('#rsvpstp-1').val('');
-                        $('#desty-1').val('');
-                        $('#rsvtdetail-1').val('');
-                        $('#cont-1').val('');
-                        $('#conm-1').val('');
-                        $('#numm-1').val('');
+                        $("#stday-1").val("");
+                        $("#endday-1").val("");
+                        $("#bus-1").val("");
+                        $("#num-1").val("");
+                        $("#stt-1").val("");
+                        $("#endt-1").val("");
+                        $("#rsvpstp-1").val("");
+                        $("#desty-1").val("");
+                        $("#rsvtdetail-1").val("");
+                        $("#cont-1").val("");
+                        $("#conm-1").val("");
+                        $("#numm-1").val("");
                     }
                     chDateInput();
                     resolve();
                 },
-                error: (jqXHR) => {
+                error: jqXHR => {
                     loginSession(jqXHR.status);
                 }
             });
-        })
+        });
     }
 
     function getCustDe(result) {
@@ -762,7 +750,7 @@ function getRsvtCh(rsvttt, ctmnonono) {
             };
 
             const params = {
-                "ctmno": ctmnonono
+                ctmno: ctmnonono
             };
 
             $.ajax({
@@ -775,112 +763,112 @@ function getRsvtCh(rsvttt, ctmnonono) {
                 cache: false,
                 success: function (r) {
                     if (r.length > 0) {
-                        $('#ctmnameUp').val('')
-                        $('#ctmlseqqqUp').val('')
-                        $('#ctmnoUp').val('');
-                        $('#inCustSepaUp1').prop('checked', true);
-                        $('#ctmtel1Up').val('');
-                        $('#ctmstpUp').val('');
-                        $('#ctmdetailUp').val('');
-                        $('#ctmtel2Up').val('');
-                        $('#ctmfaxUp').val('');
-                        $('#ctmaddressUp').val('');
-                        $('#ctmemailUp').val('');
-                        $('#ctmcompanumUp').val('');
-                        $('#ctmhomepageUp').val('');
+                        $("#ctmnameUp").val("");
+                        $("#ctmlseqqqUp").val("");
+                        $("#ctmnoUp").val("");
+                        $("#inCustSepaUp1").prop("checked", true);
+                        $("#ctmtel1Up").val("");
+                        $("#ctmstpUp").val("");
+                        $("#ctmdetailUp").val("");
+                        $("#ctmtel2Up").val("");
+                        $("#ctmfaxUp").val("");
+                        $("#ctmaddressUp").val("");
+                        $("#ctmemailUp").val("");
+                        $("#ctmcompanumUp").val("");
+                        $("#ctmhomepageUp").val("");
 
-                        $('#ctmnoUp').val(r[0].ctmno);
+                        $("#ctmnoUp").val(r[0].ctmno);
 
                         if (r[0].ctmsepa === 0) {
-                            $('#inCustSepaUp1').prop('checked', true);
+                            $("#inCustSepaUp1").prop("checked", true);
                         } else if (r[0].ctmsepa === 1) {
-                            $('#inCustSepaUp2').prop('checked', true);
+                            $("#inCustSepaUp2").prop("checked", true);
                         } else if (r[0].ctmsepa === 2) {
-                            $('#inCustSepaUp3').prop('checked', true);
-                        };
+                            $("#inCustSepaUp3").prop("checked", true);
+                        }
 
                         if (r[0].ctmname) {
-                            $('#ctmnameUp').val(r[0].ctmname);
+                            $("#ctmnameUp").val(r[0].ctmname);
                         }
                         if (r[0].ctmtel1) {
-                            $('#ctmtel1Up').val(r[0].ctmtel1);
+                            $("#ctmtel1Up").val(r[0].ctmtel1);
                         }
                         if (r[0].ctmstp) {
-                            $('#ctmstpUp').val(r[0].ctmstp);
-                            $('#rsvpstp-1').val($('#ctmstpUp').val());
+                            $("#ctmstpUp").val(r[0].ctmstp);
+                            $("#rsvpstp-1").val($("#ctmstpUp").val());
                         }
                         if (r[0].ctmdetail) {
-                            $('#ctmdetailUp').val(r[0].ctmdetail);
+                            $("#ctmdetailUp").val(r[0].ctmdetail);
                         }
                         if (r[0].ctmtel2) {
-                            $('#ctmtel2Up').val(r[0].ctmtel2);
+                            $("#ctmtel2Up").val(r[0].ctmtel2);
                         }
                         if (r[0].ctmfax) {
-                            $('#ctmfaxUp').val(r[0].ctmfax);
+                            $("#ctmfaxUp").val(r[0].ctmfax);
                         }
                         if (r[0].ctmaddress) {
-                            $('#ctmaddressUp').val(r[0].ctmaddress);
+                            $("#ctmaddressUp").val(r[0].ctmaddress);
                         }
                         if (r[0].ctmemail) {
-                            $('#ctmemailUp').val(r[0].ctmemail);
+                            $("#ctmemailUp").val(r[0].ctmemail);
                         }
                         if (r[0].ctmcompanum) {
-                            $('#ctmcompanumUp').val(r[0].ctmcompanum);
+                            $("#ctmcompanumUp").val(r[0].ctmcompanum);
                         }
                         if (r[0].ctmhomepage) {
-                            $('#ctmhomepageUp').val(r[0].ctmhomepage);
+                            $("#ctmhomepageUp").val(r[0].ctmhomepage);
                         }
                     }
                     resolve();
                 },
-                error: (jqXHR) => {
+                error: jqXHR => {
                     loginSession(jqXHR.status);
                 }
             });
-        })
+        });
     }
 
     function shomd(result) {
         return new Promise(function (resolve, reject) {
-            $('#modal-rsvt').modal('show');
+            $("#modal-rsvt").modal("show");
             resolve();
-        })
+        });
     }
 }
 
-$(document).on('click', '#alloMdbtnPapper', function () {
-    $('#modalAllo2').modal('hide');
-    $('#offAlloVe').offcanvas('hide');
+$(document).on("click", "#alloMdbtnPapper", function () {
+    $("#modalAllo2").modal("hide");
+    $("#offAlloVe").offcanvas("hide");
 
-    const name = $('#alloMdctoName').text();
-    const tel = $('#alloMdctoTel').text();
-    const ctm = $('#alloMdctmNo').val();
+    const name = $("#alloMdctoName").text();
+    const tel = $("#alloMdctoTel").text();
+    const ctm = $("#alloMdctmNo").val();
 
     show01().then(show02);
 
     function show01() {
         return new Promise(function (resolve, reject) {
             // $('#paperTitle').text(name + ' ' + tel + ' ' + $('#alloMdDay').val());
-            $('#paperCtm').val(ctm);
-            $('#paperDay').val($('#alloMdDay').val());
+            $("#paperCtm").val(ctm);
+            $("#paperDay").val($("#alloMdDay").val());
 
-            $('#ctmmm').val(ctm);
-            $('#dayyy').val($('#alloMdDay').val());
+            $("#ctmmm").val(ctm);
+            $("#dayyy").val($("#alloMdDay").val());
 
-            $('#modalPaper0Ti').text($('#alloMdDay').val() + ' ' + name + ' 서류 생성');
-            $('#ctmmmName').val(name);
+            $("#modalPaper0Ti").text($("#alloMdDay").val() + " " + name + " 서류 생성");
+            $("#ctmmmName").val(name);
             resolve();
-        })
+        });
     }
     function show02() {
         return new Promise(function (resolve, reject) {
-            $('#modalPaper0').modal('show');
+            $("#modalPaper0").modal("show");
             resolve();
-        })
+        });
     }
 });
 
-$(document).on('click', '.alloDelXBtn', function () {
+$(document).on("click", ".alloDelXBtn", function () {
     const aa = $(this)
         .parent()
         .parent();
@@ -900,7 +888,6 @@ function delAllo2(doms) {
 
     function delDbOper() {
         return new Promise(function (resolve, reject) {
-
             const aa = $(doms)
                 .parent()
                 .parent();
@@ -916,14 +903,13 @@ function delAllo2(doms) {
             const beetween = betweenDateNum(tod, ed);
 
             for (let i = 0; i < beetween; i++) {
-
                 let date = new Date(tod);
 
                 const ddd = toStringByFormatting(date.addDays(i));
                 const asd = {
-                    "opernum": opernummmm,
-                    "operday": ddd,
-                    "operno": hochacha
+                    opernum: opernummmm,
+                    operday: ddd,
+                    operno: hochacha
                 };
                 params.push(asd);
             }
@@ -943,45 +929,43 @@ function delAllo2(doms) {
                 data: JSON.stringify(params),
 
                 success: function (r) {
-
                     showAlloVeWhat(tod);
 
-                    $(aaa[0]).removeClass('alloNumClkDe');
+                    $(aaa[0]).removeClass("alloNumClkDe");
 
-                    $(aaa[1]).removeClass('allo1');
-                    $(aaa[1]).removeClass('allo2');
-                    $(aaa[1]).removeClass('allo3');
+                    $(aaa[1]).removeClass("allo1");
+                    $(aaa[1]).removeClass("allo2");
+                    $(aaa[1]).removeClass("allo3");
 
-                    $(aaa[15]).removeClass('allo11');
-                    $(aaa[15]).removeClass('allo21');
-                    $(aaa[15]).removeClass('allo31');
+                    $(aaa[15]).removeClass("allo11");
+                    $(aaa[15]).removeClass("allo21");
+                    $(aaa[15]).removeClass("allo31");
 
-                    $(aaa[1]).val('');
-                    $(aaa[3]).val('');
-                    $(aaa[6]).val('');
-                    $(aaa[7]).val('');
-                    $(aaa[8]).val('');
-                    $(aaa[9]).val('');
-                    $(aaa[10]).val('');
-                    $(aaa[11]).val('');
-                    $(aaa[12]).val('');
-                    $(aaa[13]).val('');
-                    $(aaa[14]).val('');
+                    $(aaa[1]).val("");
+                    $(aaa[3]).val("");
+                    $(aaa[6]).val("");
+                    $(aaa[7]).val("");
+                    $(aaa[8]).val("");
+                    $(aaa[9]).val("");
+                    $(aaa[10]).val("");
+                    $(aaa[11]).val("");
+                    $(aaa[12]).val("");
+                    $(aaa[13]).val("");
+                    $(aaa[14]).val("");
 
                     resolve();
                 },
-                error: (jqXHR) => {
+                error: jqXHR => {
                     loginSession(jqXHR.status);
                 }
-            })
-        })
+            });
+        });
     }
 }
 
-$(document).on('keyup', '.alloAllM', function (eInner) {
+$(document).on("keyup", ".alloAllM", function (eInner) {
     var keyValue = eInner.which; //enter key
     if (keyValue == 13) {
-
         const domss = this;
 
         if ($(domss).val()) {
@@ -1000,7 +984,7 @@ $(document).on('keyup', '.alloAllM', function (eInner) {
 
                 let altmmm = $(domss)
                     .val()
-                    .replaceAll(',', '');
+                    .replaceAll(",", "");
 
                 switch (altmmm.length) {
                     case 1:
@@ -1034,12 +1018,12 @@ $(document).on('keyup', '.alloAllM', function (eInner) {
                     const operNNN = $(bbb).val();
 
                     const ccc = $(aaa2[i]).children()[0];
-                    const typepe = $(ccc).attr('class');
+                    const typepe = $(ccc).attr("class");
 
                     const ddd = $(aaa2[i]).children()[13];
                     const confirmmm = $(ddd).val();
 
-                    if (operNNN && !typepe.includes('alloNumClkDe') && !confirmmm) {
+                    if (operNNN && !typepe.includes("alloNumClkDe") && !confirmmm) {
                         arrTmpOp.push(operNNN);
                     }
                 }
@@ -1051,7 +1035,7 @@ $(document).on('keyup', '.alloAllM', function (eInner) {
                 } else {
                     tabset(altmmm).then(closeLoadingWithMask);
                 }
-            })
+            });
         }
 
         function upAtmAll(result) {
@@ -1060,8 +1044,8 @@ $(document).on('keyup', '.alloAllM', function (eInner) {
 
                 for (let i = 0; i < result[0].length; i++) {
                     const asd = {
-                        "opernum": result[0][i],
-                        "atlm": result[1]
+                        opernum: result[0][i],
+                        atlm: result[1]
                     };
                     params.push(asd);
                 }
@@ -1091,58 +1075,56 @@ $(document).on('keyup', '.alloAllM', function (eInner) {
                             location.reload();
                         }
                     },
-                    error: (jqXHR) => {
+                    error: jqXHR => {
                         loginSession(jqXHR.status);
                     }
-                })
-            })
+                });
+            });
         }
 
         function tabset(result) {
             return new Promise(function (resolve, reject) {
                 $(domss).val(AddComma(result));
 
-                const tabnum = $(domss).attr('tabindex');
-                $('[tabindex=' + (
+                const tabnum = $(domss).attr("tabindex");
+                $("[tabindex=" + (
                     parseInt(tabnum) + 1
-                ) + ']').focus();
+                ) + "]").focus();
                 resolve();
-            })
+            });
         }
     }
 });
 
-$(document).on('click', '#modalAllo2X', function () {
-    $('#offAlloVe').offcanvas('hide');
-    if ($('#home').css('display') === 'block') {
+$(document).on("click", "#modalAllo2X", function () {
+    $("#offAlloVe").offcanvas("hide");
+    if ($("#home").css("display") === "block") {
         checkAlloLine();
     }
 
-    if ($('#home3').css('display') === 'block') {
-        if ($('#radioOper1').is(':checked')) {
+    if ($("#home3").css("display") === "block") {
+        if ($("#radioOper1").is(":checked")) {
             getOperListIl();
         }
-        if ($('#radioOper2').is(':checked')) {
+        if ($("#radioOper2").is(":checked")) {
             getOperListMonth();
         }
         getRsvtListMonthAside();
     }
-
 });
-$(document).on('click', '#modalAllo2Btn', function () {
-    $('#offAlloVe').offcanvas('hide');
-    if ($('#home').css('display') === 'block') {
+$(document).on("click", "#modalAllo2Btn", function () {
+    $("#offAlloVe").offcanvas("hide");
+    if ($("#home").css("display") === "block") {
         checkAlloLine();
     }
 
-    if ($('#home3').css('display') === 'block') {
-        if ($('#radioOper1').is(':checked')) {
+    if ($("#home3").css("display") === "block") {
+        if ($("#radioOper1").is(":checked")) {
             getOperListIl();
         }
-        if ($('#radioOper2').is(':checked')) {
+        if ($("#radioOper2").is(":checked")) {
             getOperListMonth();
         }
         getRsvtListMonthAside();
     }
-
 });

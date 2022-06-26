@@ -34,6 +34,9 @@ $(document).on('click', '#pills-manage-tab', function () {
 $(document).on('click', '#pills-nomanage-tab', function () {
     goUrl('/dashboardnmanage');
 });
+$(document).on('click', '#pills-gumanage-tab', function () {
+    goUrl('/dashboardgmanage');
+});
 $(document).on('click', '#pills-reg-tab', function () {
     window.open('/regular/regularAllo', '정기운행배차');
 });

@@ -44,6 +44,7 @@ p {
 }
 .nav button {
     letter-spacing: 0.3rem;
+    color: var(--main-color);
 }
 
 .nav-pills .nav-link {

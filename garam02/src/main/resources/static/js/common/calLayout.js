@@ -43,6 +43,10 @@ $(document).ready(function () {
         $('#pills-nomanage-tab').addClass('active');
     }
 
+    if ($('#gumanage').css('display') === 'block') {
+        $('#pills-gumanage-tab').addClass('active');
+    }
+
     if ($('#allo').css('display') === 'block') {
         $('#pills-allo-tab').addClass('active');
     }
@@ -332,6 +336,8 @@ function displayMain() {
     if ($('#nomanage').css('display') === 'block') {
         makeNoManage();
     }
+
+    if ($('#gumanage').css('display') === 'block') {}
 
     if ($('#allo').css('display') === 'block') {
         makeAllo();

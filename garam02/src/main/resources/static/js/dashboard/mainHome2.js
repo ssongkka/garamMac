@@ -555,6 +555,8 @@ function makeAsideRsvt(r) {
             `</td>
 </tr>`;
 
+    $('#home2Tile').text($('.yearMonth').val());
+
     $('#home2AsideTb').html(htmls);
     $('#home2AsideTf').html(htmlsFt);
 }

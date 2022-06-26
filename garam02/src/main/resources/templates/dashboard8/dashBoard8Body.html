@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-    <body th:fragment="main-body7">
+    <body th:fragment="main-body8">
         <header th:replace="dashboard/dashboardMainHead :: main-head"></header>
         <aside th:replace="dashboard/dashboardMainAside :: main-aside"></aside>
         <main class="main">
@@ -11,11 +11,11 @@
                 <!-- Tab panes -->
                 <div class="tab-content tab-cont">
                     <div
-                        th:insert="dashboard7/mainNoManage :: main-NoManage"
+                        th:insert="dashboard8/mainGuManage :: main-GuManage"
                         class="tab-pane fade show active"
-                        id="nomanage"
+                        id="gumanage"
                         role="tabpanel"
-                        aria-labelledby="pills-nomanage-tab"></div>
+                        aria-labelledby="pills-gumanage-tab"></div>
                 </div>
             </div>
         </main>

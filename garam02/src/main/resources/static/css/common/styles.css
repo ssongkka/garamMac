@@ -4,6 +4,7 @@
     font-family: "NotoSans";
     src: url("/fonts/NotoSansKR-Regular.otf");
 }
+
 @font-face {
     font-family: "Bae";
     src: url("/fonts/BMHANNA_11yrs_otf.otf");
@@ -30,7 +31,6 @@
 
 html {
     font-size: 62.5%;
-    /* overflow-y: scroll; */
 }
 
 /* html::-webkit-scrollbar {
@@ -73,6 +73,7 @@ input[type="text"] {
     -ms-ime-mode: active;
     ime-mode: active;
 }
+
 input[type="month"] {
     font-weight: 600;
     letter-spacing: 0.1rem;
@@ -347,9 +348,11 @@ table > tbody > tr > .tdLeft {
     justify-content: space-evenly;
     font-size: 1.3rem;
 }
+
 .home-nav li {
     flex: 1;
 }
+
 .home-nav > li > a {
     position: relative;
     display: block;
@@ -555,6 +558,14 @@ body .modal {
     box-shadow: 0 0 0 1px rgb(20 20 31 / 5%), 0 1px 3px 0 rgb(20 20 31 / 15%);
 }
 
+.dash-nav .nav-link {
+    padding: 0.5rem;
+}
+
+.dash-nav .nav-link svg {
+    margin: 0;
+}
+
 @media (max-width:1024px) {
     .card-song {
         border-radius: 0;
@@ -566,6 +577,7 @@ body .modal {
         display: grid;
         grid-template-columns: 1fr 1fr;
     }
+
     .table {
         /* width: 73rem; */
     }
