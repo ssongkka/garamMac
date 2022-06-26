@@ -290,6 +290,10 @@ function insertRsvt(result) {
                         makeNoManage();
                     }
 
+                    if ($('#gumanage').css('display') === 'block') {
+                        makeGuManageList();
+                    }
+
                     if ($('#allo').css('display') === 'block') {
                         goUrlDay('/dashboardallo', $('#stday').val());
                     }

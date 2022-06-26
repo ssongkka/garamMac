@@ -163,4 +163,10 @@ public interface DashboardMapper {
 	public int insertAllo2(RsvtDTO rsvtDTO) throws Exception;
 
 	public List<RsvtDTO> selectNoManage(RsvtDTO rsvtDTO) throws Exception;
+
+	public List<RsvtDTO> selectGuManageList(RsvtDTO rsvtDTO) throws Exception;
+
+	public List<RsvtDTO> selectGuRsvt(RsvtDTO rsvtDTO) throws Exception;
+
+	public List<RsvtDTO> selectGuOper(RsvtDTO rsvtDTO) throws Exception;
 }

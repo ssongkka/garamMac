@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value = "/c-")
+@RequestMapping(value = "/dashboardgmanage")
 public class Dashboard8Controller extends UiUtils {
 
 	private final MainService rsvtService;

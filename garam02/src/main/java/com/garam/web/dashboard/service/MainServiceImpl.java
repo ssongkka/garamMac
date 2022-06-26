@@ -2212,6 +2212,28 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public List<RsvtDTO> selectNoManage(RsvtDTO rsvtDTO) throws Exception {
 		List<RsvtDTO> list = rsvtMapper.selectNoManage(rsvtDTO);
+
+		return list;
+	}
+
+	@Override
+	public List<RsvtDTO> selectGuManageList(RsvtDTO rsvtDTO) throws Exception {
+		List<RsvtDTO> list = rsvtMapper.selectGuManageList(rsvtDTO);
+
+		return list;
+	}
+
+	@Override
+	public List<RsvtDTO> selectGuRsvt(RsvtDTO rsvtDTO) throws Exception {
+		List<RsvtDTO> list = rsvtMapper.selectGuRsvt(rsvtDTO);
+
+		return list;
+	}
+
+	@Override
+	public List<RsvtDTO> selectGuOper(RsvtDTO rsvtDTO) throws Exception {
+		List<RsvtDTO> list = rsvtMapper.selectGuOper(rsvtDTO);
+
 		return list;
 	}
 }
