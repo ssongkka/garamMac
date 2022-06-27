@@ -17,7 +17,6 @@ function setAdMDVeStaticPer(yearMonth, arrAllo, arrAlloM, arrEarn, allo, alloM, 
 
     function setDe(result) {
         return new Promise(function (resolve, reject) {
-            console.log(arrVe);
             $('#veStaticYearMonth').text(yearMonth);
 
             $('#veStaticVe').text(arrVe[1].substring(0, 5) + ' ' + arrVe[1].substring(5));

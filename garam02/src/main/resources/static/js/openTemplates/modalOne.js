@@ -77,8 +77,6 @@ function getMdOneShow(opNum, toDay, sepa) {
 
                 success: function (r) {
 
-                    console.log(r);
-
                     $('#mdOneTd21').val('');
                     $('#mdOneTd23').val('');
                     $('#mdOneTd24').val('');
@@ -601,11 +599,7 @@ $(document).on('click', '#modal-oneX2', function () {
 });
 
 $(document).on('click', '#modal-oneEnd2', function () {
-    if ($('#mdOneHDay').val() == $('#mdOneHEdDay').val()) {
-        makeModalIl($('#mdOneHDay').val(), $('#mdOneHCton').val(), null);
-    } else {
-        makeModalIl($('#mdOneHDay').val(), null, $('#mdOneHRsvt').val());
-    }
+    makeModalIl($('#mdOneHDay').val(), null, $('#mdOneHRsvt').val());
     $('#modal-one').modal('hide');
 });
 

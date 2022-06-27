@@ -57,8 +57,6 @@ function getEmpAll(name) {
                 let cntYeb = 0;
                 let cntOutman = 0;
 
-                console.log(r);
-
                 for (let i = 0; i < r.length; i++) {
                     if (r[i].trash == 1) {
                         cnt++;

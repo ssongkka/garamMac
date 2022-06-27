@@ -3054,7 +3054,9 @@
 
 		SELECT
 
-		*
+		*,
+		(rsvt.conm - IFNULL((SELECT SUM(rsvtmoney.moneymoney) FROM
+		rsvtmoney WHERE rsvtmoney.rsvt = rsvt.rsvt), 0)) AS juktrash
 
 		FROM
 
@@ -3075,7 +3077,8 @@
 
 		ON
 
-		rsvt.rsvt = gudealinm.rsvt
+		rsvt.rsvt =
+		gudealinm.rsvt
 
 		<where>
 			rsvt.ctmno = #{ctmno}
@@ -3084,6 +3087,13 @@
 
 			gudealinm.rsvt IS NULL
 		</where>
+
+		HAVING
+
+		juktrash > 0
+
+		ORDER BY
+		rsvt.stday
 
 	</select>
 	<select id="selectGuOper"
@@ -3128,6 +3138,8 @@
 				NULL
 			</if>
 		</where>
+		ORDER BY
+		operation_info.operday
 
 	</select>
 </mapper>

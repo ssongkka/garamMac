@@ -401,8 +401,6 @@ function makePapper() {
             }
         })
 
-        console.log(rsvtCheckBox);
-
         $('#rsvttt').val(rsvtCheckBox);
 
         let tmpArr = '';
@@ -468,8 +466,6 @@ function insertMemo() {
                 }
             }
         })
-
-        console.log(params);
 
         $.ajax({
             url: url,

@@ -689,8 +689,6 @@ function makeNoManage() {
     function setChart1(result) {
         return new Promise(function (resolve, reject) {
 
-            console.log(result);
-
             const data = {
                 labels: [
                     '일반', '학교', '거래처'

@@ -492,8 +492,6 @@ $(document).on('click', '#insert-many', function () {
                     params.push(asd);
                 }
 
-                console.log(params);
-
                 const url = "/rsvtmany/insert";
                 const headers = {
                     "Content-Type": "application/json",

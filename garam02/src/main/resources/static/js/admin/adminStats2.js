@@ -1451,8 +1451,6 @@ $(document).on('click', '.vePerStatic', function () {
     tmpArrVe.push($(aaa[23]).val());
     tmpArrVe.push($(aaa[24]).val());
 
-    console.log(tmpArrVe);
-
     const bbb0 = $('#tfVeAllPer').children()[0];
     const bbb = $(bbb0).children();
 
@@ -1466,8 +1464,6 @@ $(document).on('click', '.vePerStatic', function () {
     tmpArrAve.push(
         parseInt($(aaa[7]).text().replaceAll(',', '')) - parseInt($(bbb[7]).text().replaceAll(',', ''))
     );
-
-    console.log($($(aaa[8]).children()[0]).val());
 
     const jan1 = parseInt($($(aaa[8]).children()[0]).val().replaceAll(',', ''));
     const jan2 = parseInt($(aaa[8]).text().replaceAll(',', ''));

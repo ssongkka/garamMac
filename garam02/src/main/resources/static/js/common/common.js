@@ -49,6 +49,15 @@ $(document).on('click', '#pills-rsvt-tab', function () {
 
     setNewRsvtModal();
 });
+$(document).on('click', '#card-ve', function () {
+    window.open('/vehicle', '차량정보');
+});
+$(document).on('click', '#card-emp', function () {
+    window.open('/employee', '승무원정보');
+});
+$(document).on('click', '#card-reg', function () {
+    window.open('/regular', '정기운행정보');
+});
 
 $(document).on('click', '#logoSide', function () {
     goUrl('/dashboard');
@@ -620,7 +629,6 @@ function sortTableByColumn1(table, table1, column, asc = true, tthh) {
                 ? 1
                 : -1;
             const tBody = table.tBodies[0];
-            console.log(table.tBodies);
             // const rows = Array.from(tBody.querySelectorAll("tr"));
             const rows = Array.from($(tBody).children('tr'));
             // Sort each row
@@ -725,7 +733,6 @@ function sortTableByColumnStatic(table, table1, column, asc = true, tthh) {
                 ? 1
                 : -1;
             const tBody = table.tBodies[0];
-            console.log(table.tBodies);
             // const rows = Array.from(tBody.querySelectorAll("tr"));
             const rows = Array.from($(tBody).children('tr'));
             // Sort each row
@@ -1470,10 +1477,11 @@ $(document).on('click', '.sortNum', function () {
         .parentElement
         .parentElement
         .parentElement
+        .parentElement
         .nextElementSibling
         .childNodes[1];
 
-    const tableElement1 = this.parentElement.parentElement.parentElement;
+    const tableElement1 = this.parentElement.parentElement.parentElement.parentElement;
 
     const aaa = $(this)
         .parent()
@@ -1690,10 +1698,11 @@ $(document).on('click', '.sortStr', function () {
         .parentElement
         .parentElement
         .parentElement
+        .parentElement
         .nextElementSibling
         .childNodes[1];
 
-    const tableElement1 = this.parentElement.parentElement.parentElement;
+    const tableElement1 = this.parentElement.parentElement.parentElement.parentElement;
 
     const aaa = $(this)
         .parent()
@@ -1759,10 +1768,11 @@ $(document).on('click', '.sortInput', function () {
         .parentElement
         .parentElement
         .parentElement
+        .parentElement
         .nextElementSibling
         .childNodes[1];
 
-    const tableElement1 = this.parentElement.parentElement.parentElement;
+    const tableElement1 = this.parentElement.parentElement.parentElement.parentElement;
 
     const aaa = $(this)
         .parent()

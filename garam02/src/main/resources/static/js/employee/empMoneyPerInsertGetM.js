@@ -1319,7 +1319,6 @@ function getEmpOutMList(result) {
                     for (let i = 0; i < r.length; i++) {
 
                         if (r[i].separation == '관리비') {
-                            console.log(r[i].money);
                             if (r[i].money) {
                                 $('#in-baseM').val(AddComma(r[i].money));
                             } else {

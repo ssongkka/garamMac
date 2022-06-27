@@ -2,6 +2,8 @@
 
 .main-gumanage {
     flex: 1;
+
+    margin-right: 30rem;
     padding: 1rem;
 
     display: flex;
@@ -13,6 +15,8 @@
     flex: 1;
     padding: 1rem;
 }
+
+.main-gumanage-item1 button {}
 
 .main-gumanage-item2 {
     flex: 3;
@@ -35,21 +39,13 @@
     flex: 1;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 1rem;
-}
-
-.gumanage-sok1 {
-    flex: 2;
-}
-
-.gumanage-sok2 {
-    flex: 3;
 }
 
 .gumanage-go-out {
     height: 100%;
-    flex: 2;
+    flex: 1;
 
     display: flex;
     flex-direction: column;
@@ -110,22 +106,8 @@
 }
 
 .table-scroll-body-guManage {
-    min-height: calc(100vh - 16rem);
-    max-height: calc(100vh - 16rem);
-}
-
-.newGu {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.newGu button {
-    padding: 0 1rem 0 0.5rem;
-}
-
-.newGu div {
-    margin-bottom: 5px;
+    min-height: calc(100vh - 19rem);
+    max-height: calc(100vh - 19rem);
 }
 
 .title1 {
@@ -183,15 +165,15 @@
     margin-left: 1rem;
 }
 
-#gumanagein {
+.gumanagesum-item:nth-child(1) {
     background: rgba(68, 114, 196, 1);
 }
 
-#gumanageout {
+.gumanagesum-item:nth-child(2) {
     background: rgb(237, 125, 49, 1);
 }
 
-#gumanageall {
+.gumanagesum-item:nth-child(3) {
     background: rgba(112, 173, 71, 1);
 }
 .gumanagegd,
@@ -202,8 +184,24 @@
 
 .table-scroll-body-guManage-Go,
 .table-scroll-body-guManage-Out {
-    min-height: calc(100vh - 70rem);
-    max-height: calc(100vh - 70rem);
+    max-height: calc(100vh - 68rem);
+}
+
+.table-scroll-body-guManage-Jang {
+    max-height: calc(100vh - 26rem);
+}
+
+.guMdBD {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.guManage-jang {
+    flex: 1;
+
+    padding: 1rem;
 }
 
 @media (max-width:1024px) {}
