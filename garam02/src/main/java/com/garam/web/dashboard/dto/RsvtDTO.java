@@ -217,11 +217,30 @@ public class RsvtDTO {
 	private Integer juktrash;
 
 	private String regd;
+
 	private String reg;
+
 	private String insud;
+
 	private String insu;
+
 	private String jukd;
+
 	private String juk;
+
+	private Integer gudealseq;
+
+	private String gudealno;
+
+	private String godate;
+
+	private String indate;
+
+	private Integer inm;
+
+	private Integer outm;
+
+	private Integer gudealtrash;
 
 	public Integer getDayst() {
 		return dayst;
@@ -817,6 +836,62 @@ public class RsvtDTO {
 
 	public void setJuk(String juk) {
 		this.juk = juk;
+	}
+
+	public Integer getGudealseq() {
+		return gudealseq;
+	}
+
+	public void setGudealseq(Integer gudealseq) {
+		this.gudealseq = gudealseq;
+	}
+
+	public String getGudealno() {
+		return gudealno;
+	}
+
+	public void setGudealno(String gudealno) {
+		this.gudealno = gudealno;
+	}
+
+	public String getGodate() {
+		return godate;
+	}
+
+	public void setGodate(String godate) {
+		this.godate = godate;
+	}
+
+	public String getIndate() {
+		return indate;
+	}
+
+	public void setIndate(String indate) {
+		this.indate = indate;
+	}
+
+	public Integer getInm() {
+		return inm;
+	}
+
+	public void setInm(Integer inm) {
+		this.inm = inm;
+	}
+
+	public Integer getOutm() {
+		return outm;
+	}
+
+	public void setOutm(Integer outm) {
+		this.outm = outm;
+	}
+
+	public Integer getGudealtrash() {
+		return gudealtrash;
+	}
+
+	public void setGudealtrash(Integer gudealtrash) {
+		this.gudealtrash = gudealtrash;
 	}
 
 }

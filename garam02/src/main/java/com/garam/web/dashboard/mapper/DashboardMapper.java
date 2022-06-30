@@ -104,6 +104,8 @@ public interface DashboardMapper {
 
 	public int delRsvtMoney(RsvtmoneyDTO rsvtmoneyDTO) throws Exception;
 
+	public int delRsvtMoneyTong(RsvtmoneyDTO rsvtmoneyDTO) throws Exception;
+
 	public int updateRsvtConfirmMOk(RsvtDTO rsvtDTO) throws Exception;
 
 	public int updateRsvtConfirmMNo(RsvtDTO rsvtDTO) throws Exception;
@@ -169,4 +171,23 @@ public interface DashboardMapper {
 	public List<RsvtDTO> selectGuRsvt(RsvtDTO rsvtDTO) throws Exception;
 
 	public List<RsvtDTO> selectGuOper(RsvtDTO rsvtDTO) throws Exception;
+
+	public int insertGuDeal(RsvtDTO rsvtDTO) throws Exception;
+
+	public int updateGuDealInMoney(RsvtDTO rsvtDTO) throws Exception;
+
+	public int delGuDealList(RsvtDTO rsvtDTO) throws Exception;
+
+	public int updateGudealRsvt(HashMap<String, Object> map) throws Exception;
+
+	public int updateGudealOper(HashMap<String, Object> map) throws Exception;
+
+	public List<RsvtDTO> selectGudealMAll(RsvtDTO rsvtDTO) throws Exception;
+
+	public List<RsvtDTO> selectGudealImRsvt(RsvtDTO rsvtDTO) throws Exception;
+
+	public List<RsvtDTO> selectGudealImRsvt111(RsvtDTO rsvtDTO) throws Exception;
+
+	public List<RsvtDTO> selectGudealImOper(RsvtDTO rsvtDTO) throws Exception;
+
 }

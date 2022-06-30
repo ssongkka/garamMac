@@ -590,18 +590,31 @@ function delOneWay2(doms, num) {
 }
 
 $(document).on('click', '#modal-oneX2', function () {
-    if ($('#mdOneHDay').val() == $('#mdOneHEdDay').val()) {
-        makeModalIl($('#mdOneHDay').val(), $('#mdOneHCton').val(), null);
-    } else {
-        makeModalIl($('#mdOneHDay').val(), null, $('#mdOneHRsvt').val());
-    }
-    $('#modal-one').modal('hide');
+    closeOneModal();
 });
 
 $(document).on('click', '#modal-oneEnd2', function () {
-    makeModalIl($('#mdOneHDay').val(), null, $('#mdOneHRsvt').val());
-    $('#modal-one').modal('hide');
+    closeOneModal();
 });
+
+function closeOneModal() {
+    if ($('#home').css('display') === 'block') {
+        switch (parseInt($("#alloMdSepa").val())) {
+            case 0:
+                makeModalIl($('#mdOneHDay').val(), null, $('#mdOneHRsvt').val());
+
+                break;
+            case 1:
+                makeModalIl($('#mdOneHDay').val(), $('#mdOneHCton').val(), null);
+                break;
+        }
+    } else {
+        makeModalIl($('#mdOneHDay').val(), null, $('#mdOneHRsvt').val());
+    }
+
+    $('#modal-one').modal('hide');
+
+}
 
 $(document).on('change', '#mdOneTd4', function () {
     let tmpArr = new Array();

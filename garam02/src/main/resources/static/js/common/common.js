@@ -1477,11 +1477,10 @@ $(document).on('click', '.sortNum', function () {
         .parentElement
         .parentElement
         .parentElement
-        .parentElement
         .nextElementSibling
         .childNodes[1];
 
-    const tableElement1 = this.parentElement.parentElement.parentElement.parentElement;
+    const tableElement1 = this.parentElement.parentElement.parentElement;
 
     const aaa = $(this)
         .parent()
@@ -1698,11 +1697,10 @@ $(document).on('click', '.sortStr', function () {
         .parentElement
         .parentElement
         .parentElement
-        .parentElement
         .nextElementSibling
         .childNodes[1];
 
-    const tableElement1 = this.parentElement.parentElement.parentElement.parentElement;
+    const tableElement1 = this.parentElement.parentElement.parentElement;
 
     const aaa = $(this)
         .parent()
@@ -1768,11 +1766,10 @@ $(document).on('click', '.sortInput', function () {
         .parentElement
         .parentElement
         .parentElement
-        .parentElement
         .nextElementSibling
         .childNodes[1];
 
-    const tableElement1 = this.parentElement.parentElement.parentElement.parentElement;
+    const tableElement1 = this.parentElement.parentElement.parentElement;
 
     const aaa = $(this)
         .parent()
@@ -1824,6 +1821,9 @@ function updateImg(source, id) {
 }
 
 function tbChoice(dom) {
+
+    console.log(dom);
+
     $('td').css('background', 'none');
     $('td').css('color', 'black');
 

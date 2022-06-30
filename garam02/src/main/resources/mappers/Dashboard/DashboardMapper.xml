@@ -1750,6 +1750,20 @@
 		rsvtmoneyseq = #{rsvtmoneyseq};
 	</delete>
 
+	<delete id="delRsvtMoneyTong"
+		parameterType="com.garam.web.dashboard.dto.RsvtmoneyDTO">
+
+		DELETE
+
+		FROM
+
+		rsvtmoney
+
+		WHERE
+
+		moneytong = #{moneytong};
+	</delete>
+
 	<update id="updateRsvtConfirmMOk"
 		parameterType="com.garam.web.dashboard.dto.RsvtDTO">
 		UPDATE
@@ -2895,85 +2909,13 @@
 			</if>
 		</where>
 
+		HAVING
+
+		id2 > 0
+
 		ORDER BY
 
 		rsvt.stday
-	</select>
-	<select id="selectGoManageList"
-		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
-		resultType="com.garam.web.dashboard.dto.RsvtDTO">
-
-		(SELECT
-
-		customer.*,
-		(select COUNT(rsvt.rsvt) FROM rsvt where rsvt.ctmno
-		=
-		customer.ctmno) AS num
-
-		FROM rsvt
-
-		LEFT JOIN
-
-		customer
-
-		on
-
-		rsvt.ctmno =
-		customer.ctmno
-
-		<where>
-			<if test="ctmname != null">
-				(ctmname Like CONCAT('%',#{ctmname},'%')
-
-				OR ctmtel1 Like
-				CONCAT('%',#{ctmname},'%')
-
-				OR ctmtel2 Like
-				CONCAT('%',#{ctmname},'%'))
-			</if>
-			AND ctmtrash = 1
-
-			AND ctmsepa = 0
-
-			AND ctmsepa = 2
-		</where>
-
-		GROUP BY rsvt.ctmno)
-
-		UNION
-
-		(SELECT
-
-		*,
-		(select
-		COUNT(rsvt.rsvt)
-		FROM rsvt
-		where rsvt.ctmno = customer.ctmno) AS num
-
-		from
-
-		customer
-
-		<where>
-			<if test="ctmname != null">
-				(ctmname Like CONCAT('%',#{ctmname},'%')
-
-				OR ctmtel1 Like
-				CONCAT('%',#{ctmname},'%')
-
-				OR ctmtel2 Like
-				CONCAT('%',#{ctmname},'%'))
-			</if>
-			AND ctmtrash = 1
-
-			AND ctmsepa = 0
-
-			AND ctmsepa = 2
-		</where>
-		)
-
-		ORDER BY ctmname
-
 	</select>
 	<select id="selectGuManageList"
 		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
@@ -2984,9 +2926,64 @@
 		customer.*,
 		(select COUNT(rsvt.rsvt) FROM rsvt where rsvt.ctmno
 		=
-		customer.ctmno) AS num
+		customer.ctmno) AS num,
 
-		FROM rsvt
+		(
+		SELECT
+
+
+		SUM((rsvt.conm - IFNULL((SELECT
+		SUM(rsvtmoney.moneymoney) FROM
+		rsvtmoney WHERE
+		rsvtmoney.rsvt =
+		rsvt.rsvt), 0)))
+
+		FROM
+
+		rsvt
+
+		WHERE rsvt.ctmno = customer.ctmno
+
+		AND
+
+		rsvt.confirm
+		IS NULL
+		)
+		AS juktrash,
+
+		(
+		IFNULL(
+		(SELECT
+
+		SUM(operation_info.atlm)
+
+		FROM
+
+		operation_info
+
+		WHERE
+
+		operation_info.opercom
+		=
+		customer.ctmname
+
+		AND
+
+		operation_info.dayst = 1
+
+		AND
+
+		operation_info.operconfirm IS
+		NULL)
+		,
+		0)
+		)
+		AS
+		gudealtrash
+
+		FROM
+
+		rsvt
 
 		LEFT JOIN
 
@@ -3022,7 +3019,62 @@
 		(select
 		COUNT(rsvt.rsvt)
 		FROM rsvt
-		where rsvt.ctmno = customer.ctmno) AS num
+		where rsvt.ctmno = customer.ctmno) AS num,
+
+		(
+		SELECT
+
+
+		SUM((rsvt.conm -
+		IFNULL((SELECT
+		SUM(rsvtmoney.moneymoney) FROM
+		rsvtmoney WHERE
+		rsvtmoney.rsvt =
+		rsvt.rsvt), 0)))
+
+		FROM
+
+		rsvt
+
+		WHERE rsvt.ctmno =
+		customer.ctmno
+
+		AND
+
+		rsvt.confirm
+		IS NULL
+		)
+		AS juktrash,
+
+		(
+		IFNULL(
+		(SELECT
+
+		SUM(operation_info.atlm)
+
+		FROM
+
+		operation_info
+
+		WHERE
+
+		operation_info.opercom
+		=
+		customer.ctmname
+
+		AND
+
+		operation_info.dayst = 1
+
+		AND
+
+		operation_info.operconfirm IS
+		NULL)
+		,
+		0)
+		)
+		AS
+		gudealtrash
 
 		from
 
@@ -3071,21 +3123,13 @@
 		rsvt.ctmno =
 		customer.ctmno
 
-		LEFT JOIN
-
-		gudealinm
-
-		ON
-
-		rsvt.rsvt =
-		gudealinm.rsvt
-
 		<where>
 			rsvt.ctmno = #{ctmno}
 
 			AND
 
-			gudealinm.rsvt IS NULL
+			rsvt.confirm
+			IS NULL
 		</where>
 
 		HAVING
@@ -3125,21 +3169,281 @@
 
 			operation_info.dayst = 1
 
-			<if test="operconfirm != null">
-				AND
+			AND
 
-				operation_info.operconfirm = #{confirm}
-			</if>
-
-			<if test="operconfirm = null">
-				AND
-
-				operation_info.operconfirm IS
-				NULL
-			</if>
+			operation_info.operconfirm IS
+			NULL
 		</where>
 		ORDER BY
 		operation_info.operday
 
 	</select>
+
+	<insert id="insertGuDeal"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		INSERT INTO gudeal
+
+		VALUES
+
+		(
+		NULL,
+		#{gudealno},
+		#{ctmno},
+		NOW(),
+		NULL,
+		#{inm},
+		#{outm},
+		#{empin},
+		1,
+		NULL
+		);
+
+	</insert>
+
+	<update id="updateGuDealInMoney"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		UPDATE
+
+		gudeal
+
+		SET
+
+		<if test="gudealtrash == 1">
+			indate = NOW()
+		</if>
+		<if test="gudealtrash == 0">
+			indate = NULL
+		</if>
+
+		WHERE
+
+		gudealno =
+		#{confirm}
+
+		;
+
+		UPDATE
+
+		operation_info
+
+		SET
+
+		<if test="gudealtrash == 1">
+			operation_info.opertrash = 0
+		</if>
+		<if test="gudealtrash == 0">
+			operation_info.opertrash = 2
+		</if>
+
+		WHERE
+
+		operation_info.operconfirm =
+		#{confirm}
+
+		;
+	</update>
+
+	<delete id="delGuDealList"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		DELETE FROM
+
+		gudeal
+
+		WHERE
+
+		gudealno =
+		#{confirm}
+
+		;
+
+		UPDATE
+
+		rsvt
+
+		SET
+
+		rsvt.confirm = NULL
+
+		WHERE
+
+		rsvt.confirm = #{confirm}
+
+		;
+
+		UPDATE
+
+		operation_info
+
+		SET
+
+		operation_info.opertrash = 1,
+
+		operation_info.operconfirm = NULL
+
+		WHERE
+
+		operation_info.operconfirm =
+		#{confirm}
+
+		;
+
+	</delete>
+
+
+
+
+	<update id="updateGudealRsvt" parameterType="java.util.HashMap">
+		<foreach collection="rsvt" item="value" index="index"
+			separator=";">
+			UPDATE
+
+			rsvt
+
+			SET
+
+			rsvt.confirm = #{value.gudealno}
+
+			WHERE
+
+			rsvt.rsvt = #{value.rsvt}
+		</foreach>
+	</update>
+
+	<update id="updateGudealOper" parameterType="java.util.HashMap">
+		<foreach collection="oper" item="value" index="index"
+			separator=";">
+			UPDATE
+
+			operation_info
+
+			SET
+
+			operation_info.operconfirm =
+			#{value.gudealno},
+
+			operation_info.opertrash = #{value.opertrash}
+
+			WHERE
+
+			operation_info.operseq = #{value.operseq}
+		</foreach>
+	</update>
+	<select id="selectGudealMAll"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		gudeal
+
+		WHERE
+
+		ctmno = #{ctmno}
+
+	</select>
+
+	<select id="selectGudealImRsvt"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		SELECT
+
+		*,
+		(rsvt.conm -
+		IFNULL((SELECT SUM(rsvtmoney.moneymoney) FROM
+		rsvtmoney
+		WHERE
+		rsvtmoney.rsvt = rsvt.rsvt), 0)) AS juktrash
+
+		FROM
+
+		rsvt
+
+		LEFT JOIN
+
+		customer
+
+		ON
+
+		rsvt.ctmno =
+		customer.ctmno
+
+		<where>
+			rsvt.confirm = #{confirm}
+		</where>
+
+		HAVING
+
+		juktrash > 0
+
+		ORDER BY
+		rsvt.stday
+
+	</select>
+
+	<select id="selectGudealImRsvt111"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		SELECT
+
+		rsvt.*,
+
+		IFNULL((SELECT rsvtmoney.moneymoney FROM
+		rsvtmoney
+		WHERE rsvtmoney.rsvt = rsvt.rsvt AND rsvtmoney.moneytong =
+		#{confirm}), 0) AS juktrash
+
+		FROM
+
+		rsvt
+
+		WHERE
+
+		rsvt.confirm =
+		#{confirm}
+
+		ORDER
+		BY
+
+		rsvt.stday
+
+	</select>
+
+	<select id="selectGudealImOper"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		operation_info
+
+		LEFT JOIN
+
+		rsvt
+
+		ON
+
+		operation_info.rsvt =
+		rsvt.rsvt
+
+		<where>
+			operation_info.operconfirm =
+			#{confirm}
+		</where>
+		ORDER BY
+		operation_info.operday
+	</select>
+
 </mapper>

@@ -1985,6 +1985,13 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
+	public int delRsvtMoneyTong(RsvtmoneyDTO rsvtmoneyDTO) throws Exception {
+		int rtn = rsvtMapper.delRsvtMoneyTong(rsvtmoneyDTO);
+
+		return rtn;
+	}
+
+	@Override
 	public int updateRsvtConfirmMOk(RsvtDTO rsvtDTO) throws Exception {
 		int rtn = rsvtMapper.updateRsvtConfirmMOk(rsvtDTO);
 
@@ -2233,6 +2240,79 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public List<RsvtDTO> selectGuOper(RsvtDTO rsvtDTO) throws Exception {
 		List<RsvtDTO> list = rsvtMapper.selectGuOper(rsvtDTO);
+
+		return list;
+	}
+
+	@Override
+	public int insertGuDeal(RsvtDTO rsvtDTO) throws Exception {
+		int rtn = rsvtMapper.insertGuDeal(rsvtDTO);
+
+		return rtn;
+	}
+
+	@Override
+	public int updateGuDealInMoney(RsvtDTO rsvtDTO) throws Exception {
+		int rtn = rsvtMapper.updateGuDealInMoney(rsvtDTO);
+
+		return rtn;
+	}
+
+	@Override
+	public int delGuDealList(RsvtDTO rsvtDTO) throws Exception {
+		int rtn = rsvtMapper.delGuDealList(rsvtDTO);
+
+		return rtn;
+	}
+
+	@Override
+	public int updateGudealRsvt(List<Map<String, Object>> map) throws Exception {
+		HashMap<String, Object> rsvt = new HashMap<>();
+		for (int i = 0; i < map.size(); i++) {
+			rsvt.put("rsvt", map);
+		}
+
+		int rtn = rsvtMapper.updateGudealRsvt(rsvt);
+
+		return rtn;
+	}
+
+	@Override
+	public int updateGudealOper(List<Map<String, Object>> map) throws Exception {
+		HashMap<String, Object> oper = new HashMap<>();
+		for (int i = 0; i < map.size(); i++) {
+			oper.put("oper", map);
+		}
+
+		int rtn = rsvtMapper.updateGudealOper(oper);
+
+		return rtn;
+	}
+
+	@Override
+	public List<RsvtDTO> selectGudealMAll(RsvtDTO rsvtDTO) throws Exception {
+		List<RsvtDTO> list = rsvtMapper.selectGudealMAll(rsvtDTO);
+
+		return list;
+	}
+
+	@Override
+	public List<RsvtDTO> selectGudealImRsvt(RsvtDTO rsvtDTO) throws Exception {
+		List<RsvtDTO> list = rsvtMapper.selectGudealImRsvt(rsvtDTO);
+
+		return list;
+	}
+
+	@Override
+	public List<RsvtDTO> selectGudealImRsvt111(RsvtDTO rsvtDTO) throws Exception {
+		List<RsvtDTO> list = rsvtMapper.selectGudealImRsvt111(rsvtDTO);
+
+		return list;
+	}
+
+	@Override
+	public List<RsvtDTO> selectGudealImOper(RsvtDTO rsvtDTO) throws Exception {
+		List<RsvtDTO> list = rsvtMapper.selectGudealImOper(rsvtDTO);
 
 		return list;
 	}

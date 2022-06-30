@@ -55,6 +55,21 @@ public class RestMainManageController {
 		return rst;
 	}
 
+	@PostMapping(value = "/delrsvtmoneytong")
+	public int delrsvtmoneytong(@RequestBody RsvtmoneyDTO rsvtmoneyDTO) throws Exception {
+
+		int rst = 0;
+		try {
+			rst = rsvtService.delRsvtMoneyTong(rsvtmoneyDTO);
+		} catch (DataAccessException e) {
+			rst = -1;
+
+		} catch (Exception e) {
+			rst = -2;
+		}
+		return rst;
+	}
+
 	@PostMapping(value = "/updateRsvtConfirmMOk")
 	public int updateRsvtConfirmMOk(@RequestBody RsvtDTO rsvtDTO) throws Exception {
 

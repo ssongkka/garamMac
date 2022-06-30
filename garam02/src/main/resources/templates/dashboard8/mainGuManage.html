@@ -26,15 +26,17 @@
                         <div class="scBar">
                             <table class="table table-striped table-hover table-bordered">
                                 <colgroup>
-                                    <col width="33%"/>
-                                    <col width="33%"/>
-                                    <col width="auto"/>
+                                    <col width="30%"/>
+                                    <col width="24%"/>
+                                    <col width="23%"/>
+                                    <col width="23%"/>
                                 </colgroup>
                                 <thead class="table-light">
                                     <tr>
                                         <th class="sortStr">이름</th>
                                         <th class="sortStr">연락처</th>
-                                        <th class="sortStr">메모</th>
+                                        <th class="sortStr">미수금</th>
+                                        <th class="sortStr">배차금액</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -43,9 +45,10 @@
                     <div class="table-scroll-body-guManage scBar">
                         <table class="table table-striped table-hover table-bordered">
                             <colgroup>
-                                <col width="33%"/>
-                                <col width="33%"/>
-                                <col width="auto"/>
+                                <col width="30%"/>
+                                <col width="24%"/>
+                                <col width="23%"/>
+                                <col width="23%"/>
                             </colgroup>
                             <tbody id="guManageTb"></tbody>
                         </table>
@@ -100,7 +103,7 @@
                                     <div class="scBar">
                                         <table class="table table-striped table-hover table-bordered">
                                             <colgroup>
-                                                <col width="auto"/>
+                                                <col width="8%"/>
                                                 <col width="23%"/>
                                                 <col width="23%"/>
                                                 <col width="23%"/>
@@ -110,9 +113,9 @@
                                                 <tr>
                                                     <th class="sortStr">#</th>
                                                     <th class="sortStr">저장날짜</th>
-                                                    <th class="sortStr">수입</th>
-                                                    <th class="sortStr">지출</th>
-                                                    <th class="sortStr">합계</th>
+                                                    <th class="sortStr">입 금</th>
+                                                    <th class="sortStr">지 불</th>
+                                                    <th class="sortStr">합 계</th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -121,15 +124,35 @@
                                 <div class="table-scroll-body-guManageIm scBar">
                                     <table class="table table-striped table-hover table-bordered">
                                         <colgroup>
-                                            <col width="auto"/>
+                                            <col width="8%"/>
                                             <col width="23%"/>
                                             <col width="23%"/>
                                             <col width="23%"/>
                                             <col width="23%"/>
                                         </colgroup>
-                                        <tbody id="guManageTb"></tbody>
-                                        <tfoot id="guManageTㄹ"></tfoot>
+                                        <tbody id="guManageImTb"></tbody>
                                     </table>
+                                </div>
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="8%"/>
+                                                <col width="23%"/>
+                                                <col width="23%"/>
+                                                <col width="23%"/>
+                                                <col width="23%"/>
+                                            </colgroup>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="2">합 계</td>
+                                                    <td class="tdRight" id="guManageImTf1"></td>
+                                                    <td class="tdRight" id="guManageImTf2"></td>
+                                                    <td class="tdRight" id="guManageImTf3"></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -142,19 +165,21 @@
                                     <div class="scBar">
                                         <table class="table table-striped table-hover table-bordered">
                                             <colgroup>
-                                                <col width="auto"/>
-                                                <col width="23%"/>
-                                                <col width="23%"/>
-                                                <col width="23%"/>
-                                                <col width="23%"/>
+                                                <col width="5%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
                                             </colgroup>
                                             <thead class="table-light">
                                                 <tr>
                                                     <th class="sortStr">#</th>
+                                                    <th class="sortStr">저장날짜</th>
                                                     <th class="sortStr">완료날짜</th>
-                                                    <th class="sortStr">수입</th>
-                                                    <th class="sortStr">지출</th>
-                                                    <th class="sortStr">합계</th>
+                                                    <th class="sortStr">입 금</th>
+                                                    <th class="sortStr">지 불</th>
+                                                    <th class="sortStr">합 계</th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -163,15 +188,37 @@
                                 <div class="table-scroll-body-guManageIm scBar">
                                     <table class="table table-striped table-hover table-bordered">
                                         <colgroup>
-                                            <col width="auto"/>
-                                            <col width="23%"/>
-                                            <col width="23%"/>
-                                            <col width="23%"/>
-                                            <col width="23%"/>
+                                            <col width="5%"/>
+                                            <col width="19%"/>
+                                            <col width="19%"/>
+                                            <col width="19%"/>
+                                            <col width="19%"/>
+                                            <col width="19%"/>
                                         </colgroup>
-                                        <tbody id="guManageTb"></tbody>
-                                        <tfoot id="guManageTㄹ"></tfoot>
+                                        <tbody id="guManageOkTb"></tbody>
                                     </table>
+                                </div>
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="5%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                            </colgroup>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="3">합 계</td>
+                                                    <td class="tdRight" id="guManageOkTf1"></td>
+                                                    <td class="tdRight" id="guManageOkTf2"></td>
+                                                    <td class="tdRight" id="guManageOkTf3"></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +226,6 @@
                 </div>
             </div>
         </div>
-        <div class="allo-side scBar"></div>
         <div
             class="modal fade"
             id="guManageMd"
@@ -196,12 +242,16 @@
                             type="button"
                             class="btn-close"
                             data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                            aria-label="Close"
+                            id="guManageMdFootX"></button>
                     </div>
                     <div class="modal-body guMdBD">
                         <div class="gumanage-go-out">
                             <div class="gumanage-go card-song">
-                                <h4>수입</h4>
+                                <input type="hidden" value="" id="guManageSepa">
+                                <input type="hidden" value="" id="guManageImOkSepa">
+                                <input type="hidden" value="" id="guManageNum">
+                                <h4>미 수 금</h4>
                                 <div>
                                     <div class="table-scroll">
                                         <div class="table-scroll-head">
@@ -219,8 +269,8 @@
                                                             <th><input type="checkbox" id="guMaGo"></th>
                                                             <th class="sortStr">출발일</th>
                                                             <th class="sortStr">목적지</th>
-                                                            <th class="sortStr">대수</th>
-                                                            <th class="sortStr">금액</th>
+                                                            <th class="sortNum">대수</th>
+                                                            <th class="sortNum">미수금</th>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -263,7 +313,7 @@
                                 </div>
                             </div>
                             <div class="gumanage-out card-song">
-                                <h4>지출</h4>
+                                <h4>배 차</h4>
                                 <div>
                                     <div class="table-scroll">
                                         <div class="table-scroll-head">
@@ -281,8 +331,8 @@
                                                             <th><input type="checkbox" id="guMaout"></th>
                                                             <th class="sortStr">운행일</th>
                                                             <th class="sortStr">목적지</th>
-                                                            <th class="sortStr">호차</th>
-                                                            <th class="sortStr">금액</th>
+                                                            <th class="sortNum">호차</th>
+                                                            <th class="sortNum">배차금액</th>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -326,7 +376,7 @@
                             </div>
                         </div>
                         <div class="guManage-jang card-song">
-                            <h4>장부</h4>
+                            <h4>종 합</h4>
                             <div class="table-scroll">
                                 <div class="table-scroll-head">
                                     <div class="scBar">
@@ -335,18 +385,18 @@
                                                 <col width="5%"/>
                                                 <col width="15%"/>
                                                 <col width="auto"/>
-                                                <col width="15%"/>
-                                                <col width="15%"/>
-                                                <col width="15%"/>
+                                                <col width="18%"/>
+                                                <col width="18%"/>
+                                                <col width="18%"/>
                                             </colgroup>
                                             <thead class="table-light">
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>날짜</th>
-                                                    <th>내용</th>
-                                                    <th>수입</th>
-                                                    <th>지출</th>
-                                                    <th>증감</th>
+                                                    <th>날 짜</th>
+                                                    <th>내 용</th>
+                                                    <th>입 금</th>
+                                                    <th>지 불</th>
+                                                    <th>누적 합계</th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -358,9 +408,9 @@
                                             <col width="5%"/>
                                             <col width="15%"/>
                                             <col width="auto"/>
-                                            <col width="15%"/>
-                                            <col width="15%"/>
-                                            <col width="15%"/>
+                                            <col width="18%"/>
+                                            <col width="18%"/>
+                                            <col width="18%"/>
                                         </colgroup>
                                         <tbody id="guManageJangTb"></tbody>
                                     </table>
@@ -372,9 +422,9 @@
                                                 <col width="5%"/>
                                                 <col width="15%"/>
                                                 <col width="auto"/>
-                                                <col width="15%"/>
-                                                <col width="15%"/>
-                                                <col width="15%"/>
+                                                <col width="18%"/>
+                                                <col width="18%"/>
+                                                <col width="18%"/>
                                             </colgroup>
                                             <tfoot>
                                                 <tr>
@@ -391,12 +441,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Understood</button>
-                    </div>
+                    <div class="modal-footer" id="guManageMdFoot" style="gap: 3rem;"></div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </html>

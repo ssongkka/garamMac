@@ -108,37 +108,35 @@
 
                         <div class="table-scroll">
                             <div class="table-scroll-head">
-                                <div class="table-scroll-head">
-                                    <div class="scBar">
-                                        <table class="table table-striped table-hover table-bordered home-tb">
-                                            <colgroup>
-                                                <col width="10%"/>
-                                                <col width="15%"/>
-                                                <col width="16%"/>
-                                                <col width="8%"/>
-                                                <col width="8%"/>
-                                                <col width="10%"/>
-                                                <col width="8%"/>
-                                                <col width="5%"/>
-                                                <col width="15%"/>
-                                                <col width="5%"/>
-                                            </colgroup>
-                                            <thead class="table-light">
-                                                <tr>
-                                                    <th class="sortNum">운행일</th>
-                                                    <th class="sortStr">고객정보</th>
-                                                    <th class="sortStr">목적지</th>
-                                                    <th class="tdCho sortStr">배차차량</th>
-                                                    <th class="tdCho sortStr">승무원</th>
-                                                    <th class="tdCho sortInput">배차금액</th>
-                                                    <th class="sortNum">대당금액</th>
-                                                    <th class="sortNum">호차</th>
-                                                    <th class="sortStr">출발장소</th>
-                                                    <th class="sortNum">출발시간</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
+                                <div class="scBar">
+                                    <table class="table table-striped table-hover table-bordered home-tb">
+                                        <colgroup>
+                                            <col width="10%"/>
+                                            <col width="15%"/>
+                                            <col width="16%"/>
+                                            <col width="8%"/>
+                                            <col width="8%"/>
+                                            <col width="10%"/>
+                                            <col width="8%"/>
+                                            <col width="5%"/>
+                                            <col width="15%"/>
+                                            <col width="5%"/>
+                                        </colgroup>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="sortNum">운행일</th>
+                                                <th class="sortStr">고객정보</th>
+                                                <th class="sortStr">목적지</th>
+                                                <th class="tdCho sortStr">배차차량</th>
+                                                <th class="tdCho sortStr">승무원</th>
+                                                <th class="tdCho sortInput">배차금액</th>
+                                                <th class="sortNum">대당금액</th>
+                                                <th class="sortNum">호차</th>
+                                                <th class="sortStr">출발장소</th>
+                                                <th class="sortNum">출발시간</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                 </div>
                             </div>
                             <div class="table-scroll-body-oper scBar">
@@ -159,36 +157,38 @@
                                 </table>
                             </div>
                             <div class="table-scroll-head">
-                                <div class="table-scroll-head-inner">
-                                    <table class="table table-striped table-hover table-bordered home-tb">
-                                        <colgroup>
-                                            <col width="10%"/>
-                                            <col width="15%"/>
-                                            <col width="16%"/>
-                                            <col width="8%"/>
-                                            <col width="8%"/>
-                                            <col width="10%"/>
-                                            <col width="8%"/>
-                                            <col width="5%"/>
-                                            <col width="15%"/>
-                                            <col width="5%"/>
-                                        </colgroup>
-                                        <caption>
-                                            <span>1. 대당금액은 부가세, 카드 수수료를 제외한 금액입니다.</span>
-                                            <span>2. 데이터양이 많으면 성능이 저하될 수 있습니다. 검색기능을 이용해주세요.</span>
-                                            <span>3. 배차된 운행 정보만 표시됩니다. 예약정보는 '예약정보관리'에서 확인해 주세요.</span>
-                                        </caption>
-                                        <tfoot id="home3-tf-il">
-                                            <tr>
-                                                <td colspan="5"></td>
-                                                <td class="tdRight"></td>
-                                                <td class="tdRight"></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                <div class="scBar">
+                                    <div class="table-scroll-head">
+                                        <table class="table table-striped table-hover table-bordered home-tb">
+                                            <colgroup>
+                                                <col width="10%"/>
+                                                <col width="15%"/>
+                                                <col width="16%"/>
+                                                <col width="8%"/>
+                                                <col width="8%"/>
+                                                <col width="10%"/>
+                                                <col width="8%"/>
+                                                <col width="5%"/>
+                                                <col width="15%"/>
+                                                <col width="5%"/>
+                                            </colgroup>
+                                            <caption>
+                                                <span>1. 대당금액은 부가세, 카드 수수료를 제외한 금액입니다.</span>
+                                                <span>2. 데이터양이 많으면 성능이 저하될 수 있습니다. 검색기능을 이용해주세요.</span>
+                                                <span>3. 배차된 운행 정보만 표시됩니다. 예약정보는 '예약정보관리'에서 확인해 주세요.</span>
+                                            </caption>
+                                            <tfoot id="home3-tf-il">
+                                                <tr>
+                                                    <td colspan="5"></td>
+                                                    <td class="tdRight"></td>
+                                                    <td class="tdRight"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -218,11 +218,10 @@
                             </tr>
                         </thead>
                         <tbody id="home2AsideTb"></tbody>
-                        <tbody id="home2AsideTf"></tbody>
+                        <tfoot id="home2AsideTf"></tfoot>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
 </html>

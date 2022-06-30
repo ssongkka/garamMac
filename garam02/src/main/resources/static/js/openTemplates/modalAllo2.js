@@ -75,6 +75,12 @@ function makeModalIl(dday, cctono, rsvt) {
                         addd = r[0].ctmaddress;
                     }
 
+                    if (cctono) {
+                        $("#alloMdSepa").val(1);
+                    } else {
+                        $("#alloMdSepa").val(0);
+                    }
+
                     $("#alloMdctmNo").val(r[0].ctmno);
                     $("#alloMdDay").val(dday);
                     $("#alloMdStDay").val(r[0].stday);
@@ -506,13 +512,6 @@ function insertOper2(doms) {
                     return this.value == val;
                 })
                 .data("owner");
-
-            if (!carnum) {
-                alert("차량정보가없습니다. 확인해주세요.");
-                $(doms).focus();
-                closeLoadingWithMask();
-                return;
-            }
 
             var caridid = $("#car-info option")
                 .filter(function () {
@@ -1097,23 +1096,15 @@ $(document).on("keyup", ".alloAllM", function (eInner) {
 });
 
 $(document).on("click", "#modalAllo2X", function () {
-    $("#offAlloVe").offcanvas("hide");
-    if ($("#home").css("display") === "block") {
-        checkAlloLine();
-    }
-
-    if ($("#home3").css("display") === "block") {
-        if ($("#radioOper1").is(":checked")) {
-            getOperListIl();
-        }
-        if ($("#radioOper2").is(":checked")) {
-            getOperListMonth();
-        }
-        getRsvtListMonthAside();
-    }
+    closeMdAllo();
 });
 $(document).on("click", "#modalAllo2Btn", function () {
+    closeMdAllo();
+});
+
+function closeMdAllo() {
     $("#offAlloVe").offcanvas("hide");
+
     if ($("#home").css("display") === "block") {
         checkAlloLine();
     }
@@ -1127,4 +1118,17 @@ $(document).on("click", "#modalAllo2Btn", function () {
         }
         getRsvtListMonthAside();
     }
-});
+
+    if ($("#gumanage").css("display") === "block") {
+
+        switch (parseInt($('#guManageSepa').val())) {
+            case 0:
+                shoGuManageMd()
+                break;
+
+            case 1:
+                shoGuManageImMd($('#guManageNum').val(), $('#guManageImOkSepa').val())
+                break;
+        }
+    }
+}
