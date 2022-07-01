@@ -514,6 +514,17 @@ function shoGuManageImMd(guManageNum, sepa) {
 
             switch (parseInt(sepa)) {
                 case 1:
+                    let compaList = ``;
+                    for (let i = 0; i < dbCompa.length; i++) {
+                        if (dbCompa[i].company == dbuser.company) {
+                            compaList += ` <option value="` + dbCompa[i].company + `" label="` + dbCompa[i].company +
+                                    `" selected="selected"></option>`;
+                        } else {
+                            compaList += ` <option value="` + dbCompa[i].company + `" label="` + dbCompa[i].company +
+                                    `"></option>`;
+                        }
+                    }
+
                     $('#guManageMdFoot').html(
                         `
                     <div class="guBtnlll">
@@ -526,6 +537,12 @@ function shoGuManageImMd(guManageNum, sepa) {
                     </div>
                     <div class="guBtnWan">
                         <input type="date" class="form-control" id="guDealInDay" placeholder="입금일">
+                        <select class="form-select" id="guDealInTong">
+                    ` +
+                        compaList +
+                        `
+                            <option value="기타" label="기타"></option>
+                        </select>
                         <input type="text" class="form-control" id="guDealInMemo" placeholder="입금시 메모">
                         <button type="button" class="btn btn-success" id="updateImGudeal">완 료</button>
                     </div>`
@@ -535,6 +552,10 @@ function shoGuManageImMd(guManageNum, sepa) {
 
                     $('#guDealInDay').val(toStringByFormatting(nowddd));
 
+                    $('#guDealInTong').val(dbuser.company);
+
+                    $('#guManageMdTitle').text($('#ttl0').text() + ' 임시저장 거래내역');
+
                     break;
                 case 2:
                     $('#guManageMdFoot').html(
@@ -543,13 +564,14 @@ function shoGuManageImMd(guManageNum, sepa) {
                     <button type="button" class="btn btn-warning" id="downImGudeal">완료취소</button>`
                     );
 
+                    $('#guManageMdTitle').text($('#ttl0').text() + ' 완료 거래내역');
+
                     break;
 
                 default:
                     break;
             }
 
-            $('#guManageMdTitle').text($('#ttl0').text() + ' 임시저장 거래내역');
             $("#guManageMd").modal("show");
 
             resolve();
@@ -1107,6 +1129,7 @@ function insertNewGuDeal() {
 
 function endGood(result) {
     return new Promise(function (resolve, reject) {
+        makeGuManageList();
         getGuDetail($('#guNo').val());
         $("#guManageMd").modal("hide");
         resolve();
@@ -1226,8 +1249,9 @@ function updateImGudeal(trash) {
                         rsvt: rsvttt,
                         moneyday: $('#guDealInDay').val(),
                         moneyuser: dbuser.id,
-                        moneytong: $('#guManageNum').val(),
                         moneymemo: $('#guDealInMemo').val(),
+                        moneytong: $('#guDealInTong').val(),
+                        moneyetc: $('#guManageNum').val(),
                         moneymoney: janmM
                     };
                     params.push(asd);
@@ -1267,7 +1291,7 @@ function updateImGudeal(trash) {
                 "Content-Type": "application/json"
             };
             const params = {
-                moneytong: $('#guManageNum').val()
+                moneyetc: $('#guManageNum').val()
             };
             $.ajax({
                 url: url,
@@ -1358,5 +1382,6 @@ $(document).on("click", "#guManageMdFootX", function () {
 });
 
 function closeguManageMd() {
+    makeGuManageList();
     getGuDetail($('#guNo').val());
 }

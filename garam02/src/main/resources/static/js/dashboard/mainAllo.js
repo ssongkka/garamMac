@@ -2035,26 +2035,30 @@ $(document).on('click', '#btn-rsvt-insert', function () {
 });
 
 $(document).on('click', '#btn-rsvt-close', function () {
-    // rsvtMdHide();
-    $('#modal-rsvt').modal('hide');
-
-    if ($('#alloMdStDay').val() == $('#alloMdEdDay').val()) {
-        makeModalIl($('#alloMdDay').val(), $('#alloMdctmNo').val(), null);
-    } else {
-        makeModalIl($('#alloMdDay').val(), null, $('#md-rsvtNum').val());
-    }
-
+    closeRsvtCloseee();
 });
 
 $(document).on('click', '#btn-rsvt-closeX', function () {
-    // rsvtMdHide();
-    $('#modal-rsvt').modal('hide');
-    if ($('#alloMdStDay').val() == $('#alloMdEdDay').val()) {
-        makeModalIl($('#alloMdDay').val(), $('#alloMdctmNo').val(), null);
+    closeRsvtCloseee();
+});
+
+function closeRsvtCloseee() {
+    if ($('#home').css('display') === 'block') {
+        switch (parseInt($("#alloMdSepa").val())) {
+            case 0:
+                makeModalIl($('#alloMdDay').val(), null, $('#md-rsvtNum').val());
+
+                break;
+            case 1:
+                makeModalIl($('#alloMdDay').val(), $('#alloMdctmNo').val(), null);
+                break;
+        }
     } else {
         makeModalIl($('#alloMdDay').val(), null, $('#md-rsvtNum').val());
     }
-});
+
+    $('#modal-rsvt').modal('hide');
+}
 
 $(document).on('click', '#btn-rsvt-cancle', function () {
     if (confirm("예약정보를 취소하시겠습니까?\n\n취소된 예약정보로 저장됩니다.")) {

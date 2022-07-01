@@ -146,7 +146,7 @@ function getManageMD2() {
                                         <th>입금일</th>
                                         <th>입금</th>
                                         <th>메모</th>
-                                        <th>잔금</th>
+                                        <th>미수금</th>
                                         <th>입금액</th>
                                         <th>잔액</th>
                                     </thead>
@@ -569,7 +569,7 @@ $(document).on('keyup', '.inputManage', function (eInner) {
                 }
 
             } else {
-                alert("입금액이 잔금액보다 클수는 업습니다.\n\n다시 입력해주세요.");
+                alert("입금액이 미수금보다 클수는 업습니다.\n\n다시 입력해주세요.");
                 $(this).val('');
                 $(this).focus();
             }

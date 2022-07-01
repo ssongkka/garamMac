@@ -220,8 +220,13 @@
 }
 
 .guBtnWan button,
-.guBtnWan input {
+.guBtnWan input,
+.guBtnWan select {
     flex: 1;
+}
+
+#guManageMdNew {
+    width: 100%;
 }
 
 #guManageMdFoot button {

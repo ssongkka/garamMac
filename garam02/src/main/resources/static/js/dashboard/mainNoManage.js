@@ -258,11 +258,17 @@ function makeNoManage() {
                                 }
 
                                 htmlsTb += `
-                            <tr class="mainNoManageMore">
+                            <tr class="mainNoManageMore rsvtChoNoma">
                                 <td class="">` +
-                                        cntRsvt +
-                                        `</td>
-                                <td class="">` + r[i].stday +
+                                        cntRsvt + `<input type="hidden" value="` + r[i].stday +
+                                        `">
+                                        <input type="hidden" value="` + r[i].rsvt +
+                                        `">
+                                        <input type="hidden" value="` + r[i].ctmno +
+                                        `">
+                                        </td>
+                                <td class="">` +
+                                        r[i].stday +
                                         `</td>
                                 <td class="">` + edd +
                                         `</td>
@@ -372,7 +378,7 @@ function makeNoManage() {
                                         cntIl +
                                         `">
                                     <div class="accordion-body NoManageacco-body">
-                                        <table class="table table-striped table-bordered noManageTableIn">
+                                        <table class="table table-striped table-bordered table-hover noManageTableIn">
                                             <colgroup>
                                                 <col width="4%"/>
                                                 <col width="8%"/>
@@ -397,7 +403,7 @@ function makeNoManage() {
                                                     <th class="">부가세</th>
                                                     <th class="">계약금액</th>
                                                     <th class="">입금액</th>
-                                                    <th class="">잔금</th>
+                                                    <th class="">미수금</th>
                                                     <th class="">출발장소</th>
                                                 </tr>
                                             </thead>
@@ -486,7 +492,7 @@ function makeNoManage() {
                                         cntHak +
                                         `">
                                     <div class="accordion-body NoManageacco-body">
-                                        <table class="table table-striped table-bordered noManageTableIn">
+                                        <table class="table table-striped table-bordered table-hover noManageTableIn">
                                             <colgroup>
                                                 <col width="4%"/>
                                                 <col width="8%"/>
@@ -511,7 +517,7 @@ function makeNoManage() {
                                                     <th class="">부가세</th>
                                                     <th class="">계약금액</th>
                                                     <th class="">입금액</th>
-                                                    <th class="">잔금</th>
+                                                    <th class="">미수금</th>
                                                     <th class="">출발장소</th>
                                                 </tr>
                                             </thead>
@@ -601,7 +607,7 @@ function makeNoManage() {
                                         cntGu +
                                         `">
                                     <div class="accordion-body NoManageacco-body">
-                                        <table class="table table-striped table-bordered noManageTableIn">
+                                        <table class="table table-striped table-bordered table-hover noManageTableIn">
                                             <colgroup>
                                                 <col width="4%"/>
                                                 <col width="8%"/>
@@ -626,7 +632,7 @@ function makeNoManage() {
                                                     <th class="">부가세</th>
                                                     <th class="">계약금액</th>
                                                     <th class="">입금액</th>
-                                                    <th class="">잔금</th>
+                                                    <th class="">미수금</th>
                                                     <th class="">출발장소</th>
                                                 </tr>
                                             </thead>
@@ -866,3 +872,21 @@ function makeNoManage() {
         })
     }
 }
+
+$(document).on('click', '.rsvtChoNoma', function () {
+
+    const aaa = $(this).children()[0];
+
+    const dayday = $(aaa).children()[0];
+    const dayday1 = $(dayday).val();
+
+    const rsvt = $(aaa).children()[1];
+    const rsvt1 = $(rsvt).val();
+
+    const ddddd = new Date(dayday1);
+
+    $('#modalRsvtOperLabel').text(dayday1 + ' ' + getDayOfWeek(ddddd.getDay()));
+    $('#RsvtOperDay').val(dayday1);
+
+    makeModalIl(dayday1, null, rsvt1);
+});

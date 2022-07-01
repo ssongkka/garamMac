@@ -1679,6 +1679,7 @@
 		#{moneytong},
 		#{moneymemo},
 		#{moneymoney},
+		#{moneyetc},
 		1,
 		null
 		);
@@ -1705,6 +1706,7 @@
 			#{value.moneytong},
 			#{value.moneymemo},
 			#{value.moneymoney},
+			#{value.moneyetc},
 			1,
 			null
 			)
@@ -1761,7 +1763,7 @@
 
 		WHERE
 
-		moneytong = #{moneytong};
+		moneyetc = #{moneyetc};
 	</delete>
 
 	<update id="updateRsvtConfirmMOk"
@@ -2693,6 +2695,10 @@
 
 		rsvt.stday BETWEEN #{stday} AND #{endday}
 
+		AND
+
+		rsvt.rsvttrash = 1
+
 		GROUP BY
 		rsvt.rsvt
 
@@ -3347,6 +3353,10 @@
 
 		ctmno = #{ctmno}
 
+		ORDER BY
+
+		gudeal.godate
+
 	</select>
 
 	<select id="selectGudealImRsvt"
@@ -3398,7 +3408,7 @@
 
 		IFNULL((SELECT rsvtmoney.moneymoney FROM
 		rsvtmoney
-		WHERE rsvtmoney.rsvt = rsvt.rsvt AND rsvtmoney.moneytong =
+		WHERE rsvtmoney.rsvt = rsvt.rsvt AND rsvtmoney.moneyetc =
 		#{confirm}), 0) AS juktrash
 
 		FROM

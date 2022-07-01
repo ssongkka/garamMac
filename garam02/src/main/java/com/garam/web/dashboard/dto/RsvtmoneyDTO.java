@@ -24,6 +24,9 @@ public class RsvtmoneyDTO {
 	// 입금액
 	private Integer moneymoney;
 
+	// 입금액
+	private String moneyetc;
+
 	// 삭제여부
 	private Integer moneytrash;
 
@@ -91,6 +94,14 @@ public class RsvtmoneyDTO {
 
 	public void setMoneymoney(Integer moneymoney) {
 		this.moneymoney = moneymoney;
+	}
+
+	public String getMoneyetc() {
+		return moneyetc;
+	}
+
+	public void setMoneyetc(String moneyetc) {
+		this.moneyetc = moneyetc;
 	}
 
 	public Integer getMoneytrash() {
