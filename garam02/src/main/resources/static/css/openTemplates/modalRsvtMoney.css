@@ -162,7 +162,7 @@
     font-weight: 600;
 }
 
-.dropdown-menu.show {
+.moneydropdown.show {
     overflow-y: scroll;
     max-height: 10rem;
 }

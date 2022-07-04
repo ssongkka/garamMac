@@ -1,14 +1,20 @@
 package com.garam.web.dashboard.service;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -17,13 +23,23 @@ import java.util.Map;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.garam.Utils.FTPManager;
 import com.garam.Utils.PDFUtil;
 import com.garam.company.dto.CompanyDTO;
 import com.garam.company.mapper.CompanyMapper;
+import com.garam.web.dashboard.dto.CustomerDTO;
 import com.garam.web.dashboard.dto.OptDTO;
 import com.garam.web.dashboard.dto.RegularOperDTO;
 import com.garam.web.dashboard.dto.RsvtDTO;
@@ -118,6 +134,19 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
+	public int insertManyCtm(List<Map<String, Object>> map) throws Exception {
+
+		HashMap<String, Object> ctm = new HashMap<>();
+		for (int i = 0; i < map.size(); i++) {
+			ctm.put("ctm", map);
+		}
+
+		int rtn = rsvtMapper.insertManyCtm(ctm);
+
+		return rtn;
+	}
+
+	@Override
 	public int insertRsvt(RsvtDTO rsvtDTO) throws Exception {
 		if (rsvtDTO.getNumm() == null || rsvtDTO.getNumm().equals("")) {
 			rsvtDTO.setNumm(0);
@@ -173,6 +202,360 @@ public class MainServiceImpl implements MainService {
 
 		String day = LocalDate.now().toString().replaceAll("-", "").substring(2);
 		return "C-" + day + "-" + str;
+	}
+
+	@Override
+	public File dwonSampleRsvt() {
+
+		File file = null;
+		HSSFWorkbook wb = null;
+		FileOutputStream fileoutputstream = null;
+
+		try {
+
+			RsvtDTO tmpDto = new RsvtDTO();
+
+			List<RsvtDTO> list = rsvtMapper.selectCustomerAll(tmpDto);
+
+			String url = "src/main/resources/static/excel/samplersvt.xls";
+
+			FileInputStream fis = new FileInputStream(url);
+
+			wb = new HSSFWorkbook(fis);
+			HSSFSheet sheet = wb.getSheetAt(0);
+
+			CellStyle style = wb.createCellStyle();
+			style.setBorderBottom(BorderStyle.THIN);
+			style.setBorderTop(BorderStyle.THIN);
+			style.setBorderRight(BorderStyle.THIN);
+			style.setBorderLeft(BorderStyle.THIN);
+
+			style.setAlignment(HorizontalAlignment.CENTER);
+			style.setVerticalAlignment(VerticalAlignment.CENTER);
+
+			int rowNo = 4;
+
+			for (int i = 0; i < list.size(); i++) {
+
+				if (list.get(i).getCtmsepa().equals(0) || list.get(i).getCtmsepa().equals(2)) {
+					int cellNo = 0;
+					HSSFRow row = sheet.createRow(rowNo++);
+					row.setHeight((short) 800);
+
+					HSSFCell cell = row.createCell(cellNo++);
+					cell.setCellStyle(style);
+					cell.setCellValue(list.get(i).getCtmname());
+
+					cell = row.createCell(cellNo++);
+					cell.setCellStyle(style);
+					cell.setCellValue(list.get(i).getCtmtel1());
+				}
+
+			}
+
+			int a = (int) ((Math.random() * 10000) + 10);
+
+			file = File.createTempFile("tmp" + Integer.toString(a), ".tmp");
+			file.deleteOnExit();
+
+			wb.write(file);
+
+//			fileoutputstream.close();
+
+			wb.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+		}
+
+		return file;
+	}
+
+	@Override
+	public List<RsvtDTO> uploadExcelRsvt(MultipartFile[] files) {
+
+		HSSFWorkbook wb = null;
+		List<RsvtDTO> list = new ArrayList<>();
+
+		try {
+
+			if (files[0].getSize() > 0) {
+				InputStream fis = new BufferedInputStream(files[0].getInputStream());
+
+				wb = new HSSFWorkbook(fis);
+
+				HSSFSheet sheet = wb.getSheetAt(0);
+
+				HSSFCell cell = null;
+
+				int cntCell = 4;
+
+				while (true) {
+					HSSFCell cellCheck = sheet.getRow(cntCell).getCell(3);
+
+					if (cellCheck != null) {
+
+						String stday = "";
+						String edday = "";
+						ArrayList<String> ctmNo = new ArrayList<>();
+						ArrayList<String> ctmname = new ArrayList<>();
+						ArrayList<String> ctmtel = new ArrayList<>();
+						String bus = "";
+						int num = 0;
+						String desty = "";
+						String stppp = "";
+						String stT = "";
+						String edT = "";
+						String cont = "";
+						int contM = 0;
+
+						SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+						stday = simFormat.format(sheet.getRow(cntCell).getCell(3).getDateCellValue());
+
+						if (sheet.getRow(cntCell).getCell(4) != null) {
+							edday = simFormat.format(sheet.getRow(cntCell).getCell(4).getDateCellValue());
+						} else {
+							edday = simFormat.format(sheet.getRow(cntCell).getCell(3).getDateCellValue());
+						}
+
+						if (sheet.getRow(cntCell).getCell(7) != null
+								&& sheet.getRow(cntCell).getCell(7).getStringCellValue().length() > 0) {
+							bus = sheet.getRow(cntCell).getCell(7).getStringCellValue();
+						}
+
+						if (sheet.getRow(cntCell).getCell(8) != null) {
+							num = (int) sheet.getRow(cntCell).getCell(8).getNumericCellValue();
+						}
+
+						if (sheet.getRow(cntCell).getCell(9) != null) {
+							desty = sheet.getRow(cntCell).getCell(9).getStringCellValue().toString();
+						}
+
+						if (sheet.getRow(cntCell).getCell(10) != null) {
+							stppp = sheet.getRow(cntCell).getCell(10).getStringCellValue().toString();
+						}
+
+						if (sheet.getRow(cntCell).getCell(11) != null) {
+							stT = sheet.getRow(cntCell).getCell(11).getStringCellValue().toString();
+						}
+
+						if (sheet.getRow(cntCell).getCell(12) != null) {
+							edT = sheet.getRow(cntCell).getCell(12).getStringCellValue().toString();
+						}
+
+						if (sheet.getRow(cntCell).getCell(13) != null) {
+							cont = sheet.getRow(cntCell).getCell(13).getStringCellValue().toString();
+						}
+
+						if (sheet.getRow(cntCell).getCell(14) != null) {
+							contM = (int) sheet.getRow(cntCell).getCell(14).getNumericCellValue();
+						}
+
+						List<RsvtDTO> tmpList = new ArrayList<>();
+						RsvtDTO rsvtDto = new RsvtDTO();
+
+						if (sheet.getRow(cntCell).getCell(5) == null) {
+							ctmNo.add("0");
+							ctmname.add("미정");
+							ctmtel.add("");
+						} else {
+
+							if (sheet.getRow(cntCell).getCell(6) != null) {
+								rsvtDto.setCtmname(sheet.getRow(cntCell).getCell(5).getStringCellValue());
+								rsvtDto.setCtmtel1(sheet.getRow(cntCell).getCell(6).getStringCellValue());
+
+								tmpList = rsvtMapper.selectCustomerName(rsvtDto);
+
+								if (tmpList.size() > 0) {
+									ctmNo.add(tmpList.get(0).getCtmno());
+									ctmname.add(tmpList.get(0).getCtmname());
+									ctmtel.add(tmpList.get(0).getCtmtel1());
+								} else {
+									rsvtDto.setCtmname(sheet.getRow(cntCell).getCell(6).getStringCellValue());
+									tmpList = rsvtMapper.selectCustomerAll(rsvtDto);
+
+									if (tmpList.size() > 0) {
+										for (int i = 0; i < tmpList.size(); i++) {
+											ctmNo.add(tmpList.get(i).getCtmno());
+											ctmname.add(tmpList.get(i).getCtmname());
+											ctmtel.add(tmpList.get(i).getCtmtel1());
+										}
+									} else {
+										rsvtDto.setCtmname(sheet.getRow(cntCell).getCell(5).getStringCellValue());
+										tmpList = rsvtMapper.selectCustomerAll(rsvtDto);
+
+										if (tmpList.size() > 0) {
+											for (int i = 0; i < tmpList.size(); i++) {
+												ctmNo.add(tmpList.get(i).getCtmno());
+												ctmname.add(tmpList.get(i).getCtmname());
+												ctmtel.add(tmpList.get(i).getCtmtel1());
+											}
+										}
+									}
+								}
+							} else {
+								rsvtDto.setCtmname(sheet.getRow(cntCell).getCell(5).getStringCellValue());
+								tmpList = rsvtMapper.selectCustomerAll(rsvtDto);
+
+								if (tmpList.size() > 0) {
+									for (int i = 0; i < tmpList.size(); i++) {
+										ctmNo.add(tmpList.get(i).getCtmno());
+										ctmname.add(tmpList.get(i).getCtmname());
+										ctmtel.add(tmpList.get(i).getCtmtel1());
+									}
+								}
+							}
+						}
+
+						String naaa = "";
+						String teee = "";
+
+						if (sheet.getRow(cntCell).getCell(5) != null) {
+							naaa = sheet.getRow(cntCell).getCell(5).getStringCellValue();
+						}
+						if (sheet.getRow(cntCell).getCell(6) != null) {
+							teee = sheet.getRow(cntCell).getCell(6).getStringCellValue();
+						}
+
+						int cnt = 0;
+
+						for (int i = 0; i < ctmNo.size(); i++) {
+							if (ctmname.get(i).equals(naaa) && ctmtel.get(i).equals(teee)) {
+								cnt++;
+							}
+
+							if (ctmname.get(i).equals(naaa)) {
+								if (teee.length() > 0 && ctmtel.get(i).equals(teee)) {
+									cnt++;
+								}
+							}
+
+							if (ctmname.get(i).equals(naaa) && teee.length() < 1) {
+								cnt++;
+							}
+						}
+
+						if (cnt < 1 && sheet.getRow(cntCell).getCell(5) != null) {
+							ctmNo.add("");
+							ctmname.add(naaa);
+							ctmtel.add(teee);
+						}
+
+						if (sheet.getRow(cntCell).getCell(5) != null) {
+
+							if (sheet.getRow(cntCell).getCell(5).getStringCellValue().contains("초등학교")
+									|| sheet.getRow(cntCell).getCell(5).getStringCellValue().contains("중학교")
+									|| sheet.getRow(cntCell).getCell(5).getStringCellValue().contains("고등학교")) {
+
+								rsvtDto.setCtmname(sheet.getRow(cntCell).getCell(5).getStringCellValue());
+								tmpList = rsvtMapper.selectCustomerAll(rsvtDto);
+
+								if (tmpList.size() > 0) {
+									ctmNo.clear();
+									ctmname.clear();
+									ctmtel.clear();
+
+									for (int i = 0; i < tmpList.size(); i++) {
+										ctmNo.add(tmpList.get(i).getCtmno());
+										ctmname.add(tmpList.get(i).getCtmname());
+										ctmtel.add(tmpList.get(i).getCtmtel1());
+									}
+								}
+							}
+						}
+
+						String rsvttt = get_Rsvt(stday);
+
+						if (ctmNo.size() > 0) {
+
+							for (int i = 0; i < ctmNo.size(); i++) {
+								RsvtDTO rsvtDto2 = new RsvtDTO();
+
+								rsvtDto2.setRsvt(rsvttt);
+
+								rsvtDto2.setStday(stday);
+								rsvtDto2.setEndday(edday);
+
+								rsvtDto2.setCtmno(ctmNo.get(i));
+								rsvtDto2.setCtmname(ctmname.get(i));
+								rsvtDto2.setCtmtel1(ctmtel.get(i));
+
+								rsvtDto2.setBus(bus);
+								rsvtDto2.setNum(num);
+								rsvtDto2.setDesty(desty);
+								rsvtDto2.setRsvpstp(stppp);
+								rsvtDto2.setStt(stT);
+								rsvtDto2.setEndt(edT);
+								rsvtDto2.setCont(cont);
+								rsvtDto2.setConm(contM);
+
+								list.add(rsvtDto2);
+							}
+
+						} else {
+							RsvtDTO rsvtDto3 = new RsvtDTO();
+
+							rsvtDto3.setRsvt(rsvttt);
+
+							rsvtDto3.setStday(stday);
+							rsvtDto3.setEndday(edday);
+
+							rsvtDto3.setCtmno("");
+							if (sheet.getRow(cntCell).getCell(5) != null) {
+								rsvtDto3.setCtmname(sheet.getRow(cntCell).getCell(5).getStringCellValue().toString());
+							}
+							if (sheet.getRow(cntCell).getCell(6) != null) {
+								rsvtDto3.setCtmtel1(sheet.getRow(cntCell).getCell(6).getStringCellValue().toString());
+							} else {
+								rsvtDto3.setCtmtel1("");
+							}
+
+							rsvtDto3.setBus(bus);
+							rsvtDto3.setNum(num);
+							rsvtDto3.setDesty(desty);
+							rsvtDto3.setRsvpstp(stppp);
+							rsvtDto3.setStt(stT);
+							rsvtDto3.setEndt(edT);
+							rsvtDto3.setCont(cont);
+							rsvtDto3.setConm(contM);
+
+							list.add(rsvtDto3);
+						}
+
+					} else {
+						break;
+					}
+
+					cntCell++;
+				}
+
+				wb.close();
+			} else {
+
+			}
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+		}
+
+		return list;
 	}
 
 	@Override
@@ -298,7 +681,9 @@ public class MainServiceImpl implements MainService {
 		}
 
 		for (int i = 0; i < map.size(); i++) {
-			map.get(i).replace("rsvt", get_Rsvt((String) map.get(i).get("stday")));
+			if (map.get(i).get("rsvt") != null && map.get(i).get("rsvt").toString().length() < 1) {
+				map.get(i).replace("rsvt", get_Rsvt((String) map.get(i).get("stday")));
+			}
 		}
 
 		HashMap<String, Object> rsvt = new HashMap<>();
@@ -456,17 +841,11 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public int updateRsvt(RsvtDTO rsvtDTO) throws Exception {
 
-		System.out.println("ggggggggggg");
 		List<RsvtDTO> tmpList = rsvtMapper.selectRSVT(rsvtDTO);
-		System.out.println("ggggggggggg");
-		System.out.println(tmpList.get(0).getCtmno().equals(rsvtDTO.getCtmno()));
 
 		if (tmpList.get(0).getCtmno().equals(rsvtDTO.getCtmno())) {
 			rsvtDTO.setCtmno(null);
 		}
-
-		System.out.println("tmpList.get(0).getCtmno()  " + tmpList.get(0).getCtmno());
-		System.out.println("rsvtDTO.getCtmno()   " + rsvtDTO.getCtmno());
 
 		if (tmpList.get(0).getStday().equals(rsvtDTO.getStday())) {
 			rsvtDTO.setStday(null);
@@ -483,9 +862,6 @@ public class MainServiceImpl implements MainService {
 		if (tmpList.get(0).getNum() == rsvtDTO.getNum()) {
 			rsvtDTO.setNum(null);
 		}
-
-		System.out.println("tmpList.get(0).getNum()  " + tmpList.get(0).getNum());
-		System.out.println("rsvtDTO.getNum()   " + rsvtDTO.getNum());
 
 		String desty1 = "";
 		String desty2 = "";
@@ -566,10 +942,6 @@ public class MainServiceImpl implements MainService {
 			rsvtDTO.setCont(null);
 		}
 
-		System.out.println("tmpList.get(0).getConm()  " + tmpList.get(0).getConm());
-		System.out.println("rsvtDTO.getConm()   " + rsvtDTO.getConm());
-		System.out.println(tmpList.get(0).getConm().equals(rsvtDTO.getConm()));
-
 		if (tmpList.get(0).getConm().equals(rsvtDTO.getConm())) {
 			rsvtDTO.setConm(null);
 		}
@@ -577,9 +949,6 @@ public class MainServiceImpl implements MainService {
 		if (tmpList.get(0).getNumm().equals(rsvtDTO.getNumm())) {
 			rsvtDTO.setNumm(null);
 		}
-
-		System.out.println("tmpList.get(0).getNumm()  " + tmpList.get(0).getNumm());
-		System.out.println("rsvtDTO.getNumm()   " + rsvtDTO.getNumm());
 
 		int rtn = rsvtMapper.updateRsvt(rsvtDTO);
 
@@ -744,9 +1113,12 @@ public class MainServiceImpl implements MainService {
 
 		ArrayList<File> arr_File = new ArrayList<File>();
 
-		FTPClient ftp = ftpmanager.connect();
+		System.out.println("11111111");
+		System.out.println("22222222");
 
 		for (int i = 0; i < tmpArr_Papper.length; i++) {
+
+			System.out.println(tmpArr_Papper[i]);
 			switch (tmpArr_Papper[i]) {
 			case "1":
 				arr_File.add(getEmpBatchPDF(companyyy, dayyy, listCtm, list_Rsvt, listCompa));
@@ -761,13 +1133,13 @@ public class MainServiceImpl implements MainService {
 				arr_File.add(getAnjunPDF(companyyy, dayyy, listCtm, list_Rsvt, listCompa));
 				break;
 			case "5":
-				arr_File.addAll(getVePapperPDF(list_Rsvt, ftp));
+				arr_File.addAll(getVePapperPDF(list_Rsvt));
 				break;
 			case "6":
-				arr_File.addAll(getVeInsuPDF(list_Rsvt, ftp));
+				arr_File.addAll(getVeInsuPDF(list_Rsvt));
 				break;
 			case "7":
-				arr_File.addAll(getVeJukPDF(list_Rsvt, ftp));
+				arr_File.addAll(getVeJukPDF(list_Rsvt));
 				break;
 			}
 		}
@@ -794,8 +1166,6 @@ public class MainServiceImpl implements MainService {
 		PDFmerger.setDestinationStream(bout2);
 
 		PDFmerger.mergeDocuments(null);
-
-		ftpmanager.disconnect(ftp);
 
 		return file;
 	}
@@ -1853,15 +2223,19 @@ public class MainServiceImpl implements MainService {
 		return file;
 	}
 
-	private ArrayList<File> getVePapperPDF(ArrayList<List<RsvtDTO>> list_Rsvt, FTPClient ftp)
+	private ArrayList<File> getVePapperPDF(ArrayList<List<RsvtDTO>> list_Rsvt)
 			throws MalformedURLException, IOException {
 
 		ArrayList<File> rtnFiles = new ArrayList<File>();
 
+		FTPClient ftp = ftpmanager.connect();
+
+		System.out.println(ftp.isConnected());
+		System.out.println(ftp.isAvailable());
+
 		for (int i = 0; i < list_Rsvt.size(); i++) {
 			for (int j = 0; j < list_Rsvt.get(i).size(); j++) {
-				String FILE_URL = ftpmanager.getVeFolder() + "reg/" + list_Rsvt.get(i).get(j).getCtmemail() + ".PDF";
-				;
+				String FILE_URL = ftpmanager.getVeFolder() + "reg/" + list_Rsvt.get(i).get(j).getCtmemail() + ".pdf";
 
 				int a = (int) ((Math.random() * 10000) + 10);
 
@@ -1869,31 +2243,35 @@ public class MainServiceImpl implements MainService {
 				tempFile.deleteOnExit();
 
 				FileOutputStream fos = new FileOutputStream(tempFile);
-				if (ftp.retrieveFile(FILE_URL, fos)) {
-					rtnFiles.add(tempFile);
-				}
-			}
-		}
-
-		return rtnFiles;
-	}
-
-	private ArrayList<File> getVeInsuPDF(ArrayList<List<RsvtDTO>> list_Rsvt, FTPClient ftp)
-			throws MalformedURLException, IOException {
-
-		ArrayList<File> rtnFiles = new ArrayList<File>();
-
-		for (int i = 0; i < list_Rsvt.size(); i++) {
-			for (int j = 0; j < list_Rsvt.get(i).size(); j++) {
-				String FILE_URL = ftpmanager.getVeFolder() + "insu/" + list_Rsvt.get(i).get(j).getCtmfax() + ".PDF";
-				;
-
-				int a = (int) ((Math.random() * 10000) + 10);
-
-				File tempFile = File.createTempFile("tmp" + Integer.toString(a), ".tmp");
-				tempFile.deleteOnExit();
-
+				System.out.println(ftp.retrieveFile(FILE_URL, fos));
 				System.out.println(FILE_URL);
+				if (ftp.retrieveFile(FILE_URL, fos)) {
+					rtnFiles.add(tempFile);
+				}
+				System.out.println(tempFile);
+			}
+		}
+
+		ftpmanager.disconnect(ftp);
+
+		return rtnFiles;
+	}
+
+	private ArrayList<File> getVeInsuPDF(ArrayList<List<RsvtDTO>> list_Rsvt) throws MalformedURLException, IOException {
+
+		ArrayList<File> rtnFiles = new ArrayList<File>();
+
+		FTPClient ftp = ftpmanager.connect();
+
+		for (int i = 0; i < list_Rsvt.size(); i++) {
+			for (int j = 0; j < list_Rsvt.get(i).size(); j++) {
+				String FILE_URL = ftpmanager.getVeFolder() + "insu/" + list_Rsvt.get(i).get(j).getCtmfax() + ".pdf";
+				;
+
+				int a = (int) ((Math.random() * 10000) + 10);
+
+				File tempFile = File.createTempFile("tmp" + Integer.toString(a), ".tmp");
+				tempFile.deleteOnExit();
 
 				FileOutputStream fos = new FileOutputStream(tempFile);
 				if (ftp.retrieveFile(FILE_URL, fos)) {
@@ -1902,11 +2280,14 @@ public class MainServiceImpl implements MainService {
 			}
 		}
 
+		ftpmanager.disconnect(ftp);
+
 		return rtnFiles;
 	}
 
-	private ArrayList<File> getVeJukPDF(ArrayList<List<RsvtDTO>> list_Rsvt, FTPClient ftp)
-			throws MalformedURLException, IOException {
+	private ArrayList<File> getVeJukPDF(ArrayList<List<RsvtDTO>> list_Rsvt) throws MalformedURLException, IOException {
+
+		FTPClient ftp = ftpmanager.connect();
 
 		ArrayList<File> rtnFiles = new ArrayList<File>();
 
@@ -1926,20 +2307,20 @@ public class MainServiceImpl implements MainService {
 		}
 
 		for (int i = 0; i < arrayList.size(); i++) {
-			String FILE_URL = ftpmanager.getVeFolder() + "juk/" + arrayList.get(i) + ".PDF";
+			String FILE_URL = ftpmanager.getVeFolder() + "juk/" + arrayList.get(i) + ".pdf";
 
 			int a = (int) ((Math.random() * 10000) + 10);
 
 			File tempFile = File.createTempFile("tmp" + Integer.toString(a), ".tmp");
 			tempFile.deleteOnExit();
 
-			System.out.println(FILE_URL);
-
 			FileOutputStream fos = new FileOutputStream(tempFile);
 			if (ftp.retrieveFile(FILE_URL, fos)) {
 				rtnFiles.add(tempFile);
 			}
 		}
+
+		ftpmanager.disconnect(ftp);
 
 		return rtnFiles;
 	}
@@ -2042,6 +2423,18 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
+	public List<RsvtmoneyDTO> selectRsvtMoneyRsvtMany(List<Map<String, Object>> map) throws Exception {
+		HashMap<String, Object> rsvtL = new HashMap<>();
+		for (int i = 0; i < map.size(); i++) {
+			rsvtL.put("rsvtL", map);
+		}
+
+		List<RsvtmoneyDTO> list = rsvtMapper.selectRsvtMoneyRsvtMany(rsvtL);
+
+		return list;
+	}
+
+	@Override
 	public List<RsvtDTO> selectCalRsvt1(RsvtDTO rsvtDTO) throws Exception {
 		List<RsvtDTO> list = rsvtMapper.selectCalRsvt1(rsvtDTO);
 		return list;
@@ -2135,8 +2528,6 @@ public class MainServiceImpl implements MainService {
 		for (int i = 0; i < map.size(); i++) {
 			rsvthome.put("rsvthome", map);
 		}
-
-		System.out.println(rsvthome);
 
 		List<RsvtDTO> rtn = rsvtMapper.selectrsvtCal2Aside(rsvthome);
 

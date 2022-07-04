@@ -67,7 +67,7 @@ public class VehicleController {
 		Resource resource = new InputStreamResource(new FileInputStream(file));
 
 		HttpHeaders headers = new HttpHeaders();
-		String fileName = "차량명세서_" + compa + "_" + LocalDate.now().toString().replaceAll("-", "") + ".PDF";
+		String fileName = "차량명세서_" + compa + "_" + LocalDate.now().toString().replaceAll("-", "") + ".pdf";
 		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());
@@ -83,7 +83,7 @@ public class VehicleController {
 		Resource resource = new InputStreamResource(new FileInputStream(file));
 
 		HttpHeaders headers = new HttpHeaders();
-		String fileName = "차량명세서_" + compa + "_" + LocalDate.now().toString().replaceAll("-", "") + ".XLS";
+		String fileName = "차량명세서_" + compa + "_" + LocalDate.now().toString().replaceAll("-", "") + ".xls";
 		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());

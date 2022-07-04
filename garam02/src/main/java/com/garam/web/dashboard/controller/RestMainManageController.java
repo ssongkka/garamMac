@@ -136,6 +136,14 @@ public class RestMainManageController {
 		return list;
 	}
 
+	@PostMapping(value = "/selectRsvtMoneyMany")
+	public List<RsvtmoneyDTO> selectRsvtMoneyMany(@RequestBody List<Map<String, Object>> map) throws Exception {
+
+		List<RsvtmoneyDTO> list = rsvtService.selectRsvtMoneyRsvtMany(map);
+
+		return list;
+	}
+
 	@PostMapping(value = "/selectRsvtAside")
 	public List<RsvtDTO> selectRsvtAside(@RequestBody RsvtDTO rsvtDTO) throws Exception {
 

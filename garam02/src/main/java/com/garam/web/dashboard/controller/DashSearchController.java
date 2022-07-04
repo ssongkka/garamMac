@@ -63,8 +63,6 @@ public class DashSearchController extends UiUtils {
 		List<RsvtDTO> othercompa = rsvtService.selectCustomerOtherCompa();
 		model.addAttribute("othercompa", othercompa);
 
-		System.out.println("awfawfwfwf");
-		System.out.println(search);
 
 		return "dashSearch/dashSearch";
 	}

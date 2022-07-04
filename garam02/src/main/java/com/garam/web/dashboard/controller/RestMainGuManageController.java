@@ -63,7 +63,6 @@ public class RestMainGuManageController {
 	@PostMapping(value = "/updategudeal")
 	public int updategudeal(@RequestBody RsvtDTO rsvtDTO) throws Exception {
 
-		System.out.println("aaaaa    " + rsvtDTO.getGudealtrash());
 
 		int rst = 0;
 		try {

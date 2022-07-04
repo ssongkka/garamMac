@@ -6,9 +6,10 @@ function makeModalIl(dday, cctono, rsvt) {
     $("#modalAllo2Label").text(daysss);
 
     LoadingWithMask()
-        .then(getAllo1)
-        .then(getAllo2)
         .then(showAlloMd2)
+        .then(getAllo1)
+        .then(getAllo11)
+        .then(getAllo2)
         .then(closeLoadingWithMask);
 
     function showAlloMd2() {
@@ -141,9 +142,41 @@ function makeModalIl(dday, cctono, rsvt) {
                                                 <div class="allTitle-item allTitle-busnum ` +
                                 buss + `">` + r[i].bus + " " + r[i].num +
                                 `</div>
-                                                <div class="allTitle-item allTitle-conm">` +
+                                                <div class="allTitle-item allTitle-conm">
+                                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle allodrop" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                ` +
                                 AddComma(r[i].conm) + "(" + AddComma(r[i].numm) + ")" +
-                                `</div>
+                                `
+                                    </button>
+                                    <div class="dropdown-menu allodropdown" aria-labelledby="dropdownMenuButton2">
+                                    <table class="table table-bordered">
+                                        <colgroup>
+                                            <col width="20%">
+                                            <col width="auto">
+                                            <col width="25%">
+                                            <col width="25%">
+                                        </colgroup>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>입금일</th>
+                                                <th>메모</th>
+                                                <th>입금액</th>
+                                                <th>미수금</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2022-04-20</td>
+                                                <td>300,000</td>
+                                                <td class="tdRight">300,000</td>
+                                                <td class="tdRight">300,000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                        </div>
+                                            </div>
                                                 <div class="allTitle-item allTitle-cont">` +
                                 r[i].cont +
                                 `</div>
@@ -255,6 +288,103 @@ function makeModalIl(dday, cctono, rsvt) {
                     });
 
                     resolve(arrTmp);
+                },
+                error: jqXHR => {
+                    loginSession(jqXHR.status);
+                }
+            });
+        });
+    }
+
+    function getAllo11(result) {
+        return new Promise(function (resolve, reject) {
+            const url = "/manage/selectRsvtMoneyMany";
+            const headers = {
+                "Content-Type": "application/json"
+            };
+
+            let params = new Array();
+
+            for (let i = 0; i < result.length; i++) {
+                const asd = {
+                    "rsvt": result[i]
+                };
+                params.push(asd);
+            }
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                headers: headers,
+                caches: false,
+                dataType: "json",
+                data: JSON.stringify(params),
+                cache: false,
+                success: function (r) {
+                    console.log(r);
+
+                    const aaa = $('#alloContMd').children();
+
+                    for (let k = 0; k < aaa.length; k++) {
+                        let htmlsMoney = ``;
+
+                        const bbb = $(aaa[k]).children()[0];
+                        const bbb1 = $(bbb).children()[1];
+                        const bbb11 = $(bbb1).children()[0];
+                        const bbb111 = $(bbb11).children()[0];
+                        const bbb1111 = $(bbb111).children()[0];
+
+                        const ccc = $(bbb1111).children();
+                        const rsvttt = $(ccc[0]).val();
+
+                        const ddd = $(ccc[3]).children()[0];
+                        const ddd1 = $(ddd).children()[1];
+                        const ddd11 = $(ddd1).children()[0];
+                        const ddd111 = $(ddd11).children()[2];
+
+                        const wwww = $(ddd).children()[0];
+                        let conMMM = $(wwww)
+                            .text()
+                            .split('(')[0]
+                            .replaceAll(',', '');
+
+                        for (let i = 0; i < r.length; i++) {
+                            if (rsvttt == r[i].rsvt) {
+                                conMMM = conMMM - parseInt(r[i].moneymoney);
+
+                                htmlsMoney += `
+                            <tr>
+                                <td>` + r[i].moneyday +
+                                        `</td>
+                                <td>` + r[i].moneymemo +
+                                        `</td>
+                                <td class="tdRight">` + AddComma(
+                                    r[i].moneymoney
+                                ) +
+                                        `</td>
+                                <td class="tdRight">` + AddComma(conMMM) +
+                                        `</td>
+                            </tr>`;
+                            }
+                        }
+
+                        if (r.length < 1) {
+                            htmlsMoney = `
+                            <tr>
+                                <td colspan="4">입금내역 없음</td>
+                            </tr>`;;
+                        }
+
+                        if (parseInt(conMMM) > 0) {
+                            $(wwww).addClass('btn-outline-secondary');
+                        } else {
+                            $(wwww).addClass('btn-outline-success');
+                        }
+
+                        $(ddd111).html(htmlsMoney);
+                    }
+
+                    resolve(result);
                 },
                 error: jqXHR => {
                     loginSession(jqXHR.status);
@@ -670,16 +800,44 @@ $(document).on("click", ".btnAlloCh", function () {
 
     const ctmnonono = $("#alloMdctmNo").val();
 
-    getRsvtCh(rsvttt, ctmnonono);
+    const bbb = $(this)
+        .parent()
+        .parent()
+        .parent()
+        .parent()
+        .parent()
+        .parent()
+        .parent();
+    const bbbb = $(bbb).children()[1];
+    const bbb1 = $(bbbb).children();
+
+    let checkAll = 0;
+
+    for (let k = 0; k < bbb1.length; k++) {
+        const bbb111 = $(bbb1[k]).children()[15];
+
+        const checkAlloDiv = $(bbb111).attr('class');
+
+        if ($(bbb111).attr('disabled')) {
+            checkAll++;
+        }
+
+        console.log($(bbb111).attr('disabled'));
+        console.log(checkAlloDiv.includes('alloDelX'));
+    }
+
+    getRsvtCh(rsvttt, ctmnonono, checkAll);
 });
 
-function getRsvtCh(rsvttt, ctmnonono) {
+function getRsvtCh(rsvttt, ctmnonono, sepanum) {
     $("#modalAllo2").modal("hide");
 
+    console.log("sepanum", sepanum);
+
     LoadingWithMask()
+        .then(shomd)
         .then(getRsvtDe)
         .then(getCustDe)
-        .then(shomd)
         .then(closeLoadingWithMask);
 
     function getRsvtDe(result) {
@@ -829,6 +987,31 @@ function getRsvtCh(rsvttt, ctmnonono) {
 
     function shomd(result) {
         return new Promise(function (resolve, reject) {
+            console.log("sepanum", sepanum);
+            let htmlsOp = ``;
+            if (parseInt(sepanum) > 0) {
+                $('#rsvtCancleD').html(`<h4>배차완료된 차량이있으면 수정에 제한이있습니다.</h4>`);
+
+                for (let i = 0; i < 100; i++) {
+                    htmlsOp += `<option value="` + (parseInt(sepanum) + i) + `">` + (
+                        parseInt(sepanum) + i
+                    ) + `&nbsp;대</option>`;
+                }
+            } else {
+                $('#rsvtCancleD').html(
+                    `<button type="button" class="btn btn-warning" id="btn-rsvt-cancle">운행 취소</button>`
+                );
+
+                for (let i = 0; i < 100; i++) {
+                    htmlsOp += `<option value="` + (i + 1) + `">` + (i + 1) +
+                            `&nbsp;대</option>`;
+                }
+            }
+
+            console.log(htmlsOp);
+
+            $('#num-1').html(htmlsOp);
+
             $("#modal-rsvt").modal("show");
             resolve();
         });

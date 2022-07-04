@@ -96,6 +96,34 @@ public class Dashboard1Controller extends UiUtils {
 
 	}
 
+	@GetMapping(value = "/rsvtManyExcel")
+	public String rsvtManyExcel(@AuthenticationPrincipal User user, Model model) throws Exception {
+		RsvtDTO rsvtDTO = new RsvtDTO();
+		List<RsvtDTO> list = rsvtService.selectCustomerAll(rsvtDTO);
+		model.addAttribute("customer", list);
+		List<OptDTO> opt = rsvtService.selectOpt();
+		model.addAttribute("opt", opt);
+		model.addAttribute("user", user);
+
+		return "dashboard/mainRsvtManyExcel";
+
+	}
+
+	@GetMapping(value = "/samplexcel")
+	public ResponseEntity<Object> samplexcel() throws Exception {
+		File file = rsvtService.dwonSampleRsvt();
+
+		Resource resource = new InputStreamResource(new FileInputStream(file));
+
+		HttpHeaders headers = new HttpHeaders();
+		String fileName = "샘플_예약정보입력" + ".xls";
+		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());
+
+		return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
+	}
+
 	@GetMapping(value = "/makePapper")
 	public ResponseEntity<Object> makePapper(@RequestParam(value = "companyyy", required = true) String companyyy,
 			@RequestParam(value = "dayyy", required = true) String dayyy,
@@ -110,7 +138,7 @@ public class Dashboard1Controller extends UiUtils {
 
 		HttpHeaders headers = new HttpHeaders();
 		String fileName = companyyy + "_" + dayyy.split("-")[0] + dayyy.split("-")[1] + "_" + ctmmmName + "_배차서류"
-				+ ".PDF";
+				+ ".pdf";
 		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());

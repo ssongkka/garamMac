@@ -189,6 +189,8 @@ function updateCtm() {
             "ctmdetail": $('#ctmdetailUp').val()
         };
 
+        console.table(params);
+
         $.ajax({
             url: url,
             type: "POST",

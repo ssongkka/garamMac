@@ -69,7 +69,7 @@ $(document).on('change', '#ctmnameIn', function () {
         type: "POST",
         headers: headers,
         caches: false,
-                dataType: "json",
+        dataType: "json",
         data: JSON.stringify(params),
         success: function (r) {
             if (r.length > 0) {
@@ -189,12 +189,14 @@ function insertCtm() {
             "ctmdetail": $('#ctmdetailIn').val()
         };
 
+        console.table(params);
+
         $.ajax({
             url: url,
             type: "POST",
             headers: headers,
             caches: false,
-                dataType: "json",
+            dataType: "json",
             data: JSON.stringify(params),
 
             success: function (r) {

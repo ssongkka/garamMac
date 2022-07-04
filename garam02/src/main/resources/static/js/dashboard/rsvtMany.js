@@ -11,10 +11,6 @@ window.onload = function () {
     showManyModal();
 };
 
-$(document).on('click', '#backMain', function () {
-    window.open('/dashboard', '_parent');
-});
-
 $(document).on('click', '#plus-btn', function () {
     const aaa = $('#plus-btn')
         .parents()
@@ -265,7 +261,9 @@ $(document).on('click', '#asdBtn', function () {
 
 function showManyModal() {
     if ($('#t-name').text() && $('#t-name').text() != '고객이름') {
-        $('#ctmnameUp').val($('#t-name').text());
+        if ($('#t-name').text() != '이름') {
+            $('#ctmnameUp').val($('#t-name').text());
+        }
     } else {
         $('#ctmnameUp').val('');
     }
@@ -511,7 +509,7 @@ $(document).on('click', '#insert-many', function () {
                                 "'" + $('#t-name').text() + "  " + r + "건' 예약정보 입력 완료\n\n홈화면으로 돌아가시겠습니까?"
                             );
                             if (rtn) {
-                                $('#backMain').click();
+                                window.open('/dashboard', '_parent');
                             } else {
                                 location.reload();
                             }

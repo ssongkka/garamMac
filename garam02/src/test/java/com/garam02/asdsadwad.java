@@ -21,7 +21,6 @@ public class asdsadwad {
 		String aaa = "전세버스";
 
 		String encodeData = URLEncoder.encode(aaa, "EUC-KR");
-		System.out.println("URL 인코딩 : " + encodeData);
 
 		String upSepa = "";
 
@@ -44,7 +43,6 @@ public class asdsadwad {
 
 		String URL = a + b + c + d + e + f + g + h + i + j + k + l + m + n + o + p;
 
-		System.out.println(URL);
 
 		Connection conn = Jsoup.connect(URL);
 
@@ -54,8 +52,6 @@ public class asdsadwad {
 
 		Elements parsingDivs1 = parsingDivs.get(3).getElementsByTag("td"); // class가 parsingDiv인 element 찾기
 
-		System.out.println("parsingDivs1  " + parsingDivs1.size());
-		System.out.println(parsingDivs1);
 
 	}
 }

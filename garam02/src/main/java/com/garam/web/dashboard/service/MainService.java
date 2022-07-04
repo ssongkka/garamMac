@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.garam.web.dashboard.dto.OptDTO;
 import com.garam.web.dashboard.dto.RegularOperDTO;
 import com.garam.web.dashboard.dto.RsvtDTO;
@@ -17,6 +19,12 @@ public interface MainService {
 	public List<RsvtDTO> selectCustomerName(RsvtDTO rsvtDTO) throws Exception;
 
 	public List<RsvtDTO> insertCtm(RsvtDTO rsvtDTO) throws Exception;
+
+	public int insertManyCtm(List<Map<String, Object>> map) throws Exception;
+
+	public File dwonSampleRsvt() throws Exception;
+
+	public List<RsvtDTO> uploadExcelRsvt(MultipartFile[] files) throws Exception;
 
 	public List<RsvtDTO> selectCustomerOtherCompa() throws Exception;
 
@@ -110,6 +118,8 @@ public interface MainService {
 	public int updateRsvtConfirmMOkMany(List<Map<String, Object>> map) throws Exception;
 
 	public List<RsvtmoneyDTO> selectSumRsvtMoney(List<Map<String, Object>> map) throws Exception;
+
+	public List<RsvtmoneyDTO> selectRsvtMoneyRsvtMany(List<Map<String, Object>> map) throws Exception;
 
 	public List<RsvtDTO> selectCalRsvt1(RsvtDTO rsvtDTO) throws Exception;
 

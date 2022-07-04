@@ -123,7 +123,7 @@ function getManageMD2() {
                                     aria-expanded="false">
                                     운행차량
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <ul class="dropdown-menu moneydropdown" aria-labelledby="dropdownMenuButton1">
                                 </ul>
                             </div>
                             </div>

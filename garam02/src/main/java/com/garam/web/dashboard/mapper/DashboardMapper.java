@@ -24,6 +24,8 @@ public interface DashboardMapper {
 
 	public List<RsvtDTO> selectCustomerOtherCompa() throws Exception;
 
+	public int insertManyCtm(HashMap<String, Object> map) throws Exception;
+
 	public int insertManyRsvt(HashMap<String, Object> map) throws Exception;
 
 	public int insertOper(HashMap<String, Object> map) throws Exception;
@@ -115,6 +117,8 @@ public interface DashboardMapper {
 	public int updateRsvtConfirmMOkMany(HashMap<String, Object> map) throws Exception;
 
 	public List<RsvtmoneyDTO> selectSumRsvtMoney(HashMap<String, Object> map) throws Exception;
+
+	public List<RsvtmoneyDTO> selectRsvtMoneyRsvtMany(HashMap<String, Object> map) throws Exception;
 
 	public List<RsvtDTO> selectCalRsvt1(RsvtDTO rsvtDTO) throws Exception;
 

@@ -812,8 +812,6 @@ public class VehicleServiceImpl implements VehicleService {
 
 		FTPClient ftp = ftpmanager.connect();
 
-		System.out.println("ㅁㅇㅁㅈㅇㅁㅇ  " + ftp.isConnected());
-
 		int a = (int) ((Math.random() * 10000) + 10);
 
 		File tempFile = File.createTempFile("tmp" + Integer.toString(a), ".pdf");
@@ -829,8 +827,6 @@ public class VehicleServiceImpl implements VehicleService {
 		default:
 			break;
 		}
-
-		System.out.println(fileAdd);
 
 		FileOutputStream fos = new FileOutputStream(tempFile);
 		if (ftp.retrieveFile(fileAdd, fos)) {
@@ -1103,7 +1099,6 @@ public class VehicleServiceImpl implements VehicleService {
 		List<Map<String, Object>> mapUp = new ArrayList<Map<String, Object>>();
 
 		for (int i = 0; i < map.size(); i++) {
-			System.out.println(map.get(i).get("vegasseq"));
 			if (map.get(i).get("vegasseq") == null) {
 				mapIn.add(map.get(i));
 			} else {

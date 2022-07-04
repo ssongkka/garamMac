@@ -369,9 +369,7 @@ function insertRsvt1(result) {
     })
 }
 
-$(document).on('click', '#many-insert', function () {
-    window.open('/dashboard/rsvtMany', '_parent');
-});
+$(document).on('click', '#many-insert', function () {});
 
 $(document).on('click', '#customerInsertMo', function () {
     const aaa = $('#offCustomer').css('visibility');

@@ -55,9 +55,14 @@
 
 		FROM customer
 
-		WHERE
-
-		ctmno = #{ctmno}
+		<where>
+			<if test="ctmno != null">AND ctmno = #{ctmno}
+			</if>
+			<if test="ctmname != null">AND ctmname = #{ctmname}
+			</if>
+			<if test="ctmtel1 != null">AND ctmtel1 = #{ctmtel1}
+			</if>
+		</where>
 
 	</select>
 
@@ -124,7 +129,43 @@
 		,
 		#{ctmdetail}
 		, 1
-		);
+		)
+	</insert>
+
+	<insert id="insertManyCtm" parameterType="java.util.HashMap">
+
+		INSERT INTO
+
+		customer
+
+		VALUES
+		<foreach collection="ctm" item="value" separator=",">
+			(
+			null
+			,
+			#{value.ctmno}
+			, #{value.ctmsepa}
+			, #{value.ctmname}
+			,
+			#{value.ctmaddress}
+			,
+			#{value.ctmtel1}
+			,
+			#{value.ctmtel2}
+			,
+			#{value.ctmemail}
+			, #{value.ctmfax}
+			,
+			#{value.ctmcompanum}
+			,
+			#{value.ctmhomepage}
+			,
+			#{value.ctmstp}
+			,
+			#{value.ctmdetail}
+			, 1
+			)
+		</foreach>
 	</insert>
 
 	<insert id="insertRsvt"
@@ -234,24 +275,24 @@
 
 	<update id="updateRsvt"
 		parameterType="com.garam.web.dashboard.dto.RsvtDTO">
-		DELETE FROM
 
-		operation_info
 
-		WHERE
+		<if test="num != null and num != '' ">
+			DELETE FROM
 
-		rsvt =
-		#{rsvt}
+			operation_info
 
-		AND
+			WHERE
 
-		operation_info.operno >
-		#{num}
+			rsvt =
+			#{rsvt}
 
-		AND
+			AND
 
-		operconfirm IS NULL
-		;
+			operconfirm
+			IS NULL
+			;
+		</if>
 
 		UPDATE
 
@@ -401,6 +442,10 @@
 
 		SET
 
+		<if test="ctmsepa != null and ctmsepa != '' ">
+			ctmsepa =
+			#{ctmsepa},
+		</if>
 		<if test="ctmaddress != null and ctmaddress != '' ">
 			ctmaddress =
 			#{ctmaddress},
@@ -1827,6 +1872,26 @@
 		0)
 		AS moneymoney
 
+
+		FROM
+
+		rsvtmoney
+
+		WHERE
+
+		rsvtmoney.rsvt IN
+		<foreach collection="rsvtL" item="value" index="index"
+			separator="," open="(" close=")">
+			#{value.rsvt}
+		</foreach>
+	</select>
+
+	<select id="selectRsvtMoneyRsvtMany"
+		parameterType="java.util.HashMap"
+		resultType="com.garam.web.dashboard.dto.RsvtmoneyDTO">
+		SELECT
+
+		*
 
 		FROM
 

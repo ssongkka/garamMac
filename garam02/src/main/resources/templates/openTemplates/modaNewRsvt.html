@@ -30,10 +30,34 @@
                                         </h2>
                                     </div>
                                     <div class="form-group col-xs-4 col-lg-4" style="text-align: right;">
-                                        <a class=" btn btn-secondary" id="many-insert">
-                                            <span>
-                                                <i class="fas fa-list"></i>일괄입력</span>
-                                        </a>
+                                        <div class="dropdown">
+                                            <button
+                                                class="btn btn-info dropdown-toggle"
+                                                type="button"
+                                                id="dropdownMenu2"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                일괄입력
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu2">
+                                                <li>
+                                                    <a
+                                                        class="dropdown-item"
+                                                        type="button"
+                                                        id="many-insert"
+                                                        th:href="@{/dashboard/rsvtMany}">
+                                                        <i class="fas fa-list"></i>일반 일괄입력</a>
+                                                </li>
+                                                <li style="margin-top: 1rem;">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        type="button"
+                                                        id="many-insert-excel"
+                                                        th:href="@{/dashboard/rsvtManyExcel}">
+                                                        <i class="far fa-file-excel btn-excel"></i>엑셀 입력</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                                 <div th:replace="openTemplates/insertCustomer :: inCust"></div>

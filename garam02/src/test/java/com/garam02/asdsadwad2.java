@@ -56,29 +56,16 @@ public class asdsadwad2 {
 
 	@Test
 	void asd() throws IOException {
-		System.out.println("하이요");
 		FTPClient ftp = ftpmanager.connect();
-		System.out.println("하이요");
-
-		System.out.println("ㅁㅇㅁㅈㅇㅁㅇ  " + ftp.isConnected());
 
 		int a = (int) ((Math.random() * 10000) + 10);
-		System.out.println("하이요");
 
 		File tempFile = File.createTempFile("tmp" + Integer.toString(a), ".pdf");
-		System.out.println("하이요");
 		tempFile.deleteOnExit();
-		System.out.println("하이요");
 
 //		FileUtils.copyInputStreamToFile(inputStream, tempFile);
 
 		FileOutputStream fos = new FileOutputStream(tempFile);
-
-		System.out.println("ㅂㅈㄼㄼㅈㄹㄹㄼㅈ  " + ftp.retrieveFile("/src/ve/reg/V-220130-q7OPTS_Reg.PDF", fos));
-
-		System.out.println(tempFile.exists());
-		System.out.println(tempFile.getPath());
-		System.out.println(tempFile.getName());
 
 	}
 
