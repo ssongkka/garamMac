@@ -23,11 +23,6 @@
                     <input type="hidden" id="paperCtm" value="">
                     <input type="hidden" id="paperDay" value="">
                     <div class="paper0">
-                        <!-- <div class="paper0-item">
-                            <blockquote>
-                                <p id="paperTitle"></p>
-                            </blockquote>
-                        </div> -->
                         <div class="mdMakePaper">
                             <div class="mdMakePaper-item card">
                                 <button class="btn btn-outline-primary" id="btnContPaper">
@@ -57,7 +52,7 @@
         tabindex="-1"
         aria-labelledby="modalPaper1Label"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">계약서 생성</h3>
@@ -67,12 +62,77 @@
                         data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    ...
+                <div class="modal-body contractBd">
+                    <div class="contractBd-item1">
+                        <table class="table table-striped table-bordered">
+                            <colgroup>
+                                <col width="5%"/>
+                                <col width="auto"/>
+                                <col width="auto"/>
+                                <col width="10%"/>
+                                <col width="10%"/>
+                                <col width="10%"/>
+                                <col width="15%"/>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="contractChAll" checked="checked"></th>
+                                    <th>목적지</th>
+                                    <th>출발지</th>
+                                    <th>차량</th>
+                                    <th>대수</th>
+                                    <th>계약</th>
+                                    <th>금액</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contractTb">
+                                <tr>
+                                    <td><input type="checkbox" name="contractCh"></td>
+                                    <td>목적지</td>
+                                    <td>출발지</td>
+                                    <td>차량</td>
+                                    <td>대수</td>
+                                    <td>계약</td>
+                                    <td class="tdRight">300,000,000</td>
+                                    <input type="hidden" value="">
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="contractBd-item2">
+                        <div class="contractCheck1">
+                            <div class="contractCheck-item">
+                                "갑"
+                            </div>
+                            <div id="contractGap" class="contractCheck-item"></div>
+                            <div class="contractCheck-item">
+                                "을"
+                            </div>
+                            <div class="contractCheck-item">
+                                <select class="form-select" id="constractCompany">
+                                    <option
+                                        th:each="compa : ${compa}"
+                                        th:value="${compa.company}"
+                                        th:label="${compa.company}"
+                                        th:data-value="${compa.company}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contractCheck2">
+                        <h4>
+                            <p>엑셀(excel)파일로 생성됩니다. 생성 후 수정 할 사항이있으면 수정해 주세요.</p>
+                        </h4>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
-                    <button type="button" class="btn btn-primary">입 력</button>
+                    <div class="mdMfClo">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+                    </div>
+                    <div class="mdMfIn">
+                        <button type="button" class="btn btn-success" id="contractMakeExcel">
+                            <i class="fa-solid fa-file-excel"></i>계약서 생성</button>
+                    </div>
                 </div>
             </div>
         </div>

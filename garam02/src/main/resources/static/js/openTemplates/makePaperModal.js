@@ -1,8 +1,330 @@
 $(document).ready(function () {});
 
 $(document).on('click', '#btnContPaper', function () {
-    $('#modalPaper0').modal('hide');
-    $('#modalPaper1').modal('show');
+
+    LoadingWithMask()
+        .then(shomd)
+        .then(getContractRsvt)
+        .then(closeLoadingWithMask);
+
+    function shomd(result) {
+        return new Promise(function (resolve, reject) {
+            $('#contractGap').text($('#alloMdctoName').text())
+            $('#contractChAll').prop('checked', true);
+            $('#constractCompany').val(dbuser.company);
+
+            $('#modalPaper0').modal('hide');
+            $('#modalPaper1').modal('show');
+
+            resolve();
+        });
+    }
+
+    function getContractRsvt(result) {
+        return new Promise(function (resolve, reject) {
+            const url = "/papper/papperAllo1";
+            const headers = {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST"
+            };
+
+            const params = {
+                "ctmno": $('#paperCtm').val(),
+                "stday": $('#paperDay').val()
+            };
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                headers: headers,
+                caches: false,
+                dataType: "json",
+                data: JSON.stringify(params),
+                cache: false,
+                success: function (r) {
+                    console.log(r);
+
+                    let htmls = ``;
+
+                    for (let i = 0; i < r.length; i++) {
+                        htmls += `
+                    <tr>
+                        <td><input type="checkbox" name="contractCh" checked></td>
+                        <td>` +
+                                r[i].desty +
+                                `</td>
+                        <td>` + r[i].rsvpstp +
+                                `</td>
+                        <td>` + r[i].bus +
+                                `</td>
+                        <td>` + r[i].num +
+                                `</td>
+                        <td>` + r[i].cont +
+                                `</td>
+                        <td class="tdRight">` + AddComma(r[i].conm) +
+                                `</td>
+                        <input type="hidden" value="` + r[i].stday +
+                                `">
+                        <input type="hidden" value="` + r[i].endday +
+                                `">
+                    </tr>`;
+                    }
+
+                    $('#contractTb').html(htmls);
+
+                    resolve();
+                },
+                error: jqXHR => {
+                    loginSession(jqXHR.status);
+                }
+            });
+        });
+    }
+});
+
+$(document).on("click", "#contractMakeExcel", function () {
+
+    LoadingWithMask()
+        .then(makeParam)
+        .then(closeLoadingWithMask);
+
+    function makeParam(result) {
+        return new Promise(function (resolve, reject) {
+            let cntCheck = 0;
+
+            let arrTmpday = new Array();
+            let arrTmpEdDay = new Array();
+            let arrTmpDesty = new Array();
+            let arrTmpStp = new Array();
+            let tmp45 = 0;
+            let tmp25 = 0;
+            let tmp28 = 0;
+            let arrTmpCont = new Array();
+            let tmpContM = 0;
+            let tmpContM45 = 0;
+            let tmpContM25 = 0;
+            let tmpContM28 = 0;
+
+            $('input:checkbox[name="contractCh"]').each(function () {
+                if (this.checked) {
+                    cntCheck++;
+
+                    const aaa = $(this)
+                        .parent()
+                        .parent();
+                    const aaa1 = $(aaa).children();
+
+                    arrTmpDesty.push($(aaa1[1]).text());
+                    arrTmpStp.push($(aaa1[2]).text());
+                    arrTmpCont.push($(aaa1[5]).text());
+
+                    switch ($(aaa1[3]).text()) {
+                        case "대형":
+                            tmp45 = tmp45 + parseInt($(aaa1[4]).text());
+                            tmpContM45 = tmpContM45 + parseInt($(aaa1[6]).text().replaceAll(',', ''));
+                            break;
+                        case "중형":
+                            tmp25 = tmp25 + parseInt($(aaa1[4]).text());
+                            tmpContM25 = tmpContM25 + parseInt($(aaa1[6]).text().replaceAll(',', ''));
+                            break;
+                        case "우등":
+                            tmp28 = tmp28 + parseInt($(aaa1[4]).text());
+                            tmpContM28 = tmpContM28 + parseInt($(aaa1[6]).text().replaceAll(',', ''));
+                            break;
+                    }
+                    tmpContM = tmpContM + parseInt($(aaa1[6]).text().replaceAll(',', ''));
+
+                    const sttt = $(aaa1[7])
+                        .val()
+                        .split('-')[0] + '년 ' + $(aaa1[7])
+                        .val()
+                        .split('-')[1] + '월 ' + $(aaa1[7])
+                        .val()
+                        .split('-')[2] + '일'
+                    const eddd = $(aaa1[8])
+                        .val()
+                        .split('-')[0] + '년 ' + $(aaa1[8])
+                        .val()
+                        .split('-')[1] + '월 ' + $(aaa1[8])
+                        .val()
+                        .split('-')[2] + '일'
+
+                    if (sttt == eddd) {
+
+                        arrTmpday.push(sttt);
+
+                    } else {
+                        const tmpbak = betweenDateNum($(aaa1[7]).val(), $(aaa1[8]).val());
+
+                        const daysss = parseInt(tmpbak) - 1 + '박 ' + parseInt(tmpbak) + '일';
+
+                        arrTmpday.push(sttt + ' ~ ' + eddd + ' ' + daysss);
+                    }
+                }
+            });
+
+            const uniqueDay = [...new Set(arrTmpday)];
+            const uniqueDesty = [...new Set(arrTmpDesty)];
+            const uniqueStp = [...new Set(arrTmpStp)];
+            const uniqueCont = [...new Set(arrTmpCont)];
+
+            if (!cntCheck) {
+                alert("생성할 계약서 운행정보를 선택해 주세요.");
+                closeLoadingWithMask();
+                return;
+            }
+
+            if (uniqueDay.length > 1) {
+                alert("같은 운행 일자의 계약서만 생성가능합니다.\n\n확인 후 다시 선택하시거나 계약서 샘플파일을 다운받아 직접 작성해주세요.");
+                closeLoadingWithMask();
+                return;
+            }
+
+            if (uniqueCont.length > 1) {
+                alert(
+                    "부가세 형태(포함, 미포함, 카드)가 중복일 수는 없습니다.\n\n확인 후 다시 선택하시거나 계약서 샘플파일을 다운받아 직접 작성해주세요."
+                );
+                closeLoadingWithMask();
+                return;
+            }
+
+            let destyyyy = '';
+            for (let i = 0; i < uniqueDesty.length; i++) {
+                if (destyyyy) {
+                    destyyyy += ', ' + uniqueDesty[i];
+                } else {
+                    destyyyy += uniqueDesty[i];
+                }
+            }
+
+            let stpppp = '';
+            for (let i = 0; i < uniqueStp.length; i++) {
+                if (stpppp) {
+                    stpppp += ', ' + uniqueStp[i];
+                } else {
+                    stpppp += uniqueStp[i];
+                }
+            }
+
+            const contttt = uniqueCont[0];
+
+            console.log(destyyyy);
+            console.log(stpppp);
+            console.log(contttt);
+            console.log(tmp45);
+            console.log(tmp25);
+            console.log(tmp28);
+            console.log(tmpContM45);
+            console.log(tmpContM25);
+            console.log(tmpContM28);
+            console.log(tmpContM);
+
+            if (isNaN(Math.round(tmpContM45 / tmp45))) {
+                tmpContM45 = 0;
+            } else {
+                tmpContM45 = Math.round(tmpContM45 / tmp45);
+            }
+            if (isNaN(Math.round(tmpContM25 / tmp25))) {
+                tmpContM25 = 0;
+            } else {
+                tmpContM25 = Math.round(tmpContM25 / tmp25);
+            }
+            if (isNaN(Math.round(tmpContM28 / tmp28))) {
+                tmpContM28 = 0;
+            } else {
+                tmpContM28 = Math.round(tmpContM28 / tmp28);
+            }
+
+            let comAdd = '';
+            let comCeo = '';
+
+            for (let k = 0; k < compa.length; k++) {
+                if (compa[i].company == $('#constractCompany').val()) {
+                    comAdd = compa[i].adress;
+                    comCeo = compa[i].ceo;
+                }
+            }
+
+            const params = {
+                "stday": uniqueDay[0],
+                "desty": destyyyy,
+                "rsvpstp": stpppp,
+                "cont": contttt,
+                "ve1": tmp45,
+                "ve2": tmp25,
+                "ve3": tmp28,
+                "id1": tmpContM45,
+                "id2": tmpContM25,
+                "id3": tmpContM28,
+                "conm": tmpContM,
+                "ctmname": $('#contractGap').val(),
+                "company": $('#constractCompany').val(),
+                "opercom": comAdd,
+                "opercar": comCeo
+            };
+
+            console.log(params);
+
+            resolve(params);
+        });
+    }
+
+    function getContractExcel(result) {
+        return new Promise(function (resolve, reject) {
+            const url = "/allo/chRSVT";
+            const headers = {
+                "Content-Type": "application/json"
+            };
+            $.ajax({
+                url: url,
+                type: "POST",
+                headers: headers,
+                caches: false,
+                dataType: "json",
+                data: JSON.stringify(result),
+                cache: false,
+                success: function (r) {
+                    resolve();
+                },
+                error: jqXHR => {
+                    loginSession(jqXHR.status);
+                }
+            });
+        });
+    }
+
+});
+$(document).on("click", "#contractChAll", function () {
+    if (this.checked) {
+        $('input:checkbox[name="contractCh"]').each(function () {
+            $(this).prop('checked', true);
+        });
+    } else {
+        $('input:checkbox[name="contractCh"]').each(function () {
+            $(this).prop('checked', false);
+        });
+    }
+});
+
+$(document).on("click", 'input:checkbox[name="contractCh"]', function () {
+
+    let cnt = 0;
+
+    $('input:checkbox[name="contractCh"]').each(function () {
+        if (this.checked) {
+            cnt++;
+        }
+    });
+
+    const sizeze = $('#contractTb')
+        .children()
+        .length;
+
+    if (sizeze == cnt) {
+        $('#contractChAll').prop('checked', true);
+    } else {
+        $('#contractChAll').prop('checked', false);
+    }
 });
 
 $(document).on('click', '#btnAlloPaper', function () {

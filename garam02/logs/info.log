@@ -1,185 +1,27 @@
->22-07-04 14:10:13 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 1635 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 14:10:13 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 14:10:22 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 8.985 seconds (JVM running for 10.199)
->22-07-04 14:34:11 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 2861 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 14:34:11 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 14:34:17 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.303 seconds (JVM running for 8.206)
->22-07-04 14:40:58 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 2861 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 14:40:58 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 14:41:01 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 3.082 seconds (JVM running for 411.598)
->22-07-04 14:41:02 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 2861 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 14:41:02 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 14:41:04 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.143 seconds (JVM running for 415.186)
->22-07-04 14:41:29 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 2861 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 14:41:29 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 14:41:31 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 1.981 seconds (JVM running for 441.342)
->22-07-04 14:42:06 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 2861 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 14:42:06 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 14:42:08 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.065 seconds (JVM running for 479.063)
->22-07-04 14:42:34 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3069 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 14:42:34 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 14:42:42 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.922 seconds (JVM running for 8.933)
->22-07-04 14:52:40 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3262 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 14:52:40 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 14:52:47 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.432 seconds (JVM running for 8.233)
->22-07-04 14:55:59 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3262 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 14:55:59 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 14:56:01 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.486 seconds (JVM running for 202.154)
->22-07-04 14:59:47 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3262 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 14:59:47 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 14:59:49 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.565 seconds (JVM running for 430.027)
->22-07-04 15:07:53 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3641 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 15:07:53 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 15:08:00 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.592 seconds (JVM running for 8.489)
->22-07-04 15:08:53 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3641 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 15:08:53 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 15:08:55 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.35 seconds (JVM running for 63.835)
->22-07-04 15:09:26 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3686 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 15:09:26 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 15:09:33 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.115 seconds (JVM running for 7.893)
->22-07-04 15:10:41 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3686 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 15:10:41 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 15:10:44 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.415 seconds (JVM running for 78.497)
->22-07-04 15:10:54 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3715 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 15:10:54 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 15:11:01 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 6.937 seconds (JVM running for 7.919)
->22-07-04 15:14:36 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3902 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 15:14:36 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 15:14:43 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.136 seconds (JVM running for 8.015)
->22-07-04 16:28:55 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3902 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 16:28:55 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 16:28:58 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 3.485 seconds (JVM running for 4463.361)
->22-07-04 16:29:12 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3902 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 16:29:12 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 16:29:15 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.589 seconds (JVM running for 4479.841)
->22-07-04 16:29:16 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3902 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 16:29:16 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 16:29:18 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.127 seconds (JVM running for 4483.587)
->22-07-04 16:29:38 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 3902 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 16:29:38 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 16:30:05 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 9045 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 16:30:05 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 16:30:13 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 8.562 seconds (JVM running for 9.46)
->22-07-04 17:36:53 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 11022 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 17:36:53 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 17:37:02 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 9.049 seconds (JVM running for 10.227)
->22-07-04 17:43:14 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 11022 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 17:43:14 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 17:43:17 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.916 seconds (JVM running for 385.255)
->22-07-04 17:43:24 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 11022 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 17:43:24 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 17:43:26 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.236 seconds (JVM running for 394.144)
->22-07-04 17:43:35 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 11318 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 17:43:35 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 17:43:41 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.005 seconds (JVM running for 7.785)
->22-07-04 19:16:31 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 16735 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 19:16:31 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 19:16:39 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 8.658 seconds (JVM running for 9.836)
->22-07-04 19:17:44 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 16764 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 19:17:44 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 19:17:51 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.565 seconds (JVM running for 8.427)
->22-07-04 20:10:39 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 19664 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 20:10:39 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 20:10:46 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.335 seconds (JVM running for 8.226)
->22-07-04 21:41:18 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 19664 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 21:41:18 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 21:41:23 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 4.222 seconds (JVM running for 5445.103)
->22-07-04 21:53:39 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27059 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 21:53:39 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 21:53:46 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.234 seconds (JVM running for 8.133)
->22-07-04 22:07:53 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27059 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:07:53 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:07:56 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.623 seconds (JVM running for 858.221)
->22-07-04 22:08:07 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27059 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:08:07 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:08:09 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.33 seconds (JVM running for 871.426)
->22-07-04 22:08:22 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27628 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:08:22 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:08:29 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 8.375 seconds (JVM running for 9.317)
->22-07-04 22:09:28 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27628 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:09:28 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:09:39 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27687 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:09:39 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:09:47 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 8.026 seconds (JVM running for 8.809)
->22-07-04 22:11:19 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27687 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:11:19 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:11:21 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.412 seconds (JVM running for 103.101)
->22-07-04 22:11:59 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27687 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:11:59 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:12:02 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.898 seconds (JVM running for 143.906)
->22-07-04 22:12:04 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27687 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:12:04 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:12:06 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.354 seconds (JVM running for 147.916)
->22-07-04 22:13:39 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27802 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:13:39 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:13:46 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 8.013 seconds (JVM running for 8.802)
->22-07-04 22:14:31 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 27886 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:14:31 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:14:38 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.1 seconds (JVM running for 7.873)
->22-07-04 22:20:01 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 28419 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:20:01 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:20:08 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.807 seconds (JVM running for 9.048)
->22-07-04 22:25:12 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 28529 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:25:12 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:25:19 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.18 seconds (JVM running for 7.977)
->22-07-04 22:37:29 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 28827 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:37:29 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:37:36 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.2 seconds (JVM running for 8.063)
->22-07-04 22:38:33 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 28827 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:38:33 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:38:35 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.433 seconds (JVM running for 67.537)
->22-07-04 22:48:32 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29032 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:48:32 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:48:38 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 6.844 seconds (JVM running for 7.631)
->22-07-04 22:49:40 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29032 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:49:40 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:50:07 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29129 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:50:07 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:50:14 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.073 seconds (JVM running for 7.95)
->22-07-04 22:50:46 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29129 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:50:46 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:51:14 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29210 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:51:14 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:51:21 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.29 seconds (JVM running for 8.079)
->22-07-04 22:54:06 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29210 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:54:06 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:54:15 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29280 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:54:15 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:54:22 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.236 seconds (JVM running for 8.023)
->22-07-04 22:55:50 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29280 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:55:50 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:55:52 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.375 seconds (JVM running for 98.247)
->22-07-04 22:56:39 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29280 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 22:56:39 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 22:56:42 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.379 seconds (JVM running for 147.616)
->22-07-04 23:02:56 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29280 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:02:56 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:02:59 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 4.057 seconds (JVM running for 525.491)
->22-07-04 23:03:01 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29280 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:03:01 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:03:04 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.487 seconds (JVM running for 529.619)
->22-07-04 23:03:11 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29494 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:03:11 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:08:41 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29622 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:08:41 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:08:48 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.112 seconds (JVM running for 7.897)
->22-07-04 23:13:44 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29622 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:13:44 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:13:46 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.601 seconds (JVM running for 306.08)
->22-07-04 23:15:53 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29820 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:15:53 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:16:00 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.252 seconds (JVM running for 9.078)
->22-07-04 23:18:06 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29820 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:18:06 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:18:08 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.829 seconds (JVM running for 137.661)
->22-07-04 23:18:47 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29820 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:18:47 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:18:49 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.166 seconds (JVM running for 178.32)
->22-07-04 23:20:15 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 29918 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:20:15 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:20:21 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.003 seconds (JVM running for 8.075)
->22-07-04 23:32:12 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 30246 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:32:12 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:32:44 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 30251 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
->22-07-04 23:32:44 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
->22-07-04 23:32:51 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.301 seconds (JVM running for 8.198)
+>22-07-05 12:07:58 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 2023 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
+>22-07-05 12:07:58 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
+>22-07-05 12:08:07 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 9.068 seconds (JVM running for 10.396)
+>22-07-05 15:35:02 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 2023 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
+>22-07-05 15:35:02 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
+>22-07-05 15:35:06 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 3.836 seconds (JVM running for 12428.981)
+>22-07-05 15:35:07 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 2023 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
+>22-07-05 15:35:07 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
+>22-07-05 15:35:10 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.537 seconds (JVM running for 12432.998)
+>22-07-05 15:35:44 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 2023 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
+>22-07-05 15:35:44 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
+>22-07-05 15:35:47 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 2.411 seconds (JVM running for 12469.905)
+>22-07-05 19:01:03 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 13067 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
+>22-07-05 19:01:03 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
+>22-07-05 19:01:12 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 9.533 seconds (JVM running for 11.16)
+>22-07-05 20:35:24 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 16812 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
+>22-07-05 20:35:24 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
+>22-07-05 20:35:32 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 8.836 seconds (JVM running for 9.996)
+>22-07-05 20:42:08 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 16812 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
+>22-07-05 20:42:08 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
+>22-07-05 20:42:11 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 3.721 seconds (JVM running for 409.084)
+>22-07-05 20:50:59 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 17580 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
+>22-07-05 20:50:59 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
+>22-07-05 20:51:05 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 7.065 seconds (JVM running for 8.019)
+>22-07-05 21:38:03 [restartedMain] [com.garam.Garam02Application:55] INFO  ==>> Starting Garam02Application using Java 1.8.0_201 on Songui-MacBook-Pro.local with PID 20324 (/Users/songgaram/git/garam02/bin/main started by songgaram in /Users/songgaram/git/garam02)
+>22-07-05 21:38:03 [restartedMain] [com.garam.Garam02Application:637] INFO  ==>> No active profile set, falling back to default profiles: default
+>22-07-05 21:38:12 [restartedMain] [com.garam.Garam02Application:61] INFO  ==>> Started Garam02Application in 8.913 seconds (JVM running for 10.064)

@@ -149,7 +149,7 @@ function makeModalIl(dday, cctono, rsvt) {
                                 AddComma(r[i].conm) + "(" + AddComma(r[i].numm) + ")" +
                                 `
                                     </button>
-                                    <div class="dropdown-menu allodropdown" aria-labelledby="dropdownMenuButton2">
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start allodropdown" aria-labelledby="dropdownMenuButton2">
                                     <table class="table table-bordered">
                                         <colgroup>
                                             <col width="20%">
@@ -166,12 +166,6 @@ function makeModalIl(dday, cctono, rsvt) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>2022-04-20</td>
-                                                <td>300,000</td>
-                                                <td class="tdRight">300,000</td>
-                                                <td class="tdRight">300,000</td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                     </div>
@@ -990,7 +984,7 @@ function getRsvtCh(rsvttt, ctmnonono, sepanum) {
             console.log("sepanum", sepanum);
             let htmlsOp = ``;
             if (parseInt(sepanum) > 0) {
-                $('#rsvtCancleD').html(`<h4>배차완료된 차량이있으면 수정에 제한이있습니다.</h4>`);
+                $('#rsvtCancleD').html(`<h4><p>배차완료된 차량이있으면</p><p>수정에 제한이있습니다.</p></h4>`);
 
                 for (let i = 0; i < 100; i++) {
                     htmlsOp += `<option value="` + (parseInt(sepanum) + i) + `">` + (

@@ -69,7 +69,8 @@ public class TestPdf2 {
 
 			// pdf 문서 처리하는 객체
 			Document document = pdfU.getDocument();
-			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("c:/IDE/aaa.pdf"));
+			PdfWriter writer = PdfWriter.getInstance(document,
+					new FileOutputStream("/Users/songgaram/Downloads/aaa.pdf"));
 
 			MyFooter event = new MyFooter((list.size() / 45) + 1);
 			writer.setPageEvent(event);

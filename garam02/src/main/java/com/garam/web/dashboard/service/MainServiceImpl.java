@@ -1148,6 +1148,7 @@ public class MainServiceImpl implements MainService {
 		for (int i = 0; i < arr_File.size(); i++) {
 			PDDocument tmpPdd = PDDocument.load(arr_File.get(i));
 			arrpdum.add(tmpPdd);
+			tmpPdd.close();
 		}
 
 		PDFMergerUtility PDFmerger = new PDFMergerUtility();
@@ -1166,6 +1167,158 @@ public class MainServiceImpl implements MainService {
 		PDFmerger.setDestinationStream(bout2);
 
 		PDFmerger.mergeDocuments(null);
+
+		return file;
+	}
+
+	@Override
+	public File makePapperContract(RsvtDTO rsvtDTO) throws Exception {
+
+		File file = null;
+		HSSFWorkbook wb = null;
+		FileOutputStream fileoutputstream = null;
+
+		try {
+
+			RsvtDTO tmpDto = new RsvtDTO();
+
+			List<RsvtDTO> list = rsvtMapper.selectCustomerAll(tmpDto);
+
+			String url = "src/main/resources/static/excel/excelcontract.xls";
+
+			FileInputStream fis = new FileInputStream(url);
+
+			wb = new HSSFWorkbook(fis);
+			HSSFSheet sheet = wb.getSheetAt(0);
+
+			CellStyle style = wb.createCellStyle();
+			style.setBorderBottom(BorderStyle.THIN);
+			style.setBorderTop(BorderStyle.THIN);
+			style.setBorderRight(BorderStyle.THIN);
+			style.setBorderLeft(BorderStyle.THIN);
+
+			style.setAlignment(HorizontalAlignment.CENTER);
+			style.setVerticalAlignment(VerticalAlignment.CENTER);
+
+			HSSFRow row = sheet.createRow(4);
+			row.setHeight((short) 800);
+
+			HSSFCell cell = row.createCell(0);
+			cell.setCellStyle(style);
+			cell.setCellValue(
+					"     " + rsvtDTO.getCtmname() + "을(를) \"갑\"이라고 하고, " + rsvtDTO.getCompany() + "을 \"을\"이라 하며");
+
+			row = sheet.createRow(8);
+
+			cell = row.createCell(3);
+			cell.setCellStyle(style);
+			cell.setCellValue(rsvtDTO.getStday());
+
+			String connnn = "";
+			switch (rsvtDTO.getCont()) {
+			case "카드":
+				connnn = "* 카드 결재, ";
+				break;
+
+			default:
+				connnn = "* 부가세 " + rsvtDTO.getCont() + ", ";
+				break;
+			}
+
+			String busNum = "";
+			if (rsvtDTO.getVe1().length() > 0) {
+				busNum += "대형 " + rsvtDTO.getVe1() + "대";
+				connnn += "대형 " + rsvtDTO.getVe1() + "대 X " + rsvtDTO.getId1() + "원";
+			}
+			if (rsvtDTO.getVe2().length() > 0) {
+				if (busNum.length() > 0) {
+					busNum += ", 중형 " + rsvtDTO.getVe2() + "대";
+					connnn += ", 중형 " + rsvtDTO.getVe2() + "대 X " + rsvtDTO.getId2() + "원";
+				} else {
+					busNum += "중형 " + rsvtDTO.getVe2() + "대";
+					connnn += "중형 " + rsvtDTO.getVe2() + "대 X " + rsvtDTO.getId2() + "원";
+				}
+			}
+			if (rsvtDTO.getVe3().length() > 0) {
+				if (busNum.length() > 0) {
+					busNum += ", 우등 " + rsvtDTO.getVe3() + "대";
+					connnn += ", 우등 " + rsvtDTO.getVe3() + "대 X " + rsvtDTO.getId3() + "원";
+				} else {
+					busNum += "우등 " + rsvtDTO.getVe3() + "대";
+					connnn += "우등 " + rsvtDTO.getVe3() + "대 X " + rsvtDTO.getId3() + "원";
+				}
+			}
+
+			row = sheet.createRow(9);
+
+			cell = row.createCell(3);
+			cell.setCellStyle(style);
+			cell.setCellValue(busNum);
+
+			row = sheet.createRow(10);
+
+			cell = row.createCell(3);
+			cell.setCellStyle(style);
+			cell.setCellValue(rsvtDTO.getRsvpstp());
+
+			row = sheet.createRow(11);
+
+			cell = row.createCell(3);
+			cell.setCellStyle(style);
+			cell.setCellValue(rsvtDTO.getDesty());
+
+			row = sheet.createRow(13);
+
+			cell = row.createCell(3);
+			cell.setCellStyle(style);
+			cell.setCellValue(connnn);
+
+			row = sheet.createRow(15);
+
+			cell = row.createCell(0);
+			cell.setCellStyle(style);
+			cell.setCellValue(connnn);
+
+			row = sheet.createRow(46);
+
+			cell = row.createCell(5);
+			cell.setCellStyle(style);
+			cell.setCellValue(rsvtDTO.getOpercom());
+
+			row = sheet.createRow(47);
+
+			cell = row.createCell(5);
+			cell.setCellStyle(style);
+			cell.setCellValue(rsvtDTO.getCompany());
+
+			row = sheet.createRow(48);
+
+			cell = row.createCell(5);
+			cell.setCellStyle(style);
+			cell.setCellValue(rsvtDTO.getOpercar());
+
+			int a = (int) ((Math.random() * 10000) + 10);
+
+			file = File.createTempFile("tmp" + Integer.toString(a), ".tmp");
+			file.deleteOnExit();
+
+			wb.write(file);
+
+//			fileoutputstream.close();
+
+			wb.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+		}
 
 		return file;
 	}
@@ -2707,4 +2860,5 @@ public class MainServiceImpl implements MainService {
 
 		return list;
 	}
+
 }

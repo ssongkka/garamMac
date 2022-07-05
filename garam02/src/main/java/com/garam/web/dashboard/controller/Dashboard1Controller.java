@@ -16,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -139,6 +140,21 @@ public class Dashboard1Controller extends UiUtils {
 		HttpHeaders headers = new HttpHeaders();
 		String fileName = companyyy + "_" + dayyy.split("-")[0] + dayyy.split("-")[1] + "_" + ctmmmName + "_배차서류"
 				+ ".pdf";
+		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());
+
+		return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/makePapperConstract")
+	public ResponseEntity<Object> makePapperConstract(@RequestBody RsvtDTO rsvtDTO) throws Exception {
+		File file = rsvtService.makePapperContract(rsvtDTO);
+
+		Resource resource = new InputStreamResource(new FileInputStream(file));
+
+		HttpHeaders headers = new HttpHeaders();
+		String fileName = "계약요" + ".xls";
 		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());
