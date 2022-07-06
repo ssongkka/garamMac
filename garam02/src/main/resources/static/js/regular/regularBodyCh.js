@@ -13,41 +13,41 @@ function getTrHtmls() {
         1
     </td>
     <td><input
-        class="form-control input-sm rgip upclas"
+        class="form-control input-sm rgip upclas input-ent"
         onfocus="this.select()"
         autocomplete="off"
         type="text"
         placeholder="노선명 입력"></td>
     <td>
-        <select class="form-select input-sm rgip upclasse">
+        <select class="form-select input-sm rgip upclasse input-ent">
             <option value="대형" label="대형"></option>
             <option value="중형" label="중형"></option>
             <option value="우등" label="우등"></option>
         </select>
     </td>
     <td>
-        <select class="form-select input-sm rgip upclasse">
+        <select class="form-select input-sm rgip upclasse input-ent">
             <option value="0" label="미정"></option>
             <option value="1" label="월고정"></option>
             <option value="2" label="운행횟수"></option>
         </select>
     </td>
     <td><input
-        class="form-control input-sm upclas"
+        class="form-control input-sm upclas input-ent"
         onfocus="this.select()"
         autocomplete="off"
         type="text"
         data-type="currency"
         placeholder="금액입력"></td>
     <td><input
-        class="form-control input-sm upclas"
+        class="form-control input-sm upclas input-ent"
         onfocus="this.select()"
         autocomplete="off"
         type="text"
         data-type="currency"
         placeholder="금액입력"></td>
     <td><input
-        class="form-control input-sm rgip upclas"
+        class="form-control input-sm rgip upclas input-ent"
         onfocus="this.select()"
         autocomplete="off"
         type="text"
@@ -495,7 +495,7 @@ function getRecou(iidd) {
                                                     htmlgo += '<td>' + cntgo++ + '</td>';
                                                     htmlgo += '<td>';
                                                     htmlgo += '<div class="input-group" > ';
-                                                    htmlgo += '<input type="time" class="input-sm upcotm" value ="';
+                                                    htmlgo += '<input type="time" class="input-sm upcotm input-ent" value ="';
                                                     if (r[i].rct) {
                                                         htmlgo += r[i].rct;
                                                     } else {
@@ -505,7 +505,7 @@ function getRecou(iidd) {
                                                     htmlgo += '</div>';
                                                     htmlgo += '</td>';
                                                     htmlgo += '<td>';
-                                                    htmlgo += '<input type="text" class="input-sm upco" value="';
+                                                    htmlgo += '<input type="text" class="input-sm upco input-ent" value="';
                                                     if (r[i].rcstp) {
                                                         htmlgo += r[i].rcstp;
                                                     } else {
@@ -514,7 +514,7 @@ function getRecou(iidd) {
                                                     htmlgo += '">';
                                                     htmlgo += '</td>';
                                                     htmlgo += '<td>';
-                                                    htmlgo += '<input type="text" class="input-sm upco" value="';
+                                                    htmlgo += '<input type="text" class="input-sm upco input-ent" value="';
                                                     if (r[i].rcmemo) {
                                                         htmlgo += r[i].rcmemo;
                                                     } else {
@@ -533,7 +533,7 @@ function getRecou(iidd) {
                                                     htmlgo += '<td>' + cntgo++ + '</td>';
                                                     htmlgo += '<td>';
                                                     htmlgo += '<div class="input-group"> ';
-                                                    htmlgo += ' <input type="time" class="input-sm upcotm" value="';
+                                                    htmlgo += ' <input type="time" class="input-sm upcotm input-ent" value="';
                                                     if (r[i].rct) {
                                                         htmlgo += r[i].rct;
                                                     } else {
@@ -543,7 +543,7 @@ function getRecou(iidd) {
                                                     htmlgo += '</div>';
                                                     htmlgo += '</td>';
                                                     htmlgo += '<td>';
-                                                    htmlgo += '<input type="text" class = "input-sm upco" value = "';
+                                                    htmlgo += '<input type="text" class = "input-sm upco input-ent" value = "';
                                                     if (r[i].rcstp) {
                                                         htmlgo += r[i].rcstp;
                                                     } else {
@@ -552,7 +552,7 @@ function getRecou(iidd) {
                                                     htmlgo += '">';
                                                     htmlgo += '</td>';
                                                     htmlgo += '<td>';
-                                                    htmlgo += '<input type="text" class="input-sm upco" value="';
+                                                    htmlgo += '<input type="text" class="input-sm upco input-ent" value="';
                                                     if (r[i].rcmemo) {
                                                         htmlgo += r[i].rcmemo;
                                                     } else {
@@ -574,7 +574,7 @@ function getRecou(iidd) {
                                                     htmlgo += '<td>' + cntgo++ + '</td>';
                                                     htmlgo += '<td>';
                                                     htmlgo += '<div class="input-group"> ';
-                                                    htmlgo += '<input type="time" class="input-sm upcotm" value="';
+                                                    htmlgo += '<input type="time" class="input-sm upcotm input-ent" value="';
                                                     if (r[i].rct) {
                                                         htmlgo += r[i].rct;
                                                     } else {
@@ -584,7 +584,7 @@ function getRecou(iidd) {
                                                     htmlgo += '</div>';
                                                     htmlgo += '</td>';
                                                     htmlgo += '<td>';
-                                                    htmlgo += '<input type="text" class="input-sm upco" value="';
+                                                    htmlgo += '<input type="text" class="input-sm upco input-ent" value="';
                                                     if (r[i].rcstp) {
                                                         htmlgo += r[i].rcstp;
                                                     } else {
@@ -593,7 +593,7 @@ function getRecou(iidd) {
                                                     htmlgo += '">';
                                                     htmlgo += '</td>';
                                                     htmlgo += '<td>';
-                                                    htmlgo += '<input type="text" class="input-sm upco" value="';
+                                                    htmlgo += '<input type="text" class="input-sm upco input-ent" value="';
                                                     if (r[i].rcmemo) {
                                                         htmlgo += r[i].rcmemo;
                                                     } else {
@@ -616,7 +616,7 @@ function getRecou(iidd) {
                                                     htmlgo += '<td>' + cntgo++ + '</td>';
                                                     htmlgo += '<td>';
                                                     htmlgo += '<div class="input-group" > ';
-                                                    htmlgo += '<input type="time" class="input-sm upcotm" value ="';
+                                                    htmlgo += '<input type="time" class="input-sm upcotm input-ent" value ="';
                                                     if (r[i].rct) {
                                                         htmlgo += r[i].rct;
                                                     } else {
@@ -626,7 +626,7 @@ function getRecou(iidd) {
                                                     htmlgo += '</div>';
                                                     htmlgo += '</td>';
                                                     htmlgo += '<td>';
-                                                    htmlgo += '<input type="text" class="input-sm upco" value="';
+                                                    htmlgo += '<input type="text" class="input-sm upco input-ent" value="';
                                                     if (r[i].rcstp) {
                                                         htmlgo += r[i].rcstp;
                                                     } else {
@@ -635,7 +635,7 @@ function getRecou(iidd) {
                                                     htmlgo += '">';
                                                     htmlgo += '</td>';
                                                     htmlgo += '<td>';
-                                                    htmlgo += '<input type="text" class="input-sm upco" value="';
+                                                    htmlgo += '<input type="text" class="input-sm upco input-ent" value="';
                                                     if (r[i].rcmemo) {
                                                         htmlgo += r[i].rcmemo;
                                                     } else {
@@ -657,7 +657,7 @@ function getRecou(iidd) {
                                                     htmlgo += '<td>' + cntgo++ + '</td>';
                                                     htmlgo += '<td>';
                                                     htmlgo += '<div class="input-group"> ';
-                                                    htmlgo += '<input type="time" class="input-sm upcotm" value="';
+                                                    htmlgo += '<input type="time" class="input-sm upcotm input-ent" value="';
                                                     if (r[i].rct) {
                                                         htmlgo += r[i].rct;
                                                     } else {
@@ -667,7 +667,7 @@ function getRecou(iidd) {
                                                     htmlgo += '</div>';
                                                     htmlgo += '</td>';
                                                     htmlgo += '<td>';
-                                                    htmlgo += '<input type="text" class="input-sm upco" value="';
+                                                    htmlgo += '<input type="text" class="input-sm upco input-ent" value="';
                                                     if (r[i].rcstp) {
                                                         htmlgo += r[i].rcstp;
                                                     } else {
@@ -676,7 +676,7 @@ function getRecou(iidd) {
                                                     htmlgo += '">';
                                                     htmlgo += '</td>';
                                                     htmlgo += '<td>';
-                                                    htmlgo += '<input type="text" class="input-sm upco" value="';
+                                                    htmlgo += '<input type="text" class="input-sm upco input-ent" value="';
                                                     if (r[i].rcmemo) {
                                                         htmlgo += r[i].rcmemo;
                                                     } else {
@@ -729,7 +729,7 @@ function getGoGoTb(param) {
                 <col width="42%"/>
                 <col width="29%"/>
             </colgroup>
-            <thead>
+            <thead class="table-light">
                 <tr>
                     <th class="thNone"></th>
                     <th><i class="fas fa-minus"></i></th>
@@ -768,7 +768,7 @@ function getOutOutTb(param) {
                 <col width="42%"/>
                 <col width="29%"/>
             </colgroup>
-            <thead>
+            <thead class="table-light">
                 <tr>
                     <th class="thNone"></th>
                     <th><i class="fas fa-minus"></i></th>

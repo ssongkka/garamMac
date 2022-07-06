@@ -1184,7 +1184,7 @@ function makeEmpOper() {
                                             <col width="15%">
                                             <col width="15%">
                                         </colgroup>
-                                        <thead>
+                                        <thead class="table-light">
                                             <tr>
                                                 <th>날짜</th>
                                                 <th>고객정보</th>

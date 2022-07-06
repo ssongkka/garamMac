@@ -950,8 +950,8 @@ $(document).on('click', '.mdOneway', function () {
                             }
 
                             if (r[i].opertype == 1) {
-                                htmls += '<input autocomplete="off" type="text" class="ve-car-one" list="car-info" tabin' +
-                                        'dex="' + (
+                                htmls += '<input autocomplete="off" type="text" class="ve-car-one input-ent" list="car-i' +
+                                        'nfo" tabindex="' + (
                                     ++cnt
                                 ) + '" placeholder="' + (
                                     i + 1
@@ -961,12 +961,12 @@ $(document).on('click', '.mdOneway', function () {
                                         'nt;" value="' + ve + '" disabled>';
                                 htmls += '<input type="hidden" value="' + r[i].opercar + '" disabled>';
                                 htmls += '<input type="hidden" value="' + r[i].opercom + '" disabled>';
-                                htmls += '<input autocomplete="off" type="text" class="ve-emp-one" id="' + (
+                                htmls += '<input autocomplete="off" type="text" class="ve-emp-one input-ent" id="' + (
                                     i + 100
                                 ) + 'emp" list="per-info" tabindex="-1" placeholder="승무원" value="' + r[i].name +
                                         '" style="background: transparent;" disabled>';
                                 htmls += '<input type="hidden" value="' + r[i].operid + '" disabled>';
-                                htmls += '<input autocomplete="off" type="text" class="ve-m-one" id="' + (
+                                htmls += '<input autocomplete="off" type="text" class="ve-m-one input-ent" id="' + (
                                     i + 100
                                 ) + 'm" onfocus="this.select()" data-type="currency" tabindex="' + (
                                     ++cnt
@@ -974,7 +974,7 @@ $(document).on('click', '.mdOneway', function () {
                                         ': transparent;" disabled>';
                             } else {
                                 if (r[i].opertrash == 1) {
-                                    htmls += '<input type="text" class="ve-car-one" list="car-info" tabindex="' + (
+                                    htmls += '<input type="text" class="ve-car-one input-ent" list="car-info" tabindex="' + (
                                         ++cnt
                                     ) + '" placeholder="' + (
                                         i + 1
@@ -984,7 +984,7 @@ $(document).on('click', '.mdOneway', function () {
                                             '">';
                                     htmls += '<input type="hidden" value="' + r[i].opercar + '">';
                                     htmls += '<input type="hidden" value="' + r[i].opercom + '">';
-                                    htmls += '<input type="text" class="ve-emp-one" id="' + (
+                                    htmls += '<input type="text" class="ve-emp-one input-ent" id="' + (
                                         i + 100
                                     ) + 'emp" list="per-info" tabindex="-1" placeholder="승무원" value="' + r[i].name +
                                             '">';
@@ -995,7 +995,7 @@ $(document).on('click', '.mdOneway', function () {
                                         ++cnt
                                     ) + '" placeholder="배차금액" value="' + AddComma(r[i].atlm) + '">';
                                 } else {
-                                    htmls += '<input type="text" class="ve-car-one" list="car-info" tabindex="' + (
+                                    htmls += '<input type="text" class="ve-car-one input-ent" list="car-info" tabindex="' + (
                                         ++cnt
                                     ) + '" placeholder="' + (
                                         i + 1
@@ -1005,12 +1005,12 @@ $(document).on('click', '.mdOneway', function () {
                                             'disabled>';
                                     htmls += '<input type="hidden" value="' + r[i].opercar + '" disabled>';
                                     htmls += '<input type="hidden" value="' + r[i].opercom + '" disabled>';
-                                    htmls += '<input type="text" class="ve-emp-one" id="' + (
+                                    htmls += '<input type="text" class="ve-emp-one input-ent" id="' + (
                                         i + 100
                                     ) + 'emp" list="per-info" tabindex="-1" placeholder="승무원" value="' + r[i].name +
                                             '" disabled>';
                                     htmls += '<input type="hidden" value="' + r[i].operid + '" disabled>';
-                                    htmls += '<input type="text" class="ve-m-one" id="' + (
+                                    htmls += '<input type="text" class="ve-m-one input-ent" id="' + (
                                         i + 100
                                     ) + 'm" onfocus="this.select()" data-type="currency" tabindex="' + (
                                         ++cnt
@@ -1101,7 +1101,7 @@ function plusOneWay(num) {
         htmls += '<span style="margin: 0 3rem;">' + (
             num
         ) + '</span>'
-        htmls += '<input type="text" class="ve-car-one" list="car-info" tabindex="' + (
+        htmls += '<input type="text" class="ve-car-one input-ent" list="car-info" tabindex="' + (
             cnt + 100
         ) + '" placeholder="' + (
             num
@@ -1114,7 +1114,7 @@ function plusOneWay(num) {
             num + 100
         ) + 'emp" list="per-info" tabindex="-1" placeholder="승무원" value="">';
         htmls += '<input type="hidden" value="">';
-        htmls += '<input type="text" class="ve-m-one" id="' + (
+        htmls += '<input type="text" class="ve-m-one input-ent" id="' + (
             parseInt(cnt) + 100
         ) + 'm" onfocus="this.select()" data-type="currency" tabindex="' + (
             ++cnt + 100
@@ -2669,8 +2669,8 @@ function makeAllo() {
                                 }
 
                                 if (r[i].ctmno == '0') {
-                                    htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car" l' +
-                                            'ist="car-info" tabindex="' + (
+                                    htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car in' +
+                                            'put-ent" list="car-info" tabindex="' + (
                                         tbi
                                     ) + '" placeholder="' + (
                                         k + 1
@@ -2678,8 +2678,8 @@ function makeAllo() {
                                             'disabled="disabled" data-bs-toggle="tooltip" data-bs-placement="top" title="고객' +
                                             '정보입력 후 배차해주세요.">';
                                 } else {
-                                    htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car" l' +
-                                            'ist="car-info" tabindex="' + (
+                                    htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car in' +
+                                            'put-ent" list="car-info" tabindex="' + (
                                         tbi
                                     ) + '" placeholder="' + (
                                         k + 1
@@ -2689,24 +2689,24 @@ function makeAllo() {
                                 htmls += '<input type="hidden" id="" value="0">';
                                 htmls += '<input type="hidden" id="" value="0">';
                                 if (r[i].ctmno == '0') {
-                                    htmls += '<input autocomplete="off" type="text" class="ve-emp" id="' + cnt + 'emp" list=' +
-                                            '"per-info" tabindex="-1" placeholder="승무원" disabled="disabled" data-bs-toggle=' +
-                                            '"tooltip" data-bs-placement="top" title="고객정보입력 후 배차해주세요.">';
+                                    htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="' + cnt + 'emp" list="per-info" tabindex="-1" placeholder="승무원" disabled="disabled" data-' +
+                                            'bs-toggle="tooltip" data-bs-placement="top" title="고객정보입력 후 배차해주세요.">';
                                 } else {
-                                    htmls += '<input autocomplete="off" type="text" class="ve-emp" id="' + cnt + 'emp" list=' +
-                                            '"per-info" tabindex="-1" placeholder="승무원">';
+                                    htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="' + cnt + 'emp" list="per-info" tabindex="-1" placeholder="승무원">';
                                 }
                                 htmls += '<input type="hidden" id="" value="0">';
 
                                 if (r[i].ctmno == '0') {
-                                    htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m" id=' +
-                                            '"' + cnt + 'm" onfocus="this.select()" data-type="currency" tabindex="' + (
+                                    htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m inpu' +
+                                            't-ent" id="' + cnt + 'm" onfocus="this.select()" data-type="currency" tabindex' +
+                                            '="' + (
                                         tbii
                                     ) + '" placeholder="배차금액" disabled="disabled" data-bs-toggle="tooltip" data-bs-' +
                                             'placement="top" title="고객정보입력 후 배차해주세요.">';
                                 } else {
-                                    htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m" id=' +
-                                            '"' + cnt + 'm" onfocus="this.select()" data-type="currency" tabindex="' + (
+                                    htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m inpu' +
+                                            't-ent" id="' + cnt + 'm" onfocus="this.select()" data-type="currency" tabindex' +
+                                            '="' + (
                                         tbii
                                     ) + '" placeholder="배차금액">';
                                 }

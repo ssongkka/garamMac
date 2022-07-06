@@ -28,7 +28,9 @@ import com.garam.web.dashboard.dto.RsvtDTO;
 import com.garam.web.dashboard.service.MainService;
 import com.garam.web.employee.dto.EmployeeInfoDTO;
 import com.garam.web.employee.service.EmployeeService;
+import com.garam.web.login.dto.UserDTO;
 import com.garam.web.login.entity.User;
+import com.garam.web.login.service.UserMyService;
 import com.garam.web.regular.dto.RegularDTO;
 import com.garam.web.regular.service.RegularService;
 import com.garam.web.vehicle.dto.VehicleInfoDTO;
@@ -46,6 +48,7 @@ public class Dashboard1Controller extends UiUtils {
 	private final VehicleService vehicleService;
 	private final CompanyService companyService;
 	private final RegularService regularService;
+	private final UserMyService userMyService;
 
 	@GetMapping
 	public String rsvt(@RequestParam(value = "dayyy", required = false) String dayyy,
@@ -80,6 +83,9 @@ public class Dashboard1Controller extends UiUtils {
 
 		List<RegularDTO> regList = regularService.selctRegular(null);
 		model.addAttribute("regList", regList);
+
+		List<UserDTO> userAll = userMyService.selectUser();
+		model.addAttribute("userAll", userAll);
 
 		return "dashboard1/dashBoard1";
 	}
@@ -147,14 +153,47 @@ public class Dashboard1Controller extends UiUtils {
 		return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/makePapperConstract")
-	public ResponseEntity<Object> makePapperConstract(@RequestBody RsvtDTO rsvtDTO) throws Exception {
-		File file = rsvtService.makePapperContract(rsvtDTO);
+	@GetMapping(value = "/downConstractExcel")
+	public ResponseEntity<Object> downConstractExcel() throws Exception {
+		File file = rsvtService.dwonSampleContract();
 
 		Resource resource = new InputStreamResource(new FileInputStream(file));
 
 		HttpHeaders headers = new HttpHeaders();
-		String fileName = "계약요" + ".xls";
+		String fileName = "계약서양식" + ".xls";
+		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());
+
+		return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/makePapperConstract")
+	public ResponseEntity<Object> makePapperConstract(@RequestParam(value = "stdayCt", required = true) String stday,
+			@RequestParam(value = "destyCt", required = true) String desty,
+			@RequestParam(value = "rsvpstpCt", required = true) String rsvpstp,
+			@RequestParam(value = "contCt", required = true) String cont,
+			@RequestParam(value = "ve1Ct", required = true) String ve1,
+			@RequestParam(value = "ve2Ct", required = true) String ve2,
+			@RequestParam(value = "ve3Ct", required = true) String ve3,
+			@RequestParam(value = "id1Ct", required = true) String id1,
+			@RequestParam(value = "id2Ct", required = true) String id2,
+			@RequestParam(value = "id3Ct", required = true) String id3,
+			@RequestParam(value = "conmCt", required = true) String conm,
+			@RequestParam(value = "ctmnameCt", required = true) String ctmname,
+			@RequestParam(value = "companyCt", required = true) String company,
+			@RequestParam(value = "opercomCt", required = true) String opercom,
+			@RequestParam(value = "opercarCt", required = true) String opercar) throws Exception {
+		File file = rsvtService.makePapperContract(stday, desty, rsvpstp, cont, ve1, ve2, ve3, id1, id2, id3, conm,
+				ctmname, company, opercom, opercar);
+
+		Resource resource = new InputStreamResource(new FileInputStream(file));
+
+		String daysss = stday.trim().split("\\(")[0];
+		String ctmmm = ctmname.trim();
+
+		HttpHeaders headers = new HttpHeaders();
+		String fileName = "계약서_" + ctmmm + "_" + stday + ".xls";
 		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());

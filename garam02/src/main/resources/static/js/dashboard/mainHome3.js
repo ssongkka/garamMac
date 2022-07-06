@@ -394,7 +394,7 @@ function makeTableOper(r) {
             let carcar = '';
             let carHtml = `<td class="operChohome tdPerson">` + carcar +
                     `</td>
-        <td class="operChohome tdPerson"></td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="" disabled></div><div class=""><input type="text" class="form-control operAltMIn" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td></td>`;
+        <td class="operChohome tdPerson"></td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="" disabled></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td></td>`;
             if (r[i].vehicle && r[i].dayst == 1) {
                 if (isNaN((r[i].vehicle).substring((r[i].vehicle).length - 4))) {
                     carcar = r[i]
@@ -408,7 +408,7 @@ function makeTableOper(r) {
                         <td class="operChohome tdPerson">` + r[i].name +
                             `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
                             r[i].operseq +
-                            `"></div><div class=""><input type="text" class="form-control operAltMIn" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="` +
+                            `"></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="` +
                             AddComma(r[i].atlm) +
                             `"></div></div></td><td class="tdRight operChohome">` + AddComma(r[i].numm) +
                             `</td>`;
@@ -427,7 +427,7 @@ function makeTableOper(r) {
                         <td class="operChohome tdPerson">` + r[i].name +
                                 `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
                                 r[i].operseq +
-                                `"></div><div class=""><input type="text" class="form-control operAltMIn" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="` +
+                                `"></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="` +
                                 AddComma(r[i].atlm) +
                                 `"></div></div></td><td class="tdRight operChohome">` + AddComma(r[i].numm) +
                                 `</td>`;
@@ -437,7 +437,7 @@ function makeTableOper(r) {
                         <td class="operChohome tdPerson">` + r[i].name +
                                 `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
                                 r[i].operseq +
-                                `"></div><div class=""><input type="text" class="form-control operAltMIn" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="` +
+                                `"></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="` +
                                 AddComma(r[i].atlm) +
                                 `"></div></div></td><td class="tdRight operChohome">` + AddComma(r[i].numm) +
                                 `</td>`;
@@ -457,7 +457,7 @@ function makeTableOper(r) {
                         <td class="operChohome tdPerson">` + r[i].name +
                             `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
                             r[i].operseq +
-                            `" disabled></div><div class=""><input type="text" class="form-control operAltMIn" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td class="tdRight operChohome">0</td>`;
+                            `" disabled></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td class="tdRight operChohome">0</td>`;
                 } else {
                     carcar = (r[i].vehicle).substring((r[i].vehicle).length - 4);
                     let cnt = 0;
@@ -473,14 +473,14 @@ function makeTableOper(r) {
                         <td class="operChohome tdPerson">` + r[i].name +
                                 `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
                                 r[i].operseq +
-                                `" disabled></div><div class=""><input type="text" class="form-control operAltMIn" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td class="tdRight operChohome">0</td>`;
+                                `" disabled></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td class="tdRight operChohome">0</td>`;
                     } else {
                         carHtml = `<td class="operChohome tdPerson">` + carcar +
                                 `</td>
                         <td class="operChohome tdPerson">` + r[i].name +
                                 `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
                                 r[i].operseq +
-                                `" disabled></div><div class=""><input type="text" class="form-control operAltMIn" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td class="tdRight operChohome">0</td>`;
+                                `" disabled></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td class="tdRight operChohome">0</td>`;
                     }
 
                 }

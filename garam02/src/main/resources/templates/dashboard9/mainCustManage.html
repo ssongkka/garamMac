@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="main-CustManage" class="manage">
+        <div class="main-CustManage">
+            <div class="main-CustManage-item1 card-song">
+                <div class="scBar">
+                    <div class="gum-search">
+                        <div class="gum-serach-group">
+                            <div class="gum-search-icon">
+                                <i class=" fas fa-search"></i>
+                            </div>
+                            <input
+                                type="text"
+                                id="cuMSearch"
+                                autocomplete="off"
+                                oninput="makeCuManageList(this.value)"
+                                placeholder="검색">
+                            <button id="btnCu-x">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button
+                            class="nav-link active"
+                            id="nav-Il-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-Il"
+                            type="button"
+                            role="tab"
+                            aria-controls="nav-Il"
+                            aria-selected="true">일 반</button>
+                        <button
+                            class="nav-link"
+                            id="nav-Hak-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-Hak"
+                            type="button"
+                            role="tab"
+                            aria-controls="nav-Hak"
+                            aria-selected="false">학생단체</button>
+                        <button
+                            class="nav-link"
+                            id="nav-Gu-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-Gu"
+                            type="button"
+                            role="tab"
+                            aria-controls="nav-Gu"
+                            aria-selected="false">거래처</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div
+                        class="tab-pane fade show active"
+                        id="nav-Il"
+                        role="tabpanel"
+                        aria-labelledby="nav-Il-tab">
+                        <div class="table-scroll">
+                            <div class="table-scroll-head">
+                                <div class="scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="30%"/>
+                                            <col width="24%"/>
+                                            <col width="23%"/>
+                                            <col width="23%"/>
+                                        </colgroup>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="sortStr">이름</th>
+                                                <th class="sortStr">연락처</th>
+                                                <th class="sortNum">계약금액</th>
+                                                <th class="sortNum">미수금</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="table-scroll-body-cuManage scBar">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <colgroup>
+                                        <col width="30%"/>
+                                        <col width="24%"/>
+                                        <col width="23%"/>
+                                        <col width="23%"/>
+                                    </colgroup>
+                                    <tbody id="cuManageTbIl"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="nav-Hak"
+                        role="tabpanel"
+                        aria-labelledby="nav-Hak-tab">
+                        <div class="table-scroll">
+                            <div class="table-scroll-head">
+                                <div class="scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="30%"/>
+                                            <col width="24%"/>
+                                            <col width="23%"/>
+                                            <col width="23%"/>
+                                        </colgroup>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="sortStr">학교이름</th>
+                                                <th class="sortStr">연락처</th>
+                                                <th class="sortNum">계약금액</th>
+                                                <th class="sortNum">미수금</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="table-scroll-body-cuManage scBar">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <colgroup>
+                                        <col width="30%"/>
+                                        <col width="24%"/>
+                                        <col width="23%"/>
+                                        <col width="23%"/>
+                                    </colgroup>
+                                    <tbody id="cuManageTbHak"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="nav-Gu"
+                        role="tabpanel"
+                        aria-labelledby="nav-Gu-tab">
+                        <div class="table-scroll">
+                            <div class="table-scroll-head">
+                                <div class="scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="30%"/>
+                                            <col width="24%"/>
+                                            <col width="23%"/>
+                                            <col width="23%"/>
+                                        </colgroup>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="sortStr">거래처</th>
+                                                <th class="sortStr">연락처</th>
+                                                <th class="sortNum">계약금액</th>
+                                                <th class="sortNum">미수금</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="table-scroll-body-cuManage scBar">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <colgroup>
+                                        <col width="30%"/>
+                                        <col width="24%"/>
+                                        <col width="23%"/>
+                                        <col width="23%"/>
+                                    </colgroup>
+                                    <tbody id="cuManageTbGu"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button
+                        type="button"
+                        class="btn btn-default"
+                        id="guManageMdNew"
+                        control-id="ControlID-12">신규입력
+                        <i class="fas fa-plus-square"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="main-CustManage-item2 cust-detail">
+                <div class="cudetail-item1 card-song">
+                    <div class="cudetail-item1-btn">
+                        <button
+                            class="btn btn-default"
+                            id="btnChReg"
+                            style="padding: 0 1rem;"
+                            control-id="ControlID-8">수정
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </div>
+                    <div class="cuMa-name" id="cumaDe0">고객이름</div>
+                    <div class="cuMa-tel" id="cumaDe1">연락처</div>
+                    <div class="cuMa-tel titlejae" id="cumaDe2">주소</div>
+                    <hr>
+                    <div class="cudetail-item2">
+                        <div class="guMa-title">
+                            <blockquote>
+                                <h5 class="titlejae">이메일</h5>
+                                <h5 id="cumaDe3">&nbsp;</h5>
+                            </blockquote>
+                        </div>
+                        <div class="guMa-title">
+                            <blockquote>
+                                <h5 class="titlejae">팩스</h5>
+                                <h5 id="cumaDe4">&nbsp;</h5>
+                            </blockquote>
+                        </div>
+                        <div class="guMa-title">
+                            <blockquote>
+                                <h5 class="titlejae">홈페이지</h5>
+                                <h5 id="cumaDe5">&nbsp;</h5>
+                            </blockquote>
+                        </div>
+                        <div class="guMa-title">
+                            <blockquote>
+                                <h5 class="titlejae">사업자등록번호</h5>
+                                <h5 id="cumaDe6">&nbsp;</h5>
+                            </blockquote>
+                        </div>
+                        <div class="guMa-title">
+                            <blockquote>
+                                <h5 class="titlejae">고정출발장소</h5>
+                                <h5 id="cumaDe7">&nbsp;</h5>
+                            </blockquote>
+                        </div>
+                        <div class="guMa-title">
+                            <blockquote>
+                                <h5 class="titlejae">메모</h5>
+                                <h5 id="cumaDe8">&nbsp;</h5>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="cuCont-item1">
+                    <div class="cuCont-item1-item1 card-song">
+                        <div>
+                            <h3>운행내역</h3>
+                        </div>
+                        <div class="table-scroll">
+                            <div class="table-scroll-head">
+                                <div class="scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="16%"/>
+                                            <col width="30%"/>
+                                            <col width="8%"/>
+                                            <col width="8%"/>
+                                            <col width="8%"/>
+                                            <col width="15%"/>
+                                            <col width="15%"/>
+                                        </colgroup>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="sortStr">날짜</th>
+                                                <th class="sortStr">목적지</th>
+                                                <th class="sortStr">차량</th>
+                                                <th class="sortNum">대수</th>
+                                                <th class="sortNum">계약</th>
+                                                <th class="sortNum">운행금액</th>
+                                                <th class="sortNum">미수금</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="table-scroll-body-cuManageRsvt scBar">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <colgroup>
+                                        <col width="16%"/>
+                                        <col width="30%"/>
+                                        <col width="8%"/>
+                                        <col width="8%"/>
+                                        <col width="8%"/>
+                                        <col width="15%"/>
+                                        <col width="15%"/>
+                                    </colgroup>
+                                    <tbody id="cuManageTbRsvt"></tbody>
+                                </table>
+                            </div>
+                            <div class="table-scroll-head">
+                                <div class="scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="16%"/>
+                                            <col width="30%"/>
+                                            <col width="8%"/>
+                                            <col width="8%"/>
+                                            <col width="8%"/>
+                                            <col width="15%"/>
+                                            <col width="15%"/>
+                                        </colgroup>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="2">합계</td>
+                                                <td id="cuSum1"></td>
+                                                <td id="cuSum2"></td>
+                                                <td>-</td>
+                                                <td class="tdRight" id="cuSum3"></td>
+                                                <td class="tdRight" id="cuSum4"></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cuCont-item1-item2 card-song"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

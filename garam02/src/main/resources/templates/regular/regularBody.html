@@ -86,7 +86,7 @@
                                             <col width="15%"/>
                                             <col width="10%"/>
                                         </colgroup>
-                                        <thead>
+                                        <thead class="table-light">
                                             <tr>
                                                 <th>회사이름</th>
                                                 <th>담당자</th>
@@ -113,7 +113,7 @@
                                             <col width="15%"/>
                                             <col width="10%"/>
                                         </colgroup>
-                                        <thead>
+                                        <thead class="table-light">
                                             <tr>
                                                 <th>회사이름</th>
                                                 <th>담당자</th>
@@ -228,7 +228,7 @@
                                         <col width="20%"/>
                                         <col width="20%"/>
                                     </colgroup>
-                                    <thead>
+                                    <thead class="table-light">
                                         <tr>
                                             <th>#</th>
                                             <th>노선이름</th>
@@ -264,7 +264,7 @@
                                         <col width="40%"/>
                                         <col width="30%"/>
                                     </colgroup>
-                                    <thead>
+                                    <thead class="table-light">
                                         <tr>
                                             <th>구분</th>
                                             <th>#</th>
@@ -319,30 +319,7 @@
             </datalist>
         </main>
         <div th:insert="regular/regularBodyRegNewMd :: reg-MD-Reginsert"></div>
-        <div th:replace="openTemplates/offCustomer :: offCustomer"></div>
         <div th:replace="openTemplates/modalCustomerUp :: modalCustUp"></div>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            const user =/*[[${user}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const opt =/*[[${opt}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbCompa =/*[[${compa}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbVe =/*[[${ve}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbEmp =/*[[${emp}]]*/
-            'default';
-            /*]]>*/
-        </script>
         <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
         <script
             language="javascript"

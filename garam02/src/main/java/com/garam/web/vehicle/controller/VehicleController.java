@@ -49,8 +49,8 @@ public class VehicleController {
 
 		model.addAttribute("user", user);
 
-		List<CompanyDTO> company = companyService.selectCompany();
-		model.addAttribute("company", company);
+		List<CompanyDTO> compa = companyService.selectCompany();
+		model.addAttribute("compa", compa);
 
 		List<VehicleInfoDTO> ve = vehicleService.selectVeAll(null);
 		model.addAttribute("ve", ve);

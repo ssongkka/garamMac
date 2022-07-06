@@ -73,7 +73,7 @@
                                     <col width="0%"/>
                                     <col width="0%"/>
                                 </colgroup>
-                                <thead>
+                                <thead class="table-light">
                                     <tr>
                                         <th>
                                             <i class="fas fa-minus"></i>
@@ -179,7 +179,7 @@
                             <label for="chchchch">노선 특이사항</label>
                             <div id="chchchch">
                                 <input
-                                    class="form-control input-sm"
+                                    class="form-control input-sm input-ent"
                                     type="text"
                                     id="rdememoo"
                                     placeholder="특이사항입력">
@@ -206,32 +206,6 @@
         </div>
     </div>
 
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        const user =/*[[${user}]]*/
-        'default';
-        /*]]>*/
-        /*<![CDATA[*/
-        const opt =/*[[${opt}]]*/
-        'default';
-        /*]]>*/
-        /*<![CDATA[*/
-        const dbCompa =/*[[${compa}]]*/
-        'default';
-        /*]]>*/
-        /*<![CDATA[*/
-        const dbVe =/*[[${ve}]]*/
-        'default';
-        /*]]>*/
-        /*<![CDATA[*/
-        const dbEmp =/*[[${emp}]]*/
-        'default';
-        /*]]>*/
-        /*<![CDATA[*/
-        const code =/*[[${code}]]*/
-        'default';
-        /*]]>*/
-    </script>
     <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
     <script
         language="javascript"

@@ -26,4 +26,20 @@ public class RestMainCustomerController {
 
 		return list;
 	}
+
+	@PostMapping(value = "/all")
+	public List<RsvtDTO> customerAll(@RequestBody RsvtDTO rsvtDTO) throws Exception {
+
+		List<RsvtDTO> list = rsvtService.selectCustomerAll(rsvtDTO);
+
+		return list;
+	}
+
+	@PostMapping(value = "/ctmRsvt")
+	public List<RsvtDTO> ctmRsvt(@RequestBody RsvtDTO rsvtDTO) throws Exception {
+
+		List<RsvtDTO> list = rsvtService.selectCustomerRsvt(rsvtDTO);
+
+		return list;
+	}
 }

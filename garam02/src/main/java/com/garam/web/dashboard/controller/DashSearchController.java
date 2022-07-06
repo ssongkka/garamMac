@@ -19,7 +19,9 @@ import com.garam.web.dashboard.dto.RsvtDTO;
 import com.garam.web.dashboard.service.MainService;
 import com.garam.web.employee.dto.EmployeeInfoDTO;
 import com.garam.web.employee.service.EmployeeService;
+import com.garam.web.login.dto.UserDTO;
 import com.garam.web.login.entity.User;
+import com.garam.web.login.service.UserMyService;
 import com.garam.web.vehicle.dto.VehicleInfoDTO;
 import com.garam.web.vehicle.service.VehicleService;
 
@@ -34,6 +36,7 @@ public class DashSearchController extends UiUtils {
 	private final EmployeeService employeeService;
 	private final VehicleService vehicleService;
 	private final CompanyService companyService;
+	private final UserMyService userMyService;
 
 	@PostMapping
 	public String rsvt(@RequestParam(value = "search", required = true) String search,
@@ -63,6 +66,8 @@ public class DashSearchController extends UiUtils {
 		List<RsvtDTO> othercompa = rsvtService.selectCustomerOtherCompa();
 		model.addAttribute("othercompa", othercompa);
 
+		List<UserDTO> userAll = userMyService.selectUser();
+		model.addAttribute("userAll", userAll);
 
 		return "dashSearch/dashSearch";
 	}

@@ -58,7 +58,6 @@ function showAlloVeWhat(dayday, cho) {
                             }
                         }
 
-
                         let styl = '';
                         if (r[i].insudatestart) {
                             styl = ' btn-outline-allo';

@@ -49,13 +49,13 @@ $(document).on('click', '#pills-rsvt-tab', function () {
 
     setNewRsvtModal();
 });
-$(document).on('click', '#card-ve', function () {
+$(document).on('click', '#cardVe', function () {
     window.open('/vehicle', '차량정보');
 });
-$(document).on('click', '#card-emp', function () {
+$(document).on('click', '#cardEmp', function () {
     window.open('/employee', '승무원정보');
 });
-$(document).on('click', '#card-reg', function () {
+$(document).on('click', '#cardReg', function () {
     window.open('/regular', '정기운행정보');
 });
 

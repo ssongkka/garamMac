@@ -28,6 +28,7 @@ import com.garam.web.dashboard.service.MainService;
 import com.garam.web.employee.dto.EmployeeInfoDTO;
 import com.garam.web.employee.service.EmployeeService;
 import com.garam.web.login.entity.User;
+import com.garam.web.regular.dto.RegularDTO;
 import com.garam.web.vehicle.dto.VehicleInfoDTO;
 import com.garam.web.vehicle.service.VehicleService;
 
@@ -52,8 +53,8 @@ public class EmployeeController extends UiUtils {
 		List<RsvtDTO> list = rsvtService.selectCustomerAll(rsvtDTO);
 		model.addAttribute("customer", list);
 
-		List<CompanyDTO> company = companyService.selectCompany();
-		model.addAttribute("company", company);
+		List<CompanyDTO> compa = companyService.selectCompany();
+		model.addAttribute("compa", compa);
 
 		List<EmployeeInfoDTO> emp = employeeService.selectEmpNameList();
 		model.addAttribute("emp", emp);

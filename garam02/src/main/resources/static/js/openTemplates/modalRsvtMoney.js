@@ -139,7 +139,7 @@ function getManageMD2() {
                                         <col width="13%">
                                         <col width="13%">
                                     </colgroup>
-                                    <thead>
+                                    <thead class="table-light">
                                         <th class="thNone"></th>
                                         <th>#</th>
                                         <th>담당자</th>
@@ -342,7 +342,7 @@ function getManageMD4(para) {
                                     <td class="tdRight">` +
                                         AddComma(janM) +
                                         `</td>
-                                    <td><input type="text" class="form-control inputManage" data-type="currency" value="` +
+                                    <td><input type="text" class="form-control inputManage input-ent" data-type="currency" value="` +
                                         AddComma(r[i].moneymoney) +
                                         `"></td>
                                     <td class="tdRight">` +
@@ -393,7 +393,7 @@ function getManageMD4(para) {
                                 <td class="tdRight">` +
                                         AddComma(janM) +
                                         `</td>
-                                <td><input type="text" class="form-control inputManage" data-type="currency"></td>
+                                <td><input type="text" class="form-control inputManage input-ent" data-type="currency"></td>
                                 <td class="tdRight"></td>
                             </tr>`;
                             }
@@ -431,7 +431,7 @@ function getManageMD4(para) {
                                 <td class="tdRight">` +
                                     momoney +
                                     `</td>
-                                <td><input type="text" class="form-control inputManage" data-type="currency"></td>
+                                <td><input type="text" class="form-control inputManage input-ent" data-type="currency"></td>
                                 <td class="tdRight"></td>
                             </tr>`
                         }

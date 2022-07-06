@@ -337,6 +337,7 @@ $(document).on('click', '#inNewUp', function () {
         }
     } else {
         alert("입력할 고객정보를 선택해주세요.");
+        closeLoadingWithMask();
     }
 });
 
@@ -477,14 +478,3 @@ function dateInput() {
         $("#daynight").css('color', 'red');
     }
 }
-
-$(document).on('click', '#customerInsertMo', function () {
-    const aaa = $('#offCustomer').css('visibility');
-
-    if (aaa == 'hidden') {
-        showOffCustomer();
-    } else {
-        $('#offCustomer').offcanvas('hide');
-    }
-
-});

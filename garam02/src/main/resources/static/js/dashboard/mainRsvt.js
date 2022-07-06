@@ -144,6 +144,13 @@ $(document).on('click', '#inNew', function () {
                     "X-HTTP-Method-Override": "POST"
                 };
 
+                let stppp = '';
+                if ($('#rsvpstp').val()) {
+                    stppp = $('#rsvpstp').val();
+                } else {
+                    stppp = $('#ctmstpIn').val();
+                }
+
                 const params = {
                     "ctmno": $('#ctmnoIn').val(),
                     "ctmsepa": sepa,
@@ -155,7 +162,7 @@ $(document).on('click', '#inNew', function () {
                     "ctmfax": $('#ctmfaxIn').val(),
                     "ctmcompanum": $('#ctmcompanumIn').val(),
                     "ctmhomepage": $('#ctmhomepageIn').val(),
-                    "ctmstp": $('#ctmstpIn').val(),
+                    "ctmstp": stppp,
                     "ctmdetail": $('#ctmdetailIn').val()
                 };
 
@@ -294,6 +301,10 @@ function insertRsvt(result) {
                         makeGuManageList();
                     }
 
+                    if ($('#cumanage').css('display') === 'block') {
+                        makeCuManageList();
+                    }
+
                     if ($('#allo').css('display') === 'block') {
                         goUrlDay('/dashboardallo', $('#stday').val());
                     }
@@ -371,15 +382,6 @@ function insertRsvt1(result) {
 
 $(document).on('click', '#many-insert', function () {});
 
-$(document).on('click', '#customerInsertMo', function () {
-    const aaa = $('#offCustomer').css('visibility');
-    if (aaa == 'hidden') {
-        showOffCustomer();
-    } else {
-        $('#offCustomer').offcanvas('hide');
-    }
-
-});
 $(document).on('click', '#btn-custom-modal', function () {
 
     const url = "/rsvtmany/insertctm";

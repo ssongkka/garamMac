@@ -1068,11 +1068,11 @@ function getEmpAllAllOper2(result) {
                     htmlsTb += `<td>` + rcccsepaa + `</td>`;
 
                     if ($('#emp-sal').val() > 0) {
-                        htmlsTb += `<td><input type="text" class="regmoney" data-type="currency" onfocus="this.select()" value="` +
+                        htmlsTb += `<td><input type="text" class="regmoney input-ent" data-type="currency" onfocus="this.select()" value="` +
                                 AddComma(r[i].regoperatlm) +
                                 `" disabled="disabled"></td>`;
                     } else {
-                        htmlsTb += `<td><input type="text" class="regmoney" data-type="currency" onfocus="this.select()" value="` +
+                        htmlsTb += `<td><input type="text" class="regmoney input-ent" data-type="currency" onfocus="this.select()" value="` +
                                 AddComma(r[i].regoperatlm) + `"></td>`;
                     }
                     htmlsTb += `<td>` + r[i].regoperconfirm + `</td>`;

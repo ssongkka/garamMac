@@ -74,7 +74,7 @@
                                 <col width="10%"/>
                                 <col width="15%"/>
                             </colgroup>
-                            <thead>
+                            <thead class="table-light">
                                 <tr>
                                     <th><input type="checkbox" id="contractChAll" checked="checked"></th>
                                     <th>목적지</th>
@@ -123,6 +123,23 @@
                         <h4>
                             <p>엑셀(excel)파일로 생성됩니다. 생성 후 수정 할 사항이있으면 수정해 주세요.</p>
                         </h4>
+                        <form th:action="@{/dashboard/makePapperConstract}" id="formPapperContract">
+                            <input type="hidden" id="contractstday" name="stdayCt" value="">
+                            <input type="hidden" id="contractdesty" name="destyCt" value="">
+                            <input type="hidden" id="contractrsvpstp" name="rsvpstpCt" value="">
+                            <input type="hidden" id="contractcont" name="contCt" value="">
+                            <input type="hidden" id="contractve1" name="ve1Ct" value="">
+                            <input type="hidden" id="contractve2" name="ve2Ct" value="">
+                            <input type="hidden" id="contractve3" name="ve3Ct" value="">
+                            <input type="hidden" id="contractid1" name="id1Ct" value="">
+                            <input type="hidden" id="contractid2" name="id2Ct" value="">
+                            <input type="hidden" id="contractid3" name="id3Ct" value="">
+                            <input type="hidden" id="contractconm" name="conmCt" value="">
+                            <input type="hidden" id="contractctmname" name="ctmnameCt" value="">
+                            <input type="hidden" id="contractcompany" name="companyCt" value="">
+                            <input type="hidden" id="contractopercom" name="opercomCt" value="">
+                            <input type="hidden" id="contractopercar" name="opercarCt" value="">
+                        </form>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -130,6 +147,12 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
                     </div>
                     <div class="mdMfIn">
+                        <a
+                            th:href="@{/dashboard/downConstractExcel}"
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            id="contractDownExcel">
+                            <i class="fa-solid fa-file-excel"></i>계약서 양식</a>
                         <button type="button" class="btn btn-success" id="contractMakeExcel">
                             <i class="fa-solid fa-file-excel"></i>계약서 생성</button>
                     </div>
@@ -181,7 +204,7 @@
                                     <col width="10%">
                                     <col width="10%">
                                 </colgroup>
-                                <thead>
+                                <thead class="table-light">
                                     <tr>
                                         <th>#</th>
                                         <th>선택</th>
@@ -345,7 +368,7 @@
                                             <col width="10%">
                                             <col width="10%">
                                         </colgroup>
-                                        <thead>
+                                        <thead class="table-light">
                                             <th>#</th>
                                             <th>차량번호</th>
                                             <th>운행승무원</th>

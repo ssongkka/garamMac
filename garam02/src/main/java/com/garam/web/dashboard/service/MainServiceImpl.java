@@ -14,22 +14,28 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +43,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.garam.Utils.FTPManager;
 import com.garam.Utils.PDFUtil;
+import com.garam.Utils.Utils;
 import com.garam.company.dto.CompanyDTO;
 import com.garam.company.mapper.CompanyMapper;
 import com.garam.web.dashboard.dto.CustomerDTO;
@@ -81,6 +88,12 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public List<RsvtDTO> selectCustomerName(RsvtDTO rsvtDTO) throws Exception {
 		List<RsvtDTO> list = rsvtMapper.selectCustomerName(rsvtDTO);
+		return list;
+	}
+
+	@Override
+	public List<RsvtDTO> selectCustomerRsvt(RsvtDTO rsvtDTO) throws Exception {
+		List<RsvtDTO> list = rsvtMapper.selectCustomerRsvt(rsvtDTO);
 		return list;
 	}
 
@@ -205,7 +218,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public File dwonSampleRsvt() {
+	public File dwonSampleRsvt() throws Exception {
 
 		File file = null;
 		HSSFWorkbook wb = null;
@@ -459,16 +472,21 @@ public class MainServiceImpl implements MainService {
 								rsvtDto.setCtmname(sheet.getRow(cntCell).getCell(5).getStringCellValue());
 								tmpList = rsvtMapper.selectCustomerAll(rsvtDto);
 
+								ctmNo.clear();
+								ctmname.clear();
+								ctmtel.clear();
+
 								if (tmpList.size() > 0) {
-									ctmNo.clear();
-									ctmname.clear();
-									ctmtel.clear();
 
 									for (int i = 0; i < tmpList.size(); i++) {
 										ctmNo.add(tmpList.get(i).getCtmno());
 										ctmname.add(tmpList.get(i).getCtmname());
 										ctmtel.add(tmpList.get(i).getCtmtel1());
 									}
+								} else {
+									ctmNo.add("");
+									ctmname.add(naaa);
+									ctmtel.add(teee);
 								}
 							}
 						}
@@ -1113,9 +1131,6 @@ public class MainServiceImpl implements MainService {
 
 		ArrayList<File> arr_File = new ArrayList<File>();
 
-		System.out.println("11111111");
-		System.out.println("22222222");
-
 		for (int i = 0; i < tmpArr_Papper.length; i++) {
 
 			System.out.println(tmpArr_Papper[i]);
@@ -1167,22 +1182,20 @@ public class MainServiceImpl implements MainService {
 		PDFmerger.setDestinationStream(bout2);
 
 		PDFmerger.mergeDocuments(null);
+		System.out.println();
 
 		return file;
 	}
 
 	@Override
-	public File makePapperContract(RsvtDTO rsvtDTO) throws Exception {
+	public File makePapperContract(String stday, String desty, String rsvpstp, String cont, String ve1, String ve2,
+			String ve3, String id1, String id2, String id3, String conm, String ctmname, String company, String opercom,
+			String opercar) throws Exception {
 
 		File file = null;
 		HSSFWorkbook wb = null;
-		FileOutputStream fileoutputstream = null;
 
 		try {
-
-			RsvtDTO tmpDto = new RsvtDTO();
-
-			List<RsvtDTO> list = rsvtMapper.selectCustomerAll(tmpDto);
 
 			String url = "src/main/resources/static/excel/excelcontract.xls";
 
@@ -1191,111 +1204,406 @@ public class MainServiceImpl implements MainService {
 			wb = new HSSFWorkbook(fis);
 			HSSFSheet sheet = wb.getSheetAt(0);
 
-			CellStyle style = wb.createCellStyle();
-			style.setBorderBottom(BorderStyle.THIN);
-			style.setBorderTop(BorderStyle.THIN);
-			style.setBorderRight(BorderStyle.THIN);
-			style.setBorderLeft(BorderStyle.THIN);
+			HSSFFont font1 = wb.createFont();
+			font1.setFontHeightInPoints((short) 15);
+			font1.setFontName("Malgun Gothic (본문)");
 
-			style.setAlignment(HorizontalAlignment.CENTER);
-			style.setVerticalAlignment(VerticalAlignment.CENTER);
+			HSSFFont font2 = wb.createFont();
+			font2.setFontHeightInPoints((short) 15);
+			font2.setBold(true);
+			font2.setFontName("Malgun Gothic (본문)");
+
+			HSSFFont font3 = wb.createFont();
+			font3.setFontHeightInPoints((short) 17);
+			font3.setBold(true);
+			font3.setFontName("Malgun Gothic (본문)");
+
+			CellStyle style1 = wb.createCellStyle();
+
+			style1.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1.setFont(font1);
+			style1.setWrapText(true);
+
+			CellStyle style1_1 = wb.createCellStyle();
+			style1_1.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_1.setAlignment(HorizontalAlignment.RIGHT);
+			style1_1.setFont(font1);
+			style1_1.setWrapText(true);
+
+			CellStyle style1_2 = wb.createCellStyle();
+			style1_2.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_2.setAlignment(HorizontalAlignment.CENTER);
+			style1_2.setFont(font1);
+			style1_2.setWrapText(true);
+
+			CellStyle style2 = wb.createCellStyle();
+
+			style2.setVerticalAlignment(VerticalAlignment.CENTER);
+			style2.setFont(font1);
+			style2.setWrapText(true);
+
+			CellStyle style3 = wb.createCellStyle();
+
+			style3.setAlignment(HorizontalAlignment.CENTER);
+			style3.setVerticalAlignment(VerticalAlignment.CENTER);
+			style3.setFont(font2);
+			style3.setWrapText(true);
+
+			style3.setBorderBottom(BorderStyle.THIN);
+			style3.setBorderTop(BorderStyle.THIN);
+			style3.setBorderRight(BorderStyle.THIN);
+			style3.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style4 = wb.createCellStyle();
+
+			style4.setAlignment(HorizontalAlignment.CENTER);
+			style4.setVerticalAlignment(VerticalAlignment.CENTER);
+			style4.setFont(font2);
+			style4.setWrapText(true);
+
+			style4.setBorderBottom(BorderStyle.THIN);
+			style4.setBorderTop(BorderStyle.THIN);
+			style4.setBorderRight(BorderStyle.THIN);
+			style4.setBorderLeft(BorderStyle.THIN);
+
+			style4.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+			style4.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+			CellStyle style5 = wb.createCellStyle();
+
+			style5.setVerticalAlignment(VerticalAlignment.CENTER);
+			style5.setFont(font3);
+			style5.setWrapText(true);
 
 			HSSFRow row = sheet.createRow(4);
-			row.setHeight((short) 800);
+			row.setHeight((short) 400);
 
 			HSSFCell cell = row.createCell(0);
-			cell.setCellStyle(style);
+			cell.setCellStyle(style1);
 			cell.setCellValue(
-					"     " + rsvtDTO.getCtmname() + "을(를) \"갑\"이라고 하고, " + rsvtDTO.getCompany() + "을 \"을\"이라 하며");
+					"     " + ctmname + "을(를) \"갑\"이라고 하고, " + company + "을 \"을\"이라 하며 다음과 같이 전세버스 임대차 계약을 체결한다.");
 
 			row = sheet.createRow(8);
+			row.setHeight((short) 600);
+
+			cell = row.createCell(0);
+			cell.setCellStyle(style4);
+			cell.setCellValue("임차기간");
+
+			cell = row.createCell(1);
+			cell.setCellStyle(style3);
+			cell = row.createCell(2);
+			cell.setCellStyle(style3);
 
 			cell = row.createCell(3);
-			cell.setCellStyle(style);
-			cell.setCellValue(rsvtDTO.getStday());
+			cell.setCellStyle(style3);
+			cell.setCellValue(stday);
+
+			cell.setCellStyle(style3);
+			cell = row.createCell(4);
+			cell.setCellStyle(style3);
+			cell = row.createCell(5);
+			cell.setCellStyle(style3);
+			cell = row.createCell(6);
+			cell.setCellStyle(style3);
+			cell = row.createCell(7);
+			cell.setCellStyle(style3);
+			cell = row.createCell(8);
+			cell.setCellStyle(style3);
+			cell = row.createCell(9);
+			cell.setCellStyle(style3);
+			cell = row.createCell(10);
+			cell.setCellStyle(style3);
+			cell = row.createCell(11);
+			cell.setCellStyle(style3);
+			cell = row.createCell(12);
+			cell.setCellStyle(style3);
+			cell = row.createCell(13);
+			cell.setCellStyle(style3);
+			cell = row.createCell(14);
+			cell.setCellStyle(style3);
+			cell = row.createCell(15);
+			cell.setCellStyle(style3);
+			cell = row.createCell(16);
+			cell.setCellStyle(style3);
+			cell = row.createCell(17);
+			cell.setCellStyle(style3);
 
 			String connnn = "";
-			switch (rsvtDTO.getCont()) {
+			switch (cont) {
 			case "카드":
 				connnn = "* 카드 결재, ";
 				break;
 
 			default:
-				connnn = "* 부가세 " + rsvtDTO.getCont() + ", ";
+				connnn = "* 부가세 " + cont + ", ";
 				break;
 			}
 
 			String busNum = "";
-			if (rsvtDTO.getVe1().length() > 0) {
-				busNum += "대형 " + rsvtDTO.getVe1() + "대";
-				connnn += "대형 " + rsvtDTO.getVe1() + "대 X " + rsvtDTO.getId1() + "원";
+			if (Integer.parseInt(ve1) > 0) {
+				busNum += "대형 " + ve1 + "대";
+				connnn += "대형 " + ve1 + "대 X " + id1 + "원";
 			}
-			if (rsvtDTO.getVe2().length() > 0) {
+			if (Integer.parseInt(ve2) > 0) {
 				if (busNum.length() > 0) {
-					busNum += ", 중형 " + rsvtDTO.getVe2() + "대";
-					connnn += ", 중형 " + rsvtDTO.getVe2() + "대 X " + rsvtDTO.getId2() + "원";
+					busNum += ", 중형 " + ve2 + "대";
+					connnn += ", 중형 " + ve2 + "대 X " + id2 + "원";
 				} else {
-					busNum += "중형 " + rsvtDTO.getVe2() + "대";
-					connnn += "중형 " + rsvtDTO.getVe2() + "대 X " + rsvtDTO.getId2() + "원";
+					busNum += "중형 " + ve2 + "대";
+					connnn += "중형 " + ve2 + "대 X " + id2 + "원";
 				}
 			}
-			if (rsvtDTO.getVe3().length() > 0) {
+			if (Integer.parseInt(ve3) > 0) {
 				if (busNum.length() > 0) {
-					busNum += ", 우등 " + rsvtDTO.getVe3() + "대";
-					connnn += ", 우등 " + rsvtDTO.getVe3() + "대 X " + rsvtDTO.getId3() + "원";
+					busNum += ", 우등 " + ve3 + "대";
+					connnn += ", 우등 " + ve3 + "대 X " + id3 + "원";
 				} else {
-					busNum += "우등 " + rsvtDTO.getVe3() + "대";
-					connnn += "우등 " + rsvtDTO.getVe3() + "대 X " + rsvtDTO.getId3() + "원";
+					busNum += "우등 " + ve3 + "대";
+					connnn += "우등 " + ve3 + "대 X " + id3 + "원";
 				}
 			}
 
 			row = sheet.createRow(9);
-
-			cell = row.createCell(3);
-			cell.setCellStyle(style);
-			cell.setCellValue(busNum);
-
-			row = sheet.createRow(10);
-
-			cell = row.createCell(3);
-			cell.setCellStyle(style);
-			cell.setCellValue(rsvtDTO.getRsvpstp());
-
-			row = sheet.createRow(11);
-
-			cell = row.createCell(3);
-			cell.setCellStyle(style);
-			cell.setCellValue(rsvtDTO.getDesty());
-
-			row = sheet.createRow(13);
-
-			cell = row.createCell(3);
-			cell.setCellStyle(style);
-			cell.setCellValue(connnn);
-
-			row = sheet.createRow(15);
+			row.setHeight((short) 600);
 
 			cell = row.createCell(0);
-			cell.setCellStyle(style);
+			cell.setCellStyle(style4);
+			cell.setCellValue("임차수량");
+
+			cell = row.createCell(1);
+			cell.setCellStyle(style3);
+			cell = row.createCell(2);
+			cell.setCellStyle(style3);
+
+			cell = row.createCell(3);
+			cell.setCellStyle(style3);
+			cell.setCellValue(busNum);
+
+			cell.setCellStyle(style3);
+			cell = row.createCell(4);
+			cell.setCellStyle(style3);
+			cell = row.createCell(5);
+			cell.setCellStyle(style3);
+			cell = row.createCell(6);
+			cell.setCellStyle(style3);
+			cell = row.createCell(7);
+			cell.setCellStyle(style3);
+			cell = row.createCell(8);
+			cell.setCellStyle(style3);
+			cell = row.createCell(9);
+			cell.setCellStyle(style3);
+			cell = row.createCell(10);
+			cell.setCellStyle(style3);
+			cell = row.createCell(11);
+			cell.setCellStyle(style3);
+			cell = row.createCell(12);
+			cell.setCellStyle(style3);
+			cell = row.createCell(13);
+			cell.setCellStyle(style3);
+			cell = row.createCell(14);
+			cell.setCellStyle(style3);
+			cell = row.createCell(15);
+			cell.setCellStyle(style3);
+			cell = row.createCell(16);
+			cell.setCellStyle(style3);
+			cell = row.createCell(17);
+			cell.setCellStyle(style3);
+
+			row = sheet.createRow(10);
+			row.setHeight((short) 600);
+
+			cell = row.createCell(0);
+			cell.setCellStyle(style4);
+			cell.setCellValue("출 발 지");
+
+			cell = row.createCell(1);
+			cell.setCellStyle(style3);
+			cell = row.createCell(2);
+			cell.setCellStyle(style3);
+
+			cell = row.createCell(3);
+			cell.setCellStyle(style3);
+			cell.setCellValue(rsvpstp);
+
+			cell.setCellStyle(style3);
+			cell = row.createCell(4);
+			cell.setCellStyle(style3);
+			cell = row.createCell(5);
+			cell.setCellStyle(style3);
+			cell = row.createCell(6);
+			cell.setCellStyle(style3);
+			cell = row.createCell(7);
+			cell.setCellStyle(style3);
+			cell = row.createCell(8);
+			cell.setCellStyle(style3);
+			cell = row.createCell(9);
+			cell.setCellStyle(style3);
+			cell = row.createCell(10);
+			cell.setCellStyle(style3);
+			cell = row.createCell(11);
+			cell.setCellStyle(style3);
+			cell = row.createCell(12);
+			cell.setCellStyle(style3);
+			cell = row.createCell(13);
+			cell.setCellStyle(style3);
+			cell = row.createCell(14);
+			cell.setCellStyle(style3);
+			cell = row.createCell(15);
+			cell.setCellStyle(style3);
+			cell = row.createCell(16);
+			cell.setCellStyle(style3);
+			cell = row.createCell(17);
+			cell.setCellStyle(style3);
+
+			row = sheet.createRow(11);
+			row.setHeight((short) 600);
+
+			cell = row.createCell(0);
+			cell.setCellStyle(style4);
+			cell.setCellValue("목 적 지");
+
+			cell = row.createCell(1);
+			cell.setCellStyle(style3);
+			cell = row.createCell(2);
+			cell.setCellStyle(style3);
+
+			cell = row.createCell(3);
+			cell.setCellStyle(style3);
+			cell.setCellValue(desty);
+
+			cell.setCellStyle(style3);
+			cell = row.createCell(4);
+			cell.setCellStyle(style3);
+			cell = row.createCell(5);
+			cell.setCellStyle(style3);
+			cell = row.createCell(6);
+			cell.setCellStyle(style3);
+			cell = row.createCell(7);
+			cell.setCellStyle(style3);
+			cell = row.createCell(8);
+			cell.setCellStyle(style3);
+			cell = row.createCell(9);
+			cell.setCellStyle(style3);
+			cell = row.createCell(10);
+			cell.setCellStyle(style3);
+			cell = row.createCell(11);
+			cell.setCellStyle(style3);
+			cell = row.createCell(12);
+			cell.setCellStyle(style3);
+			cell = row.createCell(13);
+			cell.setCellStyle(style3);
+			cell = row.createCell(14);
+			cell.setCellStyle(style3);
+			cell = row.createCell(15);
+			cell.setCellStyle(style3);
+			cell = row.createCell(16);
+			cell.setCellStyle(style3);
+			cell = row.createCell(17);
+			cell.setCellStyle(style3);
+
+			row = sheet.createRow(13);
+			row.setHeight((short) 600);
+
+			cell = row.createCell(0);
+			cell.setCellStyle(style4);
+			cell.setCellValue("* 계약금액");
+
+			cell = row.createCell(1);
+			cell.setCellStyle(style3);
+			cell = row.createCell(2);
+			cell.setCellStyle(style3);
+
+			Utils util = new Utils();
+
+			String moneyAll = conm.replaceAll(",", "");
+
+			cell = row.createCell(3);
+			cell.setCellStyle(style3);
+			cell.setCellValue(
+					util.NumberToKor(moneyAll) + "(" + Currency.getInstance(Locale.KOREA).getSymbol() + conm + ")");
+
+			cell = row.createCell(4);
+			cell.setCellStyle(style3);
+			cell = row.createCell(5);
+			cell.setCellStyle(style3);
+			cell = row.createCell(6);
+			cell.setCellStyle(style3);
+			cell = row.createCell(7);
+			cell.setCellStyle(style3);
+			cell = row.createCell(8);
+			cell.setCellStyle(style3);
+			cell = row.createCell(9);
+			cell.setCellStyle(style3);
+			cell = row.createCell(10);
+			cell.setCellStyle(style3);
+			cell = row.createCell(11);
+			cell.setCellStyle(style3);
+			cell = row.createCell(12);
+			cell.setCellStyle(style3);
+			cell = row.createCell(13);
+			cell.setCellStyle(style3);
+			cell = row.createCell(14);
+			cell.setCellStyle(style3);
+			cell = row.createCell(15);
+			cell.setCellStyle(style3);
+			cell = row.createCell(16);
+			cell.setCellStyle(style3);
+			cell = row.createCell(17);
+			cell.setCellStyle(style3);
+
+			row = sheet.createRow(15);
+			row.setHeight((short) 400);
+
+			cell = row.createCell(0);
+			cell.setCellStyle(style1);
 			cell.setCellValue(connnn);
 
-			row = sheet.createRow(46);
-
-			cell = row.createCell(5);
-			cell.setCellStyle(style);
-			cell.setCellValue(rsvtDTO.getOpercom());
-
 			row = sheet.createRow(47);
+			row.setHeight((short) 600);
+
+			cell = row.createCell(0);
+			cell.setCellStyle(style5);
+			cell.setCellValue("\"을\"");
+
+			cell = row.createCell(2);
+			cell.setCellStyle(style1_1);
+			cell.setCellValue("소  재  지");
+			cell = row.createCell(4);
+			cell.setCellStyle(style1_2);
+			cell.setCellValue(":");
 
 			cell = row.createCell(5);
-			cell.setCellStyle(style);
-			cell.setCellValue(rsvtDTO.getCompany());
+			cell.setCellStyle(style1);
+			cell.setCellValue(opercom);
 
 			row = sheet.createRow(48);
+			row.setHeight((short) 600);
+
+			cell = row.createCell(2);
+			cell.setCellStyle(style1_1);
+			cell.setCellValue("회  사  명");
+			cell = row.createCell(4);
+			cell.setCellStyle(style1_2);
+			cell.setCellValue(":");
 
 			cell = row.createCell(5);
-			cell.setCellStyle(style);
-			cell.setCellValue(rsvtDTO.getOpercar());
+			cell.setCellStyle(style1);
+			cell.setCellValue(company);
+
+			row = sheet.createRow(49);
+			row.setHeight((short) 600);
+
+			cell = row.createCell(2);
+			cell.setCellStyle(style1_1);
+			cell.setCellValue("대  표  자");
+			cell = row.createCell(4);
+			cell.setCellStyle(style1_2);
+			cell.setCellValue(":");
+
+			cell = row.createCell(5);
+			cell.setCellStyle(style1);
+			cell.setCellValue(opercar + "     (인)");
 
 			int a = (int) ((Math.random() * 10000) + 10);
 
@@ -1304,7 +1612,43 @@ public class MainServiceImpl implements MainService {
 
 			wb.write(file);
 
-//			fileoutputstream.close();
+			wb.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+		}
+
+		return file;
+	}
+
+	@Override
+	public File dwonSampleContract() throws Exception {
+
+		File file = null;
+		HSSFWorkbook wb = null;
+
+		try {
+
+			String url = "src/main/resources/static/excel/excelcontract.xls";
+
+			FileInputStream fis = new FileInputStream(url);
+
+			wb = new HSSFWorkbook(fis);
+
+			int a = (int) ((Math.random() * 10000) + 10);
+
+			file = File.createTempFile("tmp" + Integer.toString(a), ".tmp");
+			file.deleteOnExit();
+
+			wb.write(file);
 
 			wb.close();
 
@@ -1471,7 +1815,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 	private File getAlcholPDF(String companyyy, String dayyy, List<RsvtDTO> listCtm, ArrayList<List<RsvtDTO>> list_Rsvt,
-			List<CompanyDTO> listCompa) throws DocumentException, IOException {
+			List<CompanyDTO> listCompa) throws Exception {
 		PDFUtil pdfU = new PDFUtil();
 
 		Document document = null;
@@ -1616,7 +1960,24 @@ public class MainServiceImpl implements MainService {
 
 		PdfPCell[] cell_foot1 = new PdfPCell[4];
 
-		Image img = Image.getInstance(this.getClass().getResource("/static/img/company/newdo.png"));
+		List<CompanyDTO> comList = companyMapper.selectCompany();
+
+		int chCompa = 0;
+
+		for (int i = 0; i < comList.size(); i++) {
+			if (comList.get(i).getCompany().equals(companyyy)) {
+				chCompa = i;
+			}
+		}
+
+		Image img = null;
+
+		if (chCompa > 0) {
+			img = Image.getInstance(this.getClass().getResource("/static/img/company/do01.png"));
+		} else {
+			img = Image.getInstance(this.getClass().getResource("/static/img/company/do02.png"));
+		}
+
 		img.scalePercent(20);
 
 		cell_foot1[0] = new PdfPCell(new Paragraph("대 표 자", font1));
@@ -1661,7 +2022,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 	private File getGaksuPDF(String companyyy, String dayyy, List<RsvtDTO> listCtm, ArrayList<List<RsvtDTO>> list_Rsvt,
-			List<CompanyDTO> listCompa) throws DocumentException, IOException {
+			List<CompanyDTO> listCompa) throws Exception {
 		PDFUtil pdfU = new PDFUtil();
 
 		int chCom = 0;
@@ -1821,7 +2182,23 @@ public class MainServiceImpl implements MainService {
 
 		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
 
-		Image img = Image.getInstance(this.getClass().getResource("/static/img/company/newdo.png"));
+		List<CompanyDTO> comList = companyMapper.selectCompany();
+
+		int chCompa = 0;
+
+		for (int i = 0; i < comList.size(); i++) {
+			if (comList.get(i).getCompany().equals(companyyy)) {
+				chCompa = i;
+			}
+		}
+
+		Image img = null;
+
+		if (chCompa > 0) {
+			img = Image.getInstance(this.getClass().getResource("/static/img/company/do01.png"));
+		} else {
+			img = Image.getInstance(this.getClass().getResource("/static/img/company/do02.png"));
+		}
 
 		img.setAbsolutePosition(440, 180);
 		img.scalePercent(20);
@@ -1868,7 +2245,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 	private File getAnjunPDF(String companyyy, String dayyy, List<RsvtDTO> listCtm, ArrayList<List<RsvtDTO>> list_Rsvt,
-			List<CompanyDTO> listCompa) throws DocumentException, IOException {
+			List<CompanyDTO> listCompa) throws Exception {
 		PDFUtil pdfU = new PDFUtil();
 
 		int chCom = 0;
@@ -2348,7 +2725,23 @@ public class MainServiceImpl implements MainService {
 			table_cont.addCell(cell_cont14[i]);
 		}
 
-		Image img = Image.getInstance(this.getClass().getResource("/static/img/company/newdo.png"));
+		List<CompanyDTO> comList = companyMapper.selectCompany();
+
+		int chCompa = 0;
+
+		for (int i = 0; i < comList.size(); i++) {
+			if (comList.get(i).getCompany().equals(companyyy)) {
+				chCompa = i;
+			}
+		}
+
+		Image img = null;
+
+		if (chCompa > 0) {
+			img = Image.getInstance(this.getClass().getResource("/static/img/company/do01.png"));
+		} else {
+			img = Image.getInstance(this.getClass().getResource("/static/img/company/do02.png"));
+		}
 
 		img.setAbsolutePosition(510, 615);
 		img.scalePercent(20);

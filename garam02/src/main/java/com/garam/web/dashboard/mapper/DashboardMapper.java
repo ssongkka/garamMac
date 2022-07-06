@@ -18,6 +18,8 @@ public interface DashboardMapper {
 
 	public List<RsvtDTO> selectCustomerName(RsvtDTO rsvtDTO) throws Exception;
 
+	public List<RsvtDTO> selectCustomerRsvt(RsvtDTO rsvtDTO) throws Exception;
+
 	public int insertRsvt(RsvtDTO rsvtDTO) throws Exception;
 
 	public int insertCtm(RsvtDTO rsvtDTO) throws Exception;

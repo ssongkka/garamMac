@@ -10,7 +10,6 @@
         <th:block th:replace="layout/linkGroupCss :: linkCss"></th:block>
 
         <link rel="stylesheet" href="/css/dashboardCss/rsvtManyExcel.css?v=2020051201">
-        <link rel="stylesheet" href="/css/openTemplates/offCustomer.css?v=2020051201">
         <link
             rel="stylesheet"
             href="/css/openTemplates/insertCustomer.css?v=2020051201">
@@ -46,25 +45,27 @@
                             style="display: none;">
                     </form>
                 </div>
-
                 <div class="main-side-item3">
                     <div>파일이름</div>
-                    <div id="file1">파일이름</div>
+                    <div id="file1"></div>
                     <div>예약건수</div>
-                    <div id="file2">예약건수</div>
+                    <div id="file2"></div>
                     <div>대형</div>
-                    <div id="file3">대형</div>
+                    <div id="file3"></div>
                     <div>중형</div>
-                    <div id="file4">중형</div>
+                    <div id="file4"></div>
                     <div>우등</div>
-                    <div id="file5">우등</div>
+                    <div id="file5"></div>
+                    <div class="ctm2 imfoctm"></div>
+                    <div class="">신규고객정보</div>
+                    <div class="ctm1 imfoctm"></div>
+                    <div class="">기존고객정보</div>
                 </div>
-                <div class="main-side-item4" id="excelGo">
-                </div>
+                <div class="main-side-item4" id="excelGo"></div>
             </div>
             <div class="main-cont">
                 <div class="main-cont-item1">
-                    <table class="table table-bordered table-striped table-sm">
+                    <table class="table table-bordered table-sm">
                         <colgroup>
                             <col width="3%"/>
                             <col width="6%"/>
@@ -102,27 +103,12 @@
                 </div>
             </div>
         </main>
-        <div th:replace="openTemplates/offCustomer :: offCustomer"></div>
         <div th:replace="openTemplates/modalCustomerUp :: modalCustUp"></div>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            const opt =/*[[${opt}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbuser =/*[[${user}]]*/
-            'default';
-            /*]]>*/
-        </script>
         <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
         <script
             language="javascript"
             type="text/javascript"
             src="/js/dashboard/rsvtManyExcel.js?v=2020051201"></script>
-        <script
-            language="javascript"
-            type="text/javascript"
-            src="/js/openTemplates/offCustomer.js?v=2020051201"></script>
         <script
             language="javascript"
             type="text/javascript"

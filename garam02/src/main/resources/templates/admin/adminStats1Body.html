@@ -173,29 +173,6 @@
             </div>
         </main>
         <div th:replace="admin/adminMDVeCompa :: adMDVeCompa"></div>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            const opt =/*[[${opt}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbuser =/*[[${user}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbCompa =/*[[${compa}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbVe =/*[[${ve}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbEmp =/*[[${emp}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-        </script>
         <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"

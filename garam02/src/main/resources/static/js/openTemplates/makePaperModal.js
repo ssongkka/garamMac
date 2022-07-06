@@ -156,9 +156,11 @@ $(document).on("click", "#contractMakeExcel", function () {
                     } else {
                         const tmpbak = betweenDateNum($(aaa1[7]).val(), $(aaa1[8]).val());
 
-                        const daysss = parseInt(tmpbak) - 1 + '박 ' + parseInt(tmpbak) + '일';
+                        const daysss = '(' + (
+                            parseInt(tmpbak) - 1
+                        ) + '박 ' + parseInt(tmpbak) + '일)';
 
-                        arrTmpday.push(sttt + ' ~ ' + eddd + ' ' + daysss);
+                        arrTmpday.push(sttt + '부터 ' + eddd + '까지' + daysss);
                     }
                 }
             });
@@ -175,14 +177,15 @@ $(document).on("click", "#contractMakeExcel", function () {
             }
 
             if (uniqueDay.length > 1) {
-                alert("같은 운행 일자의 계약서만 생성가능합니다.\n\n확인 후 다시 선택하시거나 계약서 샘플파일을 다운받아 직접 작성해주세요.");
+                alert("같은 운행 일자의 계약서만 생성가능합니다.\n\n확인 후 다시 선택하시거나 '계약서 양식'파일을 다운받아 직접 작성해주세요.");
                 closeLoadingWithMask();
                 return;
             }
 
             if (uniqueCont.length > 1) {
                 alert(
-                    "부가세 형태(포함, 미포함, 카드)가 중복일 수는 없습니다.\n\n확인 후 다시 선택하시거나 계약서 샘플파일을 다운받아 직접 작성해주세요."
+                    "부가세 형태(포함, 미포함, 카드)가 중복일 수는 없습니다.\n\n확인 후 다시 선택하시거나 '계약서 양식'파일을 다운받아 직접 작성해주세요" +
+                    "."
                 );
                 closeLoadingWithMask();
                 return;
@@ -208,17 +211,6 @@ $(document).on("click", "#contractMakeExcel", function () {
 
             const contttt = uniqueCont[0];
 
-            console.log(destyyyy);
-            console.log(stpppp);
-            console.log(contttt);
-            console.log(tmp45);
-            console.log(tmp25);
-            console.log(tmp28);
-            console.log(tmpContM45);
-            console.log(tmpContM25);
-            console.log(tmpContM28);
-            console.log(tmpContM);
-
             if (isNaN(Math.round(tmpContM45 / tmp45))) {
                 tmpContM45 = 0;
             } else {
@@ -238,10 +230,10 @@ $(document).on("click", "#contractMakeExcel", function () {
             let comAdd = '';
             let comCeo = '';
 
-            for (let k = 0; k < compa.length; k++) {
-                if (compa[i].company == $('#constractCompany').val()) {
-                    comAdd = compa[i].adress;
-                    comCeo = compa[i].ceo;
+            for (let k = 0; k < dbCompa.length; k++) {
+                if (dbCompa[k].company == $('#constractCompany').val()) {
+                    comAdd = dbCompa[k].adress;
+                    comCeo = dbCompa[k].ceo;
                 }
             }
 
@@ -257,42 +249,35 @@ $(document).on("click", "#contractMakeExcel", function () {
                 "id2": tmpContM25,
                 "id3": tmpContM28,
                 "conm": tmpContM,
-                "ctmname": $('#contractGap').val(),
+                "ctmname": $('#contractGap').text(),
                 "company": $('#constractCompany').val(),
                 "opercom": comAdd,
                 "opercar": comCeo
             };
+
+            $('#contractstday').val(uniqueDay[0]);
+            $('#contractdesty').val(destyyyy);
+            $('#contractrsvpstp').val(stpppp);
+            $('#contractcont').val(contttt);
+            $('#contractve1').val(AddComma(tmp45));
+            $('#contractve2').val(AddComma(tmp25));
+            $('#contractve3').val(AddComma(tmp28));
+            $('#contractid1').val(AddComma(tmpContM45));
+            $('#contractid2').val(AddComma(tmpContM25));
+            $('#contractid3').val(AddComma(tmpContM28));
+            $('#contractconm').val(AddComma(tmpContM));
+            $('#contractctmname').val($('#contractGap').text());
+            $('#contractcompany').val($('#constractCompany').val());
+            $('#contractopercom').val(comAdd);
+            $('#contractopercar').val(comCeo);
+
+            $('#formPapperContract').submit();
 
             console.log(params);
 
             resolve(params);
         });
     }
-
-    function getContractExcel(result) {
-        return new Promise(function (resolve, reject) {
-            const url = "/allo/chRSVT";
-            const headers = {
-                "Content-Type": "application/json"
-            };
-            $.ajax({
-                url: url,
-                type: "POST",
-                headers: headers,
-                caches: false,
-                dataType: "json",
-                data: JSON.stringify(result),
-                cache: false,
-                success: function (r) {
-                    resolve();
-                },
-                error: jqXHR => {
-                    loginSession(jqXHR.status);
-                }
-            });
-        });
-    }
-
 });
 $(document).on("click", "#contractChAll", function () {
     if (this.checked) {
@@ -486,7 +471,7 @@ function setPapperAllo1() {
                                 <col width="8%">
                                 <col width="8%">
                             </colgroup>
-                            <thead>
+                            <thead class="table-light">
                                 <th>#</th>
                                 <th>차량번호</th>
                                 <th>운행승무원</th>
@@ -832,15 +817,25 @@ $(document).on('click', 'input:checkbox[name="papperRsvtCh"]', function () {
                 const ccc2 = $(bbb[6]).children();
                 const ccc3 = $(bbb[7]).children();
 
-                const p1 = $(ccc1)
-                    .attr('class')
-                    .includes('fa-xmark');
-                const p2 = $(ccc2)
-                    .attr('class')
-                    .includes('fa-xmark');
-                const p3 = $(ccc3)
-                    .attr('class')
-                    .includes('fa-xmark');
+                let p1 = false;
+                let p2 = false;
+                let p3 = false;
+
+                if ($(ccc1).attr('class')) {
+                    p1 = $(ccc1)
+                        .attr('class')
+                        .includes('fa-xmark');
+                }
+                if ($(ccc2).attr('class')) {
+                    p2 = $(ccc2)
+                        .attr('class')
+                        .includes('fa-xmark');
+                }
+                if ($(ccc3).attr('class')) {
+                    p3 = $(ccc3)
+                        .attr('class')
+                        .includes('fa-xmark');
+                }
 
                 if (!ve || p1 || p2 || p3) {
                     ch++;

@@ -142,7 +142,7 @@
                                                     <col width="15%"/>
                                                     <col width="10%"/>
                                                 </colgroup>
-                                                <thead>
+                                                <thead class="table-light">
                                                     <tr>
                                                         <th class="sortStr">이름</th>
                                                         <th class="sortNum">차량</th>
@@ -187,7 +187,7 @@
                                                     <col width="15%"/>
                                                     <col width="10%"/>
                                                 </colgroup>
-                                                <thead>
+                                                <thead class="table-light">
                                                     <tr>
                                                         <th class="sortStr">이름</th>
                                                         <th class="sortNum">차량</th>
@@ -228,7 +228,7 @@
                                                     <col width="15%"/>
                                                     <col width="10%"/>
                                                 </colgroup>
-                                                <thead>
+                                                <thead class="table-light">
                                                     <tr>
                                                         <th class="sortStr">이름</th>
                                                         <th class="sortNum">차량</th>
@@ -267,7 +267,7 @@
                                                     <col width="25%"/>
                                                     <col width="25%"/>
                                                 </colgroup>
-                                                <thead>
+                                                <thead class="table-light">
                                                     <tr>
                                                         <th class="sortStr">이름</th>
                                                         <th class="sortStr">소속</th>
@@ -306,7 +306,7 @@
                                                     <col width="25%"/>
                                                     <col width="25%"/>
                                                 </colgroup>
-                                                <thead>
+                                                <thead class="table-light">
                                                     <tr>
                                                         <th class="sortStr">이름</th>
                                                         <th class="sortStr">소속</th>
@@ -792,28 +792,6 @@
         </div>
         <div th:replace="dashboard/dashboardBottom :: main-bottom"></div>
         <div th:replace="openTemplates/vehicleAccMD :: ve-MD-accCont"></div>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            const user =/*[[${user}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const opt =/*[[${opt}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbCompa =/*[[${company}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbVe =/*[[${ve}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbEmp =/*[[${emp}]]*/
-            'default';
-            /*]]>*/
-        </script>
         <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
         <script
             language="javascript"

@@ -169,7 +169,7 @@
                                                 <col width="13%"/>
                                                 <col width="22%"/>
                                             </colgroup>
-                                            <thead>
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th class="sortNum">차량번호</th>
                                                     <th class="sortStr">승무원</th>
@@ -207,7 +207,7 @@
                                                 <col width="13%"/>
                                                 <col width="22%"/>
                                             </colgroup>
-                                            <thead>
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th class="sortNum">차량번호</th>
                                                     <th class="sortStr">승무원</th>
@@ -245,7 +245,7 @@
                                                 <col width="13%"/>
                                                 <col width="22%"/>
                                             </colgroup>
-                                            <thead>
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th class="sortNum">차량번호</th>
                                                     <th class="sortStr">승무원</th>
@@ -287,7 +287,7 @@
                                                 <col width="13%"/>
                                                 <col width="22%"/>
                                             </colgroup>
-                                            <thead>
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th class="sortNum">차량번호</th>
                                                     <th class="sortStr">승무원</th>
@@ -329,7 +329,7 @@
                                                 <col width="13%"/>
                                                 <col width="22%"/>
                                             </colgroup>
-                                            <thead>
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th class="sortNum">차량번호</th>
                                                     <th class="sortStr">승무원</th>
@@ -367,7 +367,7 @@
                                                 <col width="13%"/>
                                                 <col width="22%"/>
                                             </colgroup>
-                                            <thead>
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th class="sortNum">차량번호</th>
                                                     <th class="sortStr">승무원</th>
@@ -404,7 +404,7 @@
                                                 <col width="20%"/>
                                                 <col width="25%"/>
                                             </colgroup>
-                                            <thead>
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th class="sortNum">차량번호</th>
                                                     <th class="sortStr">소속</th>
@@ -733,33 +733,6 @@
     <div th:replace="openTemplates/vehicleLoanContMD :: ve-MD-loanCont"></div>
     <div th:replace="openTemplates/vehicleAccMD :: ve-MD-accCont"></div>
     <div th:replace="openTemplates/vehicleGasMD :: ve-MD-gasCont"></div>
-
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        const user =/*[[${user}]]*/
-        'default';
-        /*]]>*/
-        /*<![CDATA[*/
-        const opt =/*[[${opt}]]*/
-        'default';
-        /*]]>*/
-        /*<![CDATA[*/
-        const dbCompa =/*[[${company}]]*/
-        'default';
-        /*]]>*/
-        /*<![CDATA[*/
-        const dbVe =/*[[${ve}]]*/
-        'default';
-        /*]]>*/
-        /*<![CDATA[*/
-        const dbEmp =/*[[${emp}]]*/
-        'default';
-        /*]]>*/
-        /*<![CDATA[*/
-        const dbcarn =/*[[${carn}]]*/
-        'default';
-        /*]]>*/
-    </script>
 
     <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
     <script

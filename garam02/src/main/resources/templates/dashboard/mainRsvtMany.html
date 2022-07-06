@@ -10,7 +10,6 @@
         <th:block th:replace="layout/linkGroupCss :: linkCss"></th:block>
 
         <link rel="stylesheet" href="/css/dashboardCss/rsvtMany.css?v=2020051201">
-        <link rel="stylesheet" href="/css/openTemplates/offCustomer.css?v=2020051201">
         <link
             rel="stylesheet"
             href="/css/openTemplates/insertCustomer.css?v=2020051201">
@@ -29,9 +28,9 @@
                 th:value="${user.position}+''+${user.name}">
             <input type="hidden" id="m-no" value="">
             <span id="t-btn">
-                <button class="btn btn-default">
+                <a th:href="@{/dashboard}" class="btn btn-default">
                     <i class="fa-solid fa-arrow-left"></i>홈으로
-                </button>
+                </a>
             </span>
             <div id="t-cnt">
                 <span id="t-name">이름</span>
@@ -60,7 +59,7 @@
                         <col width="7%">
                         <col width="3%">
                     </colgroup>
-                    <thead>
+                    <thead class="table-light">
                         <tr>
                             <th>출 발 일</th>
                             <th>도 착 일</th>
@@ -174,27 +173,12 @@
                 </div>
             </div>
         </div>
-        <div th:replace="openTemplates/offCustomer :: offCustomer"></div>
         <div th:replace="openTemplates/modalCustomerUp :: modalCustUp"></div>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            const opt =/*[[${opt}]]*/
-            'default';
-            /*]]>*/
-            /*<![CDATA[*/
-            const dbuser =/*[[${user}]]*/
-            'default';
-            /*]]>*/
-        </script>
         <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
         <script
             language="javascript"
             type="text/javascript"
             src="/js/dashboard/rsvtMany.js?v=2020051201"></script>
-        <script
-            language="javascript"
-            type="text/javascript"
-            src="/js/openTemplates/offCustomer.js?v=2020051201"></script>
         <script
             language="javascript"
             type="text/javascript"

@@ -152,14 +152,18 @@ function makeModalIl(dday, cctono, rsvt) {
                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start allodropdown" aria-labelledby="dropdownMenuButton2">
                                     <table class="table table-bordered">
                                         <colgroup>
-                                            <col width="20%">
+                                            <col width="16%">
+                                            <col width="16%">
                                             <col width="auto">
-                                            <col width="25%">
-                                            <col width="25%">
+                                            <col width="auto">
+                                            <col width="15%">
+                                            <col width="15%">
                                         </colgroup>
                                         <thead class="table-light">
                                             <tr>
                                                 <th>입금일</th>
+                                                <th>담당자</th>
+                                                <th>구분</th>
                                                 <th>메모</th>
                                                 <th>입금액</th>
                                                 <th>미수금</th>
@@ -189,7 +193,7 @@ function makeModalIl(dday, cctono, rsvt) {
                                                     <input
                                                         type="text"
                                                         data-type="currency"
-                                                        class="allo alloAllM allinde"
+                                                        class="allo alloAllM allinde input-ent"
                                                         onfocus="this.select()"
                                                         value="0"
                                                         tabindex="` +
@@ -234,7 +238,7 @@ function makeModalIl(dday, cctono, rsvt) {
                             class="input-group-text alloNumClk">` + numm +
                                     `</div>
                             <input type="text"
-                                class="form-control allinde veAllo"
+                                class="form-control allinde veAllo input-ent"
                                 list="car-info" onfocus="this.select()"
                                 name="veAlloName" tabindex="` +
                                     ++cntTabIndex +
@@ -346,9 +350,21 @@ function makeModalIl(dday, cctono, rsvt) {
                             if (rsvttt == r[i].rsvt) {
                                 conMMM = conMMM - parseInt(r[i].moneymoney);
 
+                                let userName = ``;
+
+                                for (let k = 0; k < dbAllUser.length; k++) {
+                                    if (r[i].moneyuser = dbAllUser[k].id) {
+                                        userName = dbAllUser[k].position + ' ' + dbAllUser[k].name;
+                                    }
+                                }
+
                                 htmlsMoney += `
                             <tr>
                                 <td>` + r[i].moneyday +
+                                        `</td>
+                                <td>` + userName +
+                                        `</td>
+                                <td>` + r[i].moneytong +
                                         `</td>
                                 <td>` + r[i].moneymemo +
                                         `</td>
@@ -365,7 +381,7 @@ function makeModalIl(dday, cctono, rsvt) {
                         if (r.length < 1) {
                             htmlsMoney = `
                             <tr>
-                                <td colspan="4">입금내역 없음</td>
+                                <td colspan="6">입금내역 없음</td>
                             </tr>`;;
                         }
 

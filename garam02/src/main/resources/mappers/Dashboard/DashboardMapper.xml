@@ -31,7 +31,36 @@
 		resultType="com.garam.web.dashboard.dto.RsvtDTO">
 		SELECT
 
-		*
+		*,
+
+		IFNULL((SELECT COUNT(rsvt.rsvt) FROM rsvt WHERE rsvt.ctmno =
+		customer.ctmno), 0) AS
+		rsvttrash,
+
+		IFNULL((SELECT SUM(rsvt.conm) FROM
+		rsvt WHERE
+		rsvt.ctmno =
+		customer.ctmno), 0) AS
+		ve1,
+
+		(
+
+		IFNULL((SELECT
+		SUM(rsvt.conm)
+		FROM
+		rsvt WHERE
+		rsvt.ctmno =
+		customer.ctmno), 0)
+
+		-
+
+		IFNULL(
+		(SELECT
+		SUM(rsvtmoney.moneymoney) FROM rsvtmoney LEFT JOIN rsvt ON
+		rsvtmoney.rsvt = rsvt.rsvt WHERE rsvt.ctmno = customer.ctmno) ,0)
+
+		) AS
+		id1
 
 		FROM customer
 
@@ -44,6 +73,9 @@
 			</if>
 			AND ctmtrash = 1
 		</where>
+
+		ORDER BY
+		ctmname
 	</select>
 
 	<select id="selectCustomerName"
@@ -65,6 +97,38 @@
 		</where>
 
 	</select>
+	<select id="selectCustomerRsvt"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+		SELECT
+
+		*,
+
+		(
+
+		IFNULL(rsvt.conm, 0)
+
+		-
+
+		IFNULL(
+		(SELECT
+		SUM(rsvtmoney.moneymoney) FROM rsvtmoney WHERE rsvtmoney.rsvt =
+		rsvt.rsvt) ,0)
+
+		) AS
+		id1
+
+		FROM rsvt
+
+		WHERE
+
+		rsvt.ctmno = #{ctmno}
+
+		ORDER BY
+
+		rsvt.stday
+
+	</select>
 
 	<select id="selectCustomerCheck"
 		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
@@ -81,6 +145,7 @@
 		CONCAT('%',#{ctmtel1},'%')
 
 	</select>
+
 
 
 

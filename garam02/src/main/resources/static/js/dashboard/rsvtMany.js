@@ -532,6 +532,7 @@ $(document).on('click', '#insert-many', function () {
         }
     } else {
         alert("고객정보를 입력해주세요.");
+        closeLoadingWithMask();
     }
 });
 
@@ -551,14 +552,3 @@ function get_Rsvt(ctmseq, stday, index) {
     const rtn = rsvt1 + rsvt2 + rsvt3;
     return rtn;
 }
-
-$(document).on('click', '#customerInsertMo', function () {
-    const aaa = $('#offCustomer').css('visibility');
-
-    if (aaa == 'hidden') {
-        showOffCustomer();
-    } else {
-        $('#offCustomer').offcanvas('hide');
-    }
-
-});

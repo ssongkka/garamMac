@@ -123,19 +123,19 @@ function makeGas(cho) {
                             </td>
                             <td>
                                 <div class="input-group">
-                                    <input type="text" class="form-control inGasSepa" data-type="currency" value="">
+                                    <input type="text" class="form-control inGasSepa input-ent" data-type="currency" value="">
                                     <span class="input-group-text">Km</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-group">
-                                    <input type="text" class="form-control inGasSepa" data-type="currency" value="">
+                                    <input type="text" class="form-control inGasSepa input-ent" data-type="currency" value="">
                                     <span class="input-group-text">L</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-group">
-                                    <input type="text" class="form-control inGasSepa" data-type="currency" value="">
+                                    <input type="text" class="form-control inGasSepa input-ent" data-type="currency" value="">
                                     <span class="input-group-text">원</span>
                                 </div>
                             </td>
@@ -218,7 +218,7 @@ function makeGas(cho) {
                         </td>
                         <td>
                             <div class="input-group">
-                                <input type="text" class="form-control inGasSepa" data-type="currency" value="` +
+                                <input type="text" class="form-control inGasSepa input-ent" data-type="currency" value="` +
                                 AddComma(r[i].km) +
                                 `">
                                 <span class="input-group-text">Km</span>
@@ -226,7 +226,7 @@ function makeGas(cho) {
                         </td>
                         <td>
                             <div class="input-group">
-                                <input type="text" class="form-control inGasSepa" data-type="currency" value="` +
+                                <input type="text" class="form-control inGasSepa input-ent" data-type="currency" value="` +
                                 AddComma(r[i].liter) +
                                 `">
                                 <span class="input-group-text">L</span>
@@ -234,7 +234,7 @@ function makeGas(cho) {
                         </td>
                         <td>
                             <div class="input-group">
-                                <input type="text" class="form-control inGasSepa" data-type="currency" value="` +
+                                <input type="text" class="form-control inGasSepa input-ent" data-type="currency" value="` +
                                 AddComma(r[i].vegasmoney) +
                                 `">
                                 <span class="input-group-text">원</span>

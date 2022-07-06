@@ -29,7 +29,7 @@
 }
 
 .mdMakePaper-item button {
-    height: 8rem;
+    height: 4rem;
 }
 
 .md-bd-paper2 {
@@ -62,8 +62,6 @@
 }
 
 .contractCheck-item {
-    height: 5rem;
-
     display: flex;
     align-items: center;
 

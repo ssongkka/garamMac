@@ -44,10 +44,8 @@ function makeGuManageList(ctmInput) {
 
                         htmls += `
                     <tr class="gutrea">
-                        <input type="hidden" value="` +
-                                r[i].ctmno +
-                                `">
-                        <td class="">` + name +
+                        <td class="">` +
+                                name +
                                 `</td>
                         <td class="">` + tel +
                                 `</td>
@@ -55,7 +53,10 @@ function makeGuManageList(ctmInput) {
                                 `</td>
                         <td class="tdRight">` + AddComma(
                             r[i].gudealtrash
-                        ) + `</td>
+                        ) +
+                                `</td>
+                        <input type="hidden" value="` + r[i].ctmno +
+                                `">
                     </tr>`;
                     }
                     $('#guManageTb').html(htmls);
@@ -277,7 +278,7 @@ function getGuDetail(ctmnono) {
 $(document).on("click", ".gutrea", function () {
 
     const aaa = $(this).children();
-    const codeee = $(aaa[0]).val();
+    const codeee = $(aaa[4]).val();
 
     tbChoiceThis(this);
 
@@ -303,7 +304,13 @@ $(document).on('click', '.rsvtChoGu', function () {
 });
 
 $(document).on("click", "#guManageMdNew", function () {
-    shoGuManageMd();
+
+    if ($('#guNo').val()) {
+        shoGuManageMd();
+    } else {
+        alert("거래처를 선택해주세요.");
+    }
+
 });
 
 function shoGuManageMd() {
@@ -1385,3 +1392,7 @@ function closeguManageMd() {
     makeGuManageList();
     getGuDetail($('#guNo').val());
 }
+$(document).on("click", "#btnGu-x", function () {
+    makeGuManageList();
+    $('#guMSearch').val('');
+});

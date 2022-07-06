@@ -18,7 +18,9 @@ import com.garam.web.dashboard.dto.RsvtDTO;
 import com.garam.web.dashboard.service.MainService;
 import com.garam.web.employee.dto.EmployeeInfoDTO;
 import com.garam.web.employee.service.EmployeeService;
+import com.garam.web.login.dto.UserDTO;
 import com.garam.web.login.entity.User;
+import com.garam.web.login.service.UserMyService;
 import com.garam.web.regular.dto.RegularDTO;
 import com.garam.web.regular.service.RegularService;
 import com.garam.web.vehicle.dto.VehicleInfoDTO;
@@ -36,6 +38,7 @@ public class Dashboard7Controller extends UiUtils {
 	private final VehicleService vehicleService;
 	private final CompanyService companyService;
 	private final RegularService regularService;
+	private final UserMyService userMyService;
 
 	@GetMapping
 	public String rsvt(@RequestParam(value = "dayyy", required = false) String dayyy,
@@ -70,6 +73,9 @@ public class Dashboard7Controller extends UiUtils {
 
 		List<RegularDTO> regList = regularService.selctRegular(null);
 		model.addAttribute("regList", regList);
+
+		List<UserDTO> userAll = userMyService.selectUser();
+		model.addAttribute("userAll", userAll);
 
 		return "dashboard7/dashBoard7";
 	}

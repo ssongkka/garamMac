@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.garam.web.dashboard.dto.OptDTO;
@@ -18,6 +19,8 @@ public interface MainService {
 	public List<RsvtDTO> selectCustomerAll(RsvtDTO rsvtDTO) throws Exception;
 
 	public List<RsvtDTO> selectCustomerName(RsvtDTO rsvtDTO) throws Exception;
+
+	public List<RsvtDTO> selectCustomerRsvt(RsvtDTO rsvtDTO) throws Exception;
 
 	public List<RsvtDTO> insertCtm(RsvtDTO rsvtDTO) throws Exception;
 
@@ -100,7 +103,11 @@ public interface MainService {
 	public File makePapper(String companyyy, String dayyy, String ctmmm, String rsvttt, String paperCh)
 			throws Exception;
 
-	public File makePapperContract(RsvtDTO rsvtDTO) throws Exception;
+	public File makePapperContract(String stday, String desty, String rsvpstp, String cont, String ve1, String ve2,
+			String ve3, String id1, String id2, String id3, String conm, String ctmname, String company, String opercom,
+			String opercar) throws Exception;
+
+	public File dwonSampleContract() throws Exception;
 
 	public List<RsvtmoneyDTO> selRsvtMoney(RsvtmoneyDTO rsvtmoneyDTO) throws Exception;
 

@@ -66,7 +66,7 @@ table > #excelRsvtTb > tr > .ctm22 {
 }
 
 table > #excelRsvtTb > tr > .nocheck {
-    background-color: rgba(240, 0, 0, 0.51);
+    background-color: rgba(240, 0, 0, 0.7);
 }
 
 table > #excelRsvtTb > .trnochecl {
@@ -74,13 +74,25 @@ table > #excelRsvtTb > .trnochecl {
 }
 
 .ctm0 {
-    background-color: rgba(242, 0, 0, 0.071);
+    background-color: rgba(242, 0, 0, 0.7);
 }
 .ctm1 {
     background-color: rgba(0, 177, 242, 0.071);
 }
 .ctm2 {
     background-color: rgba(220, 0, 242, 0.071);
+}
+
+.imfoctm {
+    padding: 1rem;
+    text-align: center;
+}
+
+.main-side-item5 {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
 }
 
 @media (max-width:1024px) {}

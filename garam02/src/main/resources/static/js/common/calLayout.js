@@ -17,8 +17,6 @@ $(window).on('resize', function () {
 
 $(document).ready(function () {
 
-    getRegCard();
-
     if ($('#home').css('display') === 'block') {
         $('#pills-home-tab').addClass('active');
     }
@@ -47,15 +45,17 @@ $(document).ready(function () {
         $('#pills-gumanage-tab').addClass('active');
     }
 
+    if ($('#cumanage').css('display') === 'block') {
+        $('#pills-cumanage-tab').addClass('active');
+    }
+
     if ($('#allo').css('display') === 'block') {
         $('#pills-allo-tab').addClass('active');
     }
 
     $('#info-limit').hide();
 
-    cardVeEmpMake();
-
-    getCompaInfo();
+    cardMake();
 
     const now_D = new Date(dayyy);
 
@@ -75,42 +75,6 @@ $(document).ready(function () {
         }
     }
 });
-
-function getRegCard() {
-    return new Promise(function (resolve, reject) {
-        const url = "/reg/regRegular";
-        const headers = {
-            "Content-Type": "application/json",
-            "X-HTTP-Method-Override": "POST"
-        };
-
-        const params = {};
-
-        $.ajax({
-            url: url,
-            type: "POST",
-            headers: headers,
-            caches: false,
-            dataType: "json",
-            data: JSON.stringify(params),
-
-            success: function (r) {
-
-                let cntNo = 0;
-                for (let i = 0; i < r.length; i++) {
-                    cntNo = cntNo + parseInt(r[i].fax);
-                }
-
-                $('#cardRegGye').text(r.length);
-                $('#cardRegNo').text(cntNo);
-                resolve();
-            },
-            error: (jqXHR) => {
-                loginSession(jqXHR.status);
-            }
-        })
-    })
-}
 
 $(document).on('click', '#btnYesD', function () {
 
@@ -339,6 +303,10 @@ function displayMain() {
 
     if ($('#gumanage').css('display') === 'block') {
         makeGuManageList();
+    }
+
+    if ($('#cumanage').css('display') === 'block') {
+        makeCuManageList();
     }
 
     if ($('#allo').css('display') === 'block') {
@@ -594,124 +562,206 @@ function makeCal(nowD, day) {
     return rtn;
 }
 
-function getCompaInfo() {
+function cardMake() {
 
-    for (let i = 0; i < dbCompa.length; i++) {
-        if (dbCompa[i].company == dbuser.company) {
+    makeVeEmpCard()
+        .then(makeRegCard)
+        .then(makeCustCard)
+        .then(makeCompaInfo)
 
-            $('#comp-name').text(dbuser.company);
-            $('#comp-ceo').text("대표 : " + dbCompa[i].ceo);
-            $('#comp-add').text(dbCompa[i].adress);
-            $('#comp-num1').text(dbCompa[i].no1);
-            $('#comp-tel').text(dbCompa[i].telephone);
-            $('#comp-email').text(dbCompa[i].email);
-        }
-    }
-}
+    function makeVeEmpCard(result) {
+        return new Promise(function (resolve, reject) {
+            let cntVe1 = [];
+            let cntVe2 = [];
+            let cntVe3 = [];
+            let cntVe4 = [];
 
-function cardVeEmpMake() {
-    let cntVe1 = [];
-    let cntVe2 = [];
-    let cntVe3 = [];
-    let cntVe4 = [];
+            let cntEmp1 = [];
+            let cntEmp2 = [];
+            let cntEmp3 = [];
+            let cntEmp4 = [];
 
-    let cntEmp1 = [];
-    let cntEmp2 = [];
-    let cntEmp3 = [];
-    let cntEmp4 = [];
-
-    for (let i = 0; i < dbCompa.length; i++) {
-        cntVe2[i] = 0;
-        cntVe3[i] = 0;
-        cntVe4[i] = 0;
-        for (let j = 0; j < dbVe.length; j++) {
-            if (dbCompa[i].company == dbVe[j].company) {
-                if (dbVe[j].trash == 1) {
-                    switch (dbVe[j].bus) {
-                        case '대형':
-                            cntVe2[i]++;
-                            break;
-                        case '중형':
-                            cntVe3[i]++;
-                            break;
-                        case '우등':
-                            cntVe4[i]++;
-                            break;
+            for (let i = 0; i < dbCompa.length; i++) {
+                cntVe2[i] = 0;
+                cntVe3[i] = 0;
+                cntVe4[i] = 0;
+                for (let j = 0; j < dbVe.length; j++) {
+                    if (dbCompa[i].company == dbVe[j].company) {
+                        if (dbVe[j].trash == 1) {
+                            switch (dbVe[j].bus) {
+                                case '대형':
+                                    cntVe2[i]++;
+                                    break;
+                                case '중형':
+                                    cntVe3[i]++;
+                                    break;
+                                case '우등':
+                                    cntVe4[i]++;
+                                    break;
+                            }
+                        }
+                    }
+                }
+                cntEmp2[i] = 0;
+                cntEmp3[i] = 0;
+                cntEmp4[i] = 0;
+                for (let k = 0; k < dbEmp.length; k++) {
+                    if (dbCompa[i].company == dbEmp[k].company) {
+                        if (dbEmp[k].trash == 1) {
+                            switch (dbEmp[k].kind) {
+                                case '회사':
+                                    cntEmp2[i]++;
+                                    break;
+                                case '개인':
+                                    cntEmp3[i]++;
+                                    break;
+                                case '예비':
+                                    cntEmp4[i]++;
+                                    break;
+                            }
+                        }
                     }
                 }
             }
-        }
-        cntEmp2[i] = 0;
-        cntEmp3[i] = 0;
-        cntEmp4[i] = 0;
-        for (let k = 0; k < dbEmp.length; k++) {
-            if (dbCompa[i].company == dbEmp[k].company) {
-                if (dbEmp[k].trash == 1) {
-                    switch (dbEmp[k].kind) {
-                        case '회사':
-                            cntEmp2[i]++;
-                            break;
-                        case '개인':
-                            cntEmp3[i]++;
-                            break;
-                        case '예비':
-                            cntEmp4[i]++;
-                            break;
+
+            for (let i = 0; i < dbCompa.length; i++) {
+                cntVe1[i] = 0;
+                cntEmp1[i] = 0;
+                cntVe1[i] = cntVe2[i] + cntVe3[i] + cntVe4[i];
+                cntEmp1[i] = cntEmp2[i] + cntEmp3[i] + cntEmp4[i];
+            }
+
+            let htmlsVe = '';
+
+            htmlsVe += '<div class="home-main-item-222">';
+            htmlsVe += '<i class="fas fa-bus"></i>';
+            htmlsVe += '</div>';
+            for (let i = 0; i < dbCompa.length; i++) {
+                htmlsVe += '<div class="home-main-item-222">';
+                htmlsVe += '<span class="home-main-item-222-span">' + dbCompa[i].company + '</span>';
+                htmlsVe += '<span class="home-main-item-222-span">' + cntVe1[i] + '</span>';
+                htmlsVe += '<span class="home-main-item-222-span"><span data-bs-toggle="tooltip" data-bs-p' +
+                        'lacement="top" title="대형">' + cntVe2[i] + '</span><span>/</span><span data-bs-' +
+                        'toggle="tooltip" data-bs-placement="top" title="중형">' + cntVe3[i] + '</span><s' +
+                        'pan>/</span><span data-bs-toggle="tooltip" data-bs-placement="top" title="우등">' +
+                        cntVe4[i] + '</span></span>';
+                htmlsVe += '</div>';
+            }
+            htmlsVe += '</div>';
+
+            let htmlsEmp = '';
+            htmlsEmp += '<div class="home-main-item-222">';
+            htmlsEmp += '<i class="fas fa-user-tie"></i>';
+            htmlsEmp += '</div>';
+            for (let i = 0; i < dbCompa.length; i++) {
+                htmlsEmp += '<div class="home-main-item-222">';
+                htmlsEmp += '<span class="home-main-item-222-span">' + dbCompa[i].company + '</span>';
+                htmlsEmp += '<span class="home-main-item-222-span">' + cntEmp1[i] + '</span>';
+                htmlsEmp += '<span class="home-main-item-222-span"><span data-bs-toggle="tooltip" data-bs-p' +
+                        'lacement="top" title="회사">' + cntEmp2[i] + '</span><span>/</span><span data-bs' +
+                        '-toggle="tooltip" data-bs-placement="top" title="개인">' + cntEmp3[i] + '</span>' +
+                        '</span>';
+                htmlsEmp += '</div>';
+            }
+            htmlsEmp += '</div>';
+
+            $('#cardVe').html(htmlsVe);
+            $('#cardEmp').html(htmlsEmp);
+            var tooltipTriggerList = []
+                .slice
+                .call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+            resolve();
+        });
+    }
+
+    function makeRegCard() {
+        return new Promise(function (resolve, reject) {
+            const url = "/reg/regRegular";
+            const headers = {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST"
+            };
+
+            const params = {};
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                headers: headers,
+                caches: false,
+                dataType: "json",
+                data: JSON.stringify(params),
+
+                success: function (r) {
+
+                    let cntNo = 0;
+                    for (let i = 0; i < r.length; i++) {
+                        cntNo = cntNo + parseInt(r[i].fax);
                     }
+
+                    $('#cardRegGye').text(r.length);
+                    $('#cardRegNo').text(cntNo);
+                    resolve();
+                },
+                error: (jqXHR) => {
+                    loginSession(jqXHR.status);
+                }
+            })
+        })
+    }
+
+    function makeCustCard(result) {
+        return new Promise(function (resolve, reject) {
+
+            let cntIl = 0;
+            let cntHak = 0;
+            let cntGu = 0;
+
+            for (let i = 0; i < dbCutomer.length; i++) {
+
+                console.log(
+                    parseInt(dbCutomer[i].ctmsepa) == 0 && parseInt(dbCutomer[i].rsvttrash) > 0
+                );
+
+                if (parseInt(dbCutomer[i].ctmsepa) == 0 && parseInt(dbCutomer[i].rsvttrash) > 0) {
+                    cntIl++;
+                }
+                if (parseInt(dbCutomer[i].ctmsepa) == 1 && parseInt(dbCutomer[i].rsvttrash) > 0) {
+                    cntHak++;
+                }
+                if (parseInt(dbCutomer[i].ctmsepa) == 2 && parseInt(dbCutomer[i].rsvttrash) > 0) {
+                    cntGu++;
                 }
             }
-        }
+
+            $('#cardCusIl').text(AddComma(cntIl));
+            $('#cardCusHak').text(AddComma(cntHak));
+            $('#cardCusGu').text(AddComma(cntGu));
+
+            resolve();
+        });
     }
 
-    for (let i = 0; i < dbCompa.length; i++) {
-        cntVe1[i] = 0;
-        cntEmp1[i] = 0;
-        cntVe1[i] = cntVe2[i] + cntVe3[i] + cntVe4[i];
-        cntEmp1[i] = cntEmp2[i] + cntEmp3[i] + cntEmp4[i];
+    function makeCompaInfo(result) {
+        return new Promise(function (resolve, reject) {
+            for (let i = 0; i < dbCompa.length; i++) {
+                if (dbCompa[i].company == dbuser.company) {
+
+                    $('#comp-name').text(dbuser.company);
+                    $('#comp-ceo').text("대표 : " + dbCompa[i].ceo);
+                    $('#comp-add').text(dbCompa[i].adress);
+                    $('#comp-num1').text(dbCompa[i].no1);
+                    $('#comp-tel').text(dbCompa[i].telephone);
+                    $('#comp-email').text(dbCompa[i].email);
+                }
+            }
+            resolve();
+        });
     }
 
-    let htmlsVe = '';
-
-    htmlsVe += '<div class="home-main-item-222">';
-    htmlsVe += '<i class="fas fa-bus"></i>';
-    htmlsVe += '</div>';
-    for (let i = 0; i < dbCompa.length; i++) {
-        htmlsVe += '<div class="home-main-item-222">';
-        htmlsVe += '<span class="home-main-item-222-span">' + dbCompa[i].company + '</span>';
-        htmlsVe += '<span class="home-main-item-222-span">' + cntVe1[i] + '</span>';
-        htmlsVe += '<span class="home-main-item-222-span"><span data-bs-toggle="tooltip" data-bs-p' +
-                'lacement="top" title="대형">' + cntVe2[i] + '</span><span>/</span><span data-bs-' +
-                'toggle="tooltip" data-bs-placement="top" title="중형">' + cntVe3[i] + '</span><s' +
-                'pan>/</span><span data-bs-toggle="tooltip" data-bs-placement="top" title="우등">' +
-                cntVe4[i] + '</span></span>';
-        htmlsVe += '</div>';
-    }
-    htmlsVe += '</div>';
-
-    let htmlsEmp = '';
-    htmlsEmp += '<div class="home-main-item-222">';
-    htmlsEmp += '<i class="fas fa-user-tie"></i>';
-    htmlsEmp += '</div>';
-    for (let i = 0; i < dbCompa.length; i++) {
-        htmlsEmp += '<div class="home-main-item-222">';
-        htmlsEmp += '<span class="home-main-item-222-span">' + dbCompa[i].company + '</span>';
-        htmlsEmp += '<span class="home-main-item-222-span">' + cntEmp1[i] + '</span>';
-        htmlsEmp += '<span class="home-main-item-222-span"><span data-bs-toggle="tooltip" data-bs-p' +
-                'lacement="top" title="회사">' + cntEmp2[i] + '</span><span>/</span><span data-bs' +
-                '-toggle="tooltip" data-bs-placement="top" title="개인">' + cntEmp3[i] + '</span>' +
-                '</span>';
-        htmlsEmp += '</div>';
-    }
-    htmlsEmp += '</div>';
-
-    $('#card-ve').html(htmlsVe);
-    $('#card-emp').html(htmlsEmp);
-    var tooltipTriggerList = []
-        .slice
-        .call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
 }
 
 $(document).on('click', '.deail-form-item', function () {

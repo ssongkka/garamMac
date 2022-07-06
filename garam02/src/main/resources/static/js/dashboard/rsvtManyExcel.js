@@ -60,7 +60,7 @@ function uploadExcelRsvt() {
 
                     for (let k = 0; k < uniqueRsvt.length; k++) {
 
-                        let optHtmls = `<option label="고객정보선택" value="-1" data-value="-" selected></option>`;
+                        let optHtmls = `<option label="고객정보 선택" value="-1" data-value="-" selected></option>`;
                         let cntNum = 0;
 
                         let cnttt = 0;
@@ -206,7 +206,7 @@ function uploadExcelRsvt() {
 
                     } else {
                         $('#excelGo').html(
-                            `<button type="button" class="btn btn-primary" id="insertExcelRsvt">예약정보입력</button>`
+                            `<button type="button" class="btn btn-primary" id="insertExcelRsvt">예약정보입력<i class="fa-solid fa-download"></i></button>`
                         );
 
                     }
@@ -289,6 +289,7 @@ $(document).on("click", "#insertExcelRsvt", function () {
 
                 if (ctmNoNoNo == '-1') {
                     alert("고객정보를 입력해 주세요.");
+                    closeLoadingWithMask();
                     return;
                 }
 
@@ -346,7 +347,8 @@ $(document).on("click", "#insertExcelRsvt", function () {
                         const qqq = $(bbb[3]).children();
 
                         if ($(qqq[0]).val() == '-1') {
-                            alert("고객정보를 입력해 주세요.");
+                            alert("고객정보를 선택해 주세요.");
+                            closeLoadingWithMask();
                             return;
                         }
 
