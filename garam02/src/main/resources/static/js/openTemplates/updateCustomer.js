@@ -46,6 +46,9 @@ $(document).on('change', 'input[name=ctmsepaUp]', function () {
 });
 
 $(document).on('change', '#ctmnameUp', function () {
+
+    console.log("잉잉ㅇ잉잉ㅇ잉ㅇ잉ㅇ이잉");
+
     var val = $('#ctmnameUp').val();
     var idNum = $('#name-cho option')
         .filter(function () {
@@ -188,8 +191,6 @@ function updateCtm() {
             "ctmstp": $('#ctmstpUp').val(),
             "ctmdetail": $('#ctmdetailUp').val()
         };
-
-        console.table(params);
 
         $.ajax({
             url: url,

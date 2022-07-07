@@ -34,13 +34,15 @@
 		*,
 
 		IFNULL((SELECT COUNT(rsvt.rsvt) FROM rsvt WHERE rsvt.ctmno =
-		customer.ctmno), 0) AS
+		customer.ctmno AND rsvt.rsvttrash = 1), 0) AS
 		rsvttrash,
 
-		IFNULL((SELECT SUM(rsvt.conm) FROM
+		IFNULL((SELECT
+		SUM(rsvt.conm) FROM
 		rsvt WHERE
 		rsvt.ctmno =
-		customer.ctmno), 0) AS
+		customer.ctmno AND
+		rsvt.rsvttrash = 1), 0) AS
 		ve1,
 
 		(
@@ -48,16 +50,18 @@
 		IFNULL((SELECT
 		SUM(rsvt.conm)
 		FROM
-		rsvt WHERE
+		rsvt
+		WHERE
 		rsvt.ctmno =
-		customer.ctmno), 0)
+		customer.ctmno AND rsvt.rsvttrash = 1), 0)
 
 		-
 
 		IFNULL(
 		(SELECT
 		SUM(rsvtmoney.moneymoney) FROM rsvtmoney LEFT JOIN rsvt ON
-		rsvtmoney.rsvt = rsvt.rsvt WHERE rsvt.ctmno = customer.ctmno) ,0)
+		rsvtmoney.rsvt = rsvt.rsvt WHERE rsvt.ctmno = customer.ctmno AND
+		rsvt.rsvttrash = 1) ,0)
 
 		) AS
 		id1
@@ -632,6 +636,11 @@
 
 		rsvt.rsvt = #{rsvt}
 
+		AND
+
+		rsvt.rsvttrash =
+		1
+
 		ORDER BY
 
 		datein,
@@ -794,6 +803,10 @@
 		AND
 
 		rsvt.stday = rsvt.endday
+
+		AND
+
+		rsvt.rsvttrash = 1
 
 		ORDER BY
 		rsvt.stday,
@@ -2661,6 +2674,10 @@
 			(rsvt.endday <![CDATA[>=]]>
 			#{value.stday})
 
+			AND
+
+			rsvt.rsvttrash = 1
+
 			GROUP BY
 			rsvt.bus
 		</foreach>
@@ -3038,6 +3055,10 @@
 
 			rsvt.stday <![CDATA[<=]]>
 			NOW()
+
+			AND
+
+			rsvt.rsvttrash = 1
 
 			<if test="ctmno != null and ctmno != '' ">
 				AND

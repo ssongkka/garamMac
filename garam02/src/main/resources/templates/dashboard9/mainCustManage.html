@@ -175,8 +175,9 @@
                     <button
                         type="button"
                         class="btn btn-default"
-                        id="guManageMdNew"
-                        control-id="ControlID-12">신규입력
+                        id="sumCustomer"
+                        control-id="ControlID-12"
+                        style="display: none;">합치기
                         <i class="fas fa-plus-square"></i>
                     </button>
                 </div>
@@ -186,16 +187,16 @@
                     <div class="cudetail-item1-btn">
                         <button
                             class="btn btn-default"
-                            id="btnChReg"
+                            id="cuManageMdUp"
                             style="padding: 0 1rem;"
                             control-id="ControlID-8">수정
                             <i class="fa-regular fa-pen-to-square"></i>
                         </button>
                     </div>
+                    <input type="hidden" id="cumaDeCtmNo" value="">
                     <div class="cuMa-name" id="cumaDe0">고객이름</div>
                     <div class="cuMa-tel" id="cumaDe1">연락처</div>
                     <div class="cuMa-tel titlejae" id="cumaDe2">주소</div>
-                    <hr>
                     <div class="cudetail-item2">
                         <div class="guMa-title">
                             <blockquote>
@@ -236,6 +237,71 @@
                     </div>
                 </div>
                 <div class="cuCont-item1">
+                    <div class="cuCont-item1-item2 card-song">
+                        <div>
+                            <h3>운행내역</h3>
+                        </div>
+                        <div class="cuCont-title">
+                            <div class="cuCont-title-item cuCont-title-name">예약</div>
+                            <div class="cuCont-title-item cuCont-title-cont" id="cuttl1"></div>
+                            <div class="cuCont-title-item cuCont-title-name">대형</div>
+                            <div class="cuCont-title-item cuCont-title-cont" id="cuttl2"></div>
+                            <div class="cuCont-title-item cuCont-title-name">중형</div>
+                            <div class="cuCont-title-item cuCont-title-cont" id="cuttl3"></div>
+                            <div class="cuCont-title-item cuCont-title-name">우등</div>
+                            <div class="cuCont-title-item cuCont-title-cont" id="cuttl4"></div>
+                            <div class="cuCont-title-item cuCont-title-name">예약취소</div>
+                            <div class="cuCont-title-item cuCont-title-cont" id="cuttl5"></div>
+                        </div>
+                        <div class="table-scroll">
+                            <div class="table-scroll-head">
+                                <div class="scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="30%"/>
+                                            <col width="40%"/>
+                                            <col width="30%"/>
+                                        </colgroup>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="sortStr">날짜</th>
+                                                <th class="sortStr">목적지</th>
+                                                <th class="sortNum">운행금액</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="table-scroll-body-cuManageRsvtNo scBar">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <colgroup>
+                                        <col width="30%"/>
+                                        <col width="40%"/>
+                                        <col width="30%"/>
+                                    </colgroup>
+                                    <tbody id="cuManageTbRsvtNo"></tbody>
+                                </table>
+                            </div>
+                            <div class="table-scroll-head">
+                                <div class="scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="30%"/>
+                                            <col width="40%"/>
+                                            <col width="30%"/>
+                                        </colgroup>
+                                        <tfoot>
+                                            <tr>
+                                                <td>합계</td>
+                                                <td id="cuNoSum1"></td>
+                                                <td class="tdRight" id="cuNoSum2"></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="cuCont-item1-item1 card-song">
                         <div>
                             <h3>운행내역</h3>
@@ -308,7 +374,185 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cuCont-item1-item2 card-song"></div>
+                </div>
+            </div>
+        </div>
+        <div
+            style="background: transparent;"
+            id="modalCtmDash"
+            class="modal fade"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="">고객정보입력</h3>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                        <input type="hidden" id="mdCustDashNum" value="">
+                    </div>
+                    <div class="modal-body md-rsvt-bdc" id="md-rsvt-bd">
+                        <h2>
+                            고객 정보
+                        </h2>
+                        <div class="inCustomerBody" id="InFormCutomer">
+                            <input type="hidden" id="ctmnoUpCtm" value="">
+                            <div class="row">
+                                <div class="form-group col-xs-8 col-lg-8">
+                                    <div class="form-check form-check-inline">
+                                        <input
+                                            class="form-check-input"
+                                            id="inCustSepaUp1Ctm"
+                                            type="radio"
+                                            name="ctmsepaUpCtm"
+                                            value="0"
+                                            checked="checked">
+                                        <label class="form-check-label" for="inCustSepa1">일반</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input
+                                            class="form-check-input"
+                                            id="inCustSepaUp2Ctm"
+                                            type="radio"
+                                            name="ctmsepaUpCtm"
+                                            value="1">
+                                        <label class="form-check-label" for="inCustSepa2">학생단체</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input
+                                            class="form-check-input"
+                                            id="inCustSepaUp3Ctm"
+                                            type="radio"
+                                            name="ctmsepaUpCtm"
+                                            value="2">
+                                        <label class="form-check-label" for="inCustSepa3">거래처</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                    <label for="ctmnameUp">이름&#42;</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control"
+                                        id="ctmnameUpCtm"
+                                        placeholder="이름을 입력해주세요."
+                                        value="">
+                                </div>
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <label for="ctmtel1Up">연락처&#42;</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control"
+                                        id="ctmtel1UpCtm"
+                                        placeholder="전화번호 형식으로 입력"
+                                        value="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <label for="ctmstpUp">출발지</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control"
+                                        id="ctmstpUpCtm"
+                                        placeholder="출발지가 고정된 예약자일 경우 입력"></input>
+                                </div>
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-pen"></i>
+                                    <label for="ctmdetailUp">메모</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control"
+                                        id="ctmdetailUpCtm"></input>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <label for="ctmtel2Up">비상연락처</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control"
+                                        id="ctmtel2UpCtm"
+                                        placeholder="010-0000-0000">
+                                </div>
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-map"></i>
+                                    <label for="ctmaddressUp">주소</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control"
+                                        id="ctmaddressUpCtm"
+                                        placeholder="주소를 입력해주세요.">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="far fa-envelope"></i>
+                                    <label for="ctmemailUp">이메일</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control"
+                                        id="ctmemailUpCtm"
+                                        placeholder="mail@mail.com">
+                                </div>
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="far fa-building"></i>
+                                    <label for="ctmcompanumUp">사업자등록번호</label>
+                                    <input
+                                        type="email"
+                                        onfocus="this.select()"
+                                        class="form-control"
+                                        id="ctmcompanumUpCtm"
+                                        placeholder="사업자등록번호 형식으로 입력해주세요.">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-fax"></i>
+                                    <label for="ctmfaxUp">팩스</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control"
+                                        id="ctmfaxUpCtm"
+                                        placeholder="팩스 번호를 입력해주세요.">
+                                </div>
+                                <div class="form-group col-xs-12 col-lg-6">
+                                    <i class="fas fa-home"></i>
+                                    <label for="ctmhomepageUp">홈페이지</label>
+                                    <input
+                                        type="text"
+                                        onfocus="this.select()"
+                                        class="form-control"
+                                        id="ctmhomepageUpCtm"
+                                        placeholder="홈페이지 주소를 입력해주세요.">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer mf-ch-rsvt">
+                        <div class="mf-ch-rsvt-item">
+                            <button type="button" class="btn btn-primary" id="btnCustInsert">입력</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
