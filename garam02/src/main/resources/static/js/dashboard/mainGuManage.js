@@ -425,7 +425,7 @@ function shoGuManageMd() {
                 "Content-Type": "application/json"
             };
             const params = {
-                opercom: $('#ttl0').text()
+                opercom: $('#guNo').val()
             };
             $.ajax({
                 url: url,

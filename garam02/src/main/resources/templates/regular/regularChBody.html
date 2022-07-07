@@ -9,13 +9,13 @@
             <div class="container" tabindex="-1">
                 <div class="headerD">
                     <input type="hidden" id="rgconum" name="conum" th:value="${code.conum}">
+                    <div class="title1-itemback">
+                        <a class="btn btn-default" role="button" id="md-rgCh">
+                            <i class="fas fa-arrow-left"></i>
+                            뒤로
+                        </a>
+                    </div>
                     <div class="title1">
-                        <div class="title1-item">
-                            <a class="btn btn-default" role="button" id="md-rgCh">
-                                <i class="fas fa-arrow-left"></i>
-                                뒤로
-                            </a>
-                        </div>
                         <div class="title1-item">
                             <h2 id="rgcompa">회사명</h2>
                             <h5 id="rgadd">주소</h5>
@@ -106,8 +106,8 @@
                                 th:each="othercompa : ${othercompa}"
                                 th:value="${othercompa.ctmname}"
                                 th:label="${othercompa.ctmname}"
-                                th:data-value="${othercompa.ctmname}"
-                                th:data-owner="${othercompa.ctmname}"></option>
+                                th:data-value="${othercompa.ctmno}"
+                                th:data-owner="${othercompa.ctmno}"></option>
                         </datalist>
                     </div>
                     <div class="cont-item2">

@@ -269,14 +269,24 @@ function getRegularDeAll(result) {
                                     $(ee).val(AddComma(r[k].rdaltm));
                                 }
                                 if (r[k].idvehicle) {
-                                    if (isNaN((r[k].idvehicle).substring((r[k].idvehicle).length - 4))) {
-                                        $(ff).val(r[k].idvehicle);
-                                    } else {
-                                        $(ff).val((r[k].idvehicle).substring((r[k].idvehicle).length - 4));
+
+                                    $(ff).val((r[k].idvehicle).substring((r[k].idvehicle).length - 4));
+
+                                    for (let c = 0; c < dbothercompa.length; c++) {
+                                        if (r[k].idvehicle == dbothercompa[c].ctmno) {
+                                            $(ff).val(dbothercompa[c].ctmname);
+                                        }
                                     }
+
                                 }
                                 if (r[k].idname) {
                                     $($(tmp).children()[9]).text(r[k].idname);
+
+                                    for (let c = 0; c < dbothercompa.length; c++) {
+                                        if (r[k].idvehicle == dbothercompa[c].ctmno) {
+                                            $($(tmp).children()[9]).text(dbothercompa[c].ctmname);
+                                        }
+                                    }
                                 }
                                 if (r[k].codenum) {
                                     $(ii).attr('id', r[k].codenum);

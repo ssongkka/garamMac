@@ -1043,77 +1043,19 @@ function getVeAllCompa(compa) {
                         }
                     }
 
-                    if (!tmp01I && !tmp01O) {
-                        tmp01I = NaN;
-                        tmp01O = NaN;
-                        tmp01A = NaN;
-                    }
-
-                    if (!tmp02I && !tmp02O) {
-                        tmp02I = NaN;
-                        tmp02O = NaN;
-                        tmp02A = NaN;
-                    }
-
-                    if (!tmp03I && !tmp03O) {
-                        tmp03I = NaN;
-                        tmp03O = NaN;
-                        tmp03A = NaN;
-                    }
-
-                    if (!tmp04I && !tmp04O) {
-                        tmp04I = NaN;
-                        tmp04O = NaN;
-                        tmp04A = NaN;
-                    }
-
-                    if (!tmp05I && !tmp05O) {
-                        tmp05I = NaN;
-                        tmp05O = NaN;
-                        tmp05A = NaN;
-                    }
-
-                    if (!tmp06I && !tmp06O) {
-                        tmp06I = NaN;
-                        tmp06O = NaN;
-                        tmp06A = NaN;
-                    }
-
-                    if (!tmp07I && !tmp07O) {
-                        tmp07I = NaN;
-                        tmp07O = NaN;
-                        tmp07A = NaN;
-                    }
-
-                    if (!tmp08I && !tmp08O) {
-                        tmp08I = NaN;
-                        tmp08O = NaN;
-                        tmp08A = NaN;
-                    }
-
-                    if (!tmp09I && !tmp09O) {
-                        tmp09I = NaN;
-                        tmp09O = NaN;
-                        tmp09A = NaN;
-                    }
-
-                    if (!tmp10I && !tmp10O) {
-                        tmp10I = NaN;
-                        tmp10O = NaN;
-                        tmp10A = NaN;
-                    }
-
-                    if (!tmp11I && !tmp11O) {
-                        tmp11I = NaN;
-                        tmp11O = NaN;
-                        tmp11A = NaN;
-                    }
-
-                    if (!tmp12I && !tmp12O) {
-                        tmp12I = NaN;
-                        tmp12O = NaN;
-                        tmp12A = NaN;
-                    }
+                    // if (!tmp01I && !tmp01O) {     tmp01I = NaN;     tmp01O = NaN;     tmp01A =
+                    // NaN; } if (!tmp02I && !tmp02O) {     tmp02I = NaN;     tmp02O = NaN; tmp02A =
+                    // NaN; } if (!tmp03I && !tmp03O) {     tmp03I = NaN;     tmp03O = NaN; tmp03A =
+                    // NaN; } if (!tmp04I && !tmp04O) {     tmp04I = NaN;     tmp04O = NaN; tmp04A =
+                    // NaN; } if (!tmp05I && !tmp05O) {     tmp05I = NaN;     tmp05O = NaN; tmp05A =
+                    // NaN; } if (!tmp06I && !tmp06O) {     tmp06I = NaN;     tmp06O = NaN; tmp06A =
+                    // NaN; } if (!tmp07I && !tmp07O) {     tmp07I = NaN;     tmp07O = NaN; tmp07A =
+                    // NaN; } if (!tmp08I && !tmp08O) {     tmp08I = NaN;     tmp08O = NaN; tmp08A =
+                    // NaN; } if (!tmp09I && !tmp09O) {     tmp09I = NaN;     tmp09O = NaN; tmp09A =
+                    // NaN; } if (!tmp10I && !tmp10O) {     tmp10I = NaN;     tmp10O = NaN; tmp10A =
+                    // NaN; } if (!tmp11I && !tmp11O) {     tmp11I = NaN;     tmp11O = NaN; tmp11A =
+                    // NaN; } if (!tmp12I && !tmp12O) {     tmp12I = NaN;     tmp12O = NaN; tmp12A =
+                    // NaN; }
 
                     tmpArrInM.push(tmp01I);
                     tmpArrInM.push(tmp02I);

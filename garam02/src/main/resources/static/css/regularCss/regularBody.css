@@ -47,8 +47,10 @@
 }
 .title1 {
     flex: 1;
-    text-align: center;
     display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .title1-item:nth-child(2) {

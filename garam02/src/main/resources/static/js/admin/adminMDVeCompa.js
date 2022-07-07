@@ -332,14 +332,8 @@ function setAdMDVeStatic(yearMonth, arrInM, arrOutM, allInM, allOutM, allM, gas1
 
                         allM = parseInt(inM) - parseInt(outM);
 
-                        if (inM === 0 && outM === 0) {
-                            inM = NaN;
-                            outM = NaN;
-                        }
-
-                        if (allM === 0) {
-                            allM = NaN;
-                        }
+                        // if (inM === 0 && outM === 0) {     inM = NaN;     outM = NaN; } if (allM ===
+                        // 0) {     allM = NaN; }
 
                         tmpArrInMMM.push(inM);
                         tmpArrOutMMM.push(outM);

@@ -311,12 +311,16 @@ function setRegHol(result) {
                         const ccc = $(aaa[0]).children();
                         const ddd = $(aaa[1]).children();
 
+                        const ggg = $(aaa[3]).children();
+
                         for (let i = 0; i < bbb.length; i++) {
                             const tbDay = parseInt($(ccc[i + 1]).text().replaceAll('일', ''));
                             const realDay = parseInt(r[k].solarcal.split('-')[2]);
                             if (realDay == tbDay) {
                                 $(ccc[i + 1]).css('color', '#CF2F11');
                                 $(ddd[i]).css('color', '#CF2F11');
+
+                                $(ggg[i]).text(100);
                             }
                         }
                     }
@@ -842,21 +846,24 @@ function getRegularAlloCa() {
                                 if (dddayTh === r[i].regoperday && codenumnums === r[i].codenum) {
                                     if (r[i].regoperno < tmpMin) {
                                         tmpMin = r[i].regoperno;
+
                                         let carcar = '';
-                                        if (isNaN((r[i].idvehicle).substring((r[i].idvehicle).length - 4))) {
-                                            if (r[i].idvehicle.length > 5) {
-                                                carcar = r[i]
-                                                    .idvehicle
+
+                                        carcar = (r[i].idvehicle).substring((r[i].idvehicle).length - 4);
+
+                                        console.log(r[i].idvehicle);
+
+                                        for (let c = 0; c < dbothercompa.length; c++) {
+                                            if (r[i].idvehicle == dbothercompa[c].ctmno) {
+                                                carcar = (dbothercompa[c].ctmname)
                                                     .replaceAll('고속', '')
+                                                    .replaceAll('버스', '')
                                                     .replaceAll('관광', '')
                                                     .replaceAll('여행사', '')
-                                                    .replaceAll('(주)', '');
-                                            } else {
-                                                carcar = r[i].idvehicle;
+                                                    .replaceAll('(주)', '');;
                                             }
-                                        } else {
-                                            carcar = (r[i].idvehicle).substring((r[i].idvehicle).length - 4);
                                         }
+
                                         carT = carcar;
 
                                         opernumT = r[i].regopernum;
@@ -920,8 +927,8 @@ function showAlloChModal(param) {
 
     for (let i = 0; i < dbothercompa.length; i++) {
         if (dbothercompa[i].ctmtrash > 0) {
-            htmlOthercompa += `<option value="` + dbothercompa[i].ctmname + `" label="` +
-                    dbothercompa[i].ctmname + `" data-value="` + dbothercompa[i].ctmname + `">` +
+            htmlOthercompa += `<option value="` + dbothercompa[i].ctmno + `" label="` +
+                    dbothercompa[i].ctmname + `" data-value="` + dbothercompa[i].ctmno + `">` +
                     dbothercompa[i].ctmname + `</option>`;
         }
     }
@@ -966,8 +973,8 @@ function showAlloChModal(param) {
         }
         if (veE.length < 1) {
             for (let j = 0; j < dbothercompa.length; j++) {
-                if (veve == dbothercompa[j].ctmname) {
-                    veE = dbothercompa[j].ctmname;
+                if (veve == dbothercompa[j].ctmno) {
+                    veE = dbothercompa[j].ctmno;
                 }
             }
         }
@@ -978,8 +985,8 @@ function showAlloChModal(param) {
         }
         if (idE.length < 1) {
             for (let j = 0; j < dbothercompa.length; j++) {
-                if (idid == dbothercompa[j].ctmname) {
-                    idE = dbothercompa[j].ctmname;
+                if (idid == dbothercompa[j].ctmno) {
+                    idE = dbothercompa[j].ctmno;
                 }
             }
         }
@@ -1561,8 +1568,8 @@ function getAllo(param) {
 
             for (let i = 0; i < dbothercompa.length; i++) {
                 if (dbothercompa[i].ctmtrash > 0) {
-                    htmlOthercompa += `<option value="` + dbothercompa[i].ctmname + `" label="` +
-                            dbothercompa[i].ctmname + `" data-value="` + dbothercompa[i].ctmname + `">` +
+                    htmlOthercompa += `<option value="` + dbothercompa[i].ctmno + `" label="` +
+                            dbothercompa[i].ctmname + `" data-value="` + dbothercompa[i].ctmno + `">` +
                             dbothercompa[i].ctmname + `</option>`;
                 }
             }

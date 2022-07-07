@@ -371,19 +371,24 @@ function setAdMDVeStaticPer(yearMonth, arrAllo, arrAlloM, arrEarn, allo, alloM, 
                             inininM = r[i].veaccdate;
                             outoutM = r[i].veacctime;
                         } else {
-                            inininM = NaN;
-                            outoutM = NaN;
-                            janM = NaN;
+                            // inininM = NaN; outoutM = NaN; janM = NaN;
+
+                            inininM = 0;
+                            outoutM = 0;
+                            janM = 0;
                         }
 
                         if (manegeM == 0 && ilCnt == 0 && hakCnt == 0 && guCnt == 0) {
-                            tmpArr1.push(NaN);
-                            tmpArr2.push(NaN);
-                            tmpArr3.push(NaN);
-                            tmpArr4.push(NaN);
-                            tmpArr5.push(NaN);
-                            tmpArr6.push(NaN);
-                            tmpArr7.push(NaN);
+                            // tmpArr1.push(NaN); tmpArr2.push(NaN); tmpArr3.push(NaN); tmpArr4.push(NaN);
+                            // tmpArr5.push(NaN); tmpArr6.push(NaN); tmpArr7.push(NaN);
+
+                            tmpArr1.push(0);
+                            tmpArr2.push(0);
+                            tmpArr3.push(0);
+                            tmpArr4.push(0);
+                            tmpArr5.push(0);
+                            tmpArr6.push(0);
+                            tmpArr7.push(0);
                         } else {
                             tmpArr1.push(manegeM);
                             tmpArr2.push(parseInt(jungM) - parseInt(jungAltM));
@@ -441,19 +446,6 @@ function setAdMDVeStaticPer(yearMonth, arrAllo, arrAlloM, arrEarn, allo, alloM, 
                 ],
                 datasets: [
                     {
-                        type: 'line',
-                        label: '운행횟수',
-                        backgroundColor: 'rgba(112, 103, 145, 0.2)',
-                        borderColor: 'rgba(112, 103, 145, 1)',
-                        borderDash: [
-                            5, 5
-                        ],
-                        data: result[6],
-                        pointRadius: 3,
-                        pointHoverRadius: 6,
-                        yAxisID: 'y1',
-                        stack: 'Stack 2'
-                    }, {
                         type: 'line',
                         label: '배차수익',
                         backgroundColor: 'rgba(112, 173, 71, 0.2)',
@@ -561,17 +553,6 @@ function setAdMDVeStaticPer(yearMonth, arrAllo, arrAlloM, arrEarn, allo, alloM, 
                                     }
                                     return Chart.defaults.color;
                                 }
-                            }
-                        },
-                        y1: {
-                            type: 'linear',
-                            beginAtZero: true,
-                            display: true,
-                            position: 'right',
-
-                            // grid line settings
-                            grid: {
-                                drawOnChartArea: false, // only want the grid lines for one axis to show up
                             }
                         }
                     }

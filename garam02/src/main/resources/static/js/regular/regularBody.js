@@ -428,20 +428,48 @@ function getRegularDe(result) {
                 $('#rddow').text(ddow);
 
                 if (r[0].idname) {
-                    $('#rdid').html(r[0].idname);
+
+                    let whocar = r[0].idname;
+
+                    for (let c = 0; c < dbothercompa.length; c++) {
+                        if (r[0].idname == dbothercompa[c].ctmno) {
+                            whocar = dbothercompa[c].ctmname;
+                        }
+                    }
+
+                    $('#rdid').html(whocar);
+
                 } else {
                     $('#rdid').html('&nbsp;');
                 }
 
                 if (r[0].idphone1) {
-                    $('#rdidtel').text(r[0].idphone1);
-                    $('#rdidtel').attr('href', 'tel:' + r[0].idphone1);
+
+                    let whotel = r[0].idphone1;
+
+                    for (let c = 0; c < dbothercompa.length; c++) {
+                        if (r[0].idname == dbothercompa[c].ctmno) {
+                            whotel = dbothercompa[c].ctmtel1;
+                        }
+                    }
+
+                    $('#rdidtel').text(whotel);
+                    $('#rdidtel').attr('href', 'tel:' + whotel);
                 } else {
                     $('#rdidtel').html(`&nbsp;`);
                 }
 
                 if (r[0].idvehicle) {
-                    $('#rdve').text(r[0].idvehicle);
+
+                    let whocar = r[0].idvehicle;
+
+                    for (let c = 0; c < dbothercompa.length; c++) {
+                        if (r[0].idname == dbothercompa[c].ctmno) {
+                            whocar = dbothercompa[c].ctmname;
+                        }
+                    }
+
+                    $('#rdve').text(whocar);
                 } else {
                     $('#rdve').html(`&nbsp;`);
                 }

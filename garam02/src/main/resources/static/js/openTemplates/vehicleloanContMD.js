@@ -63,7 +63,9 @@ $(document).on('click', '.middle-loan', function () {
 
     const bbb = $(this)
         .parent()
-        .parent();
+        .parent()
+        .prev()
+        .prev();
     const bbb1 = $(bbb).children()[0];
 
     const thisDay = $(bbb1).val();
@@ -77,13 +79,21 @@ $(document).on('click', '.middle-loan', function () {
 
     const carN = $(ccc).val();
 
+    const eee = $(this)
+        .parent()
+        .parent()
+        .prev()
+        .prev();
+
+    const thisddayday = $(eee).val();
+
     $('#loanCarNum').val('');
     $('#loancontNum').val(loanNoo);
 
     $('#modal-loanCont-mh').text(carNum + "  대출정보");
 
     $('#inputLoanNumInsert').val('');
-    $('#inputLoanDayInsert').val(thisDay);
+    $('#inputLoanDayInsert').val(thisddayday);
     $('#inputLoanMonthInsert').val(carN);
 
     makeModalLoanCont(loanNoo);

@@ -557,7 +557,12 @@ function makeModalIl(dday, cctono, rsvt) {
                                 if (veCnt < 1) {
                                     $(aaa[1]).addClass("allo3");
                                     $(aaa[15]).addClass("allo31");
-                                    veh = r[i].opercar;
+
+                                    for (let c = 0; c < dbothercompa.length; c++) {
+                                        if (r[i].opercar == dbothercompa[c].ctmno) {
+                                            veh = dbothercompa[c].ctmname;
+                                        }
+                                    }
                                 }
 
                                 $(aaa[1]).val(veh);
