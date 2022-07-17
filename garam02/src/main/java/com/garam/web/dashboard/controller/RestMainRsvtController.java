@@ -69,4 +69,12 @@ public class RestMainRsvtController {
 		return list;
 	}
 
+	@PostMapping(value = "/upupCtm")
+	public int upupCtm(@RequestBody RsvtDTO rsvtDTO) throws Exception {
+
+		int rtn = rsvtService.updateCtm(rsvtDTO);
+
+		return rtn;
+	}
+
 }

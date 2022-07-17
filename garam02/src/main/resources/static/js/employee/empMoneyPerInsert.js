@@ -23,6 +23,7 @@ $(document).ready(function () {
     $("#sanmM").attr("disabled", true);
 
     $("#in-baseM").attr("disabled", true);
+    $("#in-regM").attr("disabled", true);
 
     $("#insert-outM").prop("disabled", true);
     $("#insert-inM").prop("disabled", true);
@@ -478,6 +479,7 @@ function unclkName() {
     $("#sanmM").attr("disabled", true);
 
     $("#in-baseM").attr("disabled", true);
+    $("#in-regM").attr("disabled", true);
 
     $("#insert-outM").prop("disabled", true);
     $("#insert-inM").prop("disabled", true);
@@ -514,6 +516,7 @@ function clkName() {
     $("#sanmM").removeAttr("disabled");
 
     $("#in-baseM").removeAttr("disabled");
+    $("#in-regM").removeAttr("disabled");
 
     $("#insert-inM").removeAttr("disabled");
     $("#insert-outM").removeAttr("disabled");
@@ -534,6 +537,9 @@ function clkName() {
 }
 
 $(document).on('change', '#in-baseM', function () {
+    sumAllpro();
+});
+$(document).on('change', '#in-regM', function () {
     sumAllpro();
 });
 $(document).on('change', '#kukmM', function () {
@@ -1313,7 +1319,7 @@ function saveDeal(sepa) {
                 "inm": inm,
                 "outm": outm,
                 "janm": janM,
-                "empin": user.id
+                "empin": dbuser.id
             };
             $.ajax({
                 url: url,
@@ -1495,6 +1501,20 @@ function saveDeal(sepa) {
         return new Promise(function (resolve, reject) {
 
             let params = new Array();
+
+            if ($('#in-regM').val()) {
+                const ddday = {
+                    "carnumber": $('#ve-iidd').val(),
+                    "sday": $('#yearmonthsMoney2').val(),
+                    "separation": '정기운행',
+                    "date": null,
+                    "contents": '정기운행',
+                    "money": ($('#in-regM').val()).replaceAll(',', ''),
+                    "strash": sepa
+                };
+                params.push(ddday);
+            }
+
             const size = $('#emp-in-money-tb')
                 .children()
                 .length;

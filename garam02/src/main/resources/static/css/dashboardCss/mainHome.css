@@ -201,8 +201,6 @@ ul {
     padding: 1rem 2rem 0;
 
     margin-bottom: 1rem;
-
-    cursor: pointer;
 }
 
 .cal2Detail svg,
@@ -225,6 +223,8 @@ ul {
     border-radius: 50%;
     font-size: 1.5rem;
     font-weight: 600;
+
+    cursor: pointer;
 }
 
 .mainCaltd-top-hol {
@@ -473,12 +473,14 @@ ul {
 
 .h2chLoan {
     display: block;
-    color: #cde7f3;
+    /* color: #cde7f3; */
+    color: #c20000;
 }
 
 .h2chInsu {
     display: block;
-    color: #ffc8c8;
+    /* color: #ffc8c8; */
+    color: #c20000;
 }
 
 .h2chEnd,
@@ -542,6 +544,25 @@ table > tbody > tr > .big28home2 {
     overflow-y: scroll;
     width: 100%;
     max-height: calc(100vh - 17rem);
+}
+
+.ca2Compa1 {
+    background-color: var(--compa-color2);
+}
+
+.ca2Compa2 {
+    background-color: var(--person-color2);
+}
+
+.home4H4 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dropCarSide {
+    padding: 0;
+    width: 35rem;
 }
 
 @media (max-width:1024px) {}

@@ -154,13 +154,16 @@ $(document).ready(function () {
                     `
                 </label>
             </div>`;
-            compaNameHtmls += `
-            <div class="">` + dbCompa[i].company + `</div>`;
+            compaNameHtmls += `<span>* '거래내역'이 ` + $('#staticMonth')
+                .val()
+                .split('-')[0] + `년 ` + $('#staticMonth')
+                .val()
+                .split('-')[1] + `월에 입력된 차량만 표시됩니다.</span>`;
         }
     } else {}
 
     $('#stCompaD').html(compaHtmls);
-    $('#stCompaT').html(compaNameHtmls);
+    // $('#stCompaT').html(compaNameHtmls);
 
     var listVar = $('input[name=stCompa]:checked').val();
 
@@ -169,17 +172,30 @@ $(document).ready(function () {
 
 $(document).on('change', '#staticMonth', function () {
     getVeAllPer($('input[name=stCompa]:checked').val());
+    setWarn2();
 });
 
 $(document).on('click', '#fnDownMonthStatic', function () {
     setYearMonthDown('#staticMonth');
     getVeAllPer($('input[name=stCompa]:checked').val());
+    setWarn2();
 });
 
 $(document).on('click', '#fnUpMonthStatic', function () {
     setYearMonthUp('#staticMonth');
     getVeAllPer($('input[name=stCompa]:checked').val());
+    setWarn2();
 });
+
+function setWarn2() {
+    const compaNameHtmls1 = `<span>* '거래내역'이 ` + $('#staticMonth')
+        .val()
+        .split('-')[0] + `년 ` + $('#staticMonth')
+        .val()
+        .split('-')[1] + `월에 입력된 차량만 표시됩니다.</span>`;
+
+    $('#stCompaT').html(compaNameHtmls1);
+}
 
 $(document).on('click', 'input[name=stCompa]', function () {
     let compaNameHtmls = ``;
@@ -195,7 +211,14 @@ $(document).on('click', 'input[name=stCompa]', function () {
             <div class="">` + dbCompa[i].company + `</div>`;
         }
     }
-    $('#stCompaT').html(compaNameHtmls);
+
+    const compaNameHtmls1 = `<span>* '거래내역'이 ` + $('#staticMonth')
+        .val()
+        .split('-')[0] + `년 ` + $('#staticMonth')
+        .val()
+        .split('-')[1] + `월에 입력된 차량만 표시됩니다.</span>`;
+
+    $('#stCompaT').html(compaNameHtmls1);
 
     getVeAllPer($('input[name=stCompa]:checked').val());
 });
@@ -220,6 +243,8 @@ function setYearMonthDown(params) {
 
 function getVeAllPer(compa) {
 
+    setWarn2();
+
     LoadingWithMask()
         .then(getVeAllCompaSql)
         .then(setChartPer1)
@@ -227,8 +252,6 @@ function getVeAllPer(compa) {
         .then(getYearStaticPer)
         .then(setChartPer5)
         .then(closeLoadingWithMask);
-    // .then(setChartCompa1) .then(setChartCompa2) .then(setChartCompa3)
-    // .then(setChartCompa4) .then(getYearStaticCompa) .then(setChartCompa5)
 
     function getVeAllCompaSql() {
         return new Promise(function (resolve, reject) {
@@ -310,12 +333,18 @@ function getVeAllPer(compa) {
                         let jungM = 0;
                         if (r[i].special) {
                             jungM = r[i].special;
-                            allNumM = allNumM + parseInt(r[i].special);
                         }
 
                         let jungAltM = 0;
                         if (r[i].insusepaday) {
                             jungAltM = r[i].insusepaday;
+                        }
+
+                        if (parseInt(jungM) < 1 || parseInt(jungAltM) < 1) {
+                            jungM = 0;
+                            jungAltM = 0;
+                        } else {
+                            allNumM = allNumM + parseInt(r[i].special);
                             allAltM = allAltM + parseInt(r[i].insusepaday);
                         }
 
@@ -433,7 +462,7 @@ function getVeAllPer(compa) {
 
                             let namename = '';
                             for (let k = 0; k < dbEmp.length; k++) {
-                                if (r[i].owner == dbEmp[k].id) {
+                                if (r[i].vemaintenancekind == dbEmp[k].id) {
                                     namename = dbEmp[k].name;
                                 }
                             }
@@ -597,8 +626,18 @@ function getVeAllPer(compa) {
                             `</td>
                 </tr>`;
 
-                    $('#tbVeAllPer').html(htmls);
-                    $('#tfVeAllPer').html(htmlsFoot);
+                    if (r.length > 0) {
+                        $('#tbVeAllPer').html(htmls);
+                        $('#tfVeAllPer').html(htmlsFoot);
+                    } else {
+                        $('#tbVeAllPer').html(
+                            `
+                            <tr>
+                            <td colspan="19" style="text-align: center;">정보없음</td>
+                            </tr>`
+                        );
+                        $('#tfVeAllPer').html(``);
+                    }
 
                     arrTmpEarn2.push(sum5);
                     arrTmpEarn2.push(sum7);
@@ -901,12 +940,18 @@ function getVeAllPer(compa) {
                         let jungM = 0;
                         if (r[i].special) {
                             jungM = r[i].special;
-                            allNumM = allNumM + parseInt(r[i].special);
                         }
 
                         let jungAltM = 0;
                         if (r[i].insusepaday) {
                             jungAltM = r[i].insusepaday;
+                        }
+
+                        if (parseInt(jungM) < 1 || parseInt(jungAltM) < 1) {
+                            jungM = 0;
+                            jungAltM = 0;
+                        } else {
+                            allNumM = allNumM + parseInt(r[i].special);
                             allAltM = allAltM + parseInt(r[i].insusepaday);
                         }
 
@@ -1086,12 +1131,12 @@ function getVeAllPer(compa) {
                         }
                     }
 
-                    // if (!tmp011 && !tmp012 && !tmp013 && !tmp014 && !tmp015 && !tmp016) {
-                    // tmp011 = NaN;     tmp012 = NaN;     tmp013 = NaN;     tmp014 = NaN;
-                    // tmp015 = NaN;     tmp016 = NaN; } if (!tmp021 && !tmp022 && !tmp023 &&
-                    // !tmp024 && !tmp025 && !tmp026) {     tmp021 = NaN;     tmp022 = NaN;
-                    // tmp023 = NaN;     tmp024 = NaN;     tmp025 = NaN;     tmp026 = NaN; } if
-                    // (!tmp031 && !tmp032 && !tmp033 && !tmp034 && !tmp035 && !tmp036) {     tmp031
+                    // if (!tmp011 && !tmp012 && !tmp013 && !tmp014 && !tmp015 && !tmp016) { tmp011
+                    // = NaN;     tmp012 = NaN;     tmp013 = NaN;     tmp014 = NaN; tmp015 = NaN;
+                    // tmp016 = NaN; } if (!tmp021 && !tmp022 && !tmp023 && !tmp024 && !tmp025 &&
+                    // !tmp026) {     tmp021 = NaN;     tmp022 = NaN; tmp023 = NaN;     tmp024 =
+                    // NaN;     tmp025 = NaN;     tmp026 = NaN; } if (!tmp031 && !tmp032 && !tmp033
+                    // && !tmp034 && !tmp035 && !tmp036) {     tmp031
                     // = NaN;     tmp032 = NaN;     tmp033 = NaN;     tmp034 = NaN;     tmp035 =
                     // NaN;     tmp036 = NaN; } if (!tmp041 && !tmp042 && !tmp043 && !tmp044 &&
                     // !tmp045 && !tmp046) {     tmp041 = NaN;     tmp042 = NaN;     tmp043 = NaN;
@@ -1099,11 +1144,11 @@ function getVeAllPer(compa) {
                     // !tmp053 && !tmp054 && !tmp055 && !tmp056) {     tmp051 = NaN;     tmp052 =
                     // NaN;     tmp053 = NaN;     tmp054 = NaN;     tmp055 = NaN;     tmp056 = NaN;
                     // } if (!tmp061 && !tmp062 && !tmp063 && !tmp064 && !tmp065 && !tmp066) {
-                    // tmp061 = NaN;     tmp062 = NaN;     tmp063 = NaN;     tmp064 = NaN;
-                    // tmp065 = NaN;     tmp066 = NaN; } if (!tmp071 && !tmp072 && !tmp073 &&
-                    // !tmp074 && !tmp075 && !tmp076) {     tmp071 = NaN;     tmp072 = NaN;
-                    // tmp073 = NaN;     tmp074 = NaN;     tmp075 = NaN;     tmp076 = NaN; } if
-                    // (!tmp081 && !tmp082 && !tmp083 && !tmp084 && !tmp085 && !tmp086) {     tmp081
+                    // tmp061 = NaN;     tmp062 = NaN;     tmp063 = NaN;     tmp064 = NaN; tmp065 =
+                    // NaN;     tmp066 = NaN; } if (!tmp071 && !tmp072 && !tmp073 && !tmp074 &&
+                    // !tmp075 && !tmp076) {     tmp071 = NaN;     tmp072 = NaN; tmp073 = NaN;
+                    // tmp074 = NaN;     tmp075 = NaN;     tmp076 = NaN; } if (!tmp081 && !tmp082 &&
+                    // !tmp083 && !tmp084 && !tmp085 && !tmp086) {     tmp081
                     // = NaN;     tmp082 = NaN;     tmp083 = NaN;     tmp084 = NaN;     tmp085 =
                     // NaN;     tmp086 = NaN; } if (!tmp091 && !tmp092 && !tmp093 && !tmp094 &&
                     // !tmp095 && !tmp096) {     tmp091 = NaN;     tmp092 = NaN;     tmp093 = NaN;
@@ -1111,10 +1156,10 @@ function getVeAllPer(compa) {
                     // !tmp103 && !tmp104 && !tmp105 && !tmp106) {     tmp101 = NaN;     tmp102 =
                     // NaN;     tmp103 = NaN;     tmp104 = NaN;     tmp105 = NaN;     tmp106 = NaN;
                     // } if (!tmp111 && !tmp112 && !tmp113 && !tmp114 && !tmp115 && !tmp116) {
-                    // tmp111 = NaN;     tmp112 = NaN;     tmp113 = NaN;     tmp114 = NaN;
-                    // tmp115 = NaN;     tmp116 = NaN; } if (!tmp121 && !tmp122 && !tmp123 &&
-                    // !tmp124 && !tmp125 && !tmp126) {     tmp121 = NaN;     tmp122 = NaN;
-                    // tmp123 = NaN;     tmp124 = NaN;     tmp125 = NaN;     tmp126 = NaN; }
+                    // tmp111 = NaN;     tmp112 = NaN;     tmp113 = NaN;     tmp114 = NaN; tmp115 =
+                    // NaN;     tmp116 = NaN; } if (!tmp121 && !tmp122 && !tmp123 && !tmp124 &&
+                    // !tmp125 && !tmp126) {     tmp121 = NaN;     tmp122 = NaN; tmp123 = NaN;
+                    // tmp124 = NaN;     tmp125 = NaN;     tmp126 = NaN; }
 
                     tmpArr1.push(tmp011);
                     tmpArr1.push(tmp021);

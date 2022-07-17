@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.garam.web.employee.mapper.EmployeeMapper">
 
-	<select id="selectDealVe" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+	<select id="selectDealVe"
+		parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
 		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
 
 		(SELECT
@@ -21,7 +22,8 @@
 
 		ON
 
-		operation_info.opercar = vehicleinfo.carnumber
+		operation_info.opercar =
+		vehicleinfo.carnumber
 
 		LEFT JOIN
 
@@ -29,7 +31,8 @@
 
 		ON
 
-		vehicleinfo.id = employeeinfo.id
+		vehicleinfo.id =
+		employeeinfo.id
 
 		<where>
 			operation_info.opercom != vehicleinfo.company
@@ -72,7 +75,8 @@
 
 	</select>
 
-	<select id="dealInMoney" parameterType="com.garam.web.employee.dto.Empsalary"
+	<select id="dealInMoney"
+		parameterType="com.garam.web.employee.dto.Empsalary"
 		resultType="com.garam.web.employee.dto.Empsalary">
 
 		SELECT
@@ -97,7 +101,8 @@
 
 		AND
 
-		personnaldealplus.sday = #{sday}
+		personnaldealplus.sday =
+		#{sday}
 
 		AND
 
@@ -105,7 +110,8 @@
 
 	</select>
 
-	<select id="dealOutMoney" parameterType="com.garam.web.employee.dto.Empsalary"
+	<select id="dealOutMoney"
+		parameterType="com.garam.web.employee.dto.Empsalary"
 		resultType="com.garam.web.employee.dto.Empsalary">
 
 		SELECT
@@ -130,14 +136,16 @@
 
 		AND
 
-		personnaldealminus.sday = #{sday}
+		personnaldealminus.sday =
+		#{sday}
 
 		AND
 
 		personnaldeal.date = #{sday}
 	</select>
 
-	<select id="dealAllMoney" parameterType="com.garam.web.employee.dto.EmpsalaryAll"
+	<select id="dealAllMoney"
+		parameterType="com.garam.web.employee.dto.EmpsalaryAll"
 		resultType="com.garam.web.employee.dto.EmpsalaryAll">
 
 
@@ -202,7 +210,8 @@
 		)
 	</select>
 
-	<delete id="delDealInM" parameterType="com.garam.web.employee.dto.Empsalary">
+	<delete id="delDealInM"
+		parameterType="com.garam.web.employee.dto.Empsalary">
 		DELETE
 
 		personnaldealplus
@@ -228,7 +237,8 @@
 		personnaldealplus.sday =
 		#{sday};
 	</delete>
-	<delete id="delDealOutM" parameterType="com.garam.web.employee.dto.Empsalary">
+	<delete id="delDealOutM"
+		parameterType="com.garam.web.employee.dto.Empsalary">
 		DELETE
 
 		personnaldealminus
@@ -301,7 +311,8 @@
 		</foreach>
 	</insert>
 
-	<insert id="insertDealAllMoney" parameterType="com.garam.web.employee.dto.EmpsalaryAll">
+	<insert id="insertDealAllMoney"
+		parameterType="com.garam.web.employee.dto.EmpsalaryAll">
 
 		INSERT INTO
 
@@ -338,7 +349,8 @@
 		1);
 	</insert>
 
-	<select id="selectEmpOperPerListCnt" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+	<select id="selectEmpOperPerListCnt"
+		parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
 		resultType="com.garam.web.employee.dto.EmpRsvtDTO">
 
 		SELECT
@@ -393,7 +405,8 @@
 		rsvt.stt;
 
 	</select>
-	<select id="selectEmpOperPerList" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+	<select id="selectEmpOperPerList"
+		parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
 		resultType="com.garam.web.employee.dto.EmpRsvtDTO">
 
 		SELECT
@@ -460,7 +473,8 @@
 
 	</select>
 
-	<select id="selEmpRegOperPerList" parameterType="com.garam.web.regular.dto.RegularDTO"
+	<select id="selEmpRegOperPerList"
+		parameterType="com.garam.web.regular.dto.RegularDTO"
 		resultType="com.garam.web.regular.dto.RegularDTO">
 
 		SELECT
@@ -492,7 +506,8 @@
 		operation_reg.regoperday
 	</select>
 
-	<select id="selEmpRegOperPerList2" parameterType="com.garam.web.regular.dto.RegularDTO"
+	<select id="selEmpRegOperPerList2"
+		parameterType="com.garam.web.regular.dto.RegularDTO"
 		resultType="com.garam.web.regular.dto.RegularDTO">
 
 		SELECT
@@ -573,7 +588,8 @@
 		operation_reg.operregseq
 
 	</select>
-	<select id="selectEmpAllAlloPer" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+	<select id="selectEmpAllAlloPer"
+		parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
 		resultType="com.garam.web.employee.dto.EmpRsvtDTO">
 
 		SELECT
@@ -641,7 +657,8 @@
 
 	</select>
 
-	<select id="selectEmpAllAllo1Per" parameterType="com.garam.web.regular.dto.RegularDTO"
+	<select id="selectEmpAllAllo1Per"
+		parameterType="com.garam.web.regular.dto.RegularDTO"
 		resultType="com.garam.web.regular.dto.RegularDTO">
 
 		SELECT
@@ -742,7 +759,8 @@
 		operation_reg.operregseq
 	</select>
 
-	<update id="updateVeBaseM" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
+	<update id="updateVeBaseM"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		UPDATE
 

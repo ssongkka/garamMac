@@ -1,0 +1,238 @@
+@charset "UTF-8";
+
+.main-gumanage {
+    flex: 1;
+
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.main-gumanage-item1 {
+    flex: 1;
+    padding: 1rem;
+}
+
+.main-gumanage-item1 button {}
+
+.main-gumanage-item2 {
+    flex: 2;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.gumanage-cont1 {
+    background: #e6e8ed;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    padding: 2rem 1rem;
+}
+
+.gumanage-cont2 {
+    flex: 1;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.gumanage-go-out {
+    height: 100%;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.gumanage-go,
+.gumanage-out {
+    flex: 1;
+    padding: 1rem;
+}
+
+.gumanage-cont {
+    flex: 3;
+}
+
+.gum-search {
+    flex: 1;
+
+    height: calc(1.5em + 0.75rem + 2px);
+    border: 1px solid #c6c9d5;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    box-shadow: inset 0 1px 0 0 rgb(34 34 48 / 5%);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: all 0.2s ease-in-out;
+}
+
+.gum-search .gum-search-icon {
+    padding-left: 0.5rem;
+    font-size: 1.5rem;
+}
+.gum-search .gum-search-icon svg {
+    margin-top: 0.7rem;
+}
+
+.gum-search input {
+    width: 100%;
+    background: transparent;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    border: none;
+}
+
+.gum-search input:focus {
+    outline: none;
+}
+
+.gum-serach-group {
+    display: flex;
+    height: 100%;
+}
+
+.gum-serach-group button {
+    padding: 0 1rem;
+    z-index: 0;
+}
+
+.table-scroll-body-guManage {
+    min-height: calc(100vh - 19rem);
+    max-height: calc(100vh - 19rem);
+}
+
+.title1 {
+    text-align: center;
+}
+
+.title2 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 2rem;
+}
+
+.title2 blockquote {
+    padding: 0 1.5rem;
+}
+
+.title2 h5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.titlejae {
+    color: #888c9b;
+}
+
+.gumanage-sok2 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.gumanagesum {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.gumanagesum-item {
+    flex: 1;
+    padding: 1rem;
+}
+
+.gumanagesum-item div span {
+    font-size: 1.5rem;
+}
+
+.gumanagesum-item div span,
+.gumanagesum-item h4 {
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+}
+
+.gumanagesum-item h4 {
+    margin-left: 1rem;
+}
+
+.gumanagesum-item:nth-child(1) {
+    background: rgba(68, 114, 196, 1);
+}
+
+.gumanagesum-item:nth-child(2) {
+    background: rgb(237, 125, 49, 1);
+}
+
+.gumanagesum-item:nth-child(3) {
+    background: rgba(112, 173, 71, 1);
+}
+.gumanagegd,
+.gumanageim {
+    flex: 1;
+    padding: 1rem;
+}
+
+.table-scroll-body-guManage-Go,
+.table-scroll-body-guManage-Out {
+    max-height: calc(100vh - 68rem);
+}
+
+.table-scroll-body-guManage-Jang {
+    max-height: calc(100vh - 26rem);
+}
+
+.guMdBD {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.guManage-jang {
+    flex: 1;
+
+    padding: 1rem;
+}
+
+.guBtnlll {
+    flex: 1;
+
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+}
+
+.guBtnWan {
+    flex: 1;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.guBtnWan button,
+.guBtnWan input,
+.guBtnWan select {
+    flex: 1;
+}
+
+#guManageMdNew {
+    width: 100%;
+}
+
+#guManageMdFoot button {
+    width: 15rem;
+}
+
+@media (max-width:1024px) {}
+
+@media (max-width:768px) {}

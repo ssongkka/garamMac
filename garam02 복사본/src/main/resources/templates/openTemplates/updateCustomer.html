@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div class="inCustomerBody" id="InFormCutomer" th:fragment="upCust">
+        <input type="hidden" id="ctmnoUp" value="">
+        <div class="row">
+            <div class="form-group col-xs-8 col-lg-8">
+                <div class="form-check form-check-inline">
+                    <input
+                        class="form-check-input"
+                        id="inCustSepaUp1"
+                        type="radio"
+                        name="ctmsepaUp"
+                        value="0"
+                        checked="checked">
+                    <label class="form-check-label" for="inCustSepa1">일반</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input
+                        class="form-check-input"
+                        id="inCustSepaUp2"
+                        type="radio"
+                        name="ctmsepaUp"
+                        value="1">
+                    <label class="form-check-label" for="inCustSepa2">학생단체</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input
+                        class="form-check-input"
+                        id="inCustSepaUp3"
+                        type="radio"
+                        name="ctmsepaUp"
+                        value="2">
+                    <label class="form-check-label" for="inCustSepa3">거래처</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-12 col-md-6">
+                <i class="fa-solid fa-user-tie"></i>
+                <label for="ctmnameUp">이름&#42;</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    list="name-cho"
+                    class="form-control"
+                    id="ctmnameUp"
+                    placeholder="이름을 입력해주세요."
+                    value="">
+            </div>
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-phone-alt"></i>
+                <label for="ctmtel1Up">연락처&#42;</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmtel1Up"
+                    placeholder="전화번호 형식으로 입력"
+                    value="">
+            </div>
+        </div>
+        <div class="row cusPbtn">
+            <div class="form-group col-xs-12 col-lg-12">
+                <button class="btn btn-secondary" id="btnCusPUp">더보기<i class="fa-solid fa-angles-down"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row cusP">
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-map-marker-alt"></i>
+                <label for="ctmstpUp">출발지</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmstpUp"
+                    placeholder="출발지가 고정된 예약자일 경우 입력"></input>
+            </div>
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-pen"></i>
+                <label for="ctmdetailUp">메모</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmdetailUp"></input>
+            </div>
+        </div>
+        <div class="row cusP">
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-phone-alt"></i>
+                <label for="ctmtel2Up">비상연락처</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmtel2Up"
+                    placeholder="010-0000-0000">
+            </div>
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-map"></i>
+                <label for="ctmaddressUp">주소</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmaddressUp"
+                    placeholder="주소를 입력해주세요.">
+            </div>
+        </div>
+        <div class="row cusP">
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="far fa-envelope"></i>
+                <label for="ctmemailUp">이메일</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmemailUp"
+                    placeholder="mail@mail.com">
+            </div>
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="far fa-building"></i>
+                <label for="ctmcompanumUp">사업자등록번호</label>
+                <input
+                    type="email"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmcompanumUp"
+                    placeholder="사업자등록번호 형식으로 입력해주세요.">
+            </div>
+        </div>
+        <div class="row cusP">
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-fax"></i>
+                <label for="ctmfaxUp">팩스</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmfaxUp"
+                    placeholder="팩스 번호를 입력해주세요.">
+            </div>
+            <div class="form-group col-xs-12 col-lg-6">
+                <i class="fas fa-home"></i>
+                <label for="ctmhomepageUp">홈페이지</label>
+                <input
+                    type="text"
+                    onfocus="this.select()"
+                    class="form-control"
+                    id="ctmhomepageUp"
+                    placeholder="홈페이지 주소를 입력해주세요.">
+            </div>
+        </div>
+    </div>
+</html>

@@ -1,0 +1,66 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.garam02'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+apply plugin: 'war'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' 
+    implementation 'org.springframework.boot:spring-boot-starter-security' 
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' 
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' 
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0' 
+    
+    /* Thymeleaf Layout */
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+    /* Log4JDBC */
+    implementation 'com.google.code.gson:gson:2.8.5'
+    /* ftp */
+    /* annotationProcessor 'org.projectlombok:lombok' */
+	implementation 'commons-io:commons-io:2.11.0'
+	implementation 'commons-fileupload:commons-fileupload:1.4'
+	implementation 'commons-net:commons-net:3.8.0'
+	implementation 'org.springframework.integration:spring-integration-ftp:5.5.7'
+	implementation 'org.projectlombok:lombok'
+	
+	implementation 'mysql:mysql-connector-java:8.0.26'
+	
+	implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
+	
+	
+	implementation 'com.lowagie:itext:2.1.7'
+	implementation 'com.itextpdf:itextpdf:5.5.13'
+	
+	implementation 'org.apache.poi:poi:4.1.2'
+	implementation 'org.apache.poi:poi-ooxml:4.1.2'
+	implementation 'org.apache.poi:poi-ooxml-schemas:4.1.2'
+	implementation 'org.apache.poi:poi-scratchpad:4.1.2'
+	implementation 'org.apache.poi:poi-excelant:4.1.2'
+	
+	implementation 'org.apache.pdfbox:pdfbox:2.0.25'
+	implementation 'org.apache.pdfbox:pdfbox-tools:2.0.25'
+	
+	implementation 'org.jsoup:jsoup:1.14.3'
+	
+    compileOnly 'org.springframework.boot:spring-boot-devtools'
+    
+    developmentOnly 'org.springframework.boot:spring-boot-devtools' 
+    
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' 
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+	useJUnitPlatform()
+}

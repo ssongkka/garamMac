@@ -1,0 +1,141 @@
+#mdBigCal {
+    height: 100%;
+}
+
+#bigCalLabel {
+    padding-left: 45rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+}
+
+#yearMonthBig {
+    font-size: 2rem;
+}
+
+.bigCal-main {
+    padding: 1rem 35rem;
+    display: flex;
+}
+
+.bigcont {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.bigNumCon {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.md-bd-BigCal p {
+    margin: 0.2rem 0 0;
+}
+
+#mdBigCal table > tbody > tr > td {
+    vertical-align: top;
+}
+#mdBigCal table > tbody > tr > td:hover {
+    background: #edf2f9;
+    cursor: pointer;
+}
+#mdBigCal table > thead > tr > th {
+    letter-spacing: 0.3rem;
+    background: #edf2f9;
+}
+
+.bigNum {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.dotdot {
+    height: 5px;
+    width: 5px;
+    background: red;
+    border-radius: 100%;
+}
+
+.bigNum-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.numDay {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: #f9fbff;
+    border-radius: 50%;
+    padding: 0.1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.bigNumIn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.bigEven {
+    border-radius: 2px;
+    text-align: left;
+    padding-left: 3rem;
+    color: gray;
+}
+
+.bigNumIn span {
+    width: 1.5rem;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    flex: 1;
+}
+
+.big2511,
+.big2811,
+.big4511 {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    font-weight: 600;
+}
+
+.big2511 span,
+.big2811 span,
+.big4511 span {
+    margin-left: 1rem;
+}
+
+.big4511 {
+    background: #e0faef;
+    color: #009f5c;
+    border-radius: 2px;
+}
+
+.big2511 {
+    background: #fef0e8;
+    color: #f2600e;
+    border-radius: 2px;
+}
+
+.big2811 {
+    background: #e6effc;
+    color: #1862c6;
+    border-radius: 2px;
+}
+
+.bigBusNum {
+    display: flex;
+    gap: 2rem;
+}

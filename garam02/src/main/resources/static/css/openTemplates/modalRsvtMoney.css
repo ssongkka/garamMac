@@ -6,10 +6,12 @@
 
 .moneyCtm {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-start;
     gap: 3rem;
-    padding: 1rem;
+    padding: 1rem 1rem 1rem 3rem;
+
+    border-radius: 3px;
 }
 
 #rsvtMoneyRsvt {
@@ -51,6 +53,8 @@
     gap: 2rem;
 
     padding: 1rem;
+
+    background: #fcf8e3;
 }
 
 .rsvtMoneyAll-item:nth-child(1),
@@ -69,14 +73,12 @@
 .rsvtMoney-rsvt {
     display: flex;
     flex-direction: column;
-
-    background: #f6f7f9;
 }
 
 .rsvtMoney-rsvt-item1 {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     gap: 3rem;
 
     padding: 1rem;
@@ -92,7 +94,10 @@
 }
 .rsvtMoney-desy {}
 .rsvtMoney-etc {
-    padding-left: 3rem;
+    margin-left: 3rem;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 .rsvtMoney-conm1 {
     text-align: right;

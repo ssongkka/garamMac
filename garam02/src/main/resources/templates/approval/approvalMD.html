@@ -35,6 +35,7 @@
                                     <col width="20%" id="apprChLine1"/>
                                 </colgroup>
                                 <tbody>
+                                    <input type="hidden" id="apprChLinePosi0" value="">
                                     <tr style="height: 2.5rem;">
                                         <td id="apprChLinePosi5"></td>
                                         <td id="apprChLinePosi4"></td>
@@ -95,10 +96,19 @@
                     </div>
                 </div>
                 <div class="modal-footer" id="apprMdFoot">
-                    <button type="button" class="btn btn-secondary" id="apprMDBtn">닫&nbsp;기</button>
-                    <button type="button" class="btn btn-danger" id="apprMdDel">삭&nbsp;제</button>
-                    <button type="button" class="btn btn-warning" id="apprMdOut">반&nbsp;려</button>
-                    <button type="button" class="btn btn-success" id="apprMdGo">결&nbsp;재</button>
+                    <div>
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            id="apprMDBtn">닫&nbsp;기</button>
+                        <button type="button" class="btn btn-danger" id="apprMdDel">삭&nbsp;제</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-warning" id="apprMdOut">반&nbsp;려</button>
+                        <button type="button" class="btn btn-success" id="apprMdGo">결&nbsp;재</button>
+                    </div>
                 </div>
             </div>
         </div>

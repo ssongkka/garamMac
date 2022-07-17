@@ -1,3 +1,3 @@
 $(document).ready(function () {
-    makeMain2BigCal();
+    // makeMain2BigCal();
 });

@@ -149,10 +149,10 @@
                             <label for="company" class="form-label">회사&nbsp;&#42;</label>
                             <select class="form-select" id="company">
                                 <option
-                                    th:each="company : ${company}"
-                                    th:value="${company.company}"
-                                    th:label="${company.company}"
-                                    th:data-value="${company.company}"></option>
+                                    th:each="compa : ${compa}"
+                                    th:value="${compa.company}"
+                                    th:label="${compa.company}"
+                                    th:data-value="${compa.company}"></option>
                             </select>
                         </div>
                     </div>
@@ -166,10 +166,10 @@
                             </label>
                             <select class="form-select" id="owner">
                                 <option
-                                    th:each="company : ${company}"
-                                    th:value="${company.company}"
-                                    th:label="${company.company}"
-                                    th:data-value="${company.company}"></option>
+                                    th:each="compa : ${compa}"
+                                    th:value="${compa.company}"
+                                    th:label="${compa.company}"
+                                    th:data-value="${compa.company}"></option>
                                 <option
                                     th:each="emp : ${emp}"
                                     th:value="${emp.name}"

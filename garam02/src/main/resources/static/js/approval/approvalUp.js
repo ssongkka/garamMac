@@ -596,7 +596,7 @@ function getGiPaper() {
                                     `</td>
                             <td class="tdRight">` + AddComma(r[i].atlm) +
                                     `</td>
-                            <td class="tdLeft">` + r[i].opercom +
+                            <td class="">` + r[i].opercom +
                                     `</td>
                             <td>` + r[i].cont +
                                     `</td>
@@ -677,7 +677,7 @@ function getGiPaper() {
                                 r[i].endday
                             ) +
                                     `일</td>
-                            <td class="tdLeft">` + r[i].desty +
+                            <td class="">` + r[i].desty +
                                     `</td>
                             <td>` + r[i].bus +
                                     `</td>
@@ -1503,7 +1503,7 @@ $(document).on('click', '#btnapprUpAcc', function () {
 
             const tr222 = `
             <tr>
-                <td class="tdLeft" style="padding: 1rem;" colspan="4">` +
+                <td class="" style="padding: 1rem;" colspan="4">` +
                     accCont + `</td>
             </tr>`;
 
@@ -3000,6 +3000,11 @@ $(document).on('click', '#apprGo', function () {
             let tmpArrId = new Array();
             let tmpArrcondi = new Array();
             let tmpArrNum = new Array();
+
+            tmpArrPosition.push(dbuser.position);
+            tmpArrId.push(dbuser.id);
+            tmpArrcondi.push('결재');
+            tmpArrNum.push(0);
 
             if ($('#appGiLineN1').val()) {
                 tmpArrPosition.push($('#appGiLineP1').text());

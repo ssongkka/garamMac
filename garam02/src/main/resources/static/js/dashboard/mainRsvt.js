@@ -297,6 +297,10 @@ function insertRsvt(result) {
                         makeNoManage();
                     }
 
+                    if ($('#cumanage').css('display') === 'block') {
+                        makeCuManageList();
+                    }
+
                     if ($('#gumanage').css('display') === 'block') {
                         makeGuManageList();
                     }

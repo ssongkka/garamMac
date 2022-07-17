@@ -1,0 +1,177 @@
+.adMDVeCompaMB {
+    background: #f6f7f9;
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.adMDVeCompa-item1 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.staticVeTitle {
+    display: flex;
+    flex-direction: row;
+}
+
+.staticVeTitle-item {
+    display: flex;
+    flex-direction: column;
+}
+
+#veStaticYearMonth {
+    background-color: #f6f7f9;
+    font-size: 1.6rem;
+    width: 12rem;
+    height: 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+}
+
+.vtTitle {
+    padding: 2rem 2rem 0;
+    font-size: 1.5rem;
+}
+
+.vtCont {
+    padding: 1rem 1rem 1rem 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.staticVeTitle1-item1 {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 2rem;
+    align-items: center;
+}
+
+.staticVeTitle1-item1 div {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+#veStaticVe {
+    font-weight: 600;
+}
+
+.staticVeTitle1-item2 {
+    padding: 2rem;
+    overflow-x: auto;
+}
+
+.vtCont-item1 {
+    flex: 1;
+}
+
+.vtCont-item1 p {
+    margin-bottom: 0.5rem;
+}
+
+.vtCont-item1 > p > span {
+    margin-bottom: 0.3rem;
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgba(77, 89, 105,1);
+    padding-right: 0.5rem;
+}
+
+.vtCont-item1 > span {
+    margin-top: 0.5rem;
+    padding: 0 1rem;
+    border-radius: 5px;
+}
+
+.vtCont-item1 .vtup {
+    background: rgba(75, 192, 192, 0.2);
+    color: rgba(75, 192, 192, 1);
+}
+
+.vtCont-item1 .vtsam {
+    background: rgba(131, 144, 162, 0.2);
+    color: rgba(131, 144, 162, 1);
+}
+
+.vtCont-item1 .vtdown {
+    background: rgba(255, 99, 132, 0.2);
+    color: rgba(255, 99, 132, 1);
+}
+
+.vtCont-item2 {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    position: relative;
+}
+
+.vtCont-item3 {}
+
+#staticVe01,
+#staticVe02,
+#staticVe03,
+#staticVe04 {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+    cursor: default;
+}
+#staticVe01 canvas,
+#staticVe02 canvas,
+#staticVe03 canvas,
+#staticVe04 canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+}
+
+#staticVe00 {
+    position: relative;
+    height: 30vh;
+}
+
+#chartVeS0 {
+    height: 30vh;
+}
+
+#staticVe01 canvas,
+#staticVe02 canvas,
+#staticVe03 canvas,
+#staticVe04 canvas {
+    width: 106px;
+    height: 106px;
+}
+
+#staticVe01,
+#staticVe02,
+#staticVe03,
+#staticVe04 {
+    width: 106px;
+    height: 106px;
+    margin-top: -4rem;
+}
+
+#stCompaT div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-family: "Bae";
+
+    font-size: 2rem;
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="modalRsvt"
+        class="modal fade"
+        id="modal-rsvt"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="modalRsvtLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="">운행정보 수정</h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="btn-rsvt-closeX"></button>
+                    <input type="hidden" id="md-rsvtNum" value="">
+                </div>
+                <div class="modal-body md-rsvt-bdc" id="md-rsvt-bd">
+                    <div class="rsvtMain card-song">
+                        <div class="rsvt-cst">
+                            <h2>
+                                1.고객 정보
+                            </h2>
+                            <div th:replace="openTemplates/updateCustomer :: upCust"></div>
+                        </div>
+                        <hr>
+                        <div class="rsvt-cst">
+                            <h2>
+                                2.운행 내용
+                            </h2>
+                            <form class="rsvtCh-form" name="formRsvtCh" autocomplete="off">
+                                <div class="row">
+                                    <input type="hidden" id="rsvt-1" name="rsvt" value="">
+                                    <input
+                                        type="hidden"
+                                        id="empin-1"
+                                        name="empin"
+                                        th:value="${user.position}+'&nbsp;'+${user.name}">
+                                    <div class="form-group col-md-12 col-xl-6">
+                                        <i class="fas fa-calendar-day"></i>
+                                        <label for="stday-1" class="form-label">출발일</label>
+                                        <input
+                                            type="date"
+                                            class="form-control input-sm"
+                                            id="stday-1"
+                                            name="stday"
+                                            required="required">
+                                    </div>
+                                    <div class="form-group col-md-12 col-xl-6">
+                                        <i class="fas fa-calendar-day"></i>
+                                        <label for="endday-1" class="form-label">
+                                            <span>도착일</span><span id="daynight-1">(당일)</span></label>
+                                        <input
+                                            type="date"
+                                            class="form-control input-sm"
+                                            id="endday-1"
+                                            name="endday"
+                                            required="required">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-xl-6">
+                                        <i class="fas fa-bus"></i>
+                                        <label for="bus-1" class="form-label">차&nbsp;량</label>
+                                        <select id="bus-1" name="bus" class="form-select input-sm">
+                                            <option value="대형">대형(45인승)</option>
+                                            <option value="중형">중형(25인승)</option>
+                                            <option value="우등">우등(28인승)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12 col-xl-6">
+                                        <i class="fas fa-equals"></i>
+                                        <label for="num-1" class="form-label">대&nbsp;수</label>
+                                        <select id="num-1" name="num" class="form-select input-sm">
+                                            <option
+                                                th:each="i : ${#numbers.sequence(1, 50)}"
+                                                th:value="${i}"
+                                                th:text="${i} + '&nbsp;대'">Num</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-xl-6">
+                                        <i class="far fa-clock"></i>
+                                        <label for="stt-1" class="form-label">출발시간</label>
+                                        <input type="time" class="form-control input-sm" id="stt-1" name="stt">
+                                    </div>
+                                    <div class="form-group col-md-12 col-xl-6">
+                                        <i class="far fa-clock"></i>
+                                        <label for="endt-1" class="form-label">종료시간</label>
+                                        <input type="time" class="form-control input-sm" id="endt-1" name="endt">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-xl-6">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                        <label for="desty-1" class="form-label">목적지 및 경유지</label>
+                                        <textarea id="desty-1" name="desty" class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-12 col-xl-6">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <label for="rsvpstp-1" class="form-label">출발장소(모두기입)</label>
+                                        <textarea id="rsvpstp-1" name="rsvpstp" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-xl-12">
+                                        <i class="far fa-bookmark"></i>
+                                        <label for="rsvtdetail-1" class="form-label">특이사항</label>
+                                        <input
+                                            type="text"
+                                            class="form-control input-sm"
+                                            id="rsvtdetail-1"
+                                            name="rsvtdetail"
+                                            placeholder="특이사항을 입력해주세요.">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-xl-6">
+                                        <i class="fas fa-calculator"></i>
+                                        <label for="cont-1" class="form-label">부가세</label>
+                                        <select id="cont-1" name="cont" class="form-select input-sm">
+                                            <option value="포함">포함</option>
+                                            <option value="미포함">미포함</option>
+                                            <option value="카드">카드</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12 col-xl-6">
+                                        <i class="fas fa-won-sign"></i>
+                                        <label for="conm-1" class="form-label">운행금액</label>
+                                        <input
+                                            type="text"
+                                            id="conm-1"
+                                            name="conm"
+                                            onfocus="this.select()"
+                                            data-type="currency"
+                                            class="form-control input-sm"
+                                            placeholder="운행 금액 입력">
+                                        <input type="hidden" id="numm-1" name="numm">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mf-ch-rsvt">
+                    <div class="mf-ch-rsvt-item" id="rsvtCancleD">
+                        <button type="button" class="btn btn-warning" id="btn-rsvt-cancle">운행 취소</button>
+                    </div>
+                    <div class="mf-ch-rsvt-item">
+                        <button type="button" class="btn btn-default" id="btn-rsvt-close">닫 기</button>
+                    </div>
+                    <div class="mf-ch-rsvt-item">
+                        <button type="button" class="btn btn-primary" id="btn-rsvt-insert">수 정</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

@@ -351,7 +351,7 @@
 }
 
 #md-rsvt-bd {
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .md-rsvt-bdc-item {
@@ -374,9 +374,9 @@
 
 .mf-ch-rsvt-item:nth-child(1) {
     flex: 1;
-    text-align: left;
     display: flex;
     gap: 3rem;
+    justify-content: space-between;
 }
 .mf-ch-rsvt-item:nth-child(2) {}
 .mf-ch-rsvt-item:nth-child(3) {}

@@ -40,6 +40,8 @@
 #apprMD .modal-footer {
     display: flex;
     gap: 2rem;
+
+    justify-content: space-between;
 }
 #apprMD .modal-footer button {
     width: 10rem;
@@ -55,7 +57,7 @@
 
 .apprMdfootday {
     margin-left: 3rem;
-    color: var(--text-grey);
+    color: var(--text-grey2);
 }
 
 .apprMdfootUser {

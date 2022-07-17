@@ -1,0 +1,78 @@
+@charset "UTF-8";
+body {
+    background: #f6f7f9;
+}
+header {
+    background-color: #e6e8ed;
+    background: #e6e8ed;
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    gap: 6rem;
+}
+
+main {
+    padding: 3rem 15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#t-cnt {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: flex-end;
+}
+
+#t-btn {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+#t-name {
+    font-size: 2rem;
+}
+#t-add,
+#t-stp,
+#t-tel {
+    font-size: 1.5rem;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.th-ct {
+    text-align: center;
+}
+
+.btng {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5rem;
+}
+
+.btng button {
+    width: 10rem;
+}
+
+.table input {
+    font-size: 1.3rem;
+    width: 100%;
+}
+.table select {
+    font-size: 1.3rem;
+    width: 100%;
+    margin: 0;
+}
+
+#md-rsvt-bd {
+    padding: 2rem;
+}

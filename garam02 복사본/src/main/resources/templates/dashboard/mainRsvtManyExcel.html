@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>일괄 예약 입력</title>
+
+        <th:block th:replace="layout/linkGroupCss :: linkCss"></th:block>
+
+        <link rel="stylesheet" href="/css/dashboardCss/rsvtManyExcel.css?v=2020051201">
+        <link
+            rel="stylesheet"
+            href="/css/openTemplates/insertCustomer.css?v=2020051201">
+    </head>
+
+    <body>
+        <!-- 자동완성 방지용 -->
+        <input type="text" style="width:0px;height:0px;position: absolute;">
+        <input type="password" style="width:0px;height:0px;position: absolute;">
+        <!-- 자동완성 방지용 -->
+
+        <main class="manyrsvtexcel">
+            <div class="main-side">
+                <input type="hidden" id="empin" name="empin" th:value="${user.id}">
+                <input type="hidden" id="m-no" value="">
+                <div class="main-side-item1">
+                    <a class="btn btn-default" th:href="@{/dashboard}">
+                        <i class="fa-solid fa-arrow-left"></i>홈으로
+                    </a>
+                    <a class="btn btn-default" th:href="@{/dashboard/samplexcel}">
+                        샘플엑셀파일<i class="fa-solid fa-download"></i>
+                    </a>
+                </div>
+                <div class="main-side-item2">
+                    <form action="" id="excelRsvtForm">
+                        <label class="btn btn-success" for="excelRsvtSel">예약정보 엑셀파일 선택<i class="fa-solid fa-upload"></i>
+                        </label>
+                        <input
+                            type="file"
+                            accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                            name="uploadfile"
+                            id="excelRsvtSel"
+                            style="display: none;">
+                    </form>
+                </div>
+                <div class="main-side-item3">
+                    <div>파일이름</div>
+                    <div id="file1"></div>
+                    <div>예약건수</div>
+                    <div id="file2"></div>
+                    <div>대형</div>
+                    <div id="file3"></div>
+                    <div>중형</div>
+                    <div id="file4"></div>
+                    <div>우등</div>
+                    <div id="file5"></div>
+                    <div class="ctm2 imfoctm"></div>
+                    <div class="">신규고객정보</div>
+                    <div class="ctm1 imfoctm"></div>
+                    <div class="">기존고객정보</div>
+                </div>
+                <div class="main-side-item4" id="excelGo"></div>
+            </div>
+            <div class="main-cont">
+                <div class="main-cont-item1">
+                    <table class="table table-bordered table-sm">
+                        <colgroup>
+                            <col width="3%"/>
+                            <col width="6%"/>
+                            <col width="6%"/>
+                            <col width="10%"/>
+                            <col width="8%"/>
+                            <col width="17%"/>
+                            <col width="17%"/>
+                            <col width="5%"/>
+                            <col width="5%"/>
+                            <col width="5%"/>
+                            <col width="5%"/>
+                            <col width="5%"/>
+                            <col width="8%"/>
+                        </colgroup>
+                        <thead class="table-light">
+                            <tr>
+                                <th class="">#</th>
+                                <th class="">출발일</th>
+                                <th class="">도착일</th>
+                                <th class="">고객정보</th>
+                                <th class="">연락처</th>
+                                <th class="">목적지</th>
+                                <th class="">출발장소</th>
+                                <th class="">차량</th>
+                                <th class="">대수</th>
+                                <th class="">출발시간</th>
+                                <th class="">도착시간</th>
+                                <th class="">부가세</th>
+                                <th class="">계약금액</th>
+                            </tr>
+                        </thead>
+                        <tbody id="excelRsvtTb"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <div th:replace="openTemplates/modalCustomerUp :: modalCustUp"></div>
+        <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/dashboard/rsvtManyExcel.js?v=2020051201"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/openTemplates/insertCustomer.js?v=2020051201"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/openTemplates/updateCustomer.js?v=2020051201"></script>
+    </body>
+</html>

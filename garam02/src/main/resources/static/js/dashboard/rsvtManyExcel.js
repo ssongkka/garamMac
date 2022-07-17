@@ -36,7 +36,6 @@ function uploadExcelRsvt() {
                 cache: false,
                 timeout: 600000,
                 success: function (r) {
-                    console.table(r);
 
                     let arrTmpRsvt = new Array();
                     for (let i = 0; i < r.length; i++) {
@@ -245,8 +244,6 @@ $(document).on("change", ".chexcelctm", function () {
         })
         .data('value');
 
-    console.log(compa);
-
     $(bbb[4]).text(compa);
 
     $(this).removeClass('ctm0');
@@ -353,21 +350,31 @@ $(document).on("click", "#insertExcelRsvt", function () {
                         }
 
                         const idddd = '#' + $(qqq[0]).attr('id') + ' option:selected';
-                        console.log(idddd);
                         ctmnanananana = $(idddd).text();
 
                     } else {
                         ctmnanananana = $(bbb[3]).text();
                     }
 
-                    const asdasd = {
-                        "ctmno": ctmNoNoNo,
-                        "ctmname": ctmnanananana,
-                        "ctmtel1": $(bbb[4]).text(),
-                        "ctmsepa": 0
-                    };
+                    let cntCtmNO = 0;
 
-                    paramsCtm.push(asdasd);
+                    for (let l = 0; l < paramsCtm.length; l++) {
+                        if (paramsCtm[l].ctmname == ctmnanananana && paramsCtm[l].ctmtel1 == $(bbb[4]).text()) {
+                            ctmNoNoNo = paramsCtm[l].ctmno;
+                            cntCtmNO++;
+                        }
+                    }
+
+                    if (cntCtmNO < 1) {
+                        const asdasd = {
+                            "ctmno": ctmNoNoNo,
+                            "ctmname": ctmnanananana,
+                            "ctmtel1": $(bbb[4]).text(),
+                            "ctmsepa": 0
+                        };
+
+                        paramsCtm.push(asdasd);
+                    }
                 }
 
                 const asd = {
@@ -390,10 +397,9 @@ $(document).on("click", "#insertExcelRsvt", function () {
                 paramsRsvt.push(asd);
             }
 
-            console.table(paramsCtm);
-            console.table(paramsRsvt);
-
             let arrTmp = new Array();
+
+            console.table(paramsCtm);
 
             arrTmp.push(paramsCtm);
             arrTmp.push(paramsRsvt);

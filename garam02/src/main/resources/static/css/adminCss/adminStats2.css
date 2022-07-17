@@ -147,3 +147,8 @@
 .tb-stats2 > tfoot > tr > .td55 {
     background: rgba(242, 241, 238,0.5);
 }
+
+.tb-stats1 > thead > tr > .sortNumStatic2,
+.tb-stats1 > thead > tr > .sortStrStatic2 {
+    cursor: pointer;
+}

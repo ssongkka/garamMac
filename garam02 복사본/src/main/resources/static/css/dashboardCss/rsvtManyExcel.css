@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+.manyrsvtexcel {}
+
+.main-side {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 30rem;
+
+    padding: 3rem;
+
+    background-color: #e6e8ed;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10rem;
+}
+
+.main-cont {
+    padding: 3rem;
+
+    margin-left: 30rem;
+    min-height: 100vh;
+
+    background: #f6f7f9;
+}
+
+.main-side-item1 {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.main-side-item1 .btn {
+    flex: 1;
+}
+
+#excelRsvtForm label {
+    width: 100%;
+}
+
+#insertExcelRsvt {
+    width: 100%;
+}
+
+.main-side-item3 {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1rem;
+}
+
+table > #excelRsvtTb > tr > .ctm00 {
+    background-color: rgba(240, 0, 0, 0.071);
+}
+
+table > #excelRsvtTb > tr > .ctm11 {
+    background-color: rgba(0, 176, 240, 0.071);
+}
+
+table > #excelRsvtTb > tr > .ctm22 {
+    background-color: rgba(220, 0, 240, 0.071);
+}
+
+table > #excelRsvtTb > tr > .nocheck {
+    background-color: rgba(240, 0, 0, 0.7);
+}
+
+table > #excelRsvtTb > .trnochecl {
+    background-color: rgba(255, 193, 5, 0.369);
+}
+
+.ctm0 {
+    background-color: rgba(242, 0, 0, 0.7);
+}
+.ctm1 {
+    background-color: rgba(0, 177, 242, 0.071);
+}
+.ctm2 {
+    background-color: rgba(220, 0, 242, 0.071);
+}
+
+.imfoctm {
+    padding: 1rem;
+    text-align: center;
+}
+
+.main-side-item5 {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+@media (max-width:1024px) {}
+
+@media (max-width:768px) {}

@@ -7,15 +7,22 @@
         <div class="aside-main">
             <div class="side-item">
                 <h4 class="">결재 생성</h4>
-                <a href="/approval">일일보고서</a>
-                <a href="">배차보고서</a>
+                <a th:href="@{/approval}">일일보고서</a>
+                <!-- <a href="">배차보고서</a> -->
             </div>
             <hr>
             <div class="side-item">
                 <h4 class="">결재 정보</h4>
-                <a href="/approvalgo">결재 대기</a>
-                <a href="">결재 중</a>
-                <a href="">반 려</a>
+                <a th:href="@{/approvalgo}">결재 대기<span
+                    th:text="${apppapercnt[0].approvalfootseq}"
+                    class="badge bg-secondary"
+                    id="apBgGo"></span></a>
+                <a th:href="@{/approvaling}">결재 중<span
+                    th:text="${apppapercnt[1].approvalfootseq}"
+                    class="badge bg-secondary"
+                    id="apBgIng"></span></a>
+                <a th:href="@{/approvalend}">결재 완료</a>
+                <a th:href="@{/approvalout}">반 려</a>
             </div>
         </div>
     </aside>

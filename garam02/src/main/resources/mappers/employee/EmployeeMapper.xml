@@ -23,7 +23,8 @@
 		vehicleinfo.vehicle
 	</sql>
 
-	<insert id="insertEmp" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO">
+	<insert id="insertEmp"
+		parameterType="com.garam.web.employee.dto.EmployeeInfoDTO">
 		INSERT INTO
 
 		employeeinfo
@@ -62,7 +63,8 @@
 		);
 	</insert>
 
-	<update id="updateEmp" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO">
+	<update id="updateEmp"
+		parameterType="com.garam.web.employee.dto.EmployeeInfoDTO">
 
 		UPDATE
 
@@ -105,7 +107,8 @@
 		id = #{id};
 	</update>
 
-	<update id="deleteEmp" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO">
+	<update id="deleteEmp"
+		parameterType="com.garam.web.employee.dto.EmployeeInfoDTO">
 
 		UPDATE
 
@@ -122,7 +125,8 @@
 		#{id};
 	</update>
 
-	<select id="selectEmpAll" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+	<select id="selectEmpAll"
+		parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
 		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
 
 		SELECT
@@ -153,7 +157,8 @@
 
 	</select>
 
-	<select id="selectEmpNameList" resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
+	<select id="selectEmpNameList"
+		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
 
 		SELECT
 
@@ -165,7 +170,8 @@
 		ORDER BY name
 	</select>
 
-	<select id="selectEmpName" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+	<select id="selectEmpName"
+		parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
 		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
 
 		SELECT
@@ -186,7 +192,8 @@
 
 	</select>
 
-	<select id="selectEmpDetail" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+	<select id="selectEmpDetail"
+		parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
 		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
 
 		SELECT
@@ -225,10 +232,12 @@
 		WHERE
 		employeeinfo.id = #{id}
 
-		ORDER BY name;
+		ORDER
+		BY name;
 	</select>
 
-	<select id="selectEmpOperList" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+	<select id="selectEmpOperList"
+		parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
 		resultType="com.garam.web.employee.dto.EmpRsvtDTO">
 
 		SELECT
@@ -287,6 +296,10 @@
 		operation_info.dayst =
 		1
 
+		AND
+
+		operation_info.atlm > 0
+
 		ORDER BY
 		rsvt.stday,
 		operation_info.opernum,
@@ -295,7 +308,8 @@
 
 	</select>
 
-	<select id="selectEmpOperListCnt" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+	<select id="selectEmpOperListCnt"
+		parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
 		resultType="com.garam.web.employee.dto.EmpRsvtDTO">
 
 		SELECT
@@ -351,20 +365,23 @@
 
 	</select>
 
-	<select id="selectempOperMonth" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+	<select id="selectempOperMonth"
+		parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
 		resultType="com.garam.web.dashboard.dto.RsvtDTO">
 		SELECT
 
 		CONCAT(YEAR(operation_info.operday), '-',
 		MONTH(operation_info.operday)) AS ctmaddress,
 
-		SUM(operation_info.atlm) AS
+		SUM(operation_info.atlm)
+		AS
 		ctmtrash,
 
 		SUM(rsvt.numm) AS
 		opertype,
 
-		COUNT(operation_info.operseq) AS conm
+		COUNT(operation_info.operseq) AS
+		conm
 
 		FROM
 
@@ -397,7 +414,8 @@
 
 	</select>
 
-	<select id="selectempOperSepa" parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
+	<select id="selectempOperSepa"
+		parameterType="com.garam.web.employee.dto.EmpRsvtDTO"
 		resultType="com.garam.web.dashboard.dto.RsvtDTO">
 
 		SELECT
@@ -431,7 +449,8 @@
 
 		AND
 
-		operation_info.operid = #{id}
+		operation_info.operid =
+		#{id}
 
 		ORDER BY
 		operation_info.operday
@@ -439,7 +458,8 @@
 
 	</select>
 
-	<select id="selectMainEmpSal" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+	<select id="selectMainEmpSal"
+		parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
 		resultType="com.garam.web.employee.dto.EmpsalaryAll">
 
 		SELECT
@@ -457,7 +477,8 @@
 
 	</select>
 
-	<select id="selectEmpveAcc" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectEmpveAcc"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT

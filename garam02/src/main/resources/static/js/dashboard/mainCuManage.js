@@ -40,8 +40,6 @@ function makeCuManageList(ctmInput) {
                             tel = r[i].ctmtel1
                         }
 
-                        console.log(r[i].ctmsepa);
-
                         switch (parseInt(r[i].ctmsepa)) {
                             case 0:
                                 htmlsIl += `
@@ -192,6 +190,7 @@ function getCustomerDetail(ctmnono) {
 
                     if (r[0].ctmhomepage) {
                         $('#cumaDe5').html(r[0].ctmhomepage);
+                        $('#cumaDe5').attr('href', r[0].ctmhomepage);
                     } else {
                         $('#cumaDe5').html(`-`);
                     }
@@ -475,16 +474,14 @@ $(document).on("click", "#cuManageMdUp", function () {
 
 $(document).on("click", "#btnCustInsert", function () {
 
-    LoadingWithMask()
-        .then(updateCustCtm)
-        .then(closeLoadingWithMask);
+    LoadingWithMask().then(updateCustCtm);
 
     function updateCustCtm() {
         return new Promise(function (resolve, reject) {
 
             const sepa = $('input[name=ctmsepaUpCtm]:checked').val();
 
-            const url = "/rsvt/checkCtm";
+            const url = "/rsvt/upupCtm";
             const headers = {
                 "Content-Type": "application/json",
                 "X-HTTP-Method-Override": "POST"
@@ -514,14 +511,16 @@ $(document).on("click", "#btnCustInsert", function () {
                 data: JSON.stringify(params),
 
                 success: function (r) {
-                    if (r[0].ctmtrash < 0) {
-                        alert("시스템에 문제가 생겼습니다.\n\n다시 시도해 주세요.");
-                        location.reload();
+                    if (r == 0) {
+                        alert("고객정보 수정 실패!\n\n시스템을 확인해주세요.")
+                    } else if (r == -1) {
+                        alert("고객정보 수정 실패!\n\n데이터베이스 처리 과정에 문제가 발생하였습니다.")
+                    } else if (r == -2) {
+                        alert("고객정보 수정 실패!\n\n시스템을 확인해주세요.")
                     } else {
-                        alert("수정완료");
-                        location.reload();
-                        resolve();
+                        alert("고객정보 수정 완료")
                     }
+                    location.reload();
                 },
                 error: (jqXHR) => {
                     loginSession(jqXHR.status);

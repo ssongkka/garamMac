@@ -42,7 +42,6 @@ $(document).on('click', '#btnContPaper', function () {
                 data: JSON.stringify(params),
                 cache: false,
                 success: function (r) {
-                    console.log(r);
 
                     let htmls = ``;
 
@@ -272,8 +271,6 @@ $(document).on("click", "#contractMakeExcel", function () {
             $('#contractopercar').val(comCeo);
 
             $('#formPapperContract').submit();
-
-            console.log(params);
 
             resolve(params);
         });

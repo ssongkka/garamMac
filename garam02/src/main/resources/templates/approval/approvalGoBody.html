@@ -33,6 +33,12 @@
         <div th:replace="approval/approvalMD :: apprMD"></div>
 
         <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            const apppaper =/*[[${apppaper}]]*/
+            'default';
+            /*]]>*/
+        </script>
         <script
             language="javascript"
             type="text/javascript"

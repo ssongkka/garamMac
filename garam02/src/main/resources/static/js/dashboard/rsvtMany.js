@@ -386,20 +386,16 @@ function setCtm(result) {
 
                 if (r[0].ctmstp) {
                     $('#t-stp').text(r[0].ctmstp);
+                    $('#stp').val(r[0].ctmstp);
                 } else {
                     $('#t-stp').text('');
+                    $('#stp').val('');
                 }
 
                 if (r[0].ctmaddress) {
                     $('#t-add').text(r[0].ctmaddress);
                 } else {
                     $('#t-add').text('');
-                }
-
-                if (r[0].ctmstp) {
-                    $("#stp").val([0].ctmstp);
-                } else {
-                    $("#stp").val('');
                 }
 
                 $('#m-no').val(r[0].ctmno);

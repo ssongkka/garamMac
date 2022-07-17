@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="ve-MD-gasCont"
+        class="modal fade"
+        id="modal-gasCont"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" value="" id="gasCarNum">
+                    <input type="hidden" value="" id="gascontNum">
+                    <h3 class="modal-title" id="modal-gasCont-mh">연비정보</h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        id="gasContX"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body modalGasBd">
+                    <div class="gascal" id="gasCalLabel">
+                        <div class="">
+                            <a class="btn" id="fnDownMonthgas">
+                                <i class="fas fa-chevron-left fa-lg"></i>
+                            </a>
+                        </div>
+                        <div class="" id="">
+                            <input type="month" id="yearMonthgas" value="" autocomplete="off">
+                        </div>
+                        <div class="">
+                            <a class="btn" id="fnUpMonthgas">
+                                <i class="fas fa-chevron-right fa-lg"></i>
+                            </a>
+                        </div>
+                        <div class="">
+                            <a class="btn btn-secondary" id="makeFile">
+                                파일생성
+                            </a>
+                        </div>
+                        <div class="gascal-cont">
+                            <h4>
+                                '0' 입력시 삭제 됨
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="gascalTable table-responsive">
+                        <table class="table table-bordered">
+                            <colgroup>
+                                <col width="13%">
+                                <col width="17%">
+                                <col width="13%">
+                                <col width="17%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="sortNumP">차량번호</th>
+                                    <th class="sortNumVC2">주행거리</th>
+                                    <th class="sortNumVC2">주유량(리터)</th>
+                                    <th class="sortNumVC2">주유금액</th>
+                                    <th class="sortNumTC2">연비(Km/L)</th>
+                                    <th class="sortNumTC2">연비(원/Km)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="gasTb">
+                                <tr>
+                                    <td>
+                                        <input type="hidden" value="">
+                                        <input type="hidden" value="">
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" data-type="currency">
+                                            <span class="input-group-text">Km</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" data-type="currency">
+                                            <span class="input-group-text">L</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" data-type="currency">
+                                            <span class="input-group-text">원</span>
+                                        </div>
+                                    </td>
+                                    <td class="tdRight">
+                                        <div class="input-group">
+                                            <span></span>
+                                            <span class="input-group-text">원</span>
+                                        </div>
+                                    </td>
+                                    <td class="tdRight"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer mdgasFoot">
+                    <div>
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            id="gasContBtn"
+                            data-bs-dismiss="modal">닫&nbsp;기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

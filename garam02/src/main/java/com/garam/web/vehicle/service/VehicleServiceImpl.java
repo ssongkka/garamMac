@@ -30,6 +30,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -65,45 +66,59 @@ public class VehicleServiceImpl implements VehicleService {
 	public int insertVe(VehicleInfoDTO vehicleInfoDTO) throws Exception {
 
 		int rtn = 0;
+		System.out.println("000000");
 
 		if (vehicleInfoDTO.getOwner().equals("미정")) {
 			vehicleInfoDTO.setOwner(null);
 		}
 
+		System.out.println("111111");
+
 		if (vehicleInfoDTO.getId().equals("미정")) {
 			vehicleInfoDTO.setId(null);
 		}
+		System.out.println("22222");
 
 		if (vehicleInfoDTO.getExpire() == null || vehicleInfoDTO.getExpire().equals("")) {
 			vehicleInfoDTO.setExpire(null);
 		}
 
+		System.out.println("33333");
 		if (vehicleInfoDTO.getOutday() == null || vehicleInfoDTO.getOutday().equals("")) {
 			vehicleInfoDTO.setOutday(null);
 		}
+		System.out.println("44444");
 
 		if (vehicleInfoDTO.getPrice() == null || vehicleInfoDTO.getPrice() == 0) {
 			vehicleInfoDTO.setPrice(0);
 		}
+		System.out.println("55555");
 
 		if (vehicleInfoDTO.getSpecial() == null || vehicleInfoDTO.getSpecial().equals("")) {
 			vehicleInfoDTO.setSpecial(null);
 		}
+		System.out.println("66666");
 		if (vehicleInfoDTO.getImg1() == null || vehicleInfoDTO.getImg1().equals("")) {
 			vehicleInfoDTO.setImg1(null);
 		}
+		System.out.println("77777");
 		if (vehicleInfoDTO.getImg2() == null || vehicleInfoDTO.getImg2().equals("")) {
 			vehicleInfoDTO.setImg2(null);
 		}
+		System.out.println("88888");
 		if (vehicleInfoDTO.getImg3() == null || vehicleInfoDTO.getImg3().equals("")) {
 			vehicleInfoDTO.setImg3(null);
 		}
-
+		System.out.println("99999");
 		if (vehicleInfoDTO.getOutday() != null && vehicleInfoDTO.getOutday().length() > 0) {
 			vehicleInfoDTO.setTrash(0);
 		} else {
 			vehicleInfoDTO.setTrash(1);
 		}
+		System.out.println("10101010");
+
+		System.out.println("asdasdasdasdasdasd");
+		System.out.println(vehicleInfoDTO.getTp());
 
 		switch (vehicleInfoDTO.getTp()) {
 		case 0:
@@ -336,11 +351,12 @@ public class VehicleServiceImpl implements VehicleService {
 		try {
 			List<VehicleInfoDTO> list = vehicleMapper.selectVeAllPrint(compa);
 
-			String url = "src/main/resources/static/excel/car.xls";
+			ClassPathResource resource = new ClassPathResource("static/excel/car.xls");
 
-			FileInputStream fis = new FileInputStream(url);
+			InputStream is = resource.getInputStream();
 
-			wb = new HSSFWorkbook(fis);
+			wb = new HSSFWorkbook(is);
+
 			HSSFSheet sheet = wb.getSheetAt(0);
 
 			CellStyle style0 = wb.createCellStyle();

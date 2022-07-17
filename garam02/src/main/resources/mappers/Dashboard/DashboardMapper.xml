@@ -78,6 +78,10 @@
 			AND ctmtrash = 1
 		</where>
 
+		HAVING
+
+		ve1 > 0
+
 		ORDER BY
 		ctmname
 	</select>
@@ -147,6 +151,26 @@
 
 		ctmtel1 Like
 		CONCAT('%',#{ctmtel1},'%')
+
+	</select>
+
+	<select id="selectCustomerCheck1"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
+		resultType="com.garam.web.dashboard.dto.RsvtDTO">
+		SELECT
+
+		*
+
+		FROM customer
+
+		WHERE
+
+		ctmname = #{ctmname}
+
+		AND
+
+		ctmtel1 =
+		#{ctmtel1}
 
 	</select>
 
@@ -362,6 +386,38 @@
 			IS NULL
 			;
 		</if>
+		<if test="stday != null and stday != '' ">
+			DELETE FROM
+
+			operation_info
+
+			WHERE
+
+			rsvt =
+			#{rsvt}
+
+			AND
+
+			operconfirm
+			IS NULL
+			;
+		</if>
+		<if test="endday != null and endday != '' ">
+			DELETE FROM
+
+			operation_info
+
+			WHERE
+
+			rsvt =
+			#{rsvt}
+
+			AND
+
+			operconfirm
+			IS NULL
+			;
+		</if>
 
 		UPDATE
 
@@ -417,7 +473,8 @@
 		<if test="numm != null and numm != '' ">
 			rsvt.numm = #{numm},
 		</if>
-		rsvt.datech = NOW()
+		rsvt.datech = NOW(),
+		rsvt.empin = #{empin}
 
 		WHERE
 
@@ -511,6 +568,10 @@
 
 		SET
 
+		<if test="ctmname != null and ctmname != '' ">
+			ctmname =
+			#{ctmname},
+		</if>
 		<if test="ctmsepa != null and ctmsepa != '' ">
 			ctmsepa =
 			#{ctmsepa},
@@ -2450,11 +2511,25 @@
 		veinsurancesepa.insuno =
 		veinsurance.insuno
 
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		veinsurance.carnumber =
+		vehicleinfo.carnumber
+
 		WHERE
 
-		veinsurancesepa.insusepaday BETWEEN #{inday}
+		(veinsurancesepa.insusepaday BETWEEN
+		#{inday}
 		AND
-		#{outday}
+		#{outday})
+
+		AND
+
+		vehicleinfo.trash = 1
 
 		ORDER BY
 		vehicle
@@ -2468,24 +2543,26 @@
 		SELECT
 
 		*,
-		MAX(veinsurance.insudateend),
-		(SELECT
-		vehicleinfo.vehicle FROM
-		vehicleinfo WHERE vehicleinfo.carnumber
-		=
-		veinsurance.carnumber) AS
-		vehicle
+		MAX(veinsurance.insudateend) AS id5
 
 		FROM
 
 		veinsurance
 
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		veinsurance.carnumber = vehicleinfo.carnumber
+
 		WHERE
 
-		veinsurance.insudateend BETWEEN #{inday} AND #{outday}
+		vehicleinfo.trash = 1
 
 		GROUP BY
-		veinsurance.insuno
+		veinsurance.carnumber
 
 	</select>
 
@@ -2588,27 +2665,32 @@
 		SELECT
 
 		*,
-		(SELECT
-		vehicleinfo.vehicle FROM
-		vehicleinfo WHERE
-		vehicleinfo.carnumber
-		=
-		veinspection.carnumber) AS
-		vehicle
+		MAX(veinspection.inspecdateend)
 
 		FROM
 
 		veinspection
 
+		LEFT JOIN
+
+		vehicleinfo
+
+		ON
+
+		veinspection.carnumber =
+		vehicleinfo.carnumber
+
 		WHERE
-
-		veinspection.inspecdateend BETWEEN #{inday} AND
-		#{outday}
-
-		AND
 
 		veinspection.inspectrash =
 		1
+
+		AND
+
+		vehicleinfo.trash = 1
+
+		GROUP BY
+		vehicleinfo.carnumber
 
 	</select>
 	<select id="selectCal2InspecDday"
@@ -3338,6 +3420,7 @@
 
 			operation_info.operconfirm IS
 			NULL
+
 		</where>
 		ORDER BY
 		operation_info.operday
@@ -3608,8 +3691,10 @@
 		rsvt.rsvt
 
 		<where>
+
 			operation_info.operconfirm =
 			#{confirm}
+
 		</where>
 		ORDER BY
 		operation_info.operday

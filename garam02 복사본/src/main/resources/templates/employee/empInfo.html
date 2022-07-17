@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="emp-info" class="infoEmp">
+        <div class="infomain">
+            <h3>사고내역</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <colgroup>
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="25%">
+                        <col width="15%">
+                    </colgroup>
+                    <thead class="table-light">
+                        <tr>
+                            <th>사고일자</th>
+                            <th>사고시간</th>
+                            <th>종결일자</th>
+                            <th>종결내용</th>
+                            <th>금액</th>
+                        </tr>
+                    </thead>
+                    <tbody id="empaccBd"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</html>

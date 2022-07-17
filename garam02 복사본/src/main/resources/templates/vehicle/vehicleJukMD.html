@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <!-- Modal -->
+    <div
+        th:fragment="ve-MD-juk"
+        class="modal fade"
+        id="modal-juk"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-juk-mh"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="modal-jukX"></button>
+                </div>
+                <div class="modal-body">
+                    <form
+                        id="form-juk"
+                        style=" display: flex; flex-direction: row; gap: 2rem; height: 100vh;">
+                        <div class="mdb-reg" style="flex: 2">
+                            <div class="mdb-reg-juk">
+                                <iframe class="mdb-reg-item-a" src="" frameborder="0" id="juk-frame"></iframe>
+                            </div>
+                            <div class="mdb-reg-item">
+                                <label class="file-la" for="juk-selector">PDF 파일선택<i class="fas fa-file-upload"></i>
+                                </label>
+                                <input
+                                    type="file"
+                                    accept=".pdf"
+                                    name="uploadfile"
+                                    id="juk-selector"
+                                    style="display: none;">
+                            </div>
+                        </div>
+                        <div style="flex: 1; display: flex; flex-direction: column;">
+                            <div class="row mb-3">
+                                <label for="sel-ve-endD" class="col-sm-5 col-form-label">
+                                    <i class="fa-solid fa-calendar-xmark"></i>이용만료일</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" id="sel-ve-endD" name="jukday">
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="ddssaa">
+                                    <colgroup>
+                                        <col width="20%"/>
+                                        <col width="40%"/>
+                                        <col width="40%"/>
+                                    </colgroup>
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>번 호</th>
+                                            <th>차 량</th>
+                                            <th>대 상 승 무 원</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ta-juk">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <select class="form-select input-sm aaa" id="sel-ve-1" name="ve1">
+                                                    <option value="" label="" data-value=""></option>
+                                                    <option
+                                                        th:each="ve : ${ve}"
+                                                        th:if="${ve.trash==1}"
+                                                        th:value="${ve.carnumber}"
+                                                        th:label="${ve.vehicle2}"></option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select input-sm" id="sel-emp-1" name="id1">
+                                                    <option value="" label="" data-value=""></option>
+                                                    <option
+                                                        th:each="emp : ${emp}"
+                                                        th:if="${emp.trash==1}"
+                                                        th:value="${emp.id}"
+                                                        th:label="${emp.name}"></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>
+                                                <select class="form-select input-sm aaa" id="sel-ve-2" name="ve2">
+                                                    <option value="" label="" data-value=""></option>
+                                                    <option
+                                                        th:each="ve : ${ve}"
+                                                        th:if="${ve.trash==1}"
+                                                        th:value="${ve.carnumber}"
+                                                        th:label="${ve.vehicle2}"></option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select input-sm" id="sel-emp-2" name="id2">
+                                                    <option value="" label="" data-value=""></option>
+                                                    <option
+                                                        th:each="emp : ${emp}"
+                                                        th:if="${emp.trash==1}"
+                                                        th:value="${emp.id}"
+                                                        th:label="${emp.name}"></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>
+                                                <select class="form-select input-sm aaa" id="sel-ve-3" name="ve3">
+                                                    <option value="" label="" data-value=""></option>
+                                                    <option
+                                                        th:each="ve : ${ve}"
+                                                        th:if="${ve.trash==1}"
+                                                        th:value="${ve.carnumber}"
+                                                        th:label="${ve.vehicle2}"></option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select input-sm" id="sel-emp-3" name="id3">
+                                                    <option value="" label="" data-value=""></option>
+                                                    <option
+                                                        th:each="emp : ${emp}"
+                                                        th:if="${emp.trash==1}"
+                                                        th:value="${emp.id}"
+                                                        th:label="${emp.name}"></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>
+                                                <select class="form-select input-sm aaa" id="sel-ve-4" name="ve4">
+                                                    <option value="" label="" data-value=""></option>
+                                                    <option
+                                                        th:each="ve : ${ve}"
+                                                        th:if="${ve.trash==1}"
+                                                        th:value="${ve.carnumber}"
+                                                        th:label="${ve.vehicle2}"></option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select input-sm" id="sel-emp-4" name="id4">
+                                                    <option value="" label="" data-value=""></option>
+                                                    <option
+                                                        th:each="emp : ${emp}"
+                                                        th:if="${emp.trash==1}"
+                                                        th:value="${emp.id}"
+                                                        th:label="${emp.name}"></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>
+                                                <select class="form-select input-sm aaa" id="sel-ve-5" name="ve5">
+                                                    <option value="" label="" data-value=""></option>
+                                                    <option
+                                                        th:each="ve : ${ve}"
+                                                        th:if="${ve.trash==1}"
+                                                        th:value="${ve.carnumber}"
+                                                        th:label="${ve.vehicle2}"></option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select input-sm" id="sel-emp-5" name="id5">
+                                                    <option value="" label="" data-value=""></option>
+                                                    <option
+                                                        th:each="emp : ${emp}"
+                                                        th:if="${emp.trash==1}"
+                                                        th:value="${emp.id}"
+                                                        th:label="${emp.name}"></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="flex: 1;">asdasdas</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="gap: 2rem;">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="juk-insert"
+                        style="width: 10rem;">입&nbsp;력</button>
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        style="width: 10rem;"
+                        id="modal-jukEnd">닫&nbsp;기</button>
+                </div>
+            </div>
+        </div>
+    </div>

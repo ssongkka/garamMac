@@ -14,6 +14,33 @@
     gap: 2rem;
 }
 
+.rsvt-rsvt-item {
+    flex: 1;
+
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.rsvt-rsvt {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 6rem;
+}
+
+.rsvt-rsvt-item > div > p {
+    color: var(--text-grey2);
+    font-size: 1.1rem;
+}
+
+.rsvt-rsvt-item-ch,
+.rsvt-rsvt-item-in {
+    flex: 1;
+}
+
 .rsvt-cst-title {
     width: 100%;
 }
@@ -143,14 +170,6 @@
 #ctmtel1:focus {
     border-color: #Fc4700;
     box-shadow: none;
-}
-
-#stday {
-    background: var(--sub-color);
-}
-
-#endday {
-    background: var(--sub-color);
 }
 
 #user-plus {

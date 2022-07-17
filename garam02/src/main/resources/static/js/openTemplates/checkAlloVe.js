@@ -72,28 +72,94 @@ function showAlloVeWhat(dayday, cho) {
                             switch (r[i].bus) {
                                 case '대형':
                                     htmlsComp45 += `
-                                    <div class="buss buss45">
-                                        <button type="button" class="btn btn-outline-45 ` +
-                                            styl + `">` + r[i].vehicle2 +
+                                    <div class="dropdown buss buss45">
+                                        <button type="button dropdown-toggle" class="btn btn-outline-45 ` +
+                                            styl + `" id="btnSide` + i +
+                                            `" data-bs-toggle="dropdown" aria-expanded="false">` + r[i].vehicle2 +
                                             `</button>
+                                        <div class="dropdown-menu dropCarSide" aria-labelledby="btnSide` +
+                                            i +
+                                            `">
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>` +
+                                            r[i].regist +
+                                            `</td>
+                                                        <td>` + r[i].bus +
+                                            `</td>
+                                                        <td>` + r[i].num +
+                                            `인승</td>
+                                                        <td>` + r[i].grade +
+                                            `</td>
+                                                        <td>` + r[i].fuel +
+                                            `</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>`;
                                     break;
 
                                 case '중형':
                                     htmlsComp25 += `
-                                    <div class="buss buss25">
-                                        <button type="button" class="btn btn-outline-25` +
-                                            styl + `">` + r[i].vehicle2 +
+                                    <div class="dropdown buss buss25">
+                                        <button type="button dropdown-toggle" class="btn btn-outline-25` +
+                                            styl + `" id="btnSide` + i +
+                                            `" data-bs-toggle="dropdown" aria-expanded="false">` + r[i].vehicle2 +
                                             `</button>
+                                        <div class="dropdown-menu dropCarSide" aria-labelledby="btnSide` +
+                                            i +
+                                            `">
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>` +
+                                            r[i].regist +
+                                            `</td>
+                                                        <td>` + r[i].bus +
+                                            `</td>
+                                                        <td>` + r[i].num +
+                                            `인승</td>
+                                                        <td>` + r[i].grade +
+                                            `</td>
+                                                        <td>` + r[i].fuel +
+                                            `</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>`;
                                     break;
 
                                 case '우등':
                                     htmlsComp28 += `
-                                    <div class="buss buss28">
-                                        <button type="button" class="btn btn-outline-28` +
-                                            styl + `">` + r[i].vehicle2 +
+                                    <div class="dropdown buss buss28">
+                                        <button type="button dropdown-toggle" class="btn btn-outline-28` +
+                                            styl + `" id="btnSide` + i +
+                                            `" data-bs-toggle="dropdown" aria-expanded="false">` + r[i].vehicle2 +
                                             `</button>
+                                        <div class="dropdown-menu dropCarSide" aria-labelledby="btnSide` +
+                                            i +
+                                            `">
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>` +
+                                            r[i].regist +
+                                            `</td>
+                                                        <td>` + r[i].bus +
+                                            `</td>
+                                                        <td>` + r[i].num +
+                                            `인승</td>
+                                                        <td>` + r[i].grade +
+                                            `</td>
+                                                        <td>` + r[i].fuel +
+                                            `</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>`;
                                     break;
                             }
@@ -105,28 +171,94 @@ function showAlloVeWhat(dayday, cho) {
                             switch (r[i].bus) {
                                 case '대형':
                                     htmlsPer45 += `
-                                    <div class="buss buss45">
-                                        <button type="button" class="btn btn-outline-45` +
-                                            styl + `">` + r[i].vehicle2 +
+                                    <div class="dropdown buss buss45">
+                                        <button type="button dropdown-toggle" class="btn btn-outline-45` +
+                                            styl + `" id="btnSide` + i +
+                                            `" data-bs-toggle="dropdown" aria-expanded="false">` + r[i].vehicle2 +
                                             `</button>
+                                        <div class="dropdown-menu dropCarSide" aria-labelledby="btnSide` +
+                                            i +
+                                            `">
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>` +
+                                            r[i].regist +
+                                            `</td>
+                                                        <td>` + r[i].bus +
+                                            `</td>
+                                                        <td>` + r[i].num +
+                                            `인승</td>
+                                                        <td>` + r[i].grade +
+                                            `</td>
+                                                        <td>` + r[i].fuel +
+                                            `</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>`;
                                     break;
 
                                 case '중형':
                                     htmlsPer25 += `
-                                    <div class="buss buss25">
-                                        <button type="button" class="btn btn-outline-25` +
-                                            styl + `">` + r[i].vehicle2 +
+                                    <div class="dropdown buss buss25">
+                                        <button type="button dropdown-toggle" class="btn btn-outline-25` +
+                                            styl + `" id="btnSide` + i +
+                                            `" data-bs-toggle="dropdown" aria-expanded="false">` + r[i].vehicle2 +
                                             `</button>
+                                        <div class="dropdown-menu dropCarSide" aria-labelledby="btnSide` +
+                                            i +
+                                            `">
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>` +
+                                            r[i].regist +
+                                            `</td>
+                                                        <td>` + r[i].bus +
+                                            `</td>
+                                                        <td>` + r[i].num +
+                                            `인승</td>
+                                                        <td>` + r[i].grade +
+                                            `</td>
+                                                        <td>` + r[i].fuel +
+                                            `</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>`;
                                     break;
 
                                 case '우등':
                                     htmlsPer28 += `
-                                    <div class="buss buss28">
-                                        <button type="button" class="btn btn-outline-28` +
-                                            styl + `">` + r[i].vehicle2 +
+                                    <div class="dropdown buss buss28">
+                                        <button type="button dropdown-toggle" class="btn btn-outline-28` +
+                                            styl + `" id="btnSide` + i +
+                                            `" data-bs-toggle="dropdown" aria-expanded="false">` + r[i].vehicle2 +
                                             `</button>
+                                        <div class="dropdown-menu dropCarSide" aria-labelledby="btnSide` +
+                                            i +
+                                            `">
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>` +
+                                            r[i].regist +
+                                            `</td>
+                                                        <td>` + r[i].bus +
+                                            `</td>
+                                                        <td>` + r[i].num +
+                                            `인승</td>
+                                                        <td>` + r[i].grade +
+                                            `</td>
+                                                        <td>` + r[i].fuel +
+                                            `</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>`;
                                     break;
                             }
@@ -145,9 +277,6 @@ function showAlloVeWhat(dayday, cho) {
                     $('#perTiCnt').text(cntPer2 + ' / ' + cntPer1);
 
                     resolve();
-                },
-                error: (jqXHR) => {
-                    loginSession(jqXHR.status);
                 }
             })
         })

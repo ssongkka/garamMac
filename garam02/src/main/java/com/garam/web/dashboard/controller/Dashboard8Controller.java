@@ -1,8 +1,17 @@
 package com.garam.web.dashboard.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,6 +87,39 @@ public class Dashboard8Controller extends UiUtils {
 		model.addAttribute("userAll", userAll);
 
 		return "dashboard8/dashBoard8";
+	}
+
+	@GetMapping(value = "/makeChungSampleExcel")
+	public ResponseEntity<Object> makeChungSample(@RequestParam(value = "company", required = true) String company)
+			throws Exception {
+		File file = rsvtService.dwonSampleChung(company);
+
+		Resource resource = new InputStreamResource(new FileInputStream(file));
+
+		HttpHeaders headers = new HttpHeaders();
+		String fileName = "청구서양식_" + company + ".xls";
+		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());
+
+		return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/makeChungExcel")
+	public ResponseEntity<Object> makeChung(@RequestParam(value = "gumnnum", required = true) String gumnnum,
+			@RequestParam(value = "company", required = true) String company) throws Exception {
+		File file = rsvtService.makeChungExcel(gumnnum, company);
+
+		Resource resource = new InputStreamResource(new FileInputStream(file));
+
+		HttpHeaders headers = new HttpHeaders();
+		String fileName = "청구서_.xls";
+		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());
+
+		return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
+
 	}
 
 }

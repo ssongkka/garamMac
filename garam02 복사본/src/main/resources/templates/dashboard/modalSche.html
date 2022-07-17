@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="modalSche"
+        class="modal fade"
+        id="modalScheC"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="modalScheLabel"
+        aria-hidden="true">
+        <input type="hidden" id="scheModal" value="">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" id="modalScheNo">
+                    <h3 class="modal-title" id="modalScheLabel">일정추가</h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="btnmodalScheX"></button>
+                </div>
+                <div class="modal-body" id="modalScheBD">
+                    <div class="row g-3">
+                        <div class="scheCheck">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="scheGong">
+                                <label class="form-check-label" for="scheGong">
+                                    공지
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="scheAllDay">
+                                <label class="form-check-label" for="scheAllDay">
+                                    하루종일
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="scheGrade">
+                                <label class="form-check-label" for="scheGrade">
+                                    중요
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="scheEmp" class="form-label">담 당 자</label>
+                            <input type="text" class="form-control" id="scheEmp" readonly="readonly">
+                        </div>
+                        <div class="col-6">
+                            <label for="scheDay" class="form-label">날 짜</label>
+                            <input type="date" class="form-control" id="scheDay">
+                        </div>
+                        <div class="col-6">
+                            <label for="scheTime" class="form-label">시 간</label>
+                            <input type="time" class="form-control" id="scheTime">
+                        </div>
+                        <div class="col-12">
+                            <label for="scheTitle" class="form-label">제 목</label>
+                            <input type="text" class="form-control" id="scheTitle">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="scheEvent" class="form-label">내 용</label>
+                            <textarea rows="5" class="form-control" id="scheEvent"></textarea>
+                        </div>
+                        <div class="col-12" style="display: flex; gap: 1rem;">
+                            <span>입력일 :
+                            </span>
+                            <span id="scheInTime"></span>
+                            <span>수정일 :
+                            </span>
+                            <span id="scheChTime"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer modalScheFD">
+                    <div style="flex: 1;">
+                        <button type="button" class="btn btn-danger" id="sche-del">삭&nbsp;제</button>
+                    </div>
+                    <div>
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                            id="btnmodalScheBtn">닫 기</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" id="sche-insert">입 력</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </html>

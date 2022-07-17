@@ -175,3 +175,7 @@
 
     font-size: 2rem;
 }
+
+#stCompaT span {
+    text-align: right;
+}

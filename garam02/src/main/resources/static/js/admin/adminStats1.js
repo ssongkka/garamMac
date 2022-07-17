@@ -154,13 +154,16 @@ $(document).ready(function () {
                     `
                 </label>
             </div>`;
-            compaNameHtmls += `
-            <div class="">` + dbCompa[i].company + `</div>`;
+            compaNameHtmls += `<span>* '급여정보' 및 '유류비' 정보가 ` + $('#staticMonth')
+                .val()
+                .split('-')[0] + `년 ` + $('#staticMonth')
+                .val()
+                .split('-')[1] + `월에 입력된 차량만 표시됩니다.</span>`;
         }
     } else {}
 
     $('#stCompaD').html(compaHtmls);
-    $('#stCompaT').html(compaNameHtmls);
+    // $('#stCompaT').html(compaNameHtmls);
 
     var listVar = $('input[name=stCompa]:checked').val();
 
@@ -169,17 +172,30 @@ $(document).ready(function () {
 
 $(document).on('change', '#staticMonth', function () {
     getVeAllCompa($('input[name=stCompa]:checked').val());
+    setWarn1();
 });
 
 $(document).on('click', '#fnDownMonthStatic', function () {
     setYearMonthDown('#staticMonth');
     getVeAllCompa($('input[name=stCompa]:checked').val());
+    setWarn1();
 });
 
 $(document).on('click', '#fnUpMonthStatic', function () {
     setYearMonthUp('#staticMonth');
     getVeAllCompa($('input[name=stCompa]:checked').val());
+    setWarn1();
 });
+
+function setWarn1() {
+    const compaNameHtmls1 = `<span>* '급여정보' 및 '유류비' 정보가 ` + $('#staticMonth')
+        .val()
+        .split('-')[0] + `년 ` + $('#staticMonth')
+        .val()
+        .split('-')[1] + `월에 입력된 차량만 표시됩니다.</span>`;
+
+    $('#stCompaT').html(compaNameHtmls1);
+}
 
 $(document).on('click', 'input[name=stCompa]', function () {
     let compaNameHtmls = ``;
@@ -195,7 +211,8 @@ $(document).on('click', 'input[name=stCompa]', function () {
             <div class="">` + dbCompa[i].company + `</div>`;
         }
     }
-    $('#stCompaT').html(compaNameHtmls);
+
+    setWarn1();
 
     getVeAllCompa($('input[name=stCompa]:checked').val());
 });
@@ -219,6 +236,7 @@ function setYearMonthDown(params) {
 }
 
 function getVeAllCompa(compa) {
+    setWarn1();
 
     LoadingWithMask()
         .then(getVeAllCompaSql)
@@ -384,10 +402,19 @@ function getVeAllCompa(compa) {
                                 cssAll = ' style="color: rgb(207, 47, 17);"';
                             }
 
+                            let namename = '';
+                            for (let k = 0; k < dbEmp.length; k++) {
+                                if (r[i].vemaintenancekind == dbEmp[k].id) {
+                                    namename = dbEmp[k].name;
+                                }
+                            }
+
                             htmls += `
                     <tr class="veCompaStatic">
                         <td class="carTd">` +
                                     r[i].vehicle2 +
+                                    `</td>
+                        <td class="carTd">` + namename +
                                     `</td>
                         <td class="inTd">` + AddComma(allIn) +
                                     `</td>
@@ -473,7 +500,7 @@ function getVeAllCompa(compa) {
 
                     const htmlsF = `
                     <tr>
-                        <td class="carTd">평 균</td>
+                        <td class="carTd" colspan="2">평 균</td>
                         <td class="inTd">` +
                             AddComma((sum12 / cntGas).toFixed(0)) +
                             `</td>
@@ -543,7 +570,7 @@ function getVeAllCompa(compa) {
                             `</td>
                     </tr>
                     <tr>
-                        <td class="carTd">합 계</td>
+                        <td class="carTd" colspan="2">합 계</td>
                         <td class="inTd">` +
                             AddComma(sum12) +
                             `</td>
@@ -601,8 +628,18 @@ function getVeAllCompa(compa) {
                     allMAll.push(sum12);
                     allMAll.push(sum13);
 
-                    $('#tbVeAllCompa').html(htmls);
-                    $('#tfVeAllCompa').html(htmlsF);
+                    if (r.length > 0) {
+                        $('#tbVeAllCompa').html(htmls);
+                        $('#tfVeAllCompa').html(htmlsF);
+                    } else {
+                        $('#tbVeAllCompa').html(
+                            `
+                            <tr>
+                            <td colspan="19" style="text-align: center;">정보없음</td>
+                            </tr>`
+                        );
+                        $('#tfVeAllCompa').html(``);
+                    }
 
                     $('#chartVeAllCompaDiv').html(
                         `<canvas id="chartVeAllCompa" height="300"></canvas>`
@@ -1239,19 +1276,18 @@ $(document).on('click', '.veCompaStatic', function () {
     let tmpArrAve = new Array();
 
     const aaa = $(this).children();
-    tmpArrInM.push($(aaa[6]).text().replaceAll(',', ''));
-    tmpArrInM.push($(aaa[8]).text().replaceAll(',', ''));
-    tmpArrInM.push($(aaa[10]).text().replaceAll(',', ''));
-    tmpArrInM.push($(aaa[12]).text().replaceAll(',', ''));
+    tmpArrInM.push($(aaa[7]).text().replaceAll(',', ''));
+    tmpArrInM.push($(aaa[9]).text().replaceAll(',', ''));
+    tmpArrInM.push($(aaa[11]).text().replaceAll(',', ''));
+    tmpArrInM.push($(aaa[13]).text().replaceAll(',', ''));
 
-    tmpArrOutM.push($(aaa[13]).text().replaceAll(',', ''));
     tmpArrOutM.push($(aaa[14]).text().replaceAll(',', ''));
     tmpArrOutM.push($(aaa[15]).text().replaceAll(',', ''));
     tmpArrOutM.push($(aaa[16]).text().replaceAll(',', ''));
     tmpArrOutM.push($(aaa[17]).text().replaceAll(',', ''));
     tmpArrOutM.push($(aaa[18]).text().replaceAll(',', ''));
+    tmpArrOutM.push($(aaa[19]).text().replaceAll(',', ''));
 
-    tmpArrVe.push($(aaa[19]).val());
     tmpArrVe.push($(aaa[20]).val());
     tmpArrVe.push($(aaa[21]).val());
     tmpArrVe.push($(aaa[22]).val());
@@ -1260,32 +1296,34 @@ $(document).on('click', '.veCompaStatic', function () {
     tmpArrVe.push($(aaa[25]).val());
     tmpArrVe.push($(aaa[26]).val());
     tmpArrVe.push($(aaa[27]).val());
+    tmpArrVe.push($(aaa[28]).val());
+    tmpArrVe.push($(aaa[1]).text());
 
     const bbb0 = $('#tfVeAllCompa').children()[0];
     const bbb = $(bbb0).children();
 
     tmpArrAve.push(
-        parseInt($(aaa[1]).text().replaceAll(',', '')) - parseInt($(bbb[1]).text().replaceAll(',', ''))
+        parseInt($(aaa[2]).text().replaceAll(',', '')) - parseInt($(bbb[1]).text().replaceAll(',', ''))
     );
     tmpArrAve.push(
-        parseInt($(aaa[2]).text().replaceAll(',', '')) - parseInt($(bbb[2]).text().replaceAll(',', ''))
+        parseInt($(aaa[3]).text().replaceAll(',', '')) - parseInt($(bbb[2]).text().replaceAll(',', ''))
     );
     tmpArrAve.push(
-        parseInt($(aaa[3]).text().replaceAll(',', '')) - parseInt($(bbb[3]).text().replaceAll(',', ''))
+        parseInt($(aaa[4]).text().replaceAll(',', '')) - parseInt($(bbb[3]).text().replaceAll(',', ''))
     );
     tmpArrAve.push(
-        (parseFloat($(aaa[4]).text()) - parseFloat($(bbb[4]).text())).toFixed(2)
+        (parseFloat($(aaa[5]).text()) - parseFloat($(bbb[5]).text())).toFixed(2)
     );
 
     setAdMDVeStatic(
         yearMonth,
         tmpArrInM,
         tmpArrOutM,
-        $(aaa[1]).text(),
         $(aaa[2]).text(),
         $(aaa[3]).text(),
         $(aaa[4]).text(),
         $(aaa[5]).text(),
+        $(aaa[6]).text(),
         tmpArrAve,
         tmpArrVe
     );

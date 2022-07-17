@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="mdBigCal"
+        class="offcanvas offcanvas-top"
+        data-bs-scroll="true"
+        data-bs-backdrop="false"
+        tabindex="-1"
+        id="mdBigCal"
+        aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+            <div class="modal-title" id="bigCalLabel">
+                <div class="">
+                    <a class="btn" id="fnDownMonthBig">
+                        <i class="fas fa-chevron-left fa-lg"></i>
+                    </a>
+                </div>
+                <div class="" id="">
+                    <input type="month" id="yearMonthBig" value="">
+                </div>
+                <div class="">
+                    <a class="btn" id="fnUpMonthBig">
+                        <i class="fas fa-chevron-right fa-lg"></i>
+                    </a>
+                </div>
+                <div class="">
+                    <a class="btn btn-secondary" id="toMonth">
+                        이번달
+                    </a>
+                </div>
+                <div class="bigBusNum">
+                    <div class="big4511">대형<span id="big4511">0</span></div>
+                    <div class="big2511">중형<span id="big2511">0</span></div>
+                    <div class="big2811">우등<span id="big2811">0</span></div>
+                </div>
+            </div>
+
+            <button
+                type="button"
+                class="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="bigCal-main">
+                <table class="table table-bordered">
+                    <colgroup>
+                        <col width="15%">
+                        <col width="14%">
+                        <col width="14%">
+                        <col width="14%">
+                        <col width="14%">
+                        <col width="14%">
+                        <col width="15%">
+                    </colgroup>
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>월요일</th>
+                            <th>화요일</th>
+                            <th>수요일</th>
+                            <th>목요일</th>
+                            <th>금요일</th>
+                            <th>토요일</th>
+                            <th>일요일</th>
+                        </tr>
+                    </thead>
+                    <tbody id="md-bd-BigCal"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+        th:fragment="modalBigCal"
+        class="modal fade"
+        id="modalBigCal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="modalBigCalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalBigCalLabel"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

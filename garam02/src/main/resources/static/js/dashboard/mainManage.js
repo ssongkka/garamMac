@@ -466,6 +466,10 @@ function makeManage() {
                     `</td>
     </tr>`;
 
+            $('#home2Tile').text($('.yearMonth').val().split('-')[0] + '년 ' + $(
+                '.yearMonth'
+            ).val().split('-')[1] + '월 예약 건수');
+
             $('#manegeAsideTb').html(htmls);
             $('#manegeAsideTf').html(htmlFt);
             resolve();

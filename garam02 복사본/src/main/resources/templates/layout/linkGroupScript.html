@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <th:block th:fragment="linkScript">
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/boot/bootstrap.bundle.js"></script>
+        <script language="javascript" type="text/javascript" src="/js/boot/all.js"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/common/common.js?v=2020051201"></script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            const opt =/*[[${opt}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbuser =/*[[${user}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbCompa =/*[[${compa}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbVe =/*[[${ve}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbEmp =/*[[${emp}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbCutomer =/*[[${customer}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dayyy =/*[[${dayyy}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbAllUser =/*[[${userAll}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbsearch =/*[[${search}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbothercompa =/*[[${othercompa}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const code =/*[[${code}]]*/
+            'default';
+            /*]]>*/
+            /*<![CDATA[*/
+            const dbcarn =/*[[${carn}]]*/
+            'default';
+            /*]]>*/
+        </script>
+    </th:block>
+</html>

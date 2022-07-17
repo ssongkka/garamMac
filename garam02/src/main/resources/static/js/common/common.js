@@ -34,6 +34,9 @@ $(document).on('click', '#pills-manage-tab', function () {
 $(document).on('click', '#pills-nomanage-tab', function () {
     goUrl('/dashboardnmanage');
 });
+$(document).on('click', '#pills-cumanage-tab', function () {
+    goUrl('/customers');
+});
 $(document).on('click', '#pills-gumanage-tab', function () {
     goUrl('/dashboardgmanage');
 });
@@ -1558,63 +1561,66 @@ $(document).on('click', '.sortNumStatic', function () {
         case "차량번호":
             headerIndex = 0;
             break;
-        case "정기운행":
-            headerIndex = 6;
-            break;
-        case "일반":
-            headerIndex = 2;
-            break;
-        case "학생단체":
-            headerIndex = 3;
-            break;
-        case "거래처":
-            headerIndex = 4;
-            break;
-        case "급여":
-            headerIndex = 13;
-            break;
-        case "유류비":
-            headerIndex = 14;
-            break;
-        case "대출":
-            headerIndex = 15;
-            break;
-        case "차량보험":
-            headerIndex = 16;
-            break;
-        case "정비":
-            headerIndex = 17;
-            break;
-        case "사고":
-            headerIndex = 18;
-            break;
-        case "총수입":
+        case "차량번호":
             headerIndex = 1;
             break;
-        case "총비용":
+        case "정기운행":
+            headerIndex = 7;
+            break;
+        case "일반":
+            headerIndex = 3;
+            break;
+        case "학생단체":
+            headerIndex = 4;
+            break;
+        case "거래처":
+            headerIndex = 5;
+            break;
+        case "급여":
+            headerIndex = 14;
+            break;
+        case "유류비":
+            headerIndex = 15;
+            break;
+        case "대출":
+            headerIndex = 16;
+            break;
+        case "차량보험":
+            headerIndex = 17;
+            break;
+        case "정비":
+            headerIndex = 18;
+            break;
+        case "사고":
+            headerIndex = 19;
+            break;
+        case "총수입":
             headerIndex = 2;
             break;
-        case "이익":
+        case "총비용":
             headerIndex = 3;
+            break;
+        case "이익":
+            headerIndex = 4;
             break;
 
         default:
             if ($(this).attr('class').includes('static1')) {
-                headerIndex = 7;
-            } else if ($(this).attr('class').includes('static2')) {
                 headerIndex = 8;
-            } else if ($(this).attr('class').includes('static3')) {
+            } else if ($(this).attr('class').includes('static2')) {
                 headerIndex = 9;
-            } else if ($(this).attr('class').includes('static4')) {
+            } else if ($(this).attr('class').includes('static3')) {
                 headerIndex = 10;
-            } else if ($(this).attr('class').includes('static5')) {
+            } else if ($(this).attr('class').includes('static4')) {
                 headerIndex = 11;
-            } else if ($(this).attr('class').includes('static6')) {
+            } else if ($(this).attr('class').includes('static5')) {
                 headerIndex = 12;
+            } else if ($(this).attr('class').includes('static6')) {
+                headerIndex = 13;
             } else if ($(this).attr('class').includes('static7')) {
-                headerIndex = 4;
-            } else if ($(this).attr('class').includes('static8')) {
                 headerIndex = 5;
+            } else if ($(this).attr('class').includes('static8')) {
+                headerIndex = 6;
             }
             break;
     }
@@ -1631,6 +1637,119 @@ $(document).on('click', '.sortNumStatic', function () {
         this
     );
 });
+$(document).on('click', '.sortNumStatic2', function () {
+    const tableElement1 = this.parentElement.parentElement.parentElement;
+
+    const aaa = $(this)
+        .parent()
+        .children();
+
+    let aaaa = 0;
+
+    for (let i = 0; i < aaa.length; i++) {
+        if (aaa[i] == this) {
+            aaaa = i;
+        }
+    }
+
+    let headerIndex = 0;
+
+    switch ($(this).text().replaceAll(' ', '')) {
+        case "차량번호":
+            headerIndex = 0;
+            break;
+        case "소속":
+            headerIndex = 1;
+            break;
+        case "금액":
+            headerIndex = 3;
+            break;
+        case "배차금액":
+            headerIndex = 4;
+            break;
+        case "관리비":
+            headerIndex = 6;
+            break;
+        case "이익":
+            headerIndex = 7;
+            break;
+        case "잔액":
+            headerIndex = 8;
+            break;
+        case "정기운행수익":
+            headerIndex = 9;
+            break;
+
+        default:
+            if ($(this).attr('class').includes('static1')) {
+                headerIndex = 2;
+            } else if ($(this).attr('class').includes('static2')) {
+                headerIndex = 5;
+            } else if ($(this).attr('class').includes('static3')) {
+                headerIndex = 10;
+            } else if ($(this).attr('class').includes('static4')) {
+                headerIndex = 11;
+            } else if ($(this).attr('class').includes('static5')) {
+                headerIndex = 12;
+            } else if ($(this).attr('class').includes('static6')) {
+                headerIndex = 13;
+            } else if ($(this).attr('class').includes('static7')) {
+                headerIndex = 14;
+            } else if ($(this).attr('class').includes('static8')) {
+                headerIndex = 15;
+            }
+            break;
+    }
+
+    const currentIsAscending = $(this)
+        .attr('class')
+        .includes("th-sort-asc");
+
+    sortTableByColumnStatic(
+        tableElement1,
+        tableElement1,
+        headerIndex,
+        !currentIsAscending,
+        this
+    );
+});
+
+$(document).on('click', '.sortStrStatic2', function () {
+    const tableElement1 = this.parentElement.parentElement.parentElement;
+
+    const aaa = $(this)
+        .parent()
+        .children();
+
+    let aaaa = 0;
+
+    for (let i = 0; i < aaa.length; i++) {
+        if (aaa[i] == this) {
+            aaaa = i;
+        }
+    }
+
+    let headerIndex = 0;
+
+    switch ($(this).text().replaceAll(' ', '')) {
+        case "소속":
+            headerIndex = 1;
+            break;
+    }
+
+    const currentIsAscending = $(this)
+        .attr('class')
+        .includes("th-sort-asc");
+
+    sortTableByColumn2(
+        tableElement1,
+        tableElement1,
+        headerIndex,
+        !currentIsAscending,
+        this
+    );
+});
+
 $(document).on('click', '.sortNumVC2', function () {
     const tableElement1 = this.parentElement.parentElement.parentElement;
 
@@ -1821,8 +1940,6 @@ function updateImg(source, id) {
 }
 
 function tbChoice(dom) {
-
-    console.log(dom);
 
     $('td').css('background', 'none');
     $('td').css('color', 'black');

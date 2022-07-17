@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:fragment="main-allo" class="allo">
+        <div class="allo-main">
+            <div role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-justified dd-allo-nav" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link active"
+                            id="iltab-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#iltab"
+                            type="button"
+                            role="tab"
+                            aria-controls="iltab"
+                            aria-selected="true">일반&nbsp;<span class="badge bg-secondary" id="bdg1">0</span></button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link"
+                            id="jaktab-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#jaktab"
+                            type="button"
+                            role="tab"
+                            aria-controls="jaktab"
+                            aria-selected="false">학생단체&nbsp;<span class="badge bg-secondary" id="bdg2">0</span></button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link"
+                            id="gutab-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#gutab"
+                            type="button"
+                            role="tab"
+                            aria-controls="gutab"
+                            aria-selected="false">거래처&nbsp;<span class="badge bg-secondary" id="bdg3">0</span></button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link regallo-tab"
+                            type="button"
+                            role="tab"
+                            aria-controls="regallo"
+                            aria-selected="false">정기운행&nbsp;<i class="fa-solid fa-up-right-from-square"></i>
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" id="myTabContent">
+                    <div
+                        class="tab-pane fade show active"
+                        id="iltab"
+                        role="tabpanel"
+                        aria-labelledby="home-tab">
+                        <div class="allocont" id="allocont1"></div>
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="jaktab"
+                        role="tabpanel"
+                        aria-labelledby="profile-tab">
+                        <div class="allocont" id="allocont2"></div>
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="gutab"
+                        role="tabpanel"
+                        aria-labelledby="profile-tab">
+                        <div class="allocont" id="allocont3"></div>
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="goouttab"
+                        role="tabpanel"
+                        aria-labelledby="profile-tab">
+                        <div class="allocont" id="allocont4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <datalist id="car-info">
+                <option
+                    th:each="ve : ${ve}"
+                    th:value="${ve.vehicle2}"
+                    th:label="${ve.vehicle2}"
+                    th:data-value="${ve.carnumber}"
+                    th:data-owner="${ve.owner}"></option>
+                <option
+                    th:each="othercompa : ${othercompa}"
+                    th:value="${othercompa.ctmname}"
+                    th:label="${othercompa.ctmname}"
+                    th:data-value="${othercompa.ctmname}"
+                    th:data-owner="${othercompa.ctmname}"></option>
+            </datalist>
+            <datalist id="per-info">
+                <option
+                    id="aaaccc"
+                    th:each="emp : ${emp}"
+                    th:value="${emp.name}"
+                    th:label="${emp.name}"
+                    th:data-value="${emp.id}"></option>
+            </datalist>
+        </div>
+        <div class="allo-side">
+        </div>
+    </div>
+</html>

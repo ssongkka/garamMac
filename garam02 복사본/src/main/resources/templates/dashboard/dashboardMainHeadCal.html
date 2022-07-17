@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="main-headCal" class="calTitle">
+        <div class="dash-cal-h">
+            <div class="">
+                <a class="btn fnDownMonth">
+                    <i class="fas fa-chevron-left fa-lg"></i>
+                </a>
+            </div>
+            <div class="dash-cal-h-item dash-cal-h-item2">
+                <strong><input type="month" class="yearMonth" value=""></strong>
+            </div>
+            <div class="">
+                <a class="btn fnUpMonth">
+                    <i class="fas fa-chevron-right fa-lg"></i>
+                </a>
+            </div>
+            <div class="dash-cal-h-item mainTitleday">
+                <button type="button" class="btn btn-secondary btn-xs btnToD">오늘</button>
+                <button type="button" class="btn btn-secondary btn-xs btnTomD">내일</button>
+            </div>
+        </div>
+        <div class="ad-cal-items-2">
+            <span id="bigDay">&nbsp;</span>
+            <span id="cal1"></span>
+            <span id="midday"></span>
+        </div>
+        <div class="ad-cal-home1" id="home1Cal" style="display: none;">
+            <div class="allBig big45" id="big45AllCal"></div>
+            <div class="allBig big25" id="big25AllCal"></div>
+            <div class="allBig big28" id="big28AllCal"></div>
+        </div>
+        <div class="ad-cal-home4" id="home4Cal" style="display: none;"></div>
+    </div>
+</html>

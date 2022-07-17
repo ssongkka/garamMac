@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <th:block th:fragment="linkCss">
+        <link rel="stylesheet" href="/css/boot/bootstrap.css">
+        <link rel="stylesheet" href="/css/boot/all.css">
+        <link
+            rel="stylesheet"
+            href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link
+            th:if="${user.color == 0}"
+            rel="stylesheet"
+            href="/css/optCss/optCss0.css?v=2020051201">
+        <link
+            th:if="${user.color == 1}"
+            rel="stylesheet"
+            href="/css/optCss/optCss1.css?v=2020051201">
+        <link
+            th:if="${user.color == 10}"
+            rel="stylesheet"
+            href="/css/optCss/optCss10.css?v=2020051201">
+        <link
+            th:if="${user.color == 11}"
+            rel="stylesheet"
+            href="/css/optCss/optCss11.css?v=2020051201">
+        <link
+            th:if="${user.color == 12}"
+            rel="stylesheet"
+            href="/css/optCss/optCss12.css?v=2020051201">
+        <link
+            th:if="${user.color == 13}"
+            rel="stylesheet"
+            href="/css/optCss/optCss13.css?v=2020051201">
+        <link
+            th:if="${user.color == 14}"
+            rel="stylesheet"
+            href="/css/optCss/optCss14.css?v=2020051201">
+        <link
+            th:if="${user.color == 15}"
+            rel="stylesheet"
+            href="/css/optCss/optCss15.css?v=2020051201">
+        <link
+            th:if="${user.color == 16}"
+            rel="stylesheet"
+            href="/css/optCss/optCss16.css?v=2020051201">
+        <link
+            th:if="${user.color == 17}"
+            rel="stylesheet"
+            href="/css/optCss/optCss17.css?v=2020051201">
+        <link
+            th:if="${user.color == 18}"
+            rel="stylesheet"
+            href="/css/optCss/optCss18.css?v=2020051201">
+        <link
+            th:if="${user.color == 19}"
+            rel="stylesheet"
+            href="/css/optCss/optCss19.css?v=2020051201">
+        <link
+            th:if="${user.color == 20}"
+            rel="stylesheet"
+            href="/css/optCss/optCss20.css?v=2020051201">
+        <link rel="stylesheet" href="/css/common/boot_Custom.css?v=2020051201">
+        <link rel="stylesheet" href="/css/common/cal.css?v=2020051201">
+        <link rel="stylesheet" href="/css/common/styles.css?v=2020051201">
+        <link rel="stylesheet" href="/css/common/btn.css?v=2020051201">
+    </th:block>
+</html>

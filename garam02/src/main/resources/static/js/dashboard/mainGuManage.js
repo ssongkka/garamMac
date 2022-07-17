@@ -168,7 +168,6 @@ function getGuDetail(ctmnono) {
                 data: JSON.stringify(params),
                 cache: false,
                 success: function (r) {
-                    console.log(r);
 
                     let htmlsIm = ``;
                     let htmlsOk = ``;
@@ -443,6 +442,11 @@ function shoGuManageMd() {
 
                         sumOutM = sumOutM + parseInt(r[i].atlm);
 
+                        let operttty = '';
+                        if (r[i].opertype > 1) {
+                            operttty = '(편도)';
+                        }
+
                         htmls += `
                 <tr>
                     <td><input type="checkbox" class="guOutList" name="guOutList"></td>
@@ -450,6 +454,7 @@ function shoGuManageMd() {
                                 r[i].stday +
                                 `</td>
                     <td class="rsvtChoGu">` + r[i].desty +
+                                operttty +
                                 `</td>
                     <td class="rsvtChoGu">` + r[i].operno +
                                 `</td>
@@ -482,17 +487,19 @@ $(document).on("click", ".rsvtChoGuIm", function () {
     const aaa = $(this).children();
     const gMN = $(aaa[5]).val();
 
-    shoGuManageImMd(gMN, 1);
+    const moneyyy = parseInt($(aaa[2]).text().replaceAll(',', ''));
+
+    shoGuManageImMd(gMN, 1, moneyyy);
 });
 
 $(document).on("click", ".rsvtChoGuOk", function () {
     const aaa = $(this).children();
     const gMN = $(aaa[6]).val();
 
-    shoGuManageImMd(gMN, 2);
+    shoGuManageImMd(gMN, 2, null);
 });
 
-function shoGuManageImMd(guManageNum, sepa) {
+function shoGuManageImMd(guManageNum, sepa, rsvtM) {
     LoadingWithMask()
         .then(shomd)
         .then(getNewRsvtList)
@@ -505,6 +512,7 @@ function shoGuManageImMd(guManageNum, sepa) {
             $('#guManageSepa').val(1);
             $('#guManageImOkSepa').val(sepa);
             $('#guManageNum').val(guManageNum);
+            $('#gumnnum').val(guManageNum);
 
             $('#guManageJangTb').html(``);
 
@@ -652,6 +660,18 @@ function shoGuManageImMd(guManageNum, sepa) {
                     $('#guManageRsvtTf1').text(AddComma(sumCnt) + '건');
                     $('#guManageRsvtTf2').text(AddComma(sumDae) + '대');
                     $('#guManageRsvtTf3').text(AddComma(sumInM));
+
+                    if (rsvtM != null && parseInt(sumInM) != parseInt(rsvtM)) {
+
+                        const al = '임시저장된 운행 미수금과 현재 입금된 내역이 다릅니다.\n\n확인 후 다시 입력해주세요.\n\n실제 입금내역과 청구내역이 달라질 수 있습니다' +
+                                '.';
+                        alert(al);
+
+                        $('#updateImGudeal').attr('disabled', true);
+                    } else {
+                        $('#updateImGudeal').attr('disabled', false);
+                    }
+
                     resolve(result);
                 },
                 error: jqXHR => {
@@ -688,6 +708,11 @@ function shoGuManageImMd(guManageNum, sepa) {
 
                         sumOutM = sumOutM + parseInt(r[i].atlm);
 
+                        let operttty = '';
+                        if (r[i].opertype > 1) {
+                            operttty = '(편도)';
+                        }
+
                         htmls += `
                 <tr>
                     <td>
@@ -697,6 +722,7 @@ function shoGuManageImMd(guManageNum, sepa) {
                                 r[i].stday +
                                 `</td>
                     <td class="rsvtChoGu">` + r[i].desty +
+                                operttty +
                                 `</td>
                     <td class="rsvtChoGu">` + r[i].operno +
                                 `</td>
@@ -721,6 +747,13 @@ function shoGuManageImMd(guManageNum, sepa) {
                     loginSession(jqXHR.status);
                 }
             });
+        });
+    }
+
+    function checkRsvtM(result) {
+        return new Promise(function (resolve, reject) {
+
+            resolve();
         });
     }
 }
@@ -875,7 +908,7 @@ function sumAllMoneyGu() {
 
         let tmpMin = 0;
 
-        const maxValue = Math.max(...arrTmpNumCh) + 10;
+        const maxValue = Math.max(...arrTmpNumCh) + 10000;
 
         for (let i = 0; i < arrTmpNumCh.length; i++) {
             const minValue = Math.min(...arrTmpNumCh);
@@ -990,8 +1023,6 @@ function insertNewGuDeal() {
                 outm: parseInt($('#guManageJangTf3').text().replaceAll(',', '')),
                 empin: dbuser.id
             };
-
-            console.log(params);
 
             $.ajax({
                 url: url,

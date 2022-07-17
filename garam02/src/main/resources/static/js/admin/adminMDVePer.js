@@ -34,8 +34,6 @@ function setAdMDVeStaticPer(yearMonth, arrAllo, arrAlloM, arrEarn, allo, alloM, 
                 }
             }
 
-            $('#veStaticPer').text(namename);
-
             $('#veStaticInM').text(allo);
             $('#veStaticOutM').text(alloM);
 

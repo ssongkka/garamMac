@@ -301,6 +301,10 @@ function displayMain() {
         makeNoManage();
     }
 
+    if ($('#cumanage').css('display') === 'block') {
+        makeCuManageList();
+    }
+
     if ($('#gumanage').css('display') === 'block') {
         makeGuManageList();
     }
@@ -479,6 +483,19 @@ function makeCal(nowD, day) {
             const daysted = new Array;
             daysted.push(dayST);
             daysted.push(dayED);
+
+            for (let i = 0; i < 42; i++) {
+                let iiiddd = '#dash-cal-con-item' + (
+                    i + 1
+                );
+                const dayday = ddddddd.split('-')[0] + '-' + ddddddd.split('-')[1] + '-01';
+
+                if (dayday == toStringByFormatting(new Date($(iiiddd).children().children().next().val()))) {
+                    setCalWhite($(iiiddd).attr('id'), 1);
+                    $('#radioRsvt2').prop('checked', true);
+                    $('#radioOper2').prop('checked', true);
+                }
+            }
 
             resolve(daysted);
         })
@@ -721,10 +738,6 @@ function cardMake() {
             let cntGu = 0;
 
             for (let i = 0; i < dbCutomer.length; i++) {
-
-                console.log(
-                    parseInt(dbCutomer[i].ctmsepa) == 0 && parseInt(dbCutomer[i].rsvttrash) > 0
-                );
 
                 if (parseInt(dbCutomer[i].ctmsepa) == 0 && parseInt(dbCutomer[i].rsvttrash) > 0) {
                     cntIl++;

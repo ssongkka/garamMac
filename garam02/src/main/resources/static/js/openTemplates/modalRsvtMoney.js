@@ -43,6 +43,26 @@ function getManageMD1() {
                         if ($('#manageCtmno').val() == r[i].ctmno) {
                             $('#rmCtmName').text(r[i].ctmname);
                             $('#rmCtmTel').text(r[i].ctmtel1);
+
+                            $('#moneyCtmTil').removeClass('ctm-ttt-back1');
+                            $('#moneyCtmTil').removeClass('ctm-ttt-back2');
+                            $('#moneyCtmTil').removeClass('ctm-ttt-back3');
+
+                            switch (parseInt(r[i].ctmsepa)) {
+                                case 0:
+                                    $('#moneyCtmTil').addClass('ctm-ttt-back1');
+                                    break;
+                                case 1:
+                                    $('#moneyCtmTil').addClass('ctm-ttt-back2');
+                                    break;
+                                case 2:
+                                    $('#moneyCtmTil').addClass('ctm-ttt-back3');
+                                    break;
+
+                                default:
+                                    break;
+                            }
+
                         }
                     }
                 }
@@ -90,6 +110,19 @@ function getManageMD2() {
                             cnt++;
                             cntM = cntM + r[i].conm;
 
+                            let cllbus = ``;
+                            switch (r[i].bus) {
+                                case '대형':
+                                    cllbus = 'big45';
+                                    break;
+                                case '중형':
+                                    cllbus = 'big25';
+                                    break;
+                                case '우등':
+                                    cllbus = 'big28';
+                                    break;
+                            }
+
                             htmls += `
                     <div class="rsvtMoney-item">
                         <input type="hidden" value="` +
@@ -102,8 +135,8 @@ function getManageMD2() {
                                     <span>` +
                                     r[i].desty +
                                     `</span>           
-                                    <span class="rsvtMoney-etc">` +
-                                    r[i].num + '대' +
+                                    <span class="rsvtMoney-etc ` +
+                                    cllbus + `">` + r[i].bus + ' ' + r[i].num + '대' +
                                     `</span></div>
                                 <div class="rsvtMoney-conm1">
                                     <i class="fa-solid fa-won-sign"></i>

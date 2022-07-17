@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="modalRsvtMoney"
+        class="modal fade"
+        id="modalRsvtMoney"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" value="" id="manageCtmno">
+                    <h3 class="modal-title" id="manageTitle"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="modalRsvtMoneyX"></button>
+                </div>
+                <div class="modal-body rsvtMoney-main">
+                    <div id="rsvtMoneyCtm">
+                        <div class="rsvtMoney">
+                            <div class="moneyCtm">
+                                <div class="ctm-item">
+                                    <i class="fas fa-school"></i>
+                                    <span id="rmCtmName"></span></div>
+                                <div class="ctm-item">
+                                    <span id="rmCtmTel"></span></div>
+                                <div class="ctm-item">
+                                    <span id="ctmGun"></span></div>
+                                <div class="ctm-item">
+                                    <i class="fa-solid fa-won-sign"></i>
+                                    <span id="ctmAllM"></span></div>
+                                <div class="ctm-item">
+                                    <button
+                                        class="btn btn btn-primary dropdown-toggle"
+                                        id="btnAllMIn"
+                                        control-id="ControlID-16">일괄입금
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="rsvtMoneyAll card-song">
+                                <div class="rsvtMoneyAll-item">
+                                    <label for="allDate" class="form-label">입&nbsp;금&nbsp;일</label>
+                                    <input type="date" class="form-control" id="allDate">
+                                </div>
+                                <div class="rsvtMoneyAll-item">
+                                    <label for="allTong" class="form-label">입&nbsp;금</label>
+                                    <select class="form-select" id="allTong">
+                                        <option
+                                            th:each="company : ${compa}"
+                                            th:value="${company.company}"
+                                            th:label="${company.company}"
+                                            th:data-value="${company.company}"></option>
+                                        <option value="기타" label="기타"></option>
+                                    </select>
+                                </div>
+                                <div class="rsvtMoneyAll-item">
+                                    <label for="allMemo" class="form-label">메&nbsp;모</label>
+                                    <input type="text" class="form-control" id="allMemo">
+                                </div>
+                                <div class="rsvtMoneyAll-item">
+                                    <button type="button" class="btn btn-success" id="allIn">입&nbsp;력</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="rsvtMoneyRsvt"></div>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <span></span></div>
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        id="modalRsvtMoneyEnd">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

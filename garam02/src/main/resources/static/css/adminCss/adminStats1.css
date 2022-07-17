@@ -35,8 +35,10 @@
 .statsMain-item3 {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+
+    padding-right: 5rem;
 }
 
 .stLine {
@@ -55,7 +57,7 @@
     padding: 0.3rem;
 }
 
-.tb-stats1 > thead > tr > .incur {
+.tb-stats1 > thead > tr > .sortNumStatic {
     cursor: pointer;
 }
 

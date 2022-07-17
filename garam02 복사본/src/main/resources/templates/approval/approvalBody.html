@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="approval-body">
+        <aside th:replace="approval/approvalSide :: approvalSide"></aside>
+        <main class="approvalMain">
+            <div class="approvalUp">
+                <div class="approvalUp-cont approvalUp-he card-song">
+                    <div class="approvalUp-cont-title">
+                        <div class="table-responsive tablefir">
+                            <table class="approvalUpDojang">
+                                <colgroup>
+                                    <col width="20%">
+                                    <col width="16%">
+                                    <col width="16%">
+                                    <col width="16%">
+                                    <col width="16%">
+                                    <col width="16%">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td class="colorG colorUp">문서종류</td>
+                                        <td colspan="2" class="colorUp">
+                                            <select class="form-select" id="appGiPaper">
+                                                <option value="" label=""></option>
+                                                <option
+                                                    th:each="apppaper : ${apppaper}"
+                                                    th:value="${apppaper.approvalpapername}"
+                                                    th:label="${apppaper.approvalpapername}"></option>
+                                            </select>
+                                        </td>
+                                        <td class="colorG colorUp">문서번호</td>
+                                        <td colspan="2" class="colorUp" id="appGiNo"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="colorG">기안날짜</td>
+                                        <td colspan="2">
+                                            <input type="date" class="form-control" id="appGiDate">
+                                        </td>
+                                        <td class="colorG">기안자</td>
+                                        <td colspan="2" th:text="${user.position + ' ' + user.name}"></td>
+                                    </tr>
+                                    <tr class="giJik">
+                                        <td rowspan="4" class="colorG colorUp">결재</td>
+                                        <td class="colorG colorUp">담당자</td>
+                                        <td class="colorG colorUp" id="appGiLineP1"></td>
+                                        <td class="colorG colorUp" id="appGiLineP2"></td>
+                                        <td class="colorG colorUp" id="appGiLineP3"></td>
+                                        <td class="colorG colorUp" id="appGiLineP4"></td>
+                                    </tr>
+                                    <tr class="giName">
+                                        <td th:text="${user.name}" class="colorDownNo"></td>
+                                        <td class="colorDownNo">
+                                            <select class="form-select" id="appGiLineN1">
+                                                <option value="" label=""></option>
+                                                <option
+                                                    th:each="userAll : ${userAll}"
+                                                    th:if="${user.id != userAll.id}"
+                                                    th:value="${userAll.id}"
+                                                    th:label="${userAll.name}"></option>
+                                            </select>
+                                        </td>
+                                        <td class="colorDownNo">
+                                            <select class="form-select" id="appGiLineN2" disabled="disabled">
+                                                <option value="" label=""></option>
+                                                <option
+                                                    th:each="userAll : ${userAll}"
+                                                    th:if="${user.id != userAll.id}"
+                                                    th:value="${userAll.id}"
+                                                    th:label="${userAll.name}"></option>
+                                            </select>
+                                        </td>
+                                        <td class="colorDownNo">
+                                            <select class="form-select" id="appGiLineN3" disabled="disabled">
+                                                <option value="" label=""></option>
+                                                <option
+                                                    th:each="userAll : ${userAll}"
+                                                    th:if="${user.id != userAll.id}"
+                                                    th:value="${userAll.id}"
+                                                    th:label="${userAll.name}"></option>
+                                            </select>
+                                        </td>
+                                        <td class="colorDownNo">
+                                            <select class="form-select" id="appGiLineN4" disabled="disabled">
+                                                <option value="" label=""></option>
+                                                <option
+                                                    th:each="userAll : ${userAll}"
+                                                    th:if="${user.id != userAll.id}"
+                                                    th:value="${userAll.id}"
+                                                    th:label="${userAll.name}"></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr class="giName">
+                                        <td class="colorUpNo"></td>
+                                        <td class="colorUpNo">
+                                            <select class="form-select" id="appGiLineC1">
+                                                <option value="" label="" selected="selected"></option>
+                                                <option value="출장" label="출장"></option>
+                                                <option value="휴가" label="휴가"></option>
+                                                <option value="전결" label="전결"></option>
+                                            </select>
+                                        </td>
+                                        <td class="colorUpNo">
+                                            <select class="form-select" id="appGiLineC2" disabled="disabled">
+                                                <option value="" label="" selected="selected"></option>
+                                                <option value="출장" label="출장"></option>
+                                                <option value="휴가" label="휴가"></option>
+                                                <option value="전결" label="전결"></option>
+                                            </select>
+                                        </td>
+                                        <td class="colorUpNo">
+                                            <select class="form-select" id="appGiLineC3" disabled="disabled">
+                                                <option value="" label="" selected="selected"></option>
+                                                <option value="출장" label="출장"></option>
+                                                <option value="휴가" label="휴가"></option>
+                                                <option value="전결" label="전결"></option>
+                                            </select>
+                                        </td>
+                                        <td class="colorUpNo">
+                                            <select class="form-select" id="appGiLineC4" disabled="disabled">
+                                                <option value="" label="" selected="selected"></option>
+                                                <option value="출장" label="출장"></option>
+                                                <option value="휴가" label="휴가"></option>
+                                                <option value="전결" label="전결"></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr class="giDay">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="colorG colorUp">협조자</td>
+                                        <td colspan="5" class="colorUp" style="text-align: left;">
+                                            <div class="clHelpCham">
+                                                <div>
+                                                    <select class="form-select" style="width: 11rem;" id="appGiHelp">
+                                                        <option value="" label=""></option>
+                                                        <option
+                                                            th:each="userAll : ${userAll}"
+                                                            th:if="${user.id != userAll.id}"
+                                                            th:value="${id}"
+                                                            th:label="${userAll.position + ' ' + userAll.name}"></option>
+                                                    </select>
+                                                </div>
+                                                <div id="spHelp"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="colorG colorUp">수신참조</td>
+                                        <td colspan="5" class="colorUp" style="text-align: left;">
+                                            <div class="clHelpCham">
+                                                <div>
+                                                    <select class="form-select" style="width: 11rem;" id="appGiCham">
+                                                        <option value="" label=""></option>
+                                                        <option
+                                                            th:each="userAll : ${userAll}"
+                                                            th:if="${user.id != userAll.id}"
+                                                            th:value="${id}"
+                                                            th:label="${userAll.position + ' ' + userAll.name}"></option>
+                                                    </select>
+                                                </div>
+                                                <div id="spCham"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" class="colorUp">
+                                            <div class="" id="apprTitle"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td id="apprUpcontents" colspan="6" class="colorUp1">
+                                            <div class="" id="apprSummary">
+                                                <div class="apprSumAll">
+                                                    <div class="apprContT">종 합
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="33%"/>
+                                                                <col width="33%"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>입금액</th>
+                                                                    <th>지급액</th>
+                                                                    <th>합&nbsp;계</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th id="jonghabINM">0</th>
+                                                                    <th id="jonghabOUTM">0</th>
+                                                                    <th>
+                                                                        <span id="jonghabALLM">0</span>
+                                                                    </th>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprSumCountEmp" style="display: none;">
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="33%"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th style="background: #0000001a;">신규입사</th>
+                                                                    <th id="jonghabEMP"></th>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprSumCountVe" style="display: none;">
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="33%"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th style="background: #0000001a;">신규등록차량</th>
+                                                                    <th id="jonghabVE"></th>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprAcc" style="display: none;">
+                                                    <div class="apprContT">차량사고내역<a class="clearAppr" id="clearApprAcc">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="50px"/>
+                                                                <col width="100px"/>
+                                                                <col width="100px"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>차량번호</th>
+                                                                    <th>승무원</th>
+                                                                    <th>사고일시</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprAccTB"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprSal" style="display: none;">
+                                                    <div class="apprContT">급여정보<a class="clearAppr" id="clearApprSal">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="50px"/>
+                                                                <col width="auto"/>
+                                                                <col width="100px"/>
+                                                                <col width="100px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>급여월</th>
+                                                                    <th>승무원</th>
+                                                                    <th>운행차량</th>
+                                                                    <th>급여</th>
+                                                                    <th>지급액</th>
+                                                                    <th>공제액</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprSalTB"></tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="3">합 계</td>
+                                                                    <td class="tdRight" id="apprSalFTCnt"></td>
+                                                                    <td class="tdRight" id="apprSalFTAllM"></td>
+                                                                    <td class="tdRight" id="apprSalFTInM"></td>
+                                                                    <td class="tdRight" id="apprSalFTOutM"></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprRsvtMoney" style="display: none;">
+                                                    <div class="apprContT">입금내용<a class="clearAppr" id="clearApprRsvtMoney">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="50px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>고객정보</th>
+                                                                    <th>출발일</th>
+                                                                    <th>입금액</th>
+                                                                    <th>메모</th>
+                                                                    <th>계약</th>
+                                                                    <th>계약금액</th>
+                                                                    <th>미수금</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprRsvtMoneyTB"></tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="2">합 계</td>
+                                                                    <td id="apprRsvtMoneyFTCnt"></td>
+                                                                    <td class="tdRight" id="apprRsvtMoneyFTInM"></td>
+                                                                    <td>&#45;</td>
+                                                                    <td>&#45;</td>
+                                                                    <td>&#45;</td>
+                                                                    <td>&#45;</td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprSumVe" style="display: none;">
+                                                    <div class="apprContT">차량별 지급액
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="50px"/>
+                                                                <col width="100px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>차량번호</th>
+                                                                    <th>내용</th>
+                                                                    <th>날짜</th>
+                                                                    <th>비고</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprSumVeTB"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div id="apprCont">
+                                                <div id="apprEmp" style="display: none;">
+                                                    <div class="apprContT">인사<a class="clearAppr" id="clearApprEmp">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="40px"/>
+                                                                <col width="80px"/>
+                                                                <col width="80px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>이름</th>
+                                                                    <th>운행차량</th>
+                                                                    <th>생년월일</th>
+                                                                    <th>나이</th>
+                                                                    <th>입사일</th>
+                                                                    <th>소속</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprEmpTB"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprVe" style="display: none;">
+                                                    <div class="apprContT">차량정보<a class="clearAppr" id="clearApprVe">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="40px"/>
+                                                                <col width="80px"/>
+                                                                <col width="80px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>차량번호</th>
+                                                                    <th>승무원</th>
+                                                                    <th>소속</th>
+                                                                    <th>제조사</th>
+                                                                    <th>등급</th>
+                                                                    <th>승차인원</th>
+                                                                    <th>등록일</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprVeTB"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprRsvt" style="display: none;">
+                                                    <div class="apprContT">운행예약<a class="clearAppr" id="clearApprRsvt">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="40px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>고객정보</th>
+                                                                    <th colspan="2">출발일</th>
+                                                                    <th>목적지</th>
+                                                                    <th>차량</th>
+                                                                    <th>대수</th>
+                                                                    <th>계약</th>
+                                                                    <th>계약금액</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprRsvtTB"></tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="5">합 계</td>
+                                                                    <td id="apprRsvtFTCnt"></td>
+                                                                    <td id="apprRsvtFTBUS"></td>
+                                                                    <td>&#45;</td>
+                                                                    <td class="tdRight" id="apprRsvtFTAllM"></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprInsu" style="display: none;">
+                                                    <div class="apprContT">보험가입<a class="clearAppr" id="clearApprInsu">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="40px"/>
+                                                                <col width="80px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>차량번호</th>
+                                                                    <th colspan="2">공제기간</th>
+                                                                    <th>분할</th>
+                                                                    <th>총분담금</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprInsuTB"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprInsuSepa" style="display: none;">
+                                                    <div class="apprContT">보험료납부내역<a class="clearAppr" id="clearApprInsuSepa">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="40px"/>
+                                                                <col width="80px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>차량번호</th>
+                                                                    <th>납일일</th>
+                                                                    <th>방법</th>
+                                                                    <th>분할횟수</th>
+                                                                    <th>분담금</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprInsuSepaTB"></tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="4">합 계</td>
+                                                                    <td id="apprInsuSepaFTCnt"></td>
+                                                                    <td class="tdRight" id="apprInsuSepaFTAllM"></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprLoan" style="display: none;">
+                                                    <div class="apprContT">대출가입<a class="clearAppr" id="clearApprLoan">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="40px"/>
+                                                                <col width="80px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>차량번호</th>
+                                                                    <th>대출처</th>
+                                                                    <th>총대출금</th>
+                                                                    <th>월납입금</th>
+                                                                    <th>대출일</th>
+                                                                    <th>만기일</th>
+                                                                    <th>기간</th>
+                                                                    <th>기산일</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprLoanTB"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprLoanSepa" style="display: none;">
+                                                    <div class="apprContT">대출납입내역<a class="clearAppr" id="clearApprLoanSepa">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="40px"/>
+                                                                <col width="80px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>차량번호</th>
+                                                                    <th>납입일</th>
+                                                                    <th>회차월</th>
+                                                                    <th>회차</th>
+                                                                    <th>납입금</th>
+                                                                    <th>총납입금</th>
+                                                                    <th>잔액</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprLoanSepaTB"></tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="4">합 계</td>
+                                                                    <td id="apprLoanSepaFTCnt"></td>
+                                                                    <td class="tdRight" id="apprLoanSepaFTAllM"></td>
+                                                                    <td>&#45;</td>
+                                                                    <td>&#45;</td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprInspec" style="display: none;">
+                                                    <div class="apprContT">차량검사<a class="clearAppr" id="clearApprInspec">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="40px"/>
+                                                                <col width="80px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>차량번호</th>
+                                                                    <th colspan="2">검사유효기간</th>
+                                                                    <th>검사시행일</th>
+                                                                    <th>검사시행장</th>
+                                                                    <th>주행거리</th>
+                                                                    <th>검사구분</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprInspecTB"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="apprMainte" style="display: none;">
+                                                    <div class="apprContT">차량정비내역<a class="clearAppr" id="clearApprMainte">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table-bordered table-sm">
+                                                            <colgroup>
+                                                                <col width="40px"/>
+                                                                <col width="80px"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                                <col width="auto"/>
+                                                            </colgroup>
+                                                            <thead class="theadApprTh">
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>차량번호</th>
+                                                                    <th>정비일</th>
+                                                                    <th>사유</th>
+                                                                    <th>정비내역</th>
+                                                                    <th>개수</th>
+                                                                    <th>정비소</th>
+                                                                    <th>금액</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="apprMainteTB"></tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="6">합 계</td>
+                                                                    <td id="apprMainteFTCnt"></td>
+                                                                    <td class="tdRight" id="apprMainteFTAllM"></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            colspan="6"
+                                            class="colorUp1 colorDown"
+                                            style="text-align: left; padding: 1rem;">
+                                            <label for="apprfoot" class="form-label">&#42;&nbsp;첨 언</label>
+                                            <textarea class="form-control" id="apprfoot" rows="3"></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="approvalBtn">
+                        <button type="button" class="btn btn-success" id="apprGo" disabled="disabled">결재 상신</button>
+                    </div>
+                </div>
+                <div class="approvalUp-set approvalUp-he card-song">
+                    <div class="apprUp" id="apprUpEmp" style="display: none;">
+                        <div class="apprContT">신입사원</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="80px"/>
+                                    <col width="80px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpEmpAllCh"></th>
+                                        <th>#</th>
+                                        <th>이름</th>
+                                        <th>운행차량</th>
+                                        <th>생년월일</th>
+                                        <th>나이</th>
+                                        <th>입사일</th>
+                                        <th>소속</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpEmpTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpEmp">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpVe" style="display: none;">
+                        <div class="apprContT">신규차량</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="80px"/>
+                                    <col width="80px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpVeAllCh"></th>
+                                        <th>#</th>
+                                        <th>운행차량</th>
+                                        <th>승무원</th>
+                                        <th>소속</th>
+                                        <th>제조사</th>
+                                        <th>등급</th>
+                                        <th>승차인원</th>
+                                        <th>등록일</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpVeTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpVe">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpAcc" style="display: none;">
+                        <div class="apprContT">차량사고내역</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="80px"/>
+                                    <col width="80px"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpAccAllCh"></th>
+                                        <th>#</th>
+                                        <th>차량번호</th>
+                                        <th>승무원</th>
+                                        <th>사고일시</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpAccTB">
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpAcc">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpSal" style="display: none;">
+                        <div class="apprContT">급여정보</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="auto"/>
+                                    <col width="80px"/>
+                                    <col width="80px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpSalAllCh"></th>
+                                        <th>#</th>
+                                        <th>급여월</th>
+                                        <th>승무원</th>
+                                        <th>운행차량</th>
+                                        <th>급여</th>
+                                        <th>지급액</th>
+                                        <th>공제액</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpSalTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpSal">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpRsvtMoney" style="display: none;">
+                        <div class="apprContT">입금내용</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpRsvtMoneyAllCh"></th>
+                                        <th>#</th>
+                                        <th>고객정보</th>
+                                        <th>출발일</th>
+                                        <th>입금액</th>
+                                        <th>메모</th>
+                                        <th>계약</th>
+                                        <th>계약금액</th>
+                                        <th>미수금</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpRsvtMoneyTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpRsvtMoney">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpRsvt" style="display: none;">
+                        <div class="apprContT">예약내용</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpRsvtAllCh"></th>
+                                        <th>#</th>
+                                        <th>고객정보</th>
+                                        <th colspan="2">출발일</th>
+                                        <th>목적지</th>
+                                        <th>차량</th>
+                                        <th>대수</th>
+                                        <th>계약</th>
+                                        <th>계약금액</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpRsvtTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpRsvt">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpInsu" style="display: none;">
+                        <div class="apprContT">보험가입</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="80px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpInsuAllCh"></th>
+                                        <th>#</th>
+                                        <th>차량번호</th>
+                                        <th colspan="2">공제기간</th>
+                                        <th>분할</th>
+                                        <th>총분담금</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpInsuTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpInsu">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpInsuSepa" style="display: none;">
+                        <div class="apprContT">보험납부내역</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="80px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpInsuSepaAllCh"></th>
+                                        <th>#</th>
+                                        <th>차량번호</th>
+                                        <th>납일일</th>
+                                        <th>방법</th>
+                                        <th>분할횟수</th>
+                                        <th>분담금</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpInsuSepaTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpInsuSepa">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpLoan" style="display: none;">
+                        <div class="apprContT">대출가입</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="80px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpLoanAllCh"></th>
+                                        <th>#</th>
+                                        <th>차량번호</th>
+                                        <th>대출처</th>
+                                        <th>총대출금</th>
+                                        <th>월납입금</th>
+                                        <th>대출일</th>
+                                        <th>만기일</th>
+                                        <th>기간</th>
+                                        <th>기산일</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpLoanTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpLoan">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpLoanSepa" style="display: none;">
+                        <div class="apprContT">대출납입내역</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="80px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpLoanSepaAllCh"></th>
+                                        <th>#</th>
+                                        <th>차량번호</th>
+                                        <th>납입일</th>
+                                        <th>회차월</th>
+                                        <th>회차</th>
+                                        <th>납입금</th>
+                                        <th>총납입금</th>
+                                        <th>잔액</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpLoanSepaTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpLoanSepa">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpInspec" style="display: none;">
+                        <div class="apprContT">차량검사</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="80px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpInspecAllCh"></th>
+                                        <th>#</th>
+                                        <th>차량번호</th>
+                                        <th colspan="2">검사유효기간</th>
+                                        <th>검사시행일</th>
+                                        <th>검사시행장</th>
+                                        <th>주행거리</th>
+                                        <th>검사구분</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpInspecTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpInspec">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                    <div class="apprUp" id="apprUpMainte" style="display: none;">
+                        <div class="apprContT">차량정비내역</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <colgroup>
+                                    <col width="40px"/>
+                                    <col width="40px"/>
+                                    <col width="80px"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                    <col width="auto"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><input type="checkbox" id="apprUpMainteAllCh"></th>
+                                        <th>#</th>
+                                        <th>차량번호</th>
+                                        <th>정비일</th>
+                                        <th>사유</th>
+                                        <th>정비내역</th>
+                                        <th>개수</th>
+                                        <th>정비소</th>
+                                        <th>금액</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="apprUpMainteTB"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btnapprUpMainte">
+                                <i class="fa-solid fa-angles-left"></i>입력</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+    <script
+        language="javascript"
+        type="text/javascript"
+        src="/js/approval/approval.js"></script>
+    <script
+        language="javascript"
+        type="text/javascript"
+        src="/js/approval/approvalUp.js"></script>
+</body>
+
+</html>

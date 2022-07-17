@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="modalAllo2"
+        class="modal fade"
+        id="modalAllo2"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="modalAllo2Label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" id="alloMdSepa" value="">
+                    <input type="hidden" id="alloMdctmNo" value="">
+                    <input type="hidden" id="alloMdDay" value="">
+                    <input type="hidden" id="alloMdStDay" value="">
+                    <input type="hidden" id="alloMdEdDay" value="">
+                    <h3 class="modal-title" id="modalAllo2Label">운행정보</h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="modalAllo2X"></button>
+                </div>
+                <div class="modal-body modalAllo2BD">
+                    <div class="alloTitle card-song">
+                        <div class="alloTitle-item1" id="alloMdctoName">시곡초등학교</div>
+                        <div class="alloTitle-item2" id="alloMdctoTel">010-0000-0000</div>
+                        <div class="alloTitle-item3" id="alloMdctoAdd">경기도 안산시 상록구 사2동 요진아파트</div>
+                        <div class="alloTitle-item4">
+                            <button class="btn card-song" id="alloMdbtnPapper" tabindex="-1">
+                                <i class="fa-solid fa-file-lines"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="alloCont" id="alloContMd">
+                        <div class="alloCont-item">
+                            <table class="table">
+                                <colgroup></colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="allTitle" name="allTitle">
+                                                <div class="allTitle-item allTitle-desty">태백 365세이프타운</div>
+                                                <div class="allTitle-item allTitle-busnum">대형 10대</div>
+                                                <div class="allTitle-item allTitle-conm">4,200,000(636,364)</div>
+                                                <div class="allTitle-item allTitle-cont">포함</div>
+                                                <div class="allTitle-item allTitle-rps">경상중하교</div>
+                                                <div class="allTitle-item allTitle-stt">07:10 / 미정</div>
+                                                <div class="allTitle-item allTitle-Ch">
+                                                    <button class="btn card-song btnAlloCh">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="allTitle-item allTitle-atM">
+                                                    <input
+                                                        type="text"
+                                                        data-type="currency"
+                                                        class="alloAllM allo input-ent"
+                                                        onfocus="this.select()"
+                                                        value="0">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="alloAllo">
+                                <div class="input-group">
+                                    <div class="input-group-text alloNumClk">1</div>
+                                    <input type="text" class="form-control" list="car-info">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <div>
+                                        <a>
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        id="modalAllo2Btn">닫&nbsp;기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

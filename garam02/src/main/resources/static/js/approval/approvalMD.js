@@ -29,6 +29,33 @@ $(document).on('click', '.apprShowMd', function () {
     getApprGoList(apprnono, 0);
 });
 
+$(document).on('click', '.apprShowMdIng', function () {
+    const aaa = $(this).children()[0];
+    const aaa1 = $(aaa).children()[0];
+
+    const apprnono = $(aaa1).val();
+
+    getApprGoList(apprnono, 1);
+});
+
+$(document).on('click', '.apprShowMdOut', function () {
+    const aaa = $(this).children()[0];
+    const aaa1 = $(aaa).children()[0];
+
+    const apprnono = $(aaa1).val();
+
+    getApprGoList(apprnono, 2);
+});
+
+$(document).on('click', '.apprShowMdEnd', function () {
+    const aaa = $(this).children()[0];
+    const aaa1 = $(aaa).children()[0];
+
+    const apprnono = $(aaa1).val();
+
+    getApprGoList(apprnono, 2);
+});
+
 function getApprGoList(apprNo, apprSepa) {
 
     LoadingWithMask()
@@ -100,11 +127,12 @@ function getApprGoList(apprNo, apprSepa) {
                 data: JSON.stringify(params),
 
                 success: function (r) {
+
                     for (let i = 0; i < r.length; i++) {
 
                         let ddaayy = '';
-                        if (r[0].approvallineday) {
-                            ddaayy = r[0]
+                        if (r[i].approvallineday) {
+                            ddaayy = r[i]
                                 .approvallineday
                                 .split(' ')[0];
                         }
@@ -117,10 +145,12 @@ function getApprGoList(apprNo, apprSepa) {
                             $('#apprMdEndNum').val(r[i].approvallineorder);
                         }
 
+                        $('#apprChLinePosi0').val(r[0].id);
+
                         switch (i) {
-                            case 0:
-                                $('#apprChLinePosi2').text(r[0].approvallineposition);
-                                $('#apprChLinename2').text(r[0].name);
+                            case 1:
+                                $('#apprChLinePosi2').text(r[1].approvallineposition);
+                                $('#apprChLinename2').text(r[1].name);
                                 $('#apprChLineday2').text(ddaayy);
 
                                 $('#apprChLine2').show();
@@ -129,9 +159,9 @@ function getApprGoList(apprNo, apprSepa) {
                                 $('#apprChLineday2').show();
 
                                 break;
-                            case 1:
-                                $('#apprChLinePosi3').text(r[1].approvallineposition);
-                                $('#apprChLinename3').text(r[1].name);
+                            case 2:
+                                $('#apprChLinePosi3').text(r[2].approvallineposition);
+                                $('#apprChLinename3').text(r[2].name);
                                 $('#apprChLineday3').text(ddaayy);
 
                                 $('#apprChLine3').show();
@@ -139,9 +169,9 @@ function getApprGoList(apprNo, apprSepa) {
                                 $('#apprChLinename3').show();
                                 $('#apprChLineday3').show();
                                 break;
-                            case 2:
-                                $('#apprChLinePosi4').text(r[2].approvallineposition);
-                                $('#apprChLinename4').text(r[2].name);
+                            case 3:
+                                $('#apprChLinePosi4').text(r[3].approvallineposition);
+                                $('#apprChLinename4').text(r[3].name);
                                 $('#apprChLineday4').text(ddaayy);
 
                                 $('#apprChLine4').show();
@@ -149,9 +179,9 @@ function getApprGoList(apprNo, apprSepa) {
                                 $('#apprChLinename4').show();
                                 $('#apprChLineday4').show();
                                 break;
-                            case 3:
-                                $('#apprChLinePosi5').text(r[3].approvallineposition);
-                                $('#apprChLinename5').text(r[3].name);
+                            case 4:
+                                $('#apprChLinePosi5').text(r[4].approvallineposition);
+                                $('#apprChLinename5').text(r[4].name);
                                 $('#apprChLineday5').text(ddaayy);
 
                                 $('#apprChLine5').show();
@@ -319,32 +349,63 @@ function getApprGoList(apprNo, apprSepa) {
 
     function showApprMd() {
         return new Promise(function (resolve, reject) {
+
+            let sepapa = 0;
+            if ($('#apprChLinePosi0').val() == dbuser.id && !$('#apprChLineday2').text() && !$('#apprChLineday3').text() && !$('#apprChLineday4').text() && !$('#apprChLineday5').text()) {
+                sepapa = 1;
+            } else {
+                sepapa = apprSepa;
+            }
+
             let htmls = ``;
-            switch (apprSepa) {
+            switch (sepapa) {
                 case 0:
                     htmls = `
-                    <button type="button" class="btn btn-secondary" id="apprMDBtn">닫&nbsp;기</button>
-                    <button type="button" class="btn btn-warning" id="apprMdOut">반&nbsp;려</button>
-                    <button type="button" class="btn btn-success" id="apprMdGo">결&nbsp;재</button>`;
+                    <div>
+                        <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="apprMDBtn">닫&nbsp;기</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-warning" id="apprMdOut">반&nbsp;려</button>
+                        <button type="button" class="btn btn-success" id="apprMdGo">결&nbsp;재</button>
+                    </div>`;
                     break;
                 case 1:
                     htmls = `
-                    <button type="button" class="btn btn-secondary" id="apprMDBtn">닫&nbsp;기</button>
-                    <button type="button" class="btn btn-danger" id="apprMdDel">삭&nbsp;제</button>
-                    <button type="button" class="btn btn-warning" id="apprMdOut">반&nbsp;려</button>
-                    <button type="button" class="btn btn-success" id="apprMdGo">결&nbsp;재</button>`;
-                    break;
-                case 2:
-                    htmls = `
-                    <button type="button" class="btn btn-secondary" id="apprMDBtn">닫&nbsp;기</button>
-                    <button type="button" class="btn btn-danger" id="apprMdDel">삭&nbsp;제</button>
-                    <button type="button" class="btn btn-warning" id="apprMdOut">반&nbsp;려</button>
-                    <button type="button" class="btn btn-success" id="apprMdGo">결&nbsp;재</button>`;
+                    <div>
+                        <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="apprMDBtn">닫&nbsp;기</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-danger" id="apprMdDel">삭&nbsp;제</button>
+                    </div>`;
                     break;
 
-                default:
+                case 2:
+                    htmls = `
+                    <div>
+                        <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="apprMDBtn">닫&nbsp;기</button>
+                    </div>
+                    <div>
+                    </div>`;
                     break;
             }
+
+            $('#apprMdFoot').html(htmls);
+
             $('#apprMD').modal('show');
             resolve();
         })
@@ -420,7 +481,7 @@ function apprGo(paramNum) {
 
     function apprGoLineUp() {
         return new Promise(function (resolve, reject) {
-            const url = "/apprgo/updateApprLine";
+            const url = "/apprgo/upApprLine";
             const headers = {
                 "Content-Type": "application/json",
                 "X-HTTP-Method-Override": "POST"
@@ -432,7 +493,7 @@ function apprGo(paramNum) {
                 params = {
                     "approvallinesepa": '결재',
                     "id": dbuser.id,
-                    "approvalno": ('#apprMdNum').val()
+                    "approvalno": $('#apprMdNum').val()
                 };
             } else {
                 params = {
@@ -520,7 +581,15 @@ function apprGo(paramNum) {
 
     function apprGoOk() {
         return new Promise(function (resolve, reject) {
-            alert(결재완료);
+
+            if (parseInt(paramNum) < 0) {
+                alert("반려완료");
+                location.reload();
+            } else {
+                alert("결재완료");
+                location.reload();
+            }
+
             resolve();
         })
     }

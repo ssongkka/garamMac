@@ -10,6 +10,8 @@ public interface UserMyService {
 
 	public int updateUserPw(UserDTO userDTO) throws Exception;
 
+	public int updateUser(UserDTO userDTO) throws Exception;
+
 	public int insertUser(UserDTO userDTO) throws Exception;
 
 	public List<UserDTO> selectUser() throws Exception;

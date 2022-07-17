@@ -1232,49 +1232,64 @@ function getEmpInMList(result) {
             dataType: "json",
             data: JSON.stringify(params),
             success: function (r) {
+                $('#in-regM').val('0');
+
                 if (r.length > 0) {
                     let httmlll = '';
                     let cnt = 0;
                     for (let i = 0; i < r.length; i++) {
-                        let ddd = '';
 
-                        if (r[i].date) {
-                            if ((r[i].date).split('-')[2].substring('0', '1') == '0') {
-                                ddd = (r[i].date)
-                                    .split('-')[2]
-                                    .substring('1') + '일';
-                            } else {
-                                ddd = (r[i].date).split('-')[2] + '일';
+                        if (r[i].separation == '정기운행') {
+                            $('#in-regM').val(AddComma(r[i].money));
+                            switch (r[i].strash) {
+                                case 0:
+                                    $("#in-regM").attr("disabled", true);
+                                    break;
+                                case 1:
+                                    $("#in-regM").removeAttr("disabled");
+                                    break;
                             }
                         } else {
-                            ddd = '-';
-                        }
+                            let ddd = '';
 
-                        httmlll += '<tr>';
-                        httmlll += '<td class="hideTh"></td>';
-                        httmlll += '<td class="hideTh"></td>';
-                        httmlll += '<td class="hideTh"></td>';
-                        httmlll += '<td class="hideTh"></td>';
-                        httmlll += '<td>' + (
-                            ++cnt
-                        ) + '</td>';
-                        httmlll += '<td>' + ddd + '</td>';
-                        httmlll += '<td>' + r[i].separation + '</td>';
-                        httmlll += '<td>' + r[i].contents + '</td>';
-                        httmlll += '<td class="tdRight">' + AddComma(r[i].money) + '</td>';
+                            if (r[i].date) {
+                                if ((r[i].date).split('-')[2].substring('0', '1') == '0') {
+                                    ddd = (r[i].date)
+                                        .split('-')[2]
+                                        .substring('1') + '일';
+                                } else {
+                                    ddd = (r[i].date).split('-')[2] + '일';
+                                }
+                            } else {
+                                ddd = '-';
+                            }
 
-                        switch (r[i].strash) {
-                            case 0:
-                                httmlll += '<td>';
-                                httmlll += '</td>';
-                                httmlll += '</tr>';
-                                break;
-                            case 1:
-                                httmlll += '<td class="cuor-p" onclick="delTb(this)">';
-                                httmlll += '<i class="fas fa-minus-square"></i>';
-                                httmlll += '</td>';
-                                httmlll += '</tr>';
-                                break;
+                            httmlll += '<tr>';
+                            httmlll += '<td class="hideTh"></td>';
+                            httmlll += '<td class="hideTh"></td>';
+                            httmlll += '<td class="hideTh"></td>';
+                            httmlll += '<td class="hideTh"></td>';
+                            httmlll += '<td>' + (
+                                ++cnt
+                            ) + '</td>';
+                            httmlll += '<td>' + ddd + '</td>';
+                            httmlll += '<td>' + r[i].separation + '</td>';
+                            httmlll += '<td>' + r[i].contents + '</td>';
+                            httmlll += '<td class="tdRight">' + AddComma(r[i].money) + '</td>';
+
+                            switch (r[i].strash) {
+                                case 0:
+                                    httmlll += '<td>';
+                                    httmlll += '</td>';
+                                    httmlll += '</tr>';
+                                    break;
+                                case 1:
+                                    httmlll += '<td class="cuor-p" onclick="delTb(this)">';
+                                    httmlll += '<i class="fas fa-minus-square"></i>';
+                                    httmlll += '</td>';
+                                    httmlll += '</tr>';
+                                    break;
+                            }
                         }
                     }
                     $('#emp-in-money-tb').append(httmlll);

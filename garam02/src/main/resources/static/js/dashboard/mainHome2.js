@@ -327,6 +327,19 @@ function makeTableRsvt(r) {
                 eddday = r[i].endday;
             }
 
+            let busClass = '';
+            switch (r[i].bus) {
+                case "대형":
+                    busClass = 'big45';
+                    break;
+                case "중형":
+                    busClass = 'big25';
+                    break;
+                case "우등":
+                    busClass = 'big28';
+                    break;
+            }
+
             htmls += `
 <tr class="rsvtChohome">
     <td>` + r[i].stday +
@@ -342,7 +355,7 @@ function makeTableRsvt(r) {
     <td>` + r[i].ctmname +
                     `</td>
     <td>` + r[i].desty + `</td>
-    <td>` + r[i].bus +
+    <td class="` + busClass + `">` + r[i].bus +
                     `</td>
     <td>` + r[i].num + `</td>
     <td>` + r[i].cont +
@@ -555,7 +568,9 @@ function makeAsideRsvt(r) {
             `</td>
 </tr>`;
 
-    $('#home2Tile').text($('.yearMonth').val());
+    $('#home2Tile').text($('.yearMonth').val().split('-')[0] + '년 ' + $(
+        '.yearMonth'
+    ).val().split('-')[1] + '월 예약 대수');
 
     $('#home2AsideTb').html(htmls);
     $('#home2AsideTf').html(htmlsFt);

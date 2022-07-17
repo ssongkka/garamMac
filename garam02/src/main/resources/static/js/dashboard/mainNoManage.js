@@ -145,6 +145,10 @@ function makeNoManage() {
 
                 success: function (r) {
 
+                    const dayNow = new Date();
+
+                    $('#nodate').text('기준일 : ' + toStringByFormatting(dayNow));
+
                     let arrTmpCtmNo = new Array();
                     for (let i = 0; i < r.length; i++) {
                         arrTmpCtmNo.push(r[i].ctmno);

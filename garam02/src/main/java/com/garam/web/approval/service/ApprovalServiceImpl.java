@@ -325,8 +325,36 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	@Override
+	public List<ApprovalDTO> selectApprCount(ApprovalDTO approvalDTO) throws Exception {
+		List<ApprovalDTO> rtn = approvalMapper.selectApprCount(approvalDTO);
+
+		return rtn;
+	}
+
+	@Override
 	public List<ApprovalDTO> selectApprIng(ApprovalDTO approvalDTO) throws Exception {
 		List<ApprovalDTO> rtn = approvalMapper.selectApprIng(approvalDTO);
+
+		return rtn;
+	}
+
+	@Override
+	public List<ApprovalDTO> selectApprGo(ApprovalDTO approvalDTO) throws Exception {
+		List<ApprovalDTO> rtn = approvalMapper.selectApprGo(approvalDTO);
+
+		return rtn;
+	}
+
+	@Override
+	public List<ApprovalDTO> selectApprOut(ApprovalDTO approvalDTO) throws Exception {
+		List<ApprovalDTO> rtn = approvalMapper.selectApprOut(approvalDTO);
+
+		return rtn;
+	}
+
+	@Override
+	public List<ApprovalDTO> selectApprEnd(ApprovalDTO approvalDTO) throws Exception {
+		List<ApprovalDTO> rtn = approvalMapper.selectApprEnd(approvalDTO);
 
 		return rtn;
 	}

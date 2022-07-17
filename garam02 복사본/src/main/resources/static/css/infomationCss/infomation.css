@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+body {
+	background: white;
+	margin-top: 3rem;
+}
+
+a {
+	color: #222;
+}
+
+th {
+	text-align: center;
+}
+
+.table>tbody>tr>td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.table>thead>tr {
+	text-align: center;
+	vertical-align: middle;
+	font-weight: 700;
+}
+
+.ta-title table>tbody>tr>td {
+	text-align: left;
+}
+
+.title-info {
+	display: grid;
+	grid-template-columns: 50px auto;
+	gap: 2rem;
+}
+
+.title-info img {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.title-info h4 {
+	margin: 0;
+	color: #222;
+	margin-bottom: .5rem;
+}
+
+.title-info h6 {
+	margin: 0;
+	font-weight: 600;
+	color: var(--text-grey);
+}
+
+.title-info-item-title {
+	text-overflow: ellipsis; /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
+	white-space: nowrap; /* 줄바꿈을 하지 않습니다. */
+	overflow: hidden; /* 내용이 길면 감춤니다 */
+}
+
+.head-info1 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.head-info1 h2 {
+	margin: 0;
+}
+
+.head-info2 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.form-inline{
+	margin: 0;
+}
+
+.form-control{
+	border-radius: 0;
+}
+
+input[type="text"] :focus { 
+	outline: none;
+}
+
+.head-info-insert {
+	text-align: right;
+}

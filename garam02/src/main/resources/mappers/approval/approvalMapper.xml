@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.garam.web.approval.mapper.ApprovalMapper">
 
-	<select id="selectapppaper" resultType="com.garam.web.approval.dto.ApprovalDTO">
+	<select id="selectapppaper"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
 
 		SELECT
 
@@ -15,7 +16,8 @@
 
 	</select>
 
-	<select id="selectapppaperline" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+	<select id="selectapppaperline"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
 		resultType="com.garam.web.approval.dto.ApprovalDTO">
 
 		SELECT
@@ -32,15 +34,18 @@
 
 		ON
 
-		user.id = approvalpaperline.id
+		user.id =
+		approvalpaperline.id
 
 		WHERE
 
-		approvalpaperline.approvalpapername = #{approvalpapername}
+		approvalpaperline.approvalpapername =
+		#{approvalpapername}
 
 	</select>
 
-	<select id="selectapppaperhelp" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+	<select id="selectapppaperhelp"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
 		resultType="com.garam.web.approval.dto.ApprovalDTO">
 
 		SELECT
@@ -57,15 +62,18 @@
 
 		ON
 
-		user.id = approvalpaperhelp.id
+		user.id =
+		approvalpaperhelp.id
 
 		WHERE
 
-		approvalpaperhelp.approvalpapername = #{approvalpapername}
+		approvalpaperhelp.approvalpapername =
+		#{approvalpapername}
 
 	</select>
 
-	<select id="selectapppapercham" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+	<select id="selectapppapercham"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
 		resultType="com.garam.web.approval.dto.ApprovalDTO">
 
 		SELECT
@@ -82,15 +90,18 @@
 
 		ON
 
-		user.id = approvalpapercham.id
+		user.id =
+		approvalpapercham.id
 
 		WHERE
 
-		approvalpapercham.approvalpapername = #{approvalpapername}
+		approvalpapercham.approvalpapername =
+		#{approvalpapername}
 
 	</select>
 
-	<select id="selectApprEmp" parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
+	<select id="selectApprEmp"
+		parameterType="com.garam.web.employee.dto.EmployeeInfoDTO"
 		resultType="com.garam.web.employee.dto.EmployeeInfoDTO">
 
 		SELECT
@@ -116,7 +127,8 @@
 
 		ON
 
-		employeeinfo.id = vehicleinfo.id
+		employeeinfo.id =
+		vehicleinfo.id
 
 		WHERE
 
@@ -139,7 +151,8 @@
 
 	</select>
 
-	<select id="selectApprVe" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectApprVe"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT
@@ -170,7 +183,8 @@
 
 		ON
 
-		employeeinfo.id = vehicleinfo.id
+		employeeinfo.id =
+		vehicleinfo.id
 
 		WHERE
 
@@ -193,7 +207,8 @@
 
 	</select>
 
-	<select id="selectApprAcc" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectApprAcc"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT
@@ -201,7 +216,8 @@
 		*,
 		(SELECT
 		employeeinfo.name FROM
-		employeeinfo WHERE employeeinfo.id =
+		employeeinfo WHERE
+		employeeinfo.id =
 		veacc.id) AS name
 
 		FROM
@@ -245,7 +261,8 @@
 
 	</select>
 
-	<select id="selectApprSal" parameterType="com.garam.web.employee.dto.EmpsalaryAll"
+	<select id="selectApprSal"
+		parameterType="com.garam.web.employee.dto.EmpsalaryAll"
 		resultType="com.garam.web.employee.dto.EmpsalaryAll">
 
 		SELECT
@@ -253,12 +270,14 @@
 		*,
 		(SELECT
 		vehicleinfo.vehicle FROM
-		vehicleinfo WHERE vehicleinfo.id
+		vehicleinfo WHERE
+		vehicleinfo.id
 		=
 		personnalsalary.id) AS
 		vehicle,
 		(SELECT
-		employeeinfo.name FROM employeeinfo
+		employeeinfo.name
+		FROM employeeinfo
 		WHERE employeeinfo.id = personnalsalary.id) AS name
 
 		FROM
@@ -280,7 +299,8 @@
 
 		ON
 
-		personnalsalary.id = employeeinfo.id
+		personnalsalary.id =
+		employeeinfo.id
 
 		WHERE
 
@@ -302,7 +322,8 @@
 
 	</select>
 
-	<select id="selectApprRsvtMoney" parameterType="com.garam.web.dashboard.dto.RsvtDTO"
+	<select id="selectApprRsvtMoney"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
 		resultType="com.garam.web.dashboard.dto.RsvtDTO">
 
 		SELECT
@@ -312,14 +333,17 @@
 		rsvtmoney.moneymoney AS atlm,
 		rsvtmoney.moneymemo AS opercom,
 		(SELECT
-		customer.ctmname FROM customer WHERE
+		customer.ctmname FROM customer
+		WHERE
 		customer.ctmno = rsvt.ctmno) AS
 		opermemo,
 		(SELECT rsvt.conm -
 		SUM(rsvtmoney.moneymoney) FROM rsvtmoney WHERE
-		rsvtmoney.rsvt = rsvt.rsvt) AS opertype,
+		rsvtmoney.rsvt =
+		rsvt.rsvt) AS opertype,
 		(SELECT
-		SUM(rsvtmoney.moneymoney) FROM rsvtmoney WHERE rsvtmoney.rsvt =
+		SUM(rsvtmoney.moneymoney) FROM rsvtmoney
+		WHERE rsvtmoney.rsvt =
 		rsvt.rsvt) AS opertrash
 		FROM
 
@@ -367,7 +391,8 @@
 
 	</select>
 
-	<select id="selectApprRsvt" parameterType="com.garam.web.dashboard.dto.RsvtDTO"
+	<select id="selectApprRsvt"
+		parameterType="com.garam.web.dashboard.dto.RsvtDTO"
 		resultType="com.garam.web.dashboard.dto.RsvtDTO">
 
 		SELECT
@@ -375,7 +400,8 @@
 		*,
 		(SELECT
 		customer.ctmname FROM customer WHERE
-		customer.ctmno = rsvt.ctmno) AS
+		customer.ctmno =
+		rsvt.ctmno) AS
 		opermemo
 
 		FROM
@@ -388,7 +414,8 @@
 
 		ON
 
-		rsvt.approvalno = approval.approvalno
+		rsvt.approvalno =
+		approval.approvalno
 
 		WHERE
 
@@ -408,7 +435,8 @@
 
 	</select>
 
-	<select id="selectApprInsu" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectApprInsu"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT
@@ -425,7 +453,8 @@
 
 		ON
 
-		veinsurance.approvalno = approval.approvalno
+		veinsurance.approvalno =
+		approval.approvalno
 
 		LEFT JOIN
 
@@ -455,7 +484,8 @@
 
 	</select>
 
-	<select id="selectApprInsuSepa" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectApprInsuSepa"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT
@@ -511,7 +541,8 @@
 
 	</select>
 
-	<select id="selectApprLoan" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectApprLoan"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT
@@ -528,7 +559,8 @@
 
 		ON
 
-		veloan.approvalno = approval.approvalno
+		veloan.approvalno =
+		approval.approvalno
 
 		LEFT JOIN
 
@@ -560,14 +592,18 @@
 	</select>
 
 
-	<select id="selectApprLoanSepa" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectApprLoanSepa"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT
 
 		*,
-		(SELECT SUM(veloansepa.loansepamoney) FROM veloansepa WHERE veloansepa.loanno = veloan.loanno) AS veaccmoney,
-		(SELECT veloan.loan - SUM(veloansepa.loansepamoney) FROM veloansepa WHERE veloansepa.loanno = veloan.loanno) AS
+		(SELECT SUM(veloansepa.loansepamoney) FROM veloansepa WHERE
+		veloansepa.loanno = veloan.loanno) AS veaccmoney,
+		(SELECT veloan.loan -
+		SUM(veloansepa.loansepamoney) FROM veloansepa WHERE veloansepa.loanno
+		= veloan.loanno) AS
 		veacctrash
 
 		FROM
@@ -603,7 +639,8 @@
 
 		WHERE
 
-		(veloansepa.approvalno IS NULL
+		(veloansepa.approvalno IS
+		NULL
 
 		OR
 
@@ -622,7 +659,8 @@
 
 	</select>
 
-	<select id="selectApprInspec" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectApprInspec"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT
@@ -639,7 +677,8 @@
 
 		ON
 
-		veinspection.approvalno = approval.approvalno
+		veinspection.approvalno =
+		approval.approvalno
 
 		LEFT JOIN
 
@@ -669,7 +708,8 @@
 
 	</select>
 
-	<select id="selectApprMaint" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectApprMaint"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT
@@ -686,7 +726,8 @@
 
 		ON
 
-		vemaintenance.approvalno = approval.approvalno
+		vemaintenance.approvalno =
+		approval.approvalno
 
 		LEFT JOIN
 
@@ -716,7 +757,8 @@
 
 	</select>
 
-	<insert id="insertAppr" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+	<insert id="insertAppr"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO">
 		INSERT
 
 		INTO
@@ -739,7 +781,8 @@
 		);
 	</insert>
 
-	<update id="updateAppr" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+	<update id="updateAppr"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO">
 
 		UPDATE
 
@@ -749,14 +792,15 @@
 
 		approvalcondi = #{approvalcondi}
 
-		WHEW
+		WHERE
 
 		approvalno =
 		#{approvalno}
 
 	</update>
 
-	<insert id="insertApprFoot" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+	<insert id="insertApprFoot"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO">
 
 		INSERT
 
@@ -770,9 +814,11 @@
 		#{approvalno},
 		#{id},
 		#{approvalfootposition},
-		IFNULL((SELECT MAX(approvalfootnum) FROM approvalfoot ALIAS_FOR_SUBQUERY WHERE
+		IFNULL((SELECT MAX(approvalfootnum) FROM
+		approvalfoot ALIAS_FOR_SUBQUERY WHERE
 		approvalno =
-		#{approvalno}), 0) + 1,
+		#{approvalno}), 0) +
+		1,
 		NOW(),
 		null,
 		#{approvalfootcont},
@@ -806,7 +852,8 @@
 
 	</insert>
 
-	<update id="updateApprLine" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+	<update id="updateApprLine"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO">
 
 		UPDATE
 
@@ -814,7 +861,8 @@
 
 		SET
 
-		approvallinesepa = #{approvallinesepa},
+		approvallinesepa =
+		#{approvallinesepa},
 		approvallineday = NOW()
 
 		WHERE
@@ -873,7 +921,8 @@
 
 	</insert>
 
-	<update id="updateApprFoot" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+	<update id="updateApprFoot"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO">
 
 		UPDATE
 
@@ -892,7 +941,8 @@
 
 	</update>
 
-	<delete id="deleteApprFoot" parameterType="com.garam.web.approval.dto.ApprovalDTO">
+	<delete id="deleteApprFoot"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO">
 
 		DELETE
 
@@ -902,12 +952,14 @@
 
 		WHERE
 
-		approvalfootseq = #{approvalfootseq};
+		approvalfootseq =
+		#{approvalfootseq};
 
 	</delete>
 
 	<update id="updateApprEmp" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			employeeinfo
@@ -925,7 +977,8 @@
 	</update>
 
 	<update id="updateApprVe" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			vehicleinfo
@@ -943,7 +996,8 @@
 	</update>
 
 	<update id="updateApprAcc" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			veacc
@@ -961,14 +1015,16 @@
 	</update>
 
 	<update id="updateApprSal" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			personnalsalary
 
 			SET
 
-			personnalsalary.approvalno = #{value.approvalno}
+			personnalsalary.approvalno =
+			#{value.approvalno}
 
 			WHERE
 
@@ -977,8 +1033,10 @@
 		</foreach>
 	</update>
 
-	<update id="updateApprRsvtMoney" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+	<update id="updateApprRsvtMoney"
+		parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			rsvtmoney
@@ -996,7 +1054,8 @@
 	</update>
 
 	<update id="updateApprRsvt" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			rsvt
@@ -1014,7 +1073,8 @@
 	</update>
 
 	<update id="updateApprInsu" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			veinsurance
@@ -1031,15 +1091,18 @@
 		</foreach>
 	</update>
 
-	<update id="updateApprInsuSepa" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+	<update id="updateApprInsuSepa"
+		parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			veinsurancesepa
 
 			SET
 
-			veinsurancesepa.approvalno = #{value.approvalno}
+			veinsurancesepa.approvalno =
+			#{value.approvalno}
 
 			WHERE
 
@@ -1049,7 +1112,8 @@
 	</update>
 
 	<update id="updateApprLoan" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			veloan
@@ -1066,8 +1130,10 @@
 		</foreach>
 	</update>
 
-	<update id="updateApprLoanSepa" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+	<update id="updateApprLoanSepa"
+		parameterType="java.util.HashMap">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			veloansepa
@@ -1085,7 +1151,8 @@
 	</update>
 
 	<update id="updateApprInsepc" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			veinspection
@@ -1103,14 +1170,16 @@
 	</update>
 
 	<update id="updateApprMaint" parameterType="java.util.HashMap">
-		<foreach collection="appr" item="value" index="index" separator=";">
+		<foreach collection="appr" item="value" index="index"
+			separator=";">
 			UPDATE
 
 			vemaintenance
 
 			SET
 
-			vemaintenance.approvalno = #{value.approvalno}
+			vemaintenance.approvalno =
+			#{value.approvalno}
 
 			WHERE
 
@@ -1119,36 +1188,48 @@
 		</foreach>
 	</update>
 
-	<select id="selectApprIng" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+	<select id="selectApprGo"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
 		resultType="com.garam.web.approval.dto.ApprovalDTO">
 
 		SELECT
 
-		approvalline.approvallineseq, approvalline.approvalno, approvalline.id,
-		approvalline.approvallineposition, approvalline.approvallineorder,
+		approvalline.approvallineseq,
+		approvalline.approvalno,
+		approvalline.id,
+		approvalline.approvallineposition,
+		approvalline.approvallineorder,
 		approvalline.approvallinesepa,
-		approvalline.approvallineday, approvalline.approvallinetrash,
-		approval.approvalseq, approval.approvalno, approval.id AS
+		approvalline.approvallineday,
+		approvalline.approvallinetrash,
+		approval.approvalseq,
+		approval.approvalno, approval.id AS
 		name,
-		approval.approvalposition, approval.approvalpaper, approval.approvalday,
+		approval.approvalposition,
+		approval.approvalpaper,
+		approval.approvalday,
 		approval.approvaltitle,
-		approval.approvalupday, approval.approvalcondi, approval.approvaltrash
+		approval.approvalupday,
+		approval.approvalcondi, approval.approvaltrash
 
 		FROM
 
 		approvalline
 
-		LEFT JOIN
+		LEFT
+		JOIN
 
 		approval
 
 		ON
 
-		approvalline.approvalno = approval.approvalno
+		approvalline.approvalno =
+		approval.approvalno
 
 		WHERE
 
-		approval.approvalcondi > 0
+		approval.approvalcondi <![CDATA[>]]>
+		0
 
 		AND
 
@@ -1166,7 +1247,276 @@
 
 	</select>
 
-	<select id="selectApprNo" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+	<select id="selectApprIng"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		approvalline.approvallineseq,
+		approvalline.approvalno,
+		approvalline.id,
+		approvalline.approvallineposition,
+		approvalline.approvallineorder,
+		approvalline.approvallinesepa,
+		approvalline.approvallineday,
+		approvalline.approvallinetrash,
+		approval.approvalseq,
+		approval.approvalno, approval.id,
+		approval.approvalposition,
+		approval.approvalpaper,
+		approval.approvalday,
+		approval.approvaltitle,
+		approval.approvalupday,
+		approval.approvalcondi, approval.approvaltrash,
+
+		(SELECT
+
+		approvalline.id
+
+		FROM
+
+		approvalline
+
+		WHERE
+
+		approvalline.approvallineday IS NULL
+
+		HAVING
+
+		min(approvalline.approvallineorder)
+
+		) AS
+		name
+
+		FROM
+
+		approvalline
+
+		LEFT
+		JOIN
+
+		approval
+
+		ON
+
+		approvalline.approvalno =
+		approval.approvalno
+
+		WHERE
+
+		approval.approvalcondi <![CDATA[>]]>
+		0
+
+		AND
+
+		approvalline.id =
+		#{id}
+
+		AND
+
+		approvalline.approvallineday IS NOT
+		NULL
+
+	</select>
+	<select id="selectApprOut"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		approvalline.approvallineseq,
+		approvalline.approvalno,
+		approvalline.id,
+		approvalline.approvallineposition,
+		approvalline.approvallineorder,
+		approvalline.approvallinesepa,
+		approvalline.approvallineday,
+		approvalline.approvallinetrash,
+		approval.approvalseq,
+		approval.approvalno, approval.id,
+		approval.approvalposition,
+		approval.approvalpaper,
+		approval.approvalday,
+		approval.approvaltitle,
+		approval.approvalupday,
+		approval.approvalcondi, approval.approvaltrash,
+
+		(SELECT
+
+		approvalline.id
+
+		FROM
+
+		approvalline
+
+		WHERE
+
+		approvalline.approvallinesepa = '반려'
+
+		) AS
+		name
+
+		FROM
+
+		approvalline
+
+		LEFT
+		JOIN
+
+		approval
+
+		ON
+
+		approvalline.approvalno =
+		approval.approvalno
+
+		WHERE
+
+		approval.approvalcondi <![CDATA[<]]>
+		0
+
+		AND
+
+		approvalline.id = #{id}
+
+		AND
+
+		approvalline.approvallineday IS NOT
+		NULL
+
+	</select>
+
+	<select id="selectApprCount"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+
+		(SELECT
+
+		COUNT(approvalline.approvallineseq) AS approvalfootseq
+
+		FROM
+
+		approvalline
+
+		LEFT
+		JOIN
+
+		approval
+
+		ON
+
+		approvalline.approvalno =
+		approval.approvalno
+
+		WHERE
+
+		approval.approvalcondi <![CDATA[>]]>
+		0
+
+		AND
+
+		approvalline.approvallineorder =
+		approval.approvalcondi
+
+		AND
+
+		approvalline.id = #{id}
+
+		AND
+
+		approvalline.approvallineday IS
+		NULL)
+
+		UNION
+
+		(SELECT
+
+		COUNT(approvalline.approvallineseq) AS approvalfootseq
+
+		FROM
+
+		approvalline
+
+		LEFT
+		JOIN
+
+		approval
+
+		ON
+
+		approvalline.approvalno =
+		approval.approvalno
+
+		WHERE
+
+		approval.approvalcondi <![CDATA[>]]>
+		0
+
+		AND
+
+		approvalline.id =
+		#{id}
+
+		AND
+
+		approvalline.approvallineday IS NOT
+		NULL)
+
+	</select>
+	<select id="selectApprEnd"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
+		resultType="com.garam.web.approval.dto.ApprovalDTO">
+
+		SELECT
+
+		approvalline.approvallineseq,
+		approvalline.approvalno, approvalline.id,
+		approvalline.approvallineposition, approvalline.approvallineorder,
+		approvalline.approvallinesepa,
+		approvalline.approvallineday,
+		approvalline.approvallinetrash,
+		approval.approvalseq,
+		approval.approvalno, approval.id AS
+		name,
+		approval.approvalposition,
+		approval.approvalpaper, approval.approvalday,
+		approval.approvaltitle,
+		approval.approvalupday, approval.approvalcondi, approval.approvaltrash
+
+		FROM
+
+		approvalline
+
+		LEFT JOIN
+
+		approval
+
+		ON
+
+		approvalline.approvalno =
+		approval.approvalno
+
+		WHERE
+
+		approval.approvalcondi = 0
+
+		AND
+
+		approvalline.id =
+		#{id}
+
+		AND
+
+		approvalline.approvallineday IS NOT
+		NULL
+
+
+	</select>
+
+	<select id="selectApprNo"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
 		resultType="com.garam.web.approval.dto.ApprovalDTO">
 
 		SELECT
@@ -1188,7 +1538,8 @@
 
 	</select>
 
-	<select id="selectApprLine" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+	<select id="selectApprLine"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
 		resultType="com.garam.web.approval.dto.ApprovalDTO">
 
 		SELECT
@@ -1205,11 +1556,13 @@
 
 		WHERE
 
-		approvalline.approvalno = #{approvalno}
+		approvalline.approvalno =
+		#{approvalno}
 
 	</select>
 
-	<select id="selectApprHelp" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+	<select id="selectApprHelp"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
 		resultType="com.garam.web.approval.dto.ApprovalDTO">
 
 		SELECT
@@ -1226,11 +1579,13 @@
 
 		WHERE
 
-		approvalhelp.approvalno = #{approvalno}
+		approvalhelp.approvalno =
+		#{approvalno}
 
 	</select>
 
-	<select id="selectApprCham" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+	<select id="selectApprCham"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
 		resultType="com.garam.web.approval.dto.ApprovalDTO">
 
 		SELECT
@@ -1247,11 +1602,13 @@
 
 		WHERE
 
-		approvalcham.approvalno = #{approvalno}
+		approvalcham.approvalno =
+		#{approvalno}
 
 	</select>
 
-	<select id="selectApprFoot" parameterType="com.garam.web.approval.dto.ApprovalDTO"
+	<select id="selectApprFoot"
+		parameterType="com.garam.web.approval.dto.ApprovalDTO"
 		resultType="com.garam.web.approval.dto.ApprovalDTO">
 
 		SELECT
@@ -1268,7 +1625,8 @@
 
 		WHERE
 
-		approvalfoot.approvalno = #{approvalno}
+		approvalfoot.approvalno =
+		#{approvalno}
 
 	</select>
 </mapper>

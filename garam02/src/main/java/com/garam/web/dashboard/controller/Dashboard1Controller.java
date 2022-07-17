@@ -160,7 +160,7 @@ public class Dashboard1Controller extends UiUtils {
 		Resource resource = new InputStreamResource(new FileInputStream(file));
 
 		HttpHeaders headers = new HttpHeaders();
-		String fileName = "계약서양식" + ".xls";
+		String fileName = "계약서양식.xls";
 		String fileNameOrg = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileNameOrg).build());

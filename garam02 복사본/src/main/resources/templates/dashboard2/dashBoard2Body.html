@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="main-body2">
+        <header th:replace="dashboard/dashboardMainHead :: main-head"></header>
+        <aside th:replace="dashboard/dashboardMainAside :: main-aside"></aside>
+        <main class="main">
+            <div class="tab-pane" role="tabpanel">
+                <div class="dd-main-nav">
+                    <div th:replace="dashboard/dashboardMainDay :: main-day"></div>
+                </div>
+                <!-- Tab panes -->
+                <div class="tab-content tab-cont">
+                    <div
+                        th:insert="dashboard2/mainHome4 :: main-home4"
+                        class="tab-pane fade show active"
+                        id="home4"
+                        role="tabpanel"
+                        aria-labelledby="pills-home4-tab"></div>
+                </div>
+            </div>
+        </main>
+        <div th:replace="dashboard/dashboardBottom :: main-bottom"></div>
+        <div th:replace="openTemplates/modaNewRsvt :: mainNewrsvt"></div>
+        <div th:replace="openTemplates/modalSetting :: mdSetting"></div>
+        <div th:replace="openTemplates/modalCustomer :: modalCust"></div>
+        <div th:replace="openTemplates/modalCustomerUp :: modalCustUp"></div>
+        <div th:replace="openTemplates/modalRsvt :: modalRsvt"></div>
+        <div th:replace="openTemplates/vehicleInsuContMD :: ve-MD-insuCont"></div>
+        <div th:replace="openTemplates/vehicleLoanContMD :: ve-MD-loanCont"></div>
+        <div th:replace="dashboard/modalSche :: modalSche"></div>
+        <div th:replace="openTemplates/dataVeEmp :: dataVeEmp"></div>
+
+        <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+        <th:block th:replace="dashboard/dashlinkGroupScript :: dashLinkScript"></th:block>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/openTemplates/vehicleInsuContMD.js?v=2020051201"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/openTemplates/vehicleloanContMD.js?v=2020051201"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/dashboard/modalSche.js?v=2020051201"></script>
+    </body>
+</html>

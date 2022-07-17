@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="modalOne"
+        class="modal fade"
+        id="modal-one"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" id="mdOneHCton" value="">
+                    <input type="hidden" id="mdOneHRsvt" value="">
+                    <input type="hidden" id="mdOneHOper" value="">
+                    <input type="hidden" id="mdOneHDay" value="">
+                    <input type="hidden" id="mdOneHEdDay" value="">
+                    <input type="hidden" id="mdOneHNum" value="">
+                    <h3 class="modal-title" id="">상세배차정보</h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="modal-oneX2"></button>
+                </div>
+                <div class="modal-body md-one-bdc" id="md-one-bd">
+                    <table class="table">
+                        <colgroup>
+                            <col width="15%"/>
+                            <col width="25%"/>
+                            <col width="25%"/>
+                            <col width="25%"/>
+                            <col width="10%"/>
+                        </colgroup>
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>차량번호</th>
+                                <th>승무원</th>
+                                <th>배차금액</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="mdOneTr1">
+                                <th>
+                                    <input type="hidden" value="" id="mdOneTd1" name="mdone1">
+                                    <div id="mdOneTd2" name="mdone2">1</div>
+                                </th>
+                                <th>
+                                    <input type="hidden" class="form-control input-ent" id="mdOneTd3" name="mdone3">
+                                    <div>0000</div>
+                                </th>
+                                <th>
+                                    <select class="form-select input-ent" id="mdOneTd4" name="mdone4">
+                                        <option th:each="emp : ${emp}" th:value="${emp.id}" th:label="${emp.name}"></option>
+                                        <option
+                                            th:each="othercompa : ${othercompa}"
+                                            th:value="${othercompa.ctmname}"
+                                            th:label="${othercompa.ctmname}"
+                                            th:data-value="${othercompa.ctmname}"
+                                            th:data-owner="${othercompa.ctmname}"
+                                            th:data-id="${othercompa.ctmname}"></option>
+                                    </select>
+                                </th>
+                                <th>
+                                    <input
+                                        type="text"
+                                        class="form-control input-ent"
+                                        data-type="currency"
+                                        id="mdOneTd5"
+                                        name="mdone5">
+                                </th>
+                                <th></th>
+                            </tr>
+                            <tr id="mdOneTr2" style="display: none;">
+                                <td>
+                                    <input type="hidden" value="" id="mdOneTd21" name="mdone1">
+                                    <div id="mdOneTd22" name="mdone2">2</div>
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        class="form-control input-ent"
+                                        id="mdOneTd23"
+                                        list="car-info"
+                                        name="mdone3">
+                                </td>
+                                <td>
+                                    <select class="form-select input-ent" id="mdOneTd24" name="mdone4">
+                                        <option value="" label=""></option>
+                                        <option th:each="emp : ${emp}" th:value="${emp.id}" th:label="${emp.name}"></option>
+                                        <option
+                                            th:each="othercompa : ${othercompa}"
+                                            th:value="${othercompa.ctmname}"
+                                            th:label="${othercompa.ctmname}"
+                                            th:data-value="${othercompa.ctmname}"
+                                            th:data-owner="${othercompa.ctmname}"
+                                            th:data-id="${othercompa.ctmname}"></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        class="form-control input-ent"
+                                        data-type="currency"
+                                        id="mdOneTd25"
+                                        name="mdone5">
+                                </td>
+                                <td id="mdOneTrDel2">
+                                    <a class="mdOneDel1">
+                                        <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr id="mdOneTr3" style="display: none;">
+                                <td>
+                                    <input type="hidden" value="" id="mdOneTd31" name="mdone1">
+                                    <div id="mdOneTd32" name="mdone2">3</div>
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        class="form-control input-ent"
+                                        list="car-info"
+                                        id="mdOneTd33"
+                                        name="mdone3">
+                                </td>
+                                <td>
+                                    <select class="form-select input-ent" id="mdOneTd34" name="mdone4">
+                                        <option value="" label=""></option>
+                                        <option th:each="emp : ${emp}" th:value="${emp.id}" th:label="${emp.name}"></option>
+                                        <option
+                                            th:each="othercompa : ${othercompa}"
+                                            th:value="${othercompa.ctmname}"
+                                            th:label="${othercompa.ctmname}"
+                                            th:data-value="${othercompa.ctmname}"
+                                            th:data-owner="${othercompa.ctmname}"
+                                            th:data-id="${othercompa.ctmname}"></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        class="form-control input-ent"
+                                        data-type="currency"
+                                        id="mdOneTd35"
+                                        name="mdone5">
+                                </td>
+                                <td id="mdOneTrDel3">
+                                    <a class="mdOneDel2">
+                                        <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr id="mdOneTr4" style="display: none;">
+                                <td>
+                                    <input type="hidden" value="" id="mdOneTd41" name="mdone1">
+                                    <div id="mdOneTd42" name="mdone2">4</div>
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        class="form-control input-ent"
+                                        list="car-info"
+                                        id="mdOneTd43"
+                                        name="mdone3">
+                                </td>
+                                <td>
+                                    <select class="form-select input-ent" id="mdOneTd44" name="mdone4">
+                                        <option value="" label=""></option>
+                                        <option th:each="emp : ${emp}" th:value="${emp.id}" th:label="${emp.name}"></option>
+                                        <option
+                                            th:each="othercompa : ${othercompa}"
+                                            th:value="${othercompa.ctmname}"
+                                            th:label="${othercompa.ctmname}"
+                                            th:data-value="${othercompa.ctmname}"
+                                            th:data-owner="${othercompa.ctmname}"
+                                            th:data-id="${othercompa.ctmname}"></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        class="form-control input-ent"
+                                        data-type="currency"
+                                        id="mdOneTd45"
+                                        name="mdone5">
+                                </td>
+                                <td id="mdOneTrDel4">
+                                    <a class="mdOneDel3">
+                                        <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr id="mdOneTr5" style="display: none;">
+                                <td>
+                                    <input type="hidden" value="" id="mdOneTd51" name="mdone1">
+                                    <div id="mdOneTd52" name="mdone2">5</div>
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        class="form-control input-ent"
+                                        list="car-info"
+                                        id="mdOneTd53"
+                                        name="mdone3">
+                                </td>
+                                <td>
+                                    <select class="form-select input-ent" id="mdOneTd54" name="mdone4">
+                                        <option value="" label=""></option>
+                                        <option th:each="emp : ${emp}" th:value="${emp.id}" th:label="${emp.name}"></option>
+                                        <option
+                                            th:each="othercompa : ${othercompa}"
+                                            th:value="${othercompa.ctmname}"
+                                            th:label="${othercompa.ctmname}"
+                                            th:data-value="${othercompa.ctmname}"
+                                            th:data-owner="${othercompa.ctmname}"
+                                            th:data-id="${othercompa.ctmname}"></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        class="form-control input-ent"
+                                        data-type="currency"
+                                        id="mdOneTd55"
+                                        name="mdone5">
+                                </td>
+                                <td id="mdOneTrDel5">
+                                    <a class="mdOneDel4">
+                                        <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        id="modal-oneEnd2">닫기</button>
+                    <button type="button" class="btn btn-primary" id="btn-one-plus2">운행추가</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

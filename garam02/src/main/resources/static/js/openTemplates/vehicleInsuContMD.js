@@ -653,7 +653,9 @@ $(document).on('click', '#insuCont-del', function () {
                         if (r > 0) {
                             alert("보험정보 삭제");
                             $('#modal-insuCont').modal('hide');
-                            makeInsu();
+                            if (makeInsu()) {
+                                makeInsu();
+                            }
                             resolve();
                         } else if (r == 0) {
                             alert("보험정보 삭제 실패!\n\n시스템을 확인해주세요.")

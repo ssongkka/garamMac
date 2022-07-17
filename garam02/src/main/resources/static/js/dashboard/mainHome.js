@@ -1,13 +1,8 @@
 $(document).ready(function () {
     // if ($('#pills-home-tab').attr('class').includes('active')) {
-    //     $('#home1Cal').show();
-    //     $('#home4Cal').hide();
-    // }
-
-    // if ($('#pills-home4-tab').attr('class').includes('active')) {
-    //     $('#home1Cal').hide();
-    //     $('#home4Cal').show();
-    // }
+    // $('#home1Cal').show();     $('#home4Cal').hide(); } if
+    // ($('#pills-home4-tab').attr('class').includes('active')) {
+    // $('#home1Cal').hide();     $('#home4Cal').show(); }
 
 });
 
@@ -1100,26 +1095,13 @@ function getTdSize(params) {
 
 }
 
-$(document).ready(function () {
-    $(".mainCalTable tbody tr td .mainCaltd-top .mainCaltd-top-hol").mouseover(
-        function () {
-            $(this)
-                .parent()
-                .parent()
-                .parent()
-                .addClass('tdHovers');
-        }
-    );
-    $(".mainCalTable tbody tr td .mainCaltd-top .mainCaltd-top-hol").mouseout(
-        function () {
-            $(this)
-                .parent()
-                .parent()
-                .parent()
-                .removeClass('tdHovers');
-        }
-    );
-});
+// $(document).ready(function () {     $(".mainCalTable tbody tr td
+// .mainCaltd-top .mainCaltd-top-hol").mouseover(         function () { $(this)
+// .parent()                 .parent() .parent()
+// .addClass('tdHovers');         }     ); $(".mainCalTable tbody tr td
+// .mainCaltd-top .mainCaltd-top-hol").mouseout( function () {
+// $(this)                 .parent() .parent()                 .parent()
+// .removeClass('tdHovers'); }     ); });
 
 $(document).ready(function () {
     $(".mainCalTable tbody tr td .mainCaltd-top .mainCaltd-top-day").mouseover(
@@ -1142,20 +1124,11 @@ $(document).ready(function () {
     );
 });
 
-$(document).on('click', '.mainCaltd-top-hol', function () {
-    const aaa = $(this)
-        .parent()
-        .next();
-
-    const getidd = $(aaa).attr('id');
-    const getidd1 = getidd.split('calMid');
-
-    const realNum = getidd1[1];
-
-    const iiddddd = 'dash-cal-con-item' + realNum;
-
-    setCalWhite(iiddddd, 1);
-});
+// $(document).on('click', '.mainCaltd-top-hol', function () {     const aaa =
+// $(this)         .parent()         .next();     const getidd =
+// $(aaa).attr('id');     const getidd1 = getidd.split('calMid');     const
+// realNum = getidd1[1];     const iiddddd = 'dash-cal-con-item' + realNum;
+// setCalWhite(iiddddd, 1); });
 $(document).on('click', '.mainCaltd-top-day', function () {
     const aaa = $(this)
         .parent()
@@ -1543,8 +1516,8 @@ function makeHtmlsMenu(r, operday, cho) {
                     }
 
                     if (r[i].ctmno == '0') {
-                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car input-ent" l' +
-                                'ist="car-info" tabindex="' + (
+                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car in' +
+                                'put-ent" list="car-info" tabindex="' + (
                             tbi
                         ) + '" placeholder="' + (
                             k + 1
@@ -1552,8 +1525,8 @@ function makeHtmlsMenu(r, operday, cho) {
                                 '.3rem;" disabled="disabled" data-bs-toggle="tooltip" data-bs-placement="top" t' +
                                 'itle="고객정보입력 후 배차해주세요.">';
                     } else {
-                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car input-ent" l' +
-                                'ist="car-info" tabindex="' + (
+                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car in' +
+                                'put-ent" list="car-info" tabindex="' + (
                             tbi
                         ) + '" placeholder="' + (
                             k + 1
@@ -1563,26 +1536,24 @@ function makeHtmlsMenu(r, operday, cho) {
                     htmls += '<input type="hidden" id="" value="0">';
                     htmls += '<input type="hidden" id="" value="0">';
                     if (r[i].ctmno == '0') {
-                        htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="' + cnt + 'empRsvtOpe' +
-                                'r" list="per-info" tabindex="-1" placeholder="승무원" disabled="disabled" data-bs' +
-                                '-toggle="tooltip" data-bs-placement="top" title="고객정보입력 후 배차해주세요.">';
+                        htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="' + cnt + 'empRsvtOper" list="per-info" tabindex="-1" placeholder="승무원" disabled="disable' +
+                                'd" data-bs-toggle="tooltip" data-bs-placement="top" title="고객정보입력 후 배차해주세요.">';
                     } else {
-                        htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="' + cnt + 'empRsvtOpe' +
-                                'r" list="per-info" tabindex="-1" placeholder="승무원">';
+                        htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="' + cnt + 'empRsvtOper" list="per-info" tabindex="-1" placeholder="승무원">';
                     }
                     htmls += '<input type="hidden" id="" value="0">';
 
                     if (r[i].ctmno == '0') {
-                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m input-ent" id=' +
-                                '"' + cnt +
-                                'mRsvtOper" onfocus="this.select()" data-type="currency" tabindex="' + (
+                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m inpu' +
+                                't-ent" id="' + cnt + 'mRsvtOper" onfocus="this.select()" data-type="currency" ' +
+                                'tabindex="' + (
                             tbii
                         ) + '" placeholder="배차금액" disabled="disabled" data-bs-toggle="tooltip" data-bs-' +
                                 'placement="top" title="고객정보입력 후 배차해주세요.">';
                     } else {
-                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m input-ent" id=' +
-                                '"' + cnt +
-                                'mRsvtOper" onfocus="this.select()" data-type="currency" tabindex="' + (
+                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m inpu' +
+                                't-ent" id="' + cnt + 'mRsvtOper" onfocus="this.select()" data-type="currency" ' +
+                                'tabindex="' + (
                             tbii
                         ) + '" placeholder="배차금액">';
                     }
@@ -2183,8 +2154,8 @@ function makeHtmlsSuk(r, cho) {
                             '능하지 않습니다."><i class="fas fa-ban"></i></button>';
 
                     if (r[i].ctmno == '0') {
-                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car input-ent" l' +
-                                'ist="car-info" tabindex="' + (
+                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car in' +
+                                'put-ent" list="car-info" tabindex="' + (
                             tbi
                         ) + '" placeholder="' + (
                             k + 1
@@ -2192,8 +2163,8 @@ function makeHtmlsSuk(r, cho) {
                                 '.3rem;" disabled="disabled" data-bs-toggle="tooltip" data-bs-placement="top" t' +
                                 'itle="고객정보입력 후 배차해주세요.">';
                     } else {
-                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car input-ent" l' +
-                                'ist="car-info" tabindex="' + (
+                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car in' +
+                                'put-ent" list="car-info" tabindex="' + (
                             tbi
                         ) + '" placeholder="' + (
                             k + 1
@@ -2203,26 +2174,24 @@ function makeHtmlsSuk(r, cho) {
                     htmls += '<input type="hidden" id="" value="0">';
                     htmls += '<input type="hidden" id="" value="0">';
                     if (r[i].ctmno == '0') {
-                        htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="' + cnt + 'empRsvtOpe' +
-                                'r" list="per-info" tabindex="-1" placeholder="승무원" disabled="disabled" data-bs' +
-                                '-toggle="tooltip" data-bs-placement="top" title="고객정보입력 후 배차해주세요.">';
+                        htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="' + cnt + 'empRsvtOper" list="per-info" tabindex="-1" placeholder="승무원" disabled="disable' +
+                                'd" data-bs-toggle="tooltip" data-bs-placement="top" title="고객정보입력 후 배차해주세요.">';
                     } else {
-                        htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="' + cnt + 'empRsvtOpe' +
-                                'r" list="per-info" tabindex="-1" placeholder="승무원">';
+                        htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="' + cnt + 'empRsvtOper" list="per-info" tabindex="-1" placeholder="승무원">';
                     }
                     htmls += '<input type="hidden" id="" value="0">';
 
                     if (r[i].ctmno == '0') {
-                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m input-ent" id=' +
-                                '"' + cnt +
-                                'mRsvtOper" onfocus="this.select()" data-type="currency" tabindex="' + (
+                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m inpu' +
+                                't-ent" id="' + cnt + 'mRsvtOper" onfocus="this.select()" data-type="currency" ' +
+                                'tabindex="' + (
                             tbii
                         ) + '" placeholder="배차금액" disabled="disabled" data-bs-toggle="tooltip" data-bs-' +
                                 'placement="top" title="고객정보입력 후 배차해주세요.">';
                     } else {
-                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m input-ent" id=' +
-                                '"' + cnt +
-                                'mRsvtOper" onfocus="this.select()" data-type="currency" tabindex="' + (
+                        htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m inpu' +
+                                't-ent" id="' + cnt + 'mRsvtOper" onfocus="this.select()" data-type="currency" ' +
+                                'tabindex="' + (
                             tbii
                         ) + '" placeholder="배차금액">';
                     }
@@ -2896,8 +2865,8 @@ function makeHtmlsIl(ctmnono, day, cho) {
                             }
 
                             if (r[i].ctmno == '0') {
-                                htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car input-ent" l' +
-                                        'ist="car-info" tabindex="' + (
+                                htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car in' +
+                                        'put-ent" list="car-info" tabindex="' + (
                                     tbi
                                 ) + '" placeholder="' + (
                                     k + 1
@@ -2905,8 +2874,8 @@ function makeHtmlsIl(ctmnono, day, cho) {
                                         '0.3rem;" disabled="disabled" data-bs-toggle="tooltip" data-bs-placement="top" ' +
                                         'title="고객정보입력 후 배차해주세요.">';
                             } else {
-                                htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car input-ent" l' +
-                                        'ist="car-info" tabindex="' + (
+                                htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-car in' +
+                                        'put-ent" list="car-info" tabindex="' + (
                                     tbi
                                 ) + '" placeholder="' + (
                                     k + 1
@@ -2916,26 +2885,26 @@ function makeHtmlsIl(ctmnono, day, cho) {
                             htmls += '<input type="hidden" id="" value="0">';
                             htmls += '<input type="hidden" id="" value="0">';
                             if (r[i].ctmno == '0') {
-                                htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="RsvtOper' + cnt + 'em' +
-                                        'p" list="per-info" tabindex="-1" placeholder="승무원" disabled="disabled" data-bs' +
-                                        '-toggle="tooltip" data-bs-placement="top" title="고객정보입력 후 배차해주세요.">';
+                                htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="RsvtOper' +
+                                        cnt + 'emp" list="per-info" tabindex="-1" placeholder="승무원" disabled="disabled"' +
+                                        ' data-bs-toggle="tooltip" data-bs-placement="top" title="고객정보입력 후 배차해주세요.">';
                             } else {
-                                htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="RsvtOper' + cnt + 'em' +
-                                        'p" list="per-info" tabindex="-1" placeholder="승무원">';
+                                htmls += '<input autocomplete="off" type="text" class="ve-emp input-ent" id="RsvtOper' +
+                                        cnt + 'emp" list="per-info" tabindex="-1" placeholder="승무원">';
                             }
                             htmls += '<input type="hidden" id="" value="0">';
 
                             if (r[i].ctmno == '0') {
-                                htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m input-ent" id=' +
-                                        '"' + cnt +
-                                        'mRsvtOper" onfocus="this.select()" data-type="currency" tabindex="' + (
+                                htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m inpu' +
+                                        't-ent" id="' + cnt + 'mRsvtOper" onfocus="this.select()" data-type="currency" ' +
+                                        'tabindex="' + (
                                     tbii
                                 ) + '" placeholder="배차금액" disabled="disabled" data-bs-toggle="tooltip" data-bs-' +
                                         'placement="top" title="고객정보입력 후 배차해주세요.">';
                             } else {
-                                htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m input-ent" id=' +
-                                        '"' + cnt +
-                                        'mRsvtOper" onfocus="this.select()" data-type="currency" tabindex="' + (
+                                htmls += '<input onfocus="this.select()" autocomplete="off" type="text" class="ve-m inpu' +
+                                        't-ent" id="' + cnt + 'mRsvtOper" onfocus="this.select()" data-type="currency" ' +
+                                        'tabindex="' + (
                                     tbii
                                 ) + '" placeholder="배차금액">';
                             }

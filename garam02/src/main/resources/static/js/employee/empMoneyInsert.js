@@ -1259,7 +1259,7 @@ function saveSalary(sepa) {
                 "opermoney": opermoney,
                 "inm": inm,
                 "outm": outm,
-                "empin": user.id
+                "empin": dbuser.id
             };
             $.ajax({
                 url: url,

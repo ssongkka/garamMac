@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:fragment="main-home2" class="main-home">
+        <div class="home-main">
+            <div class="home-main-item-4">
+                <div class="card-song">
+                    <div th:replace="dashboard/dashboardMainHeadCal :: main-headCal"></div>
+                </div>
+                <div class="tab-pane card-song home-tap" role="tabpanel">
+                    <div class="home-main-item-444">
+                        <div class="home2-item1">
+                            <div class="form-check form-check-inline">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    id="radioRsvt1"
+                                    name="radioRsvt"
+                                    checked="checked">
+                                <label class="form-check-label" for="radioRsvt1">일별 예약 정보</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="radioRsvt2" name="radioRsvt">
+                                <label class="form-check-label" for="radioRsvt2">월별 예약 정보</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="radioRsvt3" name="radioRsvt">
+                                <label class="form-check-label" for="radioRsvt3">예약 검색</label>
+                            </div>
+                        </div>
+                        <div class="home2-item2">
+                            <div class="home2-search0">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="searchChRsvt"
+                                        checked="checked">
+                                    <label class="form-check-label" for="searchChRsvt">
+                                        전체
+                                    </label>
+                                </div>
+                                <div class="home2-peri">
+                                    <input type="date" class="form-control" id="searchPeStRsvt">
+                                    <span>~</span>
+                                    <input type="date" class="form-control" id="searchPeEdRsvt">
+                                </div>
+                            </div>
+                            <div class="home2-search1">
+                                <select class="form-select" id="searchSepaRsvt">
+                                    <option value="0">고객명</option>
+                                    <option value="1">출발일</option>
+                                    <option value="2">목적지</option>
+                                    <option value="3">출발지</option>
+                                </select>
+                            </div>
+                            <div class="home2-search2">
+                                <div class="home2-searchText">
+                                    <input
+                                        type="text"
+                                        class="form-control searchText input-ent"
+                                        id="searchTextRsvt">
+                                    <button class="btn btn-primary searIconRsvt">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                                <div class="home2-searchDate">
+                                    <input
+                                        type="date"
+                                        class="form-control searchDate input-ent"
+                                        id="searchDateRsvt">
+                                    <button class="btn btn-primary searIconRsvt">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="table-scroll">
+                            <div class="table-scroll-head">
+                                <div class="scBar">
+                                    <table class="table table-striped table-hover table-bordered home-tb">
+                                        <colgroup>
+                                            <col width="8%"/>
+                                            <col width="8%"/>
+                                            <col width="13%"/>
+                                            <col width="13%"/>
+                                            <col width="5%"/>
+                                            <col width="5%"/>
+                                            <col width="6%"/>
+                                            <col width="8%"/>
+                                            <col width="8%"/>
+                                            <col width="8%"/>
+                                            <col width="13%"/>
+                                            <col width="5%"/>
+                                        </colgroup>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="sortNum">출발일</th>
+                                                <th class="sortStr">도착일</th>
+                                                <th class="sortStr">고객정보</th>
+                                                <th class="sortStr">목적지</th>
+                                                <th class="sortStr">차량</th>
+                                                <th class="sortNum">대수</th>
+                                                <th class="sortStr">부가세</th>
+                                                <th class="sortNum">계약금액</th>
+                                                <th class="sortNum">대당금액</th>
+                                                <th class="sortNum">미수금</th>
+                                                <th class="sortStr">출발장소</th>
+                                                <th class="sortNum">출발시간</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="table-scroll-body-rsvt scBar">
+                                <table class="table table-striped table-hover table-bordered home-tb">
+                                    <colgroup>
+                                        <col width="8%"/>
+                                        <col width="8%"/>
+                                        <col width="13%"/>
+                                        <col width="13%"/>
+                                        <col width="5%"/>
+                                        <col width="5%"/>
+                                        <col width="6%"/>
+                                        <col width="8%"/>
+                                        <col width="8%"/>
+                                        <col width="8%"/>
+                                        <col width="13%"/>
+                                        <col width="5%"/>
+                                    </colgroup>
+                                    <tbody id="home2-tb-il"></tbody>
+                                </table>
+                            </div>
+                            <div class="table-scroll-head">
+                                <div class="scBar">
+                                    <div class="table-scroll-head">
+                                        <table class="table table-striped table-hover table-bordered home-tb">
+                                            <colgroup>
+                                                <col width="8%"/>
+                                                <col width="8%"/>
+                                                <col width="13%"/>
+                                                <col width="13%"/>
+                                                <col width="5%"/>
+                                                <col width="5%"/>
+                                                <col width="6%"/>
+                                                <col width="8%"/>
+                                                <col width="8%"/>
+                                                <col width="8%"/>
+                                                <col width="13%"/>
+                                                <col width="5%"/>
+                                            </colgroup>
+                                            <caption>
+                                                <span>1.대당금액은 부가세, 카드 수수료를 제외한 입니다.</span>
+                                                <span>2. 데이터양이 많으면 성능이 저하될 수 있습니다. 검색기능을 이용해주세요.</span>
+                                            </caption>
+                                            <tfoot id="home2-tf-il"></tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="allo-side scBar">
+            <div class="home2Main">
+                <h4 id="home2Tile"></h4>
+                <table class="table table-hover table-bordered table-sm">
+                    <colgroup>
+                        <col width="35%">
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="20%">
+                    </colgroup>
+                    <thead class="table-light">
+                        <tr>
+                            <th>날짜</th>
+                            <th>대형</th>
+                            <th>우등</th>
+                            <th>중형</th>
+                            <th>총</th>
+                        </tr>
+                    </thead>
+                    <tbody id="home2AsideTb"></tbody>
+                    <tbody id="home2AsideTf"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</html>

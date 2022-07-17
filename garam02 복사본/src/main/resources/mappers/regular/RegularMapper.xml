@@ -1,0 +1,807 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.garam.web.regular.mapper.RegularMapper">
+
+	<sql id="regularColumns">
+		regseq, ctmno, conum, regstartd, regendd, regcompany,
+		regaddress, regperson, regphone, regcontract,
+		regmoney,
+		regmemo,
+		regtrash
+	</sql>
+
+	<select id="selctRegular" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+		SELECT
+
+		regular.*,
+		COUNT(regulardetail.conum) AS fax
+
+		FROM
+
+		regular
+
+		LEFT JOIN
+
+		regulardetail
+
+		ON
+
+		regulardetail.conum =
+		regular.conum
+
+		<where>
+			regulardetail.rdtrash IS NULL
+
+			OR
+
+			regulardetail.rdtrash = 1
+			
+			<if test="regcompany != null">OR regcompany Like CONCAT('%',#{regcompany},'%') </if>
+		</where>
+
+		GROUP BY
+		regular.conum
+
+		ORDER BY
+		regular.regcompany
+
+	</select>
+
+	<select id="selctRegularInfo" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+		SELECT
+
+		*
+
+		FROM
+
+		regular
+
+		LEFT JOIN
+
+		customer
+
+		ON
+
+		regular.ctmno =
+		customer.ctmno
+
+		WHERE
+
+		conum = #{conum}
+	</select>
+
+	<select id="selectRegulardetail" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+
+		SELECT
+
+		rdseq, conum, codenum, rdname, rdbus, opercar,
+		rdmoney, rdaltm, rddow, rdmemo, rdtrash, rdconn,
+		rdnum,
+
+		IFNULL((SELECT
+		employeeinfo.name FROM
+		employeeinfo WHERE
+		employeeinfo.id
+		=
+		(SELECT id
+		FROM vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		regulardetail.opercar)),
+		regulardetail.opercar)
+		AS idname,
+
+		IFNULL((SELECT
+		employeeinfo.id FROM
+		employeeinfo WHERE
+		employeeinfo.id
+		=
+		(SELECT id
+		FROM vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		regulardetail.opercar)),
+		regulardetail.opercar)
+		AS idid,
+
+		IFNULL((SELECT
+		employeeinfo.phone1 FROM
+		employeeinfo WHERE
+		employeeinfo.id =
+		(SELECT id FROM
+		vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		regulardetail.opercar)),
+		regulardetail.opercar)
+		AS idphone1,
+
+		IFNULL((SELECT
+		vehicleinfo.vehicle FROM
+		vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		regulardetail.opercar),
+		regulardetail.opercar) AS
+		idvehicle,
+
+		IFNULL((SELECT
+		vehicleinfo.owner FROM
+		vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		regulardetail.opercar),
+		regulardetail.opercar) AS
+		idcompa
+
+		FROM
+
+		regulardetail
+
+		WHERE
+
+		conum = #{conum}
+
+		ORDER BY rdnum
+
+	</select>
+
+	<select id="selectRegulardetailInfo" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+
+		SELECT
+
+		rdseq, conum, codenum, rdname, rdbus, opercar,
+		rdmoney, rdaltm, rddow, rdmemo, rdtrash, rdconn,
+		rdnum,
+
+		IFNULL((SELECT
+		employeeinfo.name FROM
+		employeeinfo WHERE
+		employeeinfo.id
+		=
+		(SELECT id
+		FROM vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		regulardetail.opercar)),
+		regulardetail.opercar)
+		AS idname,
+
+		IFNULL((SELECT
+		employeeinfo.id FROM
+		employeeinfo WHERE
+		employeeinfo.id
+		=
+		(SELECT id
+		FROM vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		regulardetail.opercar)),
+		regulardetail.opercar)
+		AS idid,
+
+		IFNULL((SELECT
+		employeeinfo.phone1 FROM
+		employeeinfo WHERE
+		employeeinfo.id =
+		(SELECT id FROM
+		vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		regulardetail.opercar)),
+		regulardetail.opercar)
+		AS idphone1,
+
+		IFNULL((SELECT
+		vehicleinfo.vehicle FROM
+		vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		regulardetail.opercar),
+		regulardetail.opercar) AS
+		idvehicle,
+
+		IFNULL((SELECT
+		vehicleinfo.owner FROM
+		vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		regulardetail.opercar),
+		regulardetail.opercar) AS
+		idcompa
+
+		FROM
+
+		regulardetail
+
+		WHERE
+
+		codenum = #{codenum}
+
+		ORDER BY rdnum
+
+	</select>
+
+	<select id="selectRegularcourse" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		regularcourse
+
+		WHERE
+
+		codenum = #{codenum}
+
+		ORDER BY
+		rcnum, rct, goutnum
+	</select>
+
+	<select id="selectRegularcourseAllo" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		regularcourse
+
+		LEFT JOIN
+
+		regulardetail
+
+		ON
+
+		regulardetail.codenum =
+		regularcourse.codenum
+
+		WHERE
+
+		regularcourse.conum =
+		#{conum}
+
+		AND
+
+		regulardetail.rdtrash = 1
+
+		AND
+
+		regularcourse.rctrash = 1
+
+		GROUP
+		BY
+
+		regularcourse.goutnum,
+		regularcourse.codenum
+
+		ORDER BY
+
+		regularcourse.codenum, regularcourse.goutnum
+	</select>
+
+	<select id="selectRegOperList1" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+
+		SELECT
+
+		operation_reg.*,
+
+		IFNULL((SELECT
+		vehicleinfo.vehicle
+		FROM
+		vehicleinfo WHERE
+		vehicleinfo.carnumber
+		=
+		operation_reg.regopercar),
+		operation_reg.regopercar) AS
+		idvehicle
+
+
+		FROM
+
+		operation_reg
+
+		WHERE
+
+		operation_reg.conum =
+		#{conum}
+
+		AND
+
+		operation_reg.regoperday BETWEEN
+		#{regstartd} AND
+		#{regendd}
+
+
+	</select>
+
+	<select id="selectRegOperDe" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		operation_reg
+
+		WHERE
+
+		operation_reg.codenum =
+		#{codenum}
+
+		AND
+
+		operation_reg.regoperday = #{regoperday}
+	</select>
+
+	<select id="selectRegularcourseDeAllo" parameterType="com.garam.web.regular.dto.RegularDTO"
+		resultType="com.garam.web.regular.dto.RegularDTO">
+
+		SELECT
+
+		*
+
+		FROM
+
+		regularcourse
+
+		WHERE
+
+		codenum = #{codenum}
+
+		GROUP BY
+		regularcourse.goutnum
+
+		ORDER BY
+		rct, goutnum, rcnum
+
+	</select>
+
+
+	<insert id="insertRegular" parameterType="com.garam.web.regular.dto.RegularDTO">
+
+		INSERT
+
+		INTO
+
+		regular
+
+		VALUES
+
+		(
+		null,
+		#{ctmno},
+		#{conum},
+		#{regstartd},
+		#{regendd},
+		#{regcompany},
+		#{regaddress},
+		#{regperson},
+		#{regphone},
+		#{regcontract},
+		#{regmoney},
+		#{regmemo},
+		1,
+		null
+		)
+
+	</insert>
+
+	<insert id="insertRegulardetail" parameterType="com.garam.web.regular.dto.RegularDTO">
+
+		INSERT
+
+		INTO
+
+		regulardetail
+
+		VALUES
+
+		(
+		null,
+		#{conum},
+		#{codenum},
+		100,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		1
+		);
+
+		INSERT
+
+		INTO
+
+		regularcourse
+
+		VALUES
+
+		(
+		null,
+		#{conum},
+		#{codenum},
+		#{idname},
+		1,
+		1,
+		0,
+		'07:00',
+		null,
+		'출근출발',
+		1
+		);
+
+		INSERT
+
+		INTO
+
+		regularcourse
+
+		VALUES
+
+		(
+		null,
+		#{conum},
+		#{codenum},
+		#{idphone1},
+		1,
+		1,
+		50,
+		'09:00',
+		null,
+		'도착',
+		1
+		);
+
+		INSERT
+
+		INTO
+
+		regularcourse
+
+		VALUES
+
+		(
+		null,
+		#{conum},
+		#{codenum},
+		#{idvehicle},
+		2,
+		2,
+		100,
+		'18:00',
+		null,
+		'퇴근출발',
+		1
+		);
+	</insert>
+
+	<insert id="insertRegulardetailGO" parameterType="com.garam.web.regular.dto.RegularDTO">
+		INSERT
+
+		INTO
+
+		regularcourse
+
+		VALUES
+
+		(
+		null,
+		#{conum},
+		#{codenum},
+		#{idname},
+		#{goutnum},
+		1,
+		0,
+		'07:00',
+		null,
+		'출근출발',
+		1
+		);
+
+		INSERT
+
+		INTO
+
+		regularcourse
+
+		VALUES
+
+		(
+		null,
+		#{conum},
+		#{codenum},
+		#{idphone1},
+		#{goutnum},
+		1,
+		50,
+		'09:00',
+		null,
+		'도착',
+		1
+		);
+	</insert>
+
+	<insert id="insertRegulardetailOUT" parameterType="com.garam.web.regular.dto.RegularDTO">
+		INSERT
+
+		INTO
+
+		regularcourse
+
+		VALUES
+
+		(
+		null,
+		#{conum},
+		#{codenum},
+		#{idname},
+		#{goutnum},
+		2,
+		100,
+		'18:00',
+		null,
+		'퇴근출발',
+		1
+		);
+	</insert>
+
+	<insert id="insertRegularCoo" parameterType="com.garam.web.regular.dto.RegularDTO">
+		INSERT
+
+		INTO
+
+		regularcourse
+
+		VALUES
+
+		(
+		null,
+		#{conum},
+		#{codenum},
+		#{coconum},
+		#{goutnum},
+		#{rcsepa},
+		#{rcnum},
+		#{rct},
+		'',
+		'',
+		1
+		);
+	</insert>
+
+	<insert id="insertRegOperAllo" parameterType="java.util.HashMap">
+
+		INSERT
+
+		INTO
+
+		operation_reg
+
+		VALUES
+		<foreach collection="allo" item="value" separator=",">
+			(
+			null,
+			#{value.regopernum},
+			#{value.conum},
+			#{value.codenum},
+			#{value.regoperday},
+			#{value.regoperno},
+			#{value.regopercom},
+			#{value.regopercar},
+			#{value.regoperid},
+			0,
+			#{value.regorcar},
+			#{value.regoperconfirm},
+			1
+			)
+		</foreach>
+	</insert>
+
+	<update id="updateRegular" parameterType="com.garam.web.regular.dto.RegularDTO">
+
+		UPDATE
+
+		regular
+
+		SET
+
+		<if test="regstartd != null">regstartd = #{regstartd},</if>
+		<if test="regcompany != null">regcompany = #{regcompany},</if>
+		<if test="regaddress != null">regaddress = #{regaddress},</if>
+		<if test="regperson != null">regperson = #{regperson},</if>
+		<if test="regphone != null">regphone = #{regphone},</if>
+		<if test="regcontract != null">regcontract = #{regcontract},</if>
+		<if test="regmoney != null">regmoney = #{regmoney},</if>
+		<if test="regmemo != null">regmemo = #{regmemo},</if>
+		regendd = #{regendd},
+		regtrash = #{regtrash}
+
+		WHERE
+
+		conum = #{conum}
+
+	</update>
+
+	<update id="upDelRegular" parameterType="com.garam.web.regular.dto.RegularDTO">
+
+		UPDATE
+
+		regular
+
+		SET
+
+		regtrash = #{regtrash}
+
+		WHERE
+
+		conum =
+		#{conum}
+
+	</update>
+
+
+	<update id="updateRegulardetail" parameterType="com.garam.web.regular.dto.RegularDTO">
+
+		UPDATE
+
+		regulardetail
+
+		SET
+
+		<if test="rdname != null">rdname = #{rdname},</if>
+		<if test="rdbus != null">rdbus = #{rdbus},</if>
+		<if test="rdconn != null">rdconn = #{rdconn},</if>
+		<if test="rdmoney != null">rdmoney = #{rdmoney},</if>
+		<if test="rdaltm != null">rdaltm = #{rdaltm},</if>
+		<if test="rddow != null">rddow = #{rddow},</if>
+		<if test="rdmemo != null">rdmemo = #{rdmemo},</if>
+		<if test="opercar != null">opercar = #{opercar},</if>
+		rdtrash = #{rdtrash}
+
+		WHERE
+
+		codenum = #{codenum}
+
+	</update>
+
+	<update id="updateRegularcourse" parameterType="java.util.HashMap">
+		<foreach collection="regco" item="value" index="index" separator=";">
+			UPDATE
+
+			regularcourse
+
+			SET
+
+			<if test="value.goutnum != null">goutnum = #{value.goutnum},</if>
+			<if test="value.rcsepa != null">rcsepa = #{value.rcsepa},</if>
+			<if test="value.rcnum != null">rcnum = #{value.rcnum},</if>
+			<if test="value.rct != null">rct = #{value.rct},</if>
+			<if test="value.rcstp != null">rcstp = #{value.rcstp},</if>
+			<if test="value.rcmemo != null">rcmemo = #{value.rcmemo},</if>
+			rctrash = #{value.rctrash}
+
+			WHERE
+
+			rcseq = #{value.rcseq}
+		</foreach>
+	</update>
+
+
+	<update id="delOperCar" parameterType="com.garam.web.regular.dto.RegularDTO">
+
+		UPDATE
+
+		regulardetail
+
+		SET
+
+		opercar = null
+
+		WHERE
+
+		codenum =
+		#{codenum}
+
+	</update>
+
+	<update id="updateRegulardetailOder" parameterType="java.util.HashMap">
+		<foreach collection="rde" item="value" index="index" separator=";">
+			UPDATE
+
+			regulardetail
+
+			SET
+
+			rdnum = #{value.rdnum}
+
+			WHERE
+
+			codenum =
+			#{value.codenum}
+		</foreach>
+	</update>
+
+	<update id="updateRegOperList1" parameterType="java.util.HashMap">
+		<foreach collection="reg" item="value" index="index" separator=";">
+
+			UPDATE
+
+			operation_reg
+
+			SET
+
+			regopercom =
+			#{value.regopercom},
+			regopercar =
+			#{value.regopercar},
+			regoperid =
+			#{value.regoperid}
+
+			WHERE
+
+			operregseq =
+			#{value.operregseq}
+		</foreach>
+	</update>
+
+	<delete id="delRegulardetail" parameterType="com.garam.web.regular.dto.RegularDTO">
+
+		DELETE
+
+		FROM
+
+		regulardetail
+
+		WHERE
+
+		codenum = #{codenum}
+	</delete>
+
+	<delete id="delRegularCoo" parameterType="com.garam.web.regular.dto.RegularDTO">
+
+		DELETE
+
+		FROM
+
+		regularcourse
+
+		<where>
+			<if test="rcseq != null">AND rcseq = #{rcseq}
+			</if>
+			<if test="codenum != null">AND codenum = #{codenum}
+			</if>
+			<if test="goutnum != null">AND goutnum = #{goutnum}
+			</if>
+		</where>
+	</delete>
+	<delete id="delRegOperList1" parameterType="java.util.HashMap">
+		<foreach collection="regdel" item="value" index="index" separator=";">
+			DELETE FROM
+
+			operation_reg
+
+			WHERE
+
+			operregseq =
+			#{value.operregseq}
+		</foreach>
+	</delete>
+</mapper>
+

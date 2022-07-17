@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <div
+        th:fragment="mdSetting"
+        class="modal fade"
+        id="mdSetting"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="mdSettingLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="mdSettingLabel"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="settingMain card-song">
+                        <div class="settingMain-item">
+                            <div class="settingMain-item-1" th:text="${user.company}"></div>
+                            <div class="settingMain-item-1" th:text="${user.name}"></div>
+                            <div class="settingMain-item-1" th:text="${user.position}"></div>
+                        </div>
+                        <hr>
+                        <div class="settingMain-item">
+                            <div class="settingMain-item-2">
+                                <div class="">
+                                    <label for="pw1" class="form-label">새로운 비밀번호</label>
+                                    <input type="password" class="form-control" id="pw1" autocomplete="off">
+                                </div>
+                                <div class="">
+                                    <label for="pw2" class="form-label" id="lapw2">새로운 비밀번호 확인</label>
+                                    <input type="password" class="form-control" id="pw2" autocomplete="off">
+                                </div>
+                                <div class="">
+                                    <button type="submit" class="btn btn-primary" id="savePw">변경</button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="settingMain-item">
+                            <div class="settingMain-item-3">
+                                <div class="setting-theme card-song">
+                                    <div class="setting-theme-1">
+                                        <span>테마1
+                                        </span>
+                                        <span th:text="${compa[0].company}"></span>
+                                    </div>
+                                    <div class="setting-theme-2">
+                                        <div class="setting-theme-up1 setting-theme-up">
+                                            <label for="11111"></label>
+                                        </div>
+                                        <div class="setting-theme-down1 setting-theme-down">
+                                            <label for="11111"></label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-theme-3">
+                                        <input
+                                            th:checked="${(user.color == 0)}"
+                                            type="radio"
+                                            name="choTh"
+                                            value="0"
+                                            id="11111">
+                                    </div>
+                                </div>
+                                <div class="setting-theme card-song">
+                                    <div class="setting-theme-1">
+                                        <span>테마2
+                                        </span>
+                                        <span th:text="${compa[1].company}"></span>
+                                    </div>
+                                    <div class="setting-theme-2">
+                                        <div class="setting-theme-up2 setting-theme-up">
+                                            <label for="22222"></label>
+                                        </div>
+                                        <div class="setting-theme-down2 setting-theme-down">
+                                            <label for="22222"></label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-theme-3">
+                                        <input
+                                            th:checked="${(user.color == 1)}"
+                                            type="radio"
+                                            name="choTh"
+                                            value="1"
+                                            id="22222">
+                                    </div>
+                                </div>
+                                <div class="setting-theme card-song">
+                                    <div class="setting-theme-1">
+                                        <span>테마3
+                                        </span>
+                                    </div>
+                                    <div class="setting-theme-2">
+                                        <div class="setting-theme-up3 setting-theme-up">
+                                            <label for="33333"></label>
+                                        </div>
+                                        <div class="setting-theme-down3 setting-theme-down">
+                                            <label for="33333"></label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-theme-3">
+                                        <input
+                                            th:checked="${(user.color == 20)}"
+                                            type="radio"
+                                            name="choTh"
+                                            value="20"
+                                            id="33333">
+                                    </div>
+                                </div>
+                                <div class="setting-theme card-song">
+                                    <div class="setting-theme-1">
+                                        <span>테마4
+                                        </span>
+                                    </div>
+                                    <div class="setting-theme-2">
+                                        <div class="setting-theme-up4 setting-theme-up">
+                                            <label for="44444"></label>
+                                        </div>
+                                        <div class="setting-theme-down4 setting-theme-down">
+                                            <label for="44444"></label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-theme-3">
+                                        <input
+                                            th:checked="${(user.color == 10)}"
+                                            type="radio"
+                                            name="choTh"
+                                            value="10"
+                                            id="44444">
+                                    </div>
+                                </div>
+                                <div class="setting-theme card-song">
+                                    <div class="setting-theme-1">
+                                        <span>테마5
+                                        </span>
+                                    </div>
+                                    <div class="setting-theme-2">
+                                        <div class="setting-theme-up5 setting-theme-up">
+                                            <label for="55555"></label>
+                                        </div>
+                                        <div class="setting-theme-down5 setting-theme-down">
+                                            <label for="55555"></label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-theme-3">
+                                        <input
+                                            th:checked="${(user.color == 11)}"
+                                            type="radio"
+                                            name="choTh"
+                                            value="11"
+                                            id="55555">
+                                    </div>
+                                </div>
+                                <div class="setting-theme card-song">
+                                    <div class="setting-theme-1">
+                                        <span>테마6
+                                        </span>
+                                    </div>
+                                    <div class="setting-theme-2">
+                                        <div class="setting-theme-up6 setting-theme-up">
+                                            <label for="66666"></label>
+                                        </div>
+                                        <div class="setting-theme-down6 setting-theme-down">
+                                            <label for="66666"></label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-theme-3">
+                                        <input
+                                            th:checked="${(user.color == 12)}"
+                                            type="radio"
+                                            name="choTh"
+                                            value="12"
+                                            id="66666">
+                                    </div>
+                                </div>
+                                <div class="setting-theme card-song">
+                                    <div class="setting-theme-1">
+                                        <span>테마7
+                                        </span>
+                                    </div>
+                                    <div class="setting-theme-2">
+                                        <div class="setting-theme-up7 setting-theme-up">
+                                            <label for="77777"></label>
+                                        </div>
+                                        <div class="setting-theme-down7 setting-theme-down">
+                                            <label for="77777"></label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-theme-3">
+                                        <input
+                                            th:checked="${(user.color == 19)}"
+                                            type="radio"
+                                            name="choTh"
+                                            value="19"
+                                            id="77777">
+                                    </div>
+                                </div>
+                                <div class="setting-theme card-song">
+                                    <div class="setting-theme-1">
+                                        <span>테마8
+                                        </span>
+                                    </div>
+                                    <div class="setting-theme-2">
+                                        <div class="setting-theme-up8 setting-theme-up">
+                                            <label for="88888"></label>
+                                        </div>
+                                        <div class="setting-theme-down8 setting-theme-down">
+                                            <label for="88888"></label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-theme-3">
+                                        <input
+                                            th:checked="${(user.color == 16)}"
+                                            type="radio"
+                                            name="choTh"
+                                            value="16"
+                                            id="88888">
+                                    </div>
+                                </div>
+                                <div class="setting-theme card-song">
+                                    <div class="setting-theme-1">
+                                        <span>테마9
+                                        </span>
+                                    </div>
+                                    <div class="setting-theme-2">
+                                        <div class="setting-theme-up9 setting-theme-up">
+                                            <label for="99999"></label>
+                                        </div>
+                                        <div class="setting-theme-down9 setting-theme-down">
+                                            <label for="99999"></label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-theme-3">
+                                        <input
+                                            th:checked="${(user.color == 17)}"
+                                            type="radio"
+                                            name="choTh"
+                                            value="17"
+                                            id="99999">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫&nbsp;기</button>
+                    <button type="button" class="btn btn-primary" id="saveSetting">저&nbsp;장</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

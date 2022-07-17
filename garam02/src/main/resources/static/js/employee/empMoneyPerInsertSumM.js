@@ -228,11 +228,15 @@ function sumOutList(result) {
 function sumIN(result) {
     return new Promise(function (resolve, reject) {
 
+        let regM = ($('#in-regM').val()).replaceAll(',', '');
         let oper = ($('#in-operM').text()).replaceAll(',', '');
         let go = ($('#in-goM').text()).replaceAll(',', '');
         let gisu = ($('#in-gisuM').text()).replaceAll(',', '');
         let gita = ($('#in-gitaM').text()).replaceAll(',', '');
 
+        if (!regM) {
+            regM = 0;
+        }
         if (!oper) {
             oper = 0;
         }
@@ -246,7 +250,8 @@ function sumIN(result) {
             gita = 0;
         }
 
-        const inAll = parseInt(oper) + parseInt(go) + parseInt(gisu) + parseInt(gita);
+        const inAll = parseInt(regM) + parseInt(oper) + parseInt(go) + parseInt(gisu) +
+                parseInt(gita);
 
         $('#in-inAllM').text(AddComma(inAll));
         resolve();

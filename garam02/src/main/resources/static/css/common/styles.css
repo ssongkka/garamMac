@@ -11,12 +11,15 @@
 }
 
 :root {
-    --compa-color: #f1c17512;
-    --person-color: #87c5da17;
-    --otherCompa-color: #dc35451f;
-    --compa-color1: #f1c175;
-    --person-color1: #87c5da;
-    --otherCompa-color1: #dc3545;
+    --compa-color: rgba(241, 193, 117, 0.1);
+    --person-color: rgba(135, 197, 218, 0.1);
+    --otherCompa-color: rgba(220, 53, 69, 0.1);
+    --compa-color1: rgb(241, 193, 117);
+    --person-color1: rgb(135, 197, 218);
+    --otherCompa-color1: rgb(220, 53, 69);
+    --compa-color2: rgba(241, 193, 117, 0.4);
+    --person-color2: rgba(135, 197, 218, 0.4);
+    --otherCompa-color2: rgba(220, 53, 69, 0.4);
 }
 
 * {
@@ -476,6 +479,19 @@ object {
     border-radius: 3px;
 }
 
+.table > tbody > tr > .big45 {
+    color: #009f5c;
+}
+
+.table > tbody > tr > .big25 {
+    color: #f2600e;
+
+}
+
+.table > tbody > tr > .big28 {
+    color: #1862c6;
+}
+
 .table-scroll {}
 
 .table-scroll-head {
@@ -571,6 +587,13 @@ body .modal {
 .mdMfClo {
     flex: 1;
     text-align: left;
+}
+
+.fontgrey1 {
+    color: var(--text-grey);
+}
+.fontgrey2 {
+    color: var(--text-grey2);
 }
 
 @media (max-width:1024px) {

@@ -185,7 +185,7 @@ function makeModalIl(dday, cctono, rsvt) {
                                 stt + edt +
                                 `</div>
                                                 <div class="allTitle-item allTitle-Ch">
-                                                    <button class="btn card-song btnAlloCh" tabindex="-1">
+                                                    <button class="btn card-song btnAlloCh" tabindex="-1" data-bs-toggle="tooltip" data-bs-placement="top" title="수정">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                 </div>
@@ -319,8 +319,6 @@ function makeModalIl(dday, cctono, rsvt) {
                 data: JSON.stringify(params),
                 cache: false,
                 success: function (r) {
-                    console.log(r);
-
                     const aaa = $('#alloContMd').children();
 
                     for (let k = 0; k < aaa.length; k++) {
@@ -837,8 +835,6 @@ $(document).on("click", ".btnAlloCh", function () {
             checkAll++;
         }
 
-        console.log($(bbb111).attr('disabled'));
-        console.log(checkAlloDiv.includes('alloDelX'));
     }
 
     getRsvtCh(rsvttt, ctmnonono, checkAll);
@@ -846,8 +842,6 @@ $(document).on("click", ".btnAlloCh", function () {
 
 function getRsvtCh(rsvttt, ctmnonono, sepanum) {
     $("#modalAllo2").modal("hide");
-
-    console.log("sepanum", sepanum);
 
     LoadingWithMask()
         .then(shomd)
@@ -889,6 +883,23 @@ function getRsvtCh(rsvttt, ctmnonono, sepanum) {
                         $("#cont-1").val(r[0].cont);
                         $("#conm-1").val(AddComma(r[0].conm));
                         $("#numm-1").val(r[0].numm);
+
+                        let dch = ``;
+                        if (r[0].datech) {
+                            dch = r[0].datech;
+                        }
+
+                        let empppp = ``;
+                        for (let k = 0; k < dbAllUser.length; k++) {
+                            if (r[0].empin == dbAllUser[k].id) {
+                                empppp = dbAllUser[k].name;
+                            }
+                        }
+
+                        $("#rsvtrsvt1").text(r[0].datein);
+                        $("#rsvtrsvt2").text(dch);
+                        $("#rsvtrsvt3").text(empppp);
+
                     } else {
                         $("#stday-1").val("");
                         $("#endday-1").val("");
@@ -902,6 +913,10 @@ function getRsvtCh(rsvttt, ctmnonono, sepanum) {
                         $("#cont-1").val("");
                         $("#conm-1").val("");
                         $("#numm-1").val("");
+
+                        $("#rsvtrsvt1").text("");
+                        $("#rsvtrsvt2").text("");
+                        $("#rsvtrsvt3").text("");
                     }
                     chDateInput();
                     resolve();
@@ -1002,10 +1017,12 @@ function getRsvtCh(rsvttt, ctmnonono, sepanum) {
 
     function shomd(result) {
         return new Promise(function (resolve, reject) {
-            console.log("sepanum", sepanum);
             let htmlsOp = ``;
             if (parseInt(sepanum) > 0) {
-                $('#rsvtCancleD').html(`<h4><p>배차완료된 차량이있으면</p><p>수정에 제한이있습니다.</p></h4>`);
+                $('#rsvtCancleD').html(`<h4><p>배차마감된 차량이있으면</p><p>수정에 제한이있습니다.</p></h4>`);
+
+                $('#stday-1').prop("disabled", true);
+                $('#endday-1').prop("disabled", true);
 
                 for (let i = 0; i < 100; i++) {
                     htmlsOp += `<option value="` + (parseInt(sepanum) + i) + `">` + (
@@ -1017,13 +1034,14 @@ function getRsvtCh(rsvttt, ctmnonono, sepanum) {
                     `<button type="button" class="btn btn-warning" id="btn-rsvt-cancle">운행 취소</button>`
                 );
 
+                $('#stday-1').prop("disabled", false);
+                $('#endday-1').prop("disabled", false);
+
                 for (let i = 0; i < 100; i++) {
                     htmlsOp += `<option value="` + (i + 1) + `">` + (i + 1) +
                             `&nbsp;대</option>`;
                 }
             }
-
-            console.log(htmlsOp);
 
             $('#num-1').html(htmlsOp);
 

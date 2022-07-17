@@ -1,0 +1,22 @@
+.inCustomerBody {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#btnCusP,
+#btnCusPUp {
+    width: 100%;
+    height: 2.5rem;
+    padding: 0;
+}
+#btnCusP svg,
+#btnCusPUp svg,
+#customerInsertMo svg {
+    color: white;
+}
+
+#customerInsertMo {
+    width: 12rem;
+}

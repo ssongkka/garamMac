@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="apprMD"
+        class="modal fade"
+        id="apprMD"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="apprMDLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" id="apprMdNum">
+                    <input type="hidden" id="apprMdMNum">
+                    <input type="hidden" id="apprMdEndNum">
+                    <h3 class="modal-title" id="apprMDLabel"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="apprMDX"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="apprMd-main">
+                        <div class="" id="apprKan">
+                            <table class="table-bordered">
+                                <colgroup>
+                                    <col width="20%" id="apprChLine5"/>
+                                    <col width="20%" id="apprChLine4"/>
+                                    <col width="20%" id="apprChLine3"/>
+                                    <col width="20%" id="apprChLine2"/>
+                                    <col width="20%" id="apprChLine1"/>
+                                </colgroup>
+                                <tbody>
+                                    <tr style="height: 2.5rem;">
+                                        <td id="apprChLinePosi5"></td>
+                                        <td id="apprChLinePosi4"></td>
+                                        <td id="apprChLinePosi3"></td>
+                                        <td id="apprChLinePosi2"></td>
+                                        <td id="apprChLinePosi1"></td>
+                                    </tr>
+                                    <tr style="height: 6rem;">
+                                        <td id="apprChLinename5"></td>
+                                        <td id="apprChLinename4"></td>
+                                        <td id="apprChLinename3"></td>
+                                        <td id="apprChLinename2"></td>
+                                        <td id="apprChLinename1"></td>
+                                    </tr>
+                                    <tr style="height: 2rem;">
+                                        <td id="apprChLineday5"></td>
+                                        <td id="apprChLineday4"></td>
+                                        <td id="apprChLineday3"></td>
+                                        <td id="apprChLineday2"></td>
+                                        <td id="apprChLineday1"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="" id="apprTitle"></div>
+                        <div class="apprMd-second table-responsive">
+                            <table class="table-bordered">
+                                <colgroup>
+                                    <col width="20%" style="height: 3rem;"/>
+                                    <col width="auto" style="height: 3rem;"/>
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td style="background: #0000001a; font-weight: 600;">협조</td>
+                                        <td>
+                                            <div id="spHelp"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="background: #0000001a; font-weight: 600;">수신참조</td>
+                                        <td>
+                                            <div id="spCham"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <div id="apprUpcontents" colspan="6" class="colorUp1"></div>
+                        <hr>
+                        <div id="apprFoot"></div>
+                        <div id="apprFootMdIn">
+                            <div style="text-align: left; padding: 1rem;">
+                                <label for="apprfoot" class="form-label">&#42;&nbsp;첨 언</label>
+                                <textarea class="form-control" id="apprfoot" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" id="apprMdFoot">
+                    <button type="button" class="btn btn-secondary" id="apprMDBtn">닫&nbsp;기</button>
+                    <button type="button" class="btn btn-danger" id="apprMdDel">삭&nbsp;제</button>
+                    <button type="button" class="btn btn-warning" id="apprMdOut">반&nbsp;려</button>
+                    <button type="button" class="btn btn-success" id="apprMdGo">결&nbsp;재</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

@@ -37,6 +37,17 @@ public class UserMyServiceImpl implements UserMyService {
 	}
 
 	@Override
+	public int updateUser(UserDTO userDTO) throws Exception {
+		String encoPw = passwordEncoder.encode("0000");
+
+		userDTO.setPw(encoPw);
+
+		int rtn = userMapper.updateUser(userDTO);
+
+		return rtn;
+	}
+
+	@Override
 	public int insertUser(UserDTO userDTO) throws Exception {
 		String encoPw = passwordEncoder.encode(userDTO.getPw());
 

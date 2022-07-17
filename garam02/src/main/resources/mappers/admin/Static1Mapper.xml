@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.garam.web.admin.mapper.AdminMapper">
 
-	<select id="selectVeAllComStatic" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectVeAllComStatic"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT
@@ -19,13 +20,15 @@
 		vehicleinfo.owner,
 
 		(SELECT company.company FROM
-		company WHERE company.company =
+		company WHERE
+		company.company =
 		vehicleinfo.owner) AS
 		fuel,
 
 		(SELECT
 
-		IF((SELECT regulardetail.rdconn FROM regulardetail
+		IF((SELECT
+		regulardetail.rdconn FROM regulardetail
 		WHERE regulardetail.opercar =
 		vehicleinfo.carnumber) =
 		2,
@@ -79,7 +82,8 @@
 
 		operation_reg.regoperday
 		BETWEEN
-		#{inday} AND #{outday}
+		#{inday} AND
+		#{outday}
 
 		AND
 
@@ -99,7 +103,8 @@
 		WHERE
 
 		regulardetail.opercar
-		=vehicleinfo.carnumber)) > 0, regulardetail.rdmoney, 0)
+		=vehicleinfo.carnumber)) > 0,
+		regulardetail.rdmoney, 0)
 		)
 
 		FROM
@@ -108,14 +113,16 @@
 
 		WHERE
 
-		regulardetail.opercar = vehicleinfo.carnumber) AS
+		regulardetail.opercar
+		= vehicleinfo.carnumber) AS
 		special,
 
 		(SELECT
 
 		COUNT(IF(operation_info.opertype >
 		1, rsvt.numm /
-		(SELECT MAX(operation_info.opertype) FROM
+		(SELECT
+		MAX(operation_info.opertype) FROM
 		operation_info WHERE
 		operation_info.rsvt =
 		operation_info.rsvt), rsvt.numm))
@@ -142,7 +149,8 @@
 
 		WHERE
 
-		(SELECT company.company FROM company
+		(SELECT company.company FROM
+		company
 		WHERE company.company =
 		operation_info.opercom) IS
 		NOT NULL
@@ -158,7 +166,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -169,7 +178,8 @@
 
 		(SELECT
 
-		SUM(IF(operation_info.opertype > 1,
+		SUM(IF(operation_info.opertype >
+		1,
 		rsvt.numm / (SELECT
 		MAX(operation_info.opertype) FROM operation_info
 		WHERE
@@ -202,7 +212,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company =
+		company.company FROM
+		company WHERE company.company =
 		operation_info.opercom) IS NOT NULL
 
 		AND
@@ -215,7 +226,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -226,9 +238,11 @@
 
 		(SELECT
 
-		COUNT(IF(operation_info.opertype > 1,
+		COUNT(IF(operation_info.opertype
+		> 1,
 		rsvt.numm / (SELECT
-		MAX(operation_info.opertype) FROM operation_info
+		MAX(operation_info.opertype) FROM
+		operation_info
 		WHERE operation_info.rsvt =
 		operation_info.rsvt),
 		rsvt.numm))
@@ -315,7 +329,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company =
+		company.company FROM
+		company WHERE company.company =
 		operation_info.opercom) IS NOT NULL
 
 		AND
@@ -328,7 +343,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -340,7 +356,8 @@
 
 		(SELECT
 
-		COUNT(IF(operation_info.opertype > 1,
+		COUNT(IF(operation_info.opertype >
+		1,
 		rsvt.numm /
 		(SELECT
 		MAX(operation_info.opertype) FROM operation_info
@@ -373,7 +390,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company
+		company.company FROM
+		company WHERE company.company
 		=
 		operation_info.opercom) IS NOT NULL
 
@@ -387,7 +405,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -398,7 +417,8 @@
 
 		(SELECT
 
-		SUM(IF(operation_info.opertype > 1,
+		SUM(IF(operation_info.opertype >
+		1,
 		rsvt.numm /
 		(SELECT
 		MAX(operation_info.opertype) FROM operation_info
@@ -432,7 +452,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company
+		company.company FROM
+		company WHERE company.company
 		=
 		operation_info.opercom) IS NOT NULL
 
@@ -446,7 +467,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -466,7 +488,8 @@
 
 		WHERE
 
-		personnalsalary.date = #{fuel}
+		personnalsalary.date =
+		#{fuel}
 
 		AND
 
@@ -527,7 +550,7 @@
 
 		(SELECT
 
-		veloansepa.loansepamoney
+		SUM(veloansepa.loansepamoney)
 
 		FROM
 
@@ -556,7 +579,7 @@
 
 		(SELECT
 
-		veinsurancesepa.insusepamoney
+		SUM(veinsurancesepa.insusepamoney)
 
 		FROM
 
@@ -616,20 +639,42 @@
 
 		veacc
 
+		WHERE
+
+		veacc.veaccenddate BETWEEN #{inday} AND
+		#{outday}
+
+		AND
+
+		veacc.carnumber =
+		vehicleinfo.carnumber) AS ve2,
+
+		(
+		SELECT
+
+		personnalsalary.id
+
+		FROM
+
+		personnalsalary
+
+		WHERE
+
+		personnalsalary.date =
+		#{fuel}
+
+		AND
+
+		personnalsalary.carnumber = vehicleinfo.carnumber)
+
+		AS
+		vemaintenancekind
+
+		FROM
+
+		vehicleinfo
+
 		<where>
-			veacc.veaccenddate BETWEEN #{inday} AND #{outday}
-
-			AND
-
-			veacc.carnumber =
-			vehicleinfo.carnumber) AS ve2
-
-			FROM
-
-			vehicleinfo
-
-			WHERE
-
 			(vehicleinfo.outday <![CDATA[<=]]>
 			#{outday} AND vehicleinfo.outday <![CDATA[>=]]>
 			#{inday})
@@ -642,13 +687,24 @@
 			</if>
 		</where>
 
+		HAVING
+
+		id1 <![CDATA[>]]>
+		0
+
+		OR
+
+		id2 <![CDATA[>]]>
+		0
+
 		ORDER BY
 
 		vehicleinfo.vehicle
 
 	</select>
 
-	<select id="selectVeAllComStaticVeAll" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectVeAllComStaticVeAll"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 		SELECT
@@ -665,13 +721,15 @@
 		vehicleinfo.owner,
 
 		(SELECT company.company FROM
-		company WHERE company.company =
+		company WHERE
+		company.company =
 		vehicleinfo.owner) AS
 		fuel,
 
 		(SELECT
 
-		IF((SELECT regulardetail.rdconn FROM regulardetail
+		IF((SELECT
+		regulardetail.rdconn FROM regulardetail
 		WHERE regulardetail.opercar =
 		vehicleinfo.carnumber) =
 		2,
@@ -725,7 +783,8 @@
 
 		operation_reg.regoperday
 		BETWEEN
-		#{inday} AND #{outday}
+		#{inday} AND
+		#{outday}
 
 		AND
 
@@ -745,7 +804,8 @@
 		WHERE
 
 		regulardetail.opercar
-		=vehicleinfo.carnumber)) > 0, regulardetail.rdmoney, 0))
+		=vehicleinfo.carnumber)) > 0,
+		regulardetail.rdmoney, 0))
 
 		FROM
 
@@ -753,14 +813,16 @@
 
 		WHERE
 
-		regulardetail.opercar = vehicleinfo.carnumber) AS
+		regulardetail.opercar
+		= vehicleinfo.carnumber) AS
 		special,
 
 		(SELECT
 
 		COUNT(IF(operation_info.opertype >
 		1, rsvt.numm /
-		(SELECT MAX(operation_info.opertype) FROM
+		(SELECT
+		MAX(operation_info.opertype) FROM
 		operation_info WHERE
 		operation_info.rsvt =
 		operation_info.rsvt), rsvt.numm))
@@ -787,7 +849,8 @@
 
 		WHERE
 
-		(SELECT company.company FROM company
+		(SELECT company.company FROM
+		company
 		WHERE company.company =
 		operation_info.opercom) IS
 		NOT NULL
@@ -803,7 +866,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -814,7 +878,8 @@
 
 		(SELECT
 
-		SUM(IF(operation_info.opertype > 1,
+		SUM(IF(operation_info.opertype >
+		1,
 		rsvt.numm / (SELECT
 		MAX(operation_info.opertype) FROM operation_info
 		WHERE
@@ -847,7 +912,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company =
+		company.company FROM
+		company WHERE company.company =
 		operation_info.opercom) IS NOT NULL
 
 		AND
@@ -860,7 +926,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -871,9 +938,11 @@
 
 		(SELECT
 
-		COUNT(IF(operation_info.opertype > 1,
+		COUNT(IF(operation_info.opertype
+		> 1,
 		rsvt.numm / (SELECT
-		MAX(operation_info.opertype) FROM operation_info
+		MAX(operation_info.opertype) FROM
+		operation_info
 		WHERE operation_info.rsvt =
 		operation_info.rsvt),
 		rsvt.numm))
@@ -960,7 +1029,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company =
+		company.company FROM
+		company WHERE company.company =
 		operation_info.opercom) IS NOT NULL
 
 		AND
@@ -973,7 +1043,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -985,7 +1056,8 @@
 
 		(SELECT
 
-		COUNT(IF(operation_info.opertype > 1,
+		COUNT(IF(operation_info.opertype >
+		1,
 		rsvt.numm /
 		(SELECT
 		MAX(operation_info.opertype) FROM operation_info
@@ -1018,7 +1090,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company
+		company.company FROM
+		company WHERE company.company
 		=
 		operation_info.opercom) IS NOT NULL
 
@@ -1032,7 +1105,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -1043,7 +1117,8 @@
 
 		(SELECT
 
-		SUM(IF(operation_info.opertype > 1,
+		SUM(IF(operation_info.opertype >
+		1,
 		rsvt.numm /
 		(SELECT
 		MAX(operation_info.opertype) FROM operation_info
@@ -1077,7 +1152,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company
+		company.company FROM
+		company WHERE company.company
 		=
 		operation_info.opercom) IS NOT NULL
 
@@ -1091,7 +1167,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -1111,7 +1188,8 @@
 
 		WHERE
 
-		personnalsalary.date = #{fuel}
+		personnalsalary.date =
+		#{fuel}
 
 		AND
 
@@ -1177,7 +1255,8 @@
 
 		AND
 
-		veloan.carnumber = vehicleinfo.carnumber) AS
+		veloan.carnumber =
+		vehicleinfo.carnumber) AS
 		id4,
 
 		(SELECT
@@ -1199,7 +1278,8 @@
 
 		WHERE
 
-		veinsurancesepa.insusepaday BETWEEN #{inday} AND
+		veinsurancesepa.insusepaday BETWEEN #{inday}
+		AND
 		#{outday}
 
 		AND
@@ -1243,7 +1323,8 @@
 
 		WHERE
 
-		veacc.veaccenddate BETWEEN #{inday} AND #{outday}
+		veacc.veaccenddate BETWEEN #{inday} AND
+		#{outday}
 
 		AND
 
@@ -1266,7 +1347,8 @@
 
 		AND
 
-		vehicleinfo.carnumber = #{carnumber}
+		vehicleinfo.carnumber =
+		#{carnumber}
 
 		ORDER BY
 
@@ -1274,7 +1356,8 @@
 
 	</select>
 
-	<select id="selectVeAllPerStaticVe" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectVeAllPerStaticVe"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 
@@ -1292,7 +1375,8 @@
 		vehicleinfo.owner,
 
 		(SELECT company.company FROM
-		company WHERE company.company =
+		company
+		WHERE company.company =
 		vehicleinfo.owner) AS
 		fuel,
 
@@ -1306,7 +1390,8 @@
 
 		WHERE
 
-		personnaldeal.carnumber = loanbank
+		personnaldeal.carnumber =
+		loanbank
 
 		AND
 
@@ -1322,7 +1407,8 @@
 
 		WHERE
 
-		personnaldeal.carnumber = loanbank
+		personnaldeal.carnumber =
+		loanbank
 
 		AND
 
@@ -1420,7 +1506,8 @@
 
 		operation_reg.regoperday
 		BETWEEN
-		#{inday} AND #{outday}
+		#{inday} AND
+		#{outday}
 
 		AND
 
@@ -1440,7 +1527,8 @@
 		WHERE
 
 		regulardetail.opercar
-		=vehicleinfo.carnumber)) > 0, regulardetail.rdmoney,
+		=vehicleinfo.carnumber)) > 0,
+		regulardetail.rdmoney,
 		0)
 		)
 
@@ -1456,94 +1544,24 @@
 
 		(SELECT
 
-		IF((SELECT
-		regulardetail.rdconn FROM regulardetail
-		WHERE
-		regulardetail.opercar =
-		vehicleinfo.carnumber) =
-		2,
-
-		regulardetail.rdaltm
-
-		*
-
-		(SELECT
-
-		COUNT(operation_reg.operregseq)
+		SUM(personnaldealplus.money)
 
 		FROM
 
-		operation_reg
+		personnaldealplus
 
 		WHERE
 
-		operation_reg.regoperday BETWEEN
-		#{inday} AND #{outday}
+		personnaldealplus.separation = '정기운행'
 
 		AND
 
-		operation_reg.regoperno = 1
+		personnaldealplus.sday = #{fuel}
 
 		AND
 
-		operation_reg.codenum =
-		(SELECT
-
-		regulardetail.codenum
-
-		FROM
-
-		regulardetail
-
-		WHERE
-
-		regulardetail.opercar
-		=vehicleinfo.carnumber)),
-
-		IF((SELECT
-
-		COUNT(operation_reg.operregseq)
-
-		FROM
-
-		operation_reg
-
-		WHERE
-
-		operation_reg.regoperday
-		BETWEEN
-		#{inday} AND #{outday}
-
-		AND
-
-		operation_reg.regoperno = 1
-
-		AND
-
-		operation_reg.codenum =
-		(SELECT
-
-		regulardetail.codenum
-
-		FROM
-
-		regulardetail
-
-		WHERE
-
-		regulardetail.opercar
-		=vehicleinfo.carnumber)) > 0, regulardetail.rdaltm, 0)
-		)
-
-		FROM
-
-		regulardetail
-
-		WHERE
-
-		regulardetail.opercar =
-		vehicleinfo.carnumber) AS
-		insusepaday,
+		personnaldealplus.carnumber =
+		vehicleinfo.carnumber) AS insusepaday,
 
 		(SELECT
 
@@ -1577,7 +1595,8 @@
 
 		WHERE
 
-		(SELECT company.company FROM company
+		(SELECT company.company FROM
+		company
 		WHERE company.company =
 		operation_info.opercom) IS
 		NULL
@@ -1593,7 +1612,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
@@ -1641,7 +1661,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company =
+		company.company FROM
+		company WHERE company.company =
 		operation_info.opercom) IS NULL
 
 		AND
@@ -1655,14 +1676,16 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
 		AND
 
 		operation_info.opercar =
-		vehicleinfo.carnumber) AS
+		vehicleinfo.carnumber)
+		AS
 		img1,
 
 		(SELECT
@@ -1695,7 +1718,8 @@
 
 		(SELECT
 		company.company
-		FROM company WHERE company.company =
+		FROM company WHERE
+		company.company =
 		operation_info.opercom) IS
 		NULL
 
@@ -1709,7 +1733,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -1754,7 +1779,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company =
+		company.company FROM
+		company WHERE company.company =
 		operation_info.opercom) IS NULL
 
 		AND
@@ -1767,7 +1793,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
@@ -1814,7 +1841,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company =
+		company.company FROM
+		company WHERE company.company =
 		operation_info.opercom) IS NULL
 
 		AND
@@ -1827,7 +1855,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
@@ -1868,7 +1897,8 @@
 
 		(SELECT
 		company.company
-		FROM company WHERE company.company =
+		FROM company WHERE
+		company.company =
 		operation_info.opercom) IS
 		NULL
 
@@ -1882,7 +1912,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -1928,7 +1959,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company
+		company.company FROM
+		company WHERE company.company
 		=
 		operation_info.opercom) IS NULL
 
@@ -1942,14 +1974,16 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
 		AND
 
 		operation_info.opercar =
-		vehicleinfo.carnumber) AS
+		vehicleinfo.carnumber)
+		AS
 		jukd,
 
 		(SELECT
@@ -1989,7 +2023,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company
+		company.company FROM
+		company WHERE company.company
 		=
 		operation_info.opercom) IS NULL
 
@@ -2003,14 +2038,16 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
 		AND
 
 		operation_info.opercar =
-		vehicleinfo.carnumber) AS
+		vehicleinfo.carnumber)
+		AS
 		img3,
 
 		(SELECT
@@ -2043,14 +2080,16 @@
 
 		(SELECT
 		company.company
-		FROM company WHERE company.company
+		FROM company WHERE
+		company.company
 		=
 		operation_info.opercom) IS
 		NULL
 
 		AND
 
-		operation_info.dayst = 1
+		operation_info.dayst
+		= 1
 
 		AND
 
@@ -2065,7 +2104,26 @@
 
 		operation_info.opercar =
 		vehicleinfo.carnumber) AS
-		insusepapayment
+		insusepapayment,
+
+		(SELECT
+
+		personnaldeal.id
+
+		FROM
+
+		personnaldeal
+
+		WHERE
+
+		personnaldeal.date =
+		#{fuel}
+
+		AND
+
+		personnaldeal.carnumber = vehicleinfo.carnumber) AS
+		vemaintenancekind
+
 
 		FROM
 
@@ -2085,12 +2143,18 @@
 			</if>
 
 		</where>
+
+		HAVING
+
+		phone1 IS NOT NULL
+
 		ORDER BY
 
 		vehicleinfo.vehicle
 
 	</select>
-	<select id="selectVeAllPerStaticVeAll" parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
+	<select id="selectVeAllPerStaticVeAll"
+		parameterType="com.garam.web.vehicle.dto.VehicleInfoDTO"
 		resultType="com.garam.web.vehicle.dto.VehicleInfoDTO">
 
 
@@ -2108,7 +2172,8 @@
 		vehicleinfo.owner,
 
 		(SELECT company.company FROM
-		company WHERE company.company =
+		company
+		WHERE company.company =
 		vehicleinfo.owner) AS
 		fuel,
 
@@ -2122,7 +2187,8 @@
 
 		WHERE
 
-		personnaldeal.carnumber = loanbank
+		personnaldeal.carnumber =
+		loanbank
 
 		AND
 
@@ -2138,7 +2204,8 @@
 
 		WHERE
 
-		personnaldeal.carnumber = loanbank
+		personnaldeal.carnumber =
+		loanbank
 
 		AND
 
@@ -2155,7 +2222,8 @@
 
 		WHERE
 
-		personnaldeal.carnumber = loanbank
+		personnaldeal.carnumber =
+		loanbank
 
 		AND
 
@@ -2255,7 +2323,8 @@
 
 		operation_reg.regoperday
 		BETWEEN
-		#{inday} AND #{outday}
+		#{inday} AND
+		#{outday}
 
 		AND
 
@@ -2275,7 +2344,8 @@
 		WHERE
 
 		regulardetail.opercar
-		=vehicleinfo.carnumber)) > 0, regulardetail.rdmoney,
+		=vehicleinfo.carnumber)) > 0,
+		regulardetail.rdmoney,
 		0)
 		)
 
@@ -2291,94 +2361,24 @@
 
 		(SELECT
 
-		IF((SELECT
-		regulardetail.rdconn FROM regulardetail
-		WHERE
-		regulardetail.opercar =
-		vehicleinfo.carnumber) =
-		2,
-
-		regulardetail.rdaltm
-
-		*
-
-		(SELECT
-
-		COUNT(operation_reg.operregseq)
+		SUM(personnaldealplus.money)
 
 		FROM
 
-		operation_reg
+		personnaldealplus
 
 		WHERE
 
-		operation_reg.regoperday BETWEEN
-		#{inday} AND #{outday}
+		personnaldealplus.separation = '정기운행'
 
 		AND
 
-		operation_reg.regoperno = 1
+		personnaldealplus.sday = #{fuel}
 
 		AND
 
-		operation_reg.codenum =
-		(SELECT
-
-		regulardetail.codenum
-
-		FROM
-
-		regulardetail
-
-		WHERE
-
-		regulardetail.opercar
-		=vehicleinfo.carnumber)),
-
-		IF((SELECT
-
-		COUNT(operation_reg.operregseq)
-
-		FROM
-
-		operation_reg
-
-		WHERE
-
-		operation_reg.regoperday
-		BETWEEN
-		#{inday} AND #{outday}
-
-		AND
-
-		operation_reg.regoperno = 1
-
-		AND
-
-		operation_reg.codenum =
-		(SELECT
-
-		regulardetail.codenum
-
-		FROM
-
-		regulardetail
-
-		WHERE
-
-		regulardetail.opercar
-		=vehicleinfo.carnumber)) > 0, regulardetail.rdaltm, 0)
-		)
-
-		FROM
-
-		regulardetail
-
-		WHERE
-
-		regulardetail.opercar =
-		vehicleinfo.carnumber) AS
-		insusepaday,
+		personnaldealplus.carnumber =
+		vehicleinfo.carnumber) AS insusepaday,
 
 		(SELECT
 
@@ -2412,7 +2412,8 @@
 
 		WHERE
 
-		(SELECT company.company FROM company
+		(SELECT company.company FROM
+		company
 		WHERE company.company =
 		operation_info.opercom) IS
 		NULL
@@ -2428,7 +2429,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
@@ -2476,7 +2478,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company =
+		company.company FROM
+		company WHERE company.company =
 		operation_info.opercom) IS NULL
 
 		AND
@@ -2490,14 +2493,16 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
 		AND
 
 		operation_info.opercar =
-		vehicleinfo.carnumber) AS
+		vehicleinfo.carnumber)
+		AS
 		img1,
 
 		(SELECT
@@ -2530,7 +2535,8 @@
 
 		(SELECT
 		company.company
-		FROM company WHERE company.company =
+		FROM company WHERE
+		company.company =
 		operation_info.opercom) IS
 		NULL
 
@@ -2544,7 +2550,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -2589,7 +2596,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company =
+		company.company FROM
+		company WHERE company.company =
 		operation_info.opercom) IS NULL
 
 		AND
@@ -2602,7 +2610,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
@@ -2649,7 +2658,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company =
+		company.company FROM
+		company WHERE company.company =
 		operation_info.opercom) IS NULL
 
 		AND
@@ -2662,7 +2672,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
@@ -2703,7 +2714,8 @@
 
 		(SELECT
 		company.company
-		FROM company WHERE company.company =
+		FROM company WHERE
+		company.company =
 		operation_info.opercom) IS
 		NULL
 
@@ -2717,7 +2729,8 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND #{outday}
 
 		AND
@@ -2763,7 +2776,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company
+		company.company FROM
+		company WHERE company.company
 		=
 		operation_info.opercom) IS NULL
 
@@ -2777,14 +2791,16 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
 		AND
 
 		operation_info.opercar =
-		vehicleinfo.carnumber) AS
+		vehicleinfo.carnumber)
+		AS
 		jukd,
 
 		(SELECT
@@ -2824,7 +2840,8 @@
 		WHERE
 
 		(SELECT
-		company.company FROM company WHERE company.company
+		company.company FROM
+		company WHERE company.company
 		=
 		operation_info.opercom) IS NULL
 
@@ -2838,14 +2855,16 @@
 
 		AND
 
-		rsvt.stday BETWEEN #{inday}
+		rsvt.stday BETWEEN
+		#{inday}
 		AND
 		#{outday}
 
 		AND
 
 		operation_info.opercar =
-		vehicleinfo.carnumber) AS
+		vehicleinfo.carnumber)
+		AS
 		img3,
 
 		(SELECT
@@ -2878,14 +2897,16 @@
 
 		(SELECT
 		company.company
-		FROM company WHERE company.company
+		FROM company WHERE
+		company.company
 		=
 		operation_info.opercom) IS
 		NULL
 
 		AND
 
-		operation_info.dayst = 1
+		operation_info.dayst
+		= 1
 
 		AND
 
@@ -2918,7 +2939,8 @@
 
 			AND
 
-			vehicleinfo.carnumber = #{carnumber}
+			vehicleinfo.carnumber =
+			#{carnumber}
 
 
 		</where>

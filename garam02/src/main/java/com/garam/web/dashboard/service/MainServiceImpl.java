@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -222,7 +224,6 @@ public class MainServiceImpl implements MainService {
 
 		File file = null;
 		HSSFWorkbook wb = null;
-		FileOutputStream fileoutputstream = null;
 
 		try {
 
@@ -230,11 +231,12 @@ public class MainServiceImpl implements MainService {
 
 			List<RsvtDTO> list = rsvtMapper.selectCustomerAll(tmpDto);
 
-			String url = "src/main/resources/static/excel/samplersvt.xls";
+			ClassPathResource resource = new ClassPathResource("static/excel/samplersvt.xls");
 
-			FileInputStream fis = new FileInputStream(url);
+			InputStream is = resource.getInputStream();
 
-			wb = new HSSFWorkbook(fis);
+			wb = new HSSFWorkbook(is);
+
 			HSSFSheet sheet = wb.getSheetAt(0);
 
 			CellStyle style = wb.createCellStyle();
@@ -1012,11 +1014,14 @@ public class MainServiceImpl implements MainService {
 	public List<RsvtDTO> selectCustomerCheck(RsvtDTO rsvtDTO) throws Exception {
 		List<RsvtDTO> list = new ArrayList<RsvtDTO>();
 
+		RsvtDTO dto = rsvtDTO;
+
 		if (rsvtDTO.getCtmname().length() < 1 && rsvtDTO.getCtmtel1().length() < 1) {
 			rsvtDTO.setCtmno("0");
 			list.add(rsvtDTO);
 
 		} else {
+
 			if (rsvtDTO.getCtmno().length() > 0) {
 				int rtn = rsvtMapper.updateCtm(rsvtDTO);
 				list.add(rsvtDTO);
@@ -1044,13 +1049,38 @@ public class MainServiceImpl implements MainService {
 				}
 
 				list = rsvtMapper.selectCustomerCheck(tmpRsvt);
+
+				List<RsvtDTO> listAllCheck = new ArrayList<RsvtDTO>();
 				int rtn = 0;
 				if (list.size() > 0) {
-					if (list.size() < 2 && rsvtDTO.getCtmname().equals(list.get(0).getCtmname())) {
-						rtn = rsvtMapper.updateCtm(list.get(0));
 
-						if (rtn < 1) {
-							list.get(0).setCtmtrash(-1);
+					int cntCheck = 0;
+
+					for (int k = 0; k < list.size(); k++) {
+						if (rsvtDTO.getCtmname().trim().equals(list.get(k).getCtmname().trim())) {
+							listAllCheck.add(list.get(k));
+							cntCheck++;
+						}
+					}
+
+					if (cntCheck > 0) {
+//						if (list.size() < 2 && rsvtDTO.getCtmname().equals(list.get(0).getCtmname())) {
+						list.clear();
+
+						list.addAll(listAllCheck);
+
+						if (cntCheck == 1) {
+							dto.setCtmno(list.get(0).getCtmno());
+
+							System.out.println("123123123");
+							System.out.println(dto.getCtmno());
+							System.out.println(dto.getCtmstp());
+
+							rsvtMapper.updateCtm(dto);
+						}
+
+						if (cntCheck > 1) {
+							list.get(0).setCtmtrash(100);
 						}
 					} else {
 						list.get(0).setCtmtrash(100);
@@ -1197,11 +1227,12 @@ public class MainServiceImpl implements MainService {
 
 		try {
 
-			String url = "src/main/resources/static/excel/excelcontract.xls";
+			ClassPathResource resource = new ClassPathResource("static/excel/excelcontract.xls");
 
-			FileInputStream fis = new FileInputStream(url);
+			InputStream is = resource.getInputStream();
 
-			wb = new HSSFWorkbook(fis);
+			wb = new HSSFWorkbook(is);
+
 			HSSFSheet sheet = wb.getSheetAt(0);
 
 			HSSFFont font1 = wb.createFont();
@@ -1637,11 +1668,11 @@ public class MainServiceImpl implements MainService {
 
 		try {
 
-			String url = "src/main/resources/static/excel/excelcontract.xls";
+			ClassPathResource resource = new ClassPathResource("static/excel/excelcontract.xls");
 
-			FileInputStream fis = new FileInputStream(url);
+			InputStream is = resource.getInputStream();
 
-			wb = new HSSFWorkbook(fis);
+			wb = new HSSFWorkbook(is);
 
 			int a = (int) ((Math.random() * 10000) + 10);
 
@@ -3252,6 +3283,1532 @@ public class MainServiceImpl implements MainService {
 		List<RsvtDTO> list = rsvtMapper.selectGudealImOper(rsvtDTO);
 
 		return list;
+	}
+
+	@Override
+	public File dwonSampleChung(String company) throws Exception {
+
+		File file = null;
+		HSSFWorkbook wb = null;
+
+		List<CompanyDTO> compa = companyMapper.selectCompany();
+
+		String comNo = "";
+		String comName = "";
+		String comAdd = "";
+		String comCeo = "";
+		String comTel = "";
+		String comFax = "";
+		for (int i = 0; i < compa.size(); i++) {
+			if (company.equals(compa.get(i).getCompany())) {
+				comNo = compa.get(i).getNo1();
+				comName = compa.get(i).getCompany();
+				comAdd = compa.get(i).getAdress();
+				comCeo = compa.get(i).getCeo();
+				comTel = compa.get(i).getTelephone();
+				comFax = compa.get(i).getFax();
+			}
+		}
+
+		String nowDay = LocalDate.now().toString();
+
+		try {
+
+			ClassPathResource resource = new ClassPathResource("static/excel/samplegyen.xls");
+
+			InputStream is = resource.getInputStream();
+
+			wb = new HSSFWorkbook(is);
+
+			HSSFSheet sheet = wb.getSheetAt(0);
+
+			HSSFFont fontTitle = wb.createFont();
+			fontTitle.setFontHeightInPoints((short) 12);
+			fontTitle.setBold(false);
+			fontTitle.setFontName("Malgun Gothic (본문)");
+
+			HSSFFont fontTitle2 = wb.createFont();
+			fontTitle2.setFontHeightInPoints((short) 12);
+			fontTitle2.setBold(true);
+			fontTitle2.setFontName("Malgun Gothic (본문)");
+
+			HSSFFont fontCont = wb.createFont();
+			fontCont.setFontHeightInPoints((short) 10);
+			fontCont.setBold(false);
+			fontCont.setFontName("Malgun Gothic (본문)");
+
+			HSSFFont fontContRed = wb.createFont();
+			fontCont.setFontHeightInPoints((short) 10);
+			fontCont.setBold(false);
+			fontCont.setFontName("Malgun Gothic (본문)");
+			fontContRed.setColor(HSSFFont.COLOR_RED);
+
+			CellStyle style1 = wb.createCellStyle();
+
+			style1.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1.setFont(fontTitle);
+			style1.setAlignment(HorizontalAlignment.CENTER);
+			style1.setWrapText(true);
+
+			CellStyle style1111 = wb.createCellStyle();
+
+			style1111.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1111.setFont(fontTitle);
+			style1111.setAlignment(HorizontalAlignment.CENTER);
+			style1111.setWrapText(true);
+			style1111.setBorderBottom(BorderStyle.THIN);
+			style1111.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style1_1 = wb.createCellStyle();
+
+			style1_1.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_1.setFont(fontTitle);
+			style1_1.setAlignment(HorizontalAlignment.CENTER);
+			style1_1.setWrapText(true);
+			style1_1.setBorderTop(BorderStyle.THIN);
+			style1_1.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style1_1_1 = wb.createCellStyle();
+
+			style1_1_1.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_1_1.setFont(fontTitle2);
+			style1_1_1.setAlignment(HorizontalAlignment.CENTER);
+			style1_1_1.setWrapText(true);
+			style1_1_1.setBorderTop(BorderStyle.THIN);
+			style1_1_1.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style1_2 = wb.createCellStyle();
+
+			style1_2.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_2.setFont(fontTitle);
+			style1_2.setAlignment(HorizontalAlignment.CENTER);
+			style1_2.setWrapText(true);
+			style1_2.setBorderTop(BorderStyle.THIN);
+			style1_2.setBorderRight(BorderStyle.THIN);
+
+			CellStyle style1_3 = wb.createCellStyle();
+
+			style1_3.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_3.setFont(fontTitle);
+			style1_3.setAlignment(HorizontalAlignment.CENTER);
+			style1_3.setWrapText(true);
+			style1_3.setBorderTop(BorderStyle.THIN);
+
+			CellStyle style1_33 = wb.createCellStyle();
+
+			style1_33.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_33.setFont(fontTitle);
+			style1_33.setAlignment(HorizontalAlignment.CENTER);
+			style1_33.setWrapText(true);
+			style1_33.setBorderTop(BorderStyle.THIN);
+			style1_33.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style1_4 = wb.createCellStyle();
+
+			style1_4.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_4.setFont(fontTitle);
+			style1_4.setAlignment(HorizontalAlignment.CENTER);
+			style1_4.setWrapText(true);
+			style1_4.setBorderTop(BorderStyle.MEDIUM);
+			style1_4.setBorderRight(BorderStyle.MEDIUM);
+
+			CellStyle style1_5 = wb.createCellStyle();
+
+			style1_5.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_5.setFont(fontTitle);
+			style1_5.setAlignment(HorizontalAlignment.CENTER);
+			style1_5.setWrapText(true);
+			style1_5.setBorderTop(BorderStyle.MEDIUM);
+			style1_5.setBorderLeft(BorderStyle.MEDIUM);
+
+			CellStyle style1_6 = wb.createCellStyle();
+
+			style1_6.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_6.setFont(fontTitle);
+			style1_6.setAlignment(HorizontalAlignment.CENTER);
+			style1_6.setWrapText(true);
+			style1_6.setBorderTop(BorderStyle.MEDIUM);
+
+			CellStyle style1_7 = wb.createCellStyle();
+
+			style1_7.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_7.setFont(fontTitle);
+			style1_7.setAlignment(HorizontalAlignment.CENTER);
+			style1_7.setWrapText(true);
+			style1_7.setBorderTop(BorderStyle.THIN);
+			style1_7.setBorderLeft(BorderStyle.MEDIUM);
+
+			CellStyle style1_7_1 = wb.createCellStyle();
+
+			style1_7_1.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_7_1.setFont(fontTitle2);
+			style1_7_1.setAlignment(HorizontalAlignment.CENTER);
+			style1_7_1.setWrapText(true);
+			style1_7_1.setBorderTop(BorderStyle.THIN);
+			style1_7_1.setBorderLeft(BorderStyle.MEDIUM);
+
+			CellStyle style1_8 = wb.createCellStyle();
+
+			style1_8.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_8.setFont(fontTitle);
+			style1_8.setAlignment(HorizontalAlignment.CENTER);
+			style1_8.setWrapText(true);
+			style1_8.setBorderTop(BorderStyle.THIN);
+			style1_8.setBorderRight(BorderStyle.MEDIUM);
+
+			CellStyle style1_9 = wb.createCellStyle();
+
+			style1_9.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_9.setFont(fontTitle);
+			style1_9.setAlignment(HorizontalAlignment.CENTER);
+			style1_9.setWrapText(true);
+			style1_9.setBorderTop(BorderStyle.MEDIUM);
+			style1_9.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style1_99 = wb.createCellStyle();
+
+			style1_99.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_99.setFont(fontTitle);
+			style1_99.setAlignment(HorizontalAlignment.CENTER);
+			style1_99.setWrapText(true);
+			style1_99.setBorderTop(BorderStyle.THIN);
+			style1_99.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style1_10 = wb.createCellStyle();
+
+			style1_10.setVerticalAlignment(VerticalAlignment.CENTER);
+			style1_10.setFont(fontTitle);
+			style1_10.setAlignment(HorizontalAlignment.CENTER);
+			style1_10.setWrapText(true);
+			style1_10.setBorderTop(BorderStyle.MEDIUM);
+			style1_10.setBorderRight(BorderStyle.THIN);
+
+			CellStyle style2 = wb.createCellStyle();
+
+			style2.setVerticalAlignment(VerticalAlignment.BOTTOM);
+			style2.setFont(fontTitle);
+			style2.setAlignment(HorizontalAlignment.CENTER);
+			style2.setWrapText(true);
+			style2.setBorderBottom(BorderStyle.MEDIUM);
+
+			CellStyle style22 = wb.createCellStyle();
+
+			style22.setVerticalAlignment(VerticalAlignment.CENTER);
+			style22.setFont(fontTitle2);
+			style22.setAlignment(HorizontalAlignment.CENTER);
+			style22.setWrapText(true);
+			style22.setBorderTop(BorderStyle.MEDIUM);
+			style22.setBorderLeft(BorderStyle.MEDIUM);
+
+			CellStyle style222 = wb.createCellStyle();
+
+			style222.setVerticalAlignment(VerticalAlignment.CENTER);
+			style222.setFont(fontTitle2);
+			style222.setAlignment(HorizontalAlignment.CENTER);
+			style222.setWrapText(true);
+			style222.setBorderTop(BorderStyle.MEDIUM);
+			style222.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style2_1 = wb.createCellStyle();
+
+			style2_1.setVerticalAlignment(VerticalAlignment.BOTTOM);
+			style2_1.setFont(fontTitle2);
+			style2_1.setAlignment(HorizontalAlignment.CENTER);
+			style2_1.setWrapText(true);
+			style2_1.setBorderBottom(BorderStyle.MEDIUM);
+
+			CellStyle style3 = wb.createCellStyle();
+
+			style3.setVerticalAlignment(VerticalAlignment.CENTER);
+			style3.setFont(fontCont);
+			style3.setAlignment(HorizontalAlignment.CENTER);
+			style3.setWrapText(true);
+			style3.setBorderTop(BorderStyle.THIN);
+			style3.setBorderRight(BorderStyle.THIN);
+			style3.setBorderBottom(BorderStyle.THIN);
+			style3.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style3_1 = wb.createCellStyle();
+
+			style3_1.setVerticalAlignment(VerticalAlignment.CENTER);
+			style3_1.setFont(fontCont);
+			style3_1.setAlignment(HorizontalAlignment.RIGHT);
+			style3_1.setWrapText(true);
+			style3_1.setBorderTop(BorderStyle.THIN);
+			style3_1.setBorderRight(BorderStyle.THIN);
+			style3_1.setBorderBottom(BorderStyle.THIN);
+			style3_1.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style3_2 = wb.createCellStyle();
+
+			style3_2.setVerticalAlignment(VerticalAlignment.CENTER);
+			style3_2.setFont(fontContRed);
+			style3_2.setAlignment(HorizontalAlignment.RIGHT);
+			style3_2.setWrapText(true);
+			style3_2.setBorderTop(BorderStyle.THIN);
+			style3_2.setBorderRight(BorderStyle.THIN);
+			style3_2.setBorderBottom(BorderStyle.THIN);
+			style3_2.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style3_3 = wb.createCellStyle();
+
+			style3_3.setVerticalAlignment(VerticalAlignment.CENTER);
+			style3_3.setFont(fontCont);
+			style3_3.setAlignment(HorizontalAlignment.RIGHT);
+			style3_3.setWrapText(true);
+			style3_3.setBorderTop(BorderStyle.THIN);
+			style3_3.setBorderRight(BorderStyle.THIN);
+			style3_3.setBorderBottom(BorderStyle.THIN);
+			style3_3.setBorderLeft(BorderStyle.MEDIUM);
+
+			CellStyle style3_4 = wb.createCellStyle();
+
+			style3_4.setVerticalAlignment(VerticalAlignment.CENTER);
+			style3_4.setFont(fontCont);
+			style3_4.setAlignment(HorizontalAlignment.RIGHT);
+			style3_4.setWrapText(true);
+			style3_4.setBorderTop(BorderStyle.THIN);
+			style3_4.setBorderRight(BorderStyle.MEDIUM);
+			style3_4.setBorderBottom(BorderStyle.THIN);
+			style3_4.setBorderLeft(BorderStyle.THIN);
+
+			CellStyle style3_5 = wb.createCellStyle();
+
+			style3_5.setVerticalAlignment(VerticalAlignment.CENTER);
+			style3_5.setFont(fontTitle);
+			style3_5.setAlignment(HorizontalAlignment.RIGHT);
+			style3_5.setWrapText(true);
+			style3_5.setBorderLeft(BorderStyle.MEDIUM);
+
+			CellStyle style3_6 = wb.createCellStyle();
+
+			style3_6.setVerticalAlignment(VerticalAlignment.CENTER);
+			style3_6.setFont(fontTitle);
+			style3_6.setAlignment(HorizontalAlignment.RIGHT);
+			style3_6.setWrapText(true);
+			style3_6.setBorderRight(BorderStyle.MEDIUM);
+
+			HSSFRow row = sheet.createRow(4);
+			row.setHeight((short) 300);
+
+			HSSFCell cell = row.createCell(0);
+			cell.setCellStyle(style2_1);
+			cell.setCellValue("서기");
+
+			cell = row.createCell(1);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(2);
+			cell.setCellStyle(style2_1);
+
+			cell = row.createCell(3);
+			cell.setCellStyle(style2_1);
+			cell.setCellValue(nowDay.split("-")[0]);
+
+			cell = row.createCell(4);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(5);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(6);
+			cell.setCellStyle(style2_1);
+
+			cell = row.createCell(7);
+			cell.setCellStyle(style2_1);
+			cell.setCellValue("년");
+
+			cell = row.createCell(8);
+			cell.setCellStyle(style2_1);
+
+			cell = row.createCell(9);
+			cell.setCellStyle(style2_1);
+			cell.setCellValue(nowDay.split("-")[1]);
+
+			cell = row.createCell(10);
+			cell.setCellStyle(style2_1);
+
+			cell = row.createCell(11);
+			cell.setCellStyle(style2_1);
+			cell.setCellValue("월");
+
+			cell = row.createCell(12);
+			cell.setCellStyle(style2_1);
+
+			cell = row.createCell(13);
+			cell.setCellStyle(style2_1);
+			cell.setCellValue(nowDay.split("-")[2]);
+
+			cell = row.createCell(14);
+			cell.setCellStyle(style2_1);
+
+			cell = row.createCell(15);
+			cell.setCellStyle(style2_1);
+			cell.setCellValue("일");
+
+			cell = row.createCell(16);
+			cell.setCellStyle(style2);
+
+			cell = row.createCell(19);
+			cell.setCellStyle(style22);
+			cell.setCellValue("등록번호");
+
+			cell = row.createCell(20);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(21);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(22);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(23);
+			cell.setCellStyle(style1_10);
+
+			cell = row.createCell(24);
+			cell.setCellStyle(style222);
+			cell.setCellValue(comNo);
+
+			cell = row.createCell(25);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(26);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(27);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(28);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(29);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(30);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(31);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(32);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(33);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(34);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(35);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(36);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(37);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(38);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(39);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(40);
+			cell.setCellStyle(style1_6);
+			cell = row.createCell(41);
+			cell.setCellStyle(style1_4);
+
+			row = sheet.createRow(6);
+			row.setHeight((short) 300);
+
+			cell = row.createCell(0);
+			cell.setCellStyle(style2_1);
+			cell.setCellValue("서기");
+
+			cell = row.createCell(1);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(2);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(3);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(4);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(5);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(6);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(7);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(8);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(9);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(10);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(11);
+			cell.setCellStyle(style2_1);
+			cell = row.createCell(12);
+			cell.setCellStyle(style2_1);
+
+			cell = row.createCell(13);
+			cell.setCellStyle(style2_1);
+			cell.setCellValue("귀   하");
+
+			cell = row.createCell(14);
+			cell.setCellStyle(style2);
+			cell = row.createCell(15);
+			cell.setCellStyle(style2);
+			cell = row.createCell(16);
+			cell.setCellStyle(style2);
+
+			cell = row.createCell(19);
+			cell.setCellStyle(style1_7_1);
+			cell.setCellValue("상      호");
+
+			cell = row.createCell(20);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(21);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(22);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(23);
+			cell.setCellStyle(style1_2);
+
+			cell = row.createCell(24);
+			cell.setCellStyle(style1111);
+			cell.setCellValue(comName);
+
+			cell = row.createCell(25);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(26);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(27);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(28);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(29);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(30);
+			cell.setCellStyle(style1_2);
+
+			cell = row.createCell(31);
+			cell.setCellStyle(style1_1_1);
+			cell.setCellValue("대표자");
+
+			cell = row.createCell(32);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(33);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(34);
+			cell.setCellStyle(style1_2);
+
+			cell = row.createCell(35);
+			cell.setCellStyle(style1_3);
+			cell.setCellValue(comCeo);
+
+			cell = row.createCell(36);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(37);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(38);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(39);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(40);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(41);
+			cell.setCellStyle(style1_8);
+
+			row = sheet.createRow(8);
+			row.setHeight((short) 300);
+
+			cell = row.createCell(19);
+			cell.setCellStyle(style1_7_1);
+			cell.setCellValue("주      소");
+
+			cell = row.createCell(20);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(21);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(22);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(23);
+			cell.setCellStyle(style1_2);
+
+			cell = row.createCell(24);
+			cell.setCellStyle(style1_99);
+			cell.setCellValue(comAdd);
+
+			cell = row.createCell(25);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(26);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(27);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(28);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(29);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(30);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(31);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(32);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(33);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(34);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(35);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(36);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(37);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(38);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(39);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(40);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(41);
+			cell.setCellStyle(style1_8);
+
+			row = sheet.createRow(12);
+			row.setHeight((short) 300);
+
+			cell = row.createCell(19);
+			cell.setCellStyle(style1_7_1);
+			cell.setCellValue("전      화");
+
+			cell = row.createCell(20);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(21);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(22);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(23);
+			cell.setCellStyle(style1_2);
+
+			cell = row.createCell(24);
+			cell.setCellStyle(style1);
+			cell.setCellValue(comTel);
+
+			cell = row.createCell(25);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(26);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(27);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(28);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(29);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(30);
+			cell.setCellStyle(style1_2);
+
+			cell = row.createCell(31);
+			cell.setCellStyle(style1_1_1);
+			cell.setCellValue("팩   스");
+
+			cell = row.createCell(32);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(33);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(34);
+			cell.setCellStyle(style1_3);
+
+			cell = row.createCell(35);
+			cell.setCellStyle(style1_33);
+			cell.setCellValue(comFax);
+
+			cell = row.createCell(36);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(37);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(38);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(39);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(40);
+			cell.setCellStyle(style1_3);
+			cell = row.createCell(41);
+			cell.setCellStyle(style1_8);
+
+			int a = (int) ((Math.random() * 10000) + 10);
+
+			file = File.createTempFile("tmp" + Integer.toString(a), ".tmp");
+			file.deleteOnExit();
+
+			wb.write(file);
+
+			wb.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+		}
+
+		return file;
+	}
+
+	@Override
+	public File makeChungExcel(String guManageNum, String company) throws Exception {
+
+//		File file = null;
+//		HSSFWorkbook wb = null;
+//
+//		List<CompanyDTO> compa = companyMapper.selectCompany();
+//
+//		RsvtDTO rsvtDto = new RsvtDTO();
+//		rsvtDto.setConfirm(guManageNum);
+//
+//		List<RsvtDTO> rsvt = rsvtMapper.selectGudealImRsvt(rsvtDto);
+//		List<RsvtDTO> oper = rsvtMapper.selectGudealImOper(rsvtDto);
+//
+//		String comNo = "";
+//		String comName = "";
+//		String comAdd = "";
+//		String comCeo = "";
+//		String comTel = "";
+//		String comFax = "";
+//		for (int i = 0; i < compa.size(); i++) {
+//			if (company.equals(compa.get(i).getCompany())) {
+//				comNo = compa.get(i).getNo1();
+//				comName = compa.get(i).getCompany();
+//				comAdd = compa.get(i).getAdress();
+//				comCeo = compa.get(i).getCeo();
+//				comTel = compa.get(i).getTelephone();
+//				comFax = compa.get(i).getFax();
+//			}
+//		}
+//
+//		String nowDay = LocalDate.now().toString();
+//
+//		try {
+//
+//			String url = "src/main/resources/static/excel/samplegyen.xls";
+//
+//			FileInputStream fis = new FileInputStream(url);
+//
+//			wb = new HSSFWorkbook(fis);
+//			HSSFSheet sheet = wb.getSheetAt(0);
+//
+//			HSSFFont fontTitle = wb.createFont();
+//			fontTitle.setFontHeightInPoints((short) 12);
+//			fontTitle.setBold(false);
+//			fontTitle.setFontName("Malgun Gothic (본문)");
+//
+//			HSSFFont fontCont = wb.createFont();
+//			fontCont.setFontHeightInPoints((short) 10);
+//			fontCont.setBold(false);
+//			fontCont.setFontName("Malgun Gothic (본문)");
+//
+//			HSSFFont fontContRed = wb.createFont();
+//			fontCont.setFontHeightInPoints((short) 10);
+//			fontCont.setBold(false);
+//			fontCont.setFontName("Malgun Gothic (본문)");
+//			fontContRed.setColor(HSSFFont.COLOR_RED);
+//
+//			CellStyle style1 = wb.createCellStyle();
+//
+//			style1.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1.setFont(fontTitle);
+//			style1.setAlignment(HorizontalAlignment.CENTER);
+//			style1.setWrapText(true);
+//
+//			CellStyle style1_1 = wb.createCellStyle();
+//
+//			style1_1.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1_1.setFont(fontTitle);
+//			style1_1.setAlignment(HorizontalAlignment.CENTER);
+//			style1_1.setWrapText(true);
+//			style1_1.setBorderTop(BorderStyle.THIN);
+//			style1_1.setBorderLeft(BorderStyle.THIN);
+//
+//			CellStyle style1_2 = wb.createCellStyle();
+//
+//			style1_2.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1_2.setFont(fontTitle);
+//			style1_2.setAlignment(HorizontalAlignment.CENTER);
+//			style1_2.setWrapText(true);
+//			style1_2.setBorderTop(BorderStyle.THIN);
+//			style1_2.setBorderRight(BorderStyle.THIN);
+//
+//			CellStyle style1_3 = wb.createCellStyle();
+//
+//			style1_3.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1_3.setFont(fontTitle);
+//			style1_3.setAlignment(HorizontalAlignment.CENTER);
+//			style1_3.setWrapText(true);
+//			style1_3.setBorderTop(BorderStyle.THIN);
+//
+//			CellStyle style1_4 = wb.createCellStyle();
+//
+//			style1_4.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1_4.setFont(fontTitle);
+//			style1_4.setAlignment(HorizontalAlignment.CENTER);
+//			style1_4.setWrapText(true);
+//			style1_4.setBorderTop(BorderStyle.MEDIUM);
+//			style1_4.setBorderRight(BorderStyle.MEDIUM);
+//
+//			CellStyle style1_5 = wb.createCellStyle();
+//
+//			style1_5.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1_5.setFont(fontTitle);
+//			style1_5.setAlignment(HorizontalAlignment.CENTER);
+//			style1_5.setWrapText(true);
+//			style1_5.setBorderTop(BorderStyle.MEDIUM);
+//			style1_5.setBorderLeft(BorderStyle.MEDIUM);
+//
+//			CellStyle style1_6 = wb.createCellStyle();
+//
+//			style1_6.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1_6.setFont(fontTitle);
+//			style1_6.setAlignment(HorizontalAlignment.CENTER);
+//			style1_6.setWrapText(true);
+//			style1_6.setBorderTop(BorderStyle.MEDIUM);
+//
+//			CellStyle style1_7 = wb.createCellStyle();
+//
+//			style1_7.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1_7.setFont(fontTitle);
+//			style1_7.setAlignment(HorizontalAlignment.CENTER);
+//			style1_7.setWrapText(true);
+//			style1_7.setBorderTop(BorderStyle.THIN);
+//			style1_7.setBorderLeft(BorderStyle.MEDIUM);
+//
+//			CellStyle style1_8 = wb.createCellStyle();
+//
+//			style1_8.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1_8.setFont(fontTitle);
+//			style1_8.setAlignment(HorizontalAlignment.CENTER);
+//			style1_8.setWrapText(true);
+//			style1_8.setBorderTop(BorderStyle.THIN);
+//			style1_8.setBorderRight(BorderStyle.MEDIUM);
+//
+//			CellStyle style1_9 = wb.createCellStyle();
+//
+//			style1_9.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1_9.setFont(fontTitle);
+//			style1_9.setAlignment(HorizontalAlignment.CENTER);
+//			style1_9.setWrapText(true);
+//			style1_9.setBorderTop(BorderStyle.MEDIUM);
+//			style1_9.setBorderLeft(BorderStyle.THIN);
+//
+//			CellStyle style1_10 = wb.createCellStyle();
+//
+//			style1_10.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style1_10.setFont(fontTitle);
+//			style1_10.setAlignment(HorizontalAlignment.CENTER);
+//			style1_10.setWrapText(true);
+//			style1_10.setBorderTop(BorderStyle.MEDIUM);
+//			style1_10.setBorderRight(BorderStyle.THIN);
+//
+//			CellStyle style2 = wb.createCellStyle();
+//
+//			style2.setVerticalAlignment(VerticalAlignment.BOTTOM);
+//			style2.setFont(fontTitle);
+//			style2.setAlignment(HorizontalAlignment.CENTER);
+//			style2.setWrapText(true);
+//			style2.setBorderBottom(BorderStyle.MEDIUM);
+//
+//			CellStyle style3 = wb.createCellStyle();
+//
+//			style3.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style3.setFont(fontCont);
+//			style3.setAlignment(HorizontalAlignment.CENTER);
+//			style3.setWrapText(true);
+//			style3.setBorderTop(BorderStyle.THIN);
+//			style3.setBorderRight(BorderStyle.THIN);
+//			style3.setBorderBottom(BorderStyle.THIN);
+//			style3.setBorderLeft(BorderStyle.THIN);
+//
+//			CellStyle style3_1 = wb.createCellStyle();
+//
+//			style3_1.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style3_1.setFont(fontCont);
+//			style3_1.setAlignment(HorizontalAlignment.RIGHT);
+//			style3_1.setWrapText(true);
+//			style3_1.setBorderTop(BorderStyle.THIN);
+//			style3_1.setBorderRight(BorderStyle.THIN);
+//			style3_1.setBorderBottom(BorderStyle.THIN);
+//			style3_1.setBorderLeft(BorderStyle.THIN);
+//
+//			CellStyle style3_2 = wb.createCellStyle();
+//
+//			style3_2.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style3_2.setFont(fontContRed);
+//			style3_2.setAlignment(HorizontalAlignment.RIGHT);
+//			style3_2.setWrapText(true);
+//			style3_2.setBorderTop(BorderStyle.THIN);
+//			style3_2.setBorderRight(BorderStyle.THIN);
+//			style3_2.setBorderBottom(BorderStyle.THIN);
+//			style3_2.setBorderLeft(BorderStyle.THIN);
+//
+//			CellStyle style3_3 = wb.createCellStyle();
+//
+//			style3_3.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style3_3.setFont(fontCont);
+//			style3_3.setAlignment(HorizontalAlignment.RIGHT);
+//			style3_3.setWrapText(true);
+//			style3_3.setBorderTop(BorderStyle.THIN);
+//			style3_3.setBorderRight(BorderStyle.THIN);
+//			style3_3.setBorderBottom(BorderStyle.THIN);
+//			style3_3.setBorderLeft(BorderStyle.MEDIUM);
+//
+//			CellStyle style3_4 = wb.createCellStyle();
+//
+//			style3_4.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style3_4.setFont(fontCont);
+//			style3_4.setAlignment(HorizontalAlignment.RIGHT);
+//			style3_4.setWrapText(true);
+//			style3_4.setBorderTop(BorderStyle.THIN);
+//			style3_4.setBorderRight(BorderStyle.MEDIUM);
+//			style3_4.setBorderBottom(BorderStyle.THIN);
+//			style3_4.setBorderLeft(BorderStyle.THIN);
+//
+//			CellStyle style3_5 = wb.createCellStyle();
+//
+//			style3_3.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style3_3.setFont(fontTitle);
+//			style3_3.setAlignment(HorizontalAlignment.RIGHT);
+//			style3_3.setWrapText(true);
+//			style3_3.setBorderLeft(BorderStyle.MEDIUM);
+//
+//			CellStyle style3_6 = wb.createCellStyle();
+//
+//			style3_3.setVerticalAlignment(VerticalAlignment.CENTER);
+//			style3_3.setFont(fontTitle);
+//			style3_3.setAlignment(HorizontalAlignment.RIGHT);
+//			style3_3.setWrapText(true);
+//			style3_3.setBorderRight(BorderStyle.MEDIUM);
+//
+//			HSSFRow row = sheet.createRow(4);
+//			row.setHeight((short) 300);
+//
+//			HSSFCell cell = row.createCell(0);
+//			cell.setCellStyle(style2);
+//			cell.setCellValue("서기");
+//
+//			cell = row.createCell(1);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(2);
+//			cell.setCellStyle(style2);
+//
+//			cell = row.createCell(3);
+//			cell.setCellStyle(style2);
+//			cell.setCellValue(nowDay.split("-")[0]);
+//
+//			cell = row.createCell(4);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(5);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(6);
+//			cell.setCellStyle(style2);
+//
+//			cell = row.createCell(7);
+//			cell.setCellStyle(style2);
+//			cell.setCellValue("년");
+//
+//			cell = row.createCell(8);
+//			cell.setCellStyle(style2);
+//
+//			cell = row.createCell(9);
+//			cell.setCellStyle(style2);
+//			cell.setCellValue(nowDay.split("-")[1]);
+//
+//			cell = row.createCell(10);
+//			cell.setCellStyle(style2);
+//
+//			cell = row.createCell(11);
+//			cell.setCellStyle(style2);
+//			cell.setCellValue("월");
+//
+//			cell = row.createCell(12);
+//			cell.setCellStyle(style2);
+//
+//			cell = row.createCell(13);
+//			cell.setCellStyle(style2);
+//			cell.setCellValue(nowDay.split("-")[2]);
+//
+//			cell = row.createCell(14);
+//			cell.setCellStyle(style2);
+//
+//			cell = row.createCell(15);
+//			cell.setCellStyle(style2);
+//			cell.setCellValue("일");
+//
+//			cell = row.createCell(16);
+//			cell.setCellStyle(style2);
+//
+//			cell = row.createCell(19);
+//			cell.setCellStyle(style1_5);
+//			cell.setCellValue("등록번호");
+//
+//			cell = row.createCell(20);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(21);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(22);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(23);
+//			cell.setCellStyle(style1_10);
+//
+//			cell = row.createCell(24);
+//			cell.setCellStyle(style1_9);
+//			cell.setCellValue(comNo);
+//
+//			cell = row.createCell(25);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(26);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(27);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(28);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(29);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(30);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(31);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(32);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(33);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(34);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(35);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(36);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(37);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(38);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(39);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(40);
+//			cell.setCellStyle(style1_6);
+//			cell = row.createCell(41);
+//			cell.setCellStyle(style1_4);
+//
+//			row = sheet.createRow(6);
+//			row.setHeight((short) 300);
+//
+//			cell = row.createCell(0);
+//			cell.setCellStyle(style2);
+//			cell.setCellValue("서기");
+//
+//			cell = row.createCell(1);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(2);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(3);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(4);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(5);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(6);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(7);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(8);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(9);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(10);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(11);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(12);
+//			cell.setCellStyle(style2);
+//
+//			cell = row.createCell(13);
+//			cell.setCellStyle(style2);
+//			cell.setCellValue("귀   하");
+//
+//			cell = row.createCell(14);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(15);
+//			cell.setCellStyle(style2);
+//			cell = row.createCell(16);
+//			cell.setCellStyle(style2);
+//
+//			cell = row.createCell(19);
+//			cell.setCellStyle(style1_7);
+//			cell.setCellValue("상      호");
+//
+//			cell = row.createCell(20);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(21);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(22);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(23);
+//			cell.setCellStyle(style1_2);
+//
+//			cell = row.createCell(24);
+//			cell.setCellStyle(style1_1);
+//			cell.setCellValue(comName);
+//
+//			cell = row.createCell(25);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(26);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(27);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(28);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(29);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(30);
+//			cell.setCellStyle(style1_2);
+//
+//			cell = row.createCell(31);
+//			cell.setCellStyle(style1_1);
+//			cell.setCellValue("대표자");
+//
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(32);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(33);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(34);
+//			cell.setCellStyle(style1_2);
+//
+//			cell = row.createCell(35);
+//			cell.setCellStyle(style1_3);
+//			cell.setCellValue(comName);
+//
+//			cell = row.createCell(36);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(37);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(38);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(39);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(40);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(41);
+//			cell.setCellStyle(style1_8);
+//
+//			row = sheet.createRow(8);
+//			row.setHeight((short) 300);
+//
+//			cell = row.createCell(19);
+//			cell.setCellStyle(style1_7);
+//			cell.setCellValue("주      소");
+//
+//			cell = row.createCell(20);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(21);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(22);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(23);
+//			cell.setCellStyle(style1_2);
+//
+//			cell = row.createCell(24);
+//			cell.setCellStyle(style1_1);
+//			cell.setCellValue(comAdd);
+//
+//			cell = row.createCell(25);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(26);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(27);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(28);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(29);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(30);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(31);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(32);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(33);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(34);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(35);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(36);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(37);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(38);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(39);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(40);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(41);
+//			cell.setCellStyle(style1_8);
+//
+//			row = sheet.createRow(12);
+//			row.setHeight((short) 300);
+//
+//			cell = row.createCell(19);
+//			cell.setCellStyle(style1_7);
+//			cell.setCellValue("전      화");
+//
+//			cell = row.createCell(20);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(21);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(22);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(23);
+//			cell.setCellStyle(style1_2);
+//
+//			cell = row.createCell(24);
+//			cell.setCellStyle(style1);
+//			cell.setCellValue(comTel);
+//
+//			cell = row.createCell(25);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(26);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(27);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(28);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(29);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(30);
+//			cell.setCellStyle(style1_2);
+//
+//			cell = row.createCell(31);
+//			cell.setCellStyle(style1_1);
+//			cell.setCellValue("팩   스");
+//
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(32);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(33);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(34);
+//			cell.setCellStyle(style1_3);
+//
+//			cell = row.createCell(35);
+//			cell.setCellStyle(style1_1);
+//			cell.setCellValue(comFax);
+//
+//			cell = row.createCell(36);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(37);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(38);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(39);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(40);
+//			cell.setCellStyle(style1_3);
+//			cell = row.createCell(41);
+//			cell.setCellStyle(style1_8);
+//
+//			ArrayList<String> arrTmpDay = new ArrayList<>();
+//			ArrayList<String> arrTmpName = new ArrayList<>();
+//			ArrayList<Integer> arrTmpInM = new ArrayList<>();
+//			ArrayList<Integer> arrTmpOutM = new ArrayList<>();
+//			ArrayList<Integer> arrTmpNum = new ArrayList<>();
+//			ArrayList<Integer> arrTmpNumM = new ArrayList<>();
+//
+//			for (int i = 0; i < rsvt.size(); i++) {
+//				arrTmpDay.add(rsvt.get(i).getStday());
+//				arrTmpName.add(rsvt.get(i).getDesty());
+//				arrTmpInM.add(rsvt.get(i).getConm());
+//				arrTmpOutM.add(0);
+//
+//				arrTmpNum.add(rsvt.get(i).getNum());
+//				arrTmpNumM.add(rsvt.get(i).getNumm());
+//			}
+//
+//			for (int i = 0; i < oper.size(); i++) {
+//				arrTmpDay.add(oper.get(i).getOperday());
+//				arrTmpName.add(oper.get(i).getDesty());
+//				arrTmpInM.add(0);
+//				arrTmpOutM.add(oper.get(i).getAtlm());
+//
+//				arrTmpNum.add(1);
+//				arrTmpNumM.add(oper.get(i).getAtlm());
+//			}
+//
+//			ArrayList<Integer> arrTmpNumCh = new ArrayList<>();
+//			for (int i = 0; i < arrTmpDay.size(); i++) {
+//				int tmp = Integer.parseInt(arrTmpDay.get(i).replaceAll("-", ""));
+//				arrTmpNumCh.add(tmp);
+//			}
+//
+//			ArrayList<Integer> arrTmpIndex = new ArrayList<>();
+//
+//			int maxValue = Collections.max(arrTmpNumCh) + 10000;
+//
+//			for (int i = 0; i < arrTmpNumCh.size(); i++) {
+//				int minValue = Collections.min(arrTmpNumCh);
+//
+//				for (int k = 0; k < arrTmpNumCh.size(); k++) {
+//					if (arrTmpNumCh.get(k).equals(minValue)) {
+//						arrTmpIndex.add(k);
+//						arrTmpNumCh.set(k, maxValue);
+//						break;
+//					}
+//				}
+//			}
+//
+//			ArrayList<String> arrDay = new ArrayList<>();
+//			ArrayList<String> arrName = new ArrayList<>();
+//			ArrayList<Integer> arrInM = new ArrayList<>();
+//			ArrayList<Integer> arrOutM = new ArrayList<>();
+//			ArrayList<Integer> arrNum = new ArrayList<>();
+//			ArrayList<Integer> arrNumM = new ArrayList<>();
+//
+//			for (int i = 0; i < arrTmpNumCh.size(); i++) {
+//				arrDay.add(arrTmpDay.get(arrTmpIndex.get(i)));
+//				arrName.add(arrTmpName.get(arrTmpIndex.get(i)));
+//				arrInM.add(arrTmpInM.get(arrTmpIndex.get(i)));
+//				arrOutM.add(arrTmpOutM.get(arrTmpIndex.get(i)));
+//				arrNum.add(arrTmpNum.get(arrTmpIndex.get(i)));
+//				arrNumM.add(arrTmpNumM.get(arrTmpIndex.get(i)));
+//			}
+//
+//			int sumNum = 0;
+//			int sumMoney = 0;
+//
+//			for (int i = 0; i < arrDay.size(); i++) {
+//
+//				row = sheet.createRow(20 + (i * 2));
+//				row.setHeight((short) 300);
+//
+//				cell = row.createCell(0);
+//				cell.setCellStyle(style3_3);
+//				cell.setCellValue(arrDay.get(i).split("-")[1]);
+//
+//				cell = row.createCell(3);
+//				cell.setCellStyle(style3);
+//				cell.setCellValue(arrDay.get(i).split("-")[2]);
+//
+//				cell = row.createCell(6);
+//				cell.setCellStyle(style3);
+//				cell.setCellValue(arrTmpName.get(i));
+//
+//				cell = row.createCell(16);
+//				cell.setCellStyle(style3);
+//				cell.setCellValue(arrTmpNum.get(i));
+//
+//				cell = row.createCell(19);
+//				cell.setCellStyle(style3_1);
+//				cell.setCellValue(Utils.coma_Money_Int(arrTmpNumM.get(i)));
+//
+//				int moneyMMM = 0;
+//				if (arrTmpInM.get(i) < 1) {
+//					moneyMMM = arrTmpOutM.get(i) * -1;
+//					cell = row.createCell(25);
+//					cell.setCellStyle(style3_2);
+//					cell.setCellValue(Utils.coma_Money_Int(moneyMMM));
+//				} else {
+//					moneyMMM = arrTmpInM.get(i);
+//					cell = row.createCell(25);
+//					cell.setCellStyle(style3_1);
+//					cell.setCellValue(Utils.coma_Money_Int(moneyMMM));
+//				}
+//
+//				cell = row.createCell(33);
+//				cell.setCellStyle(style3);
+//				cell.setCellValue("");
+//
+//				cell = row.createCell(41);
+//				cell.setCellStyle(style3_4);
+//
+//				sumNum = sumNum + arrTmpNum.get(i);
+//				sumMoney = sumMoney + moneyMMM;
+//			}
+//
+//			HSSFFont fontbt = wb.createFont();
+//			fontbt.setFontHeightInPoints((short) 12);
+//			fontbt.setBold(true);
+//			fontbt.setFontName("Malgun Gothic (본문)");
+//
+//			HSSFFont fontbtR = wb.createFont();
+//			fontbtR.setFontHeightInPoints((short) 12);
+//			fontbtR.setBold(true);
+//			fontbtR.setFontName("Malgun Gothic (본문)");
+//
+//			CellStyle styleBot0 = wb.createCellStyle();
+//
+//			styleBot0.setVerticalAlignment(VerticalAlignment.CENTER);
+//			styleBot0.setFont(fontbt);
+//			styleBot0.setAlignment(HorizontalAlignment.CENTER);
+//			styleBot0.setWrapText(true);
+//			styleBot0.setBorderLeft(BorderStyle.MEDIUM);
+//			styleBot0.setBorderTop(BorderStyle.DOUBLE);
+//
+//			CellStyle styleBot1 = wb.createCellStyle();
+//
+//			styleBot1.setVerticalAlignment(VerticalAlignment.CENTER);
+//			styleBot1.setFont(fontbt);
+//			styleBot1.setAlignment(HorizontalAlignment.CENTER);
+//			styleBot1.setWrapText(true);
+//			styleBot1.setBorderLeft(BorderStyle.THIN);
+//			styleBot1.setBorderTop(BorderStyle.DOUBLE);
+//
+//			CellStyle styleBot2 = wb.createCellStyle();
+//
+//			styleBot2.setVerticalAlignment(VerticalAlignment.CENTER);
+//			styleBot2.setFont(fontbt);
+//			styleBot2.setAlignment(HorizontalAlignment.RIGHT);
+//			styleBot2.setWrapText(true);
+//			styleBot2.setBorderLeft(BorderStyle.THIN);
+//			styleBot2.setBorderTop(BorderStyle.DOUBLE);
+//
+//			CellStyle styleBot3 = wb.createCellStyle();
+//
+//			styleBot3.setVerticalAlignment(VerticalAlignment.CENTER);
+//			styleBot3.setFont(fontbt);
+//			styleBot3.setAlignment(HorizontalAlignment.RIGHT);
+//			styleBot3.setWrapText(true);
+//			styleBot3.setBorderTop(BorderStyle.DOUBLE);
+//
+//			if (arrDay.size() <= 15) {
+//				row = sheet.createRow(50);
+//				row.setHeight((short) 300);
+//
+//				cell = row.createCell(0);
+//				cell.setCellStyle(styleBot0);
+//				cell.setCellValue("계");
+//
+//				cell = row.createCell(1);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(2);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(3);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(4);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(5);
+//				cell.setCellStyle(styleBot3);
+//
+//				cell = row.createCell(6);
+//				cell.setCellStyle(styleBot1);
+//				cell.setCellValue("-");
+//
+//				cell = row.createCell(7);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(8);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(9);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(10);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(11);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(12);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(13);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(14);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(15);
+//				cell.setCellStyle(styleBot3);
+//
+//				cell = row.createCell(16);
+//				cell.setCellStyle(styleBot2);
+//				cell.setCellValue(sumNum);
+//
+//				cell = row.createCell(17);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(18);
+//				cell.setCellStyle(styleBot3);
+//
+//				cell = row.createCell(19);
+//				cell.setCellStyle(styleBot1);
+//				cell.setCellValue("-");
+//
+//				cell = row.createCell(20);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(21);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(22);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(23);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(24);
+//				cell.setCellStyle(styleBot3);
+//
+//				if (sumMoney < 0) {
+//					cell = row.createCell(25);
+//					cell.setCellStyle(styleBot2);
+//					cell.setCellValue(Utils.coma_Money_Int(sumMoney));
+//				} else {
+//					cell = row.createCell(25);
+//					cell.setCellStyle(styleBot2);
+//					cell.setCellValue(Utils.coma_Money_Int(sumMoney));
+//				}
+//
+//				cell = row.createCell(26);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(27);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(28);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(29);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(30);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(31);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(32);
+//				cell.setCellStyle(styleBot3);
+//
+//				cell = row.createCell(33);
+//				cell.setCellStyle(styleBot1);
+//				cell.setCellValue("-");
+//
+//				cell = row.createCell(34);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(35);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(36);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(37);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(38);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(39);
+//				cell.setCellStyle(styleBot3);
+//				cell = row.createCell(40);
+//				cell.setCellStyle(styleBot3);
+//
+//				cell = row.createCell(41);
+//				cell.setCellStyle(style3_4);
+//			}
+//
+//			int a = (int) ((Math.random() * 10000) + 10);
+//
+//			file = File.createTempFile("tmp" + Integer.toString(a), ".tmp");
+//			file.deleteOnExit();
+//
+//			wb.write(file);
+//
+//			wb.close();
+//
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//		}
+//
+//		return file;
+
+		return null;
+	}
+
+	@Override
+	public int updateCtm(RsvtDTO rsvtDTO) throws Exception {
+
+		int rtn = rsvtMapper.updateCtm(rsvtDTO);
+
+		return rtn;
+
 	}
 
 }

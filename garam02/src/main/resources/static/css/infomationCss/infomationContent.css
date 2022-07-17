@@ -5,7 +5,7 @@
 }
 
 .infoContent {
-	border: 1px solid var(--text-grey);
+	border: 1px solid var(--text-grey2);
 	border-radius: 10px;
 	padding: 2rem 3rem 2rem 3rem;
 }
@@ -26,11 +26,11 @@
 }
 
 #infoContent-std {
-	color: var(--text-grey);
+	color: var(--text-grey2);
 }
 
 #infoContent-ed {
-	color: var(--text-grey);
+	color: var(--text-grey2);
 }
 
 .body-content01 {
@@ -70,11 +70,11 @@
 .infoContent-reply-body-in-item:nth-child(3) {
 	display: flex;
 	gap: 1rem;
-	color: var(--text-grey);
+	color: var(--text-grey2);
 }
 
 .reply-write, .reply-write-body {
-	border: 1px solid var(--text-grey);
+	border: 1px solid var(--text-grey2);
 	border-radius: 10px;
 	padding: 1.5rem;
 	margin-top: 2rem;

@@ -118,3 +118,7 @@ a:hover {
     background-color: var(--sub-color);
     border-radius: 50%;
 }
+
+.modal-body {
+    background: #f6f7f9;
+}

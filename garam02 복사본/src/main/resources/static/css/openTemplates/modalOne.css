@@ -1,0 +1,9 @@
+.table > tbody > .allo1 {
+    background: var(--compa-color);
+}
+.table > tbody > .allo2 {
+    background: var(--person-color);
+}
+.table > tbody > .allo3 {
+    background: var(--otherCompa-color);
+}

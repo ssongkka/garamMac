@@ -737,23 +737,26 @@ function getVeInfo(dom) {
                         $('#ve14-1').val('');
                     }
 
+                    const timestamp = (new Date()).getTime();
+
                     if (r[0].img1) {
                         updateImg(veFolder + 'img/' + r[0].img1, 've16');
-                        $('#ve16-1').attr('href', veFolder + 'img/' + r[0].img1);
+
+                        $('#ve16-1').attr('href', veFolder + 'img/' + r[0].img1 + '?_=' + timestamp);
                     } else {
                         $('#ve16').attr('src', 'img/vehicle/bus1.png');
                         $('#ve16-1').attr('href', 'img/vehicle/bus1.png');
                     }
                     if (r[0].img2) {
                         updateImg(veFolder + 'img/' + r[0].img2, 've17');
-                        $('#ve17-1').attr('href', veFolder + 'img/' + r[0].img2);
+                        $('#ve17-1').attr('href', veFolder + 'img/' + r[0].img2 + '?_=' + timestamp);
                     } else {
                         $('#ve17').attr('src', 'img/vehicle/bus2.png');
                         $('#ve17-1').attr('href', 'img/vehicle/bus2.png');
                     }
                     if (r[0].img3) {
                         updateImg(veFolder + 'img/' + r[0].img3, 've18');
-                        $('#ve18-1').attr('href', veFolder + 'img/' + r[0].img3);
+                        $('#ve18-1').attr('href', veFolder + 'img/' + r[0].img3 + '?_=' + timestamp);
                     } else {
                         $('#ve18').attr('src', 'img/vehicle/bus3.png');
                         $('#ve18-1').attr('href', 'img/vehicle/bus3.png');
@@ -1381,6 +1384,7 @@ function insertVe(tp) {
                         "img2": iimmgg2,
                         "img3": iimmgg3
                     };
+
                     $.ajax({
                         url: url,
                         type: "POST",
@@ -1918,14 +1922,16 @@ function makeVeOper() {
                                 <table class="table table-bordered">
                                     <colgroup>
                                         <col width="18%">
-                                        <col width="26%">
-                                        <col width="26%">
+                                        <col width="12%">
+                                        <col width="20%">
+                                        <col width="20%">
                                         <col width="15%">
                                         <col width="15%">
                                     </colgroup>
                                     <thead class="table-light">
                                         <tr>
                                             <th class="sortStrP">날짜</th>
+                                            <th class="sortStrP">승무원</th>
                                             <th class="sortStrP">고객정보</th>
                                             <th class="sortStrP">목적지</th>
                                             <th class="sortNumP">대당금액</th>
@@ -1969,14 +1975,16 @@ function makeVeOper() {
                                     <table class="table table-bordered">
                                         <colgroup>
                                             <col width="18%">
-                                            <col width="26%">
-                                            <col width="26%">
+                                            <col width="12%">
+                                            <col width="20%">
+                                            <col width="20%">
                                             <col width="15%">
                                             <col width="15%">
                                         </colgroup>
                                         <thead class="table-light">
                                             <tr>
                                                 <th>날짜</th>
+                                                <th>승무원</th>
                                                 <th>고객정보</th>
                                                 <th>목적지</th>
                                                 <th>대당금액</th>
@@ -2040,6 +2048,15 @@ function makeVeOper() {
                             }
                         }
 
+                        let operIIIDDDD = '';
+                        for (let l = 0; l < dbEmp.length; l++) {
+
+                            if (r[i].operid == dbEmp[l].id) {
+                                operIIIDDDD = dbEmp[l].name;
+                            }
+
+                        }
+
                         arrTmpHtmls[chNum] += `
                         <tr>
                             <td>` + r[i].operday +
@@ -2047,6 +2064,9 @@ function makeVeOper() {
                                 <input type="hidden" value="` + r[i].operseq +
                                 `">
                             </td>
+                            <td>` +
+                                operIIIDDDD +
+                                `</td>
                             <td>` + r[i].ctmname +
                                 `</td>
                             <td>` + r[i].desty +

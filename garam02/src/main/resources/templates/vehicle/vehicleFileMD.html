@@ -27,10 +27,10 @@
                             <label for="compa-file" class="form-label">회사선택</label>
                             <select class="form-select" id="compa-file" name="compa">
                                 <option
-                                    th:each="company : ${company}"
-                                    th:value="${company.company}"
-                                    th:label="${company.company}"
-                                    th:data-value="${company.company}"></option>
+                                    th:each="compa : ${compa}"
+                                    th:value="${compa.company}"
+                                    th:label="${compa.company}"
+                                    th:data-value="${compa.company}"></option>
                             </select>
                         </div>
                     </form>

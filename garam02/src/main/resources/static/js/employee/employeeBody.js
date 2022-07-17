@@ -657,7 +657,8 @@ function getEmpInfo(dom) {
 
                     if (r[0].img) {
                         updateImg(empFolder + 'img/' + r[0].img, 'empPic');
-                        $('#empPic-a').attr('href', empFolder + 'img/' + r[0].img);
+                        const timestamp = (new Date()).getTime();
+                        $('#empPic-a').attr('href', empFolder + 'img/' + r[0].img + '?_=' + timestamp);
                     } else {
                         $('#empPic').attr('src', 'img/employee/emp.png');
                         $('#empPic-a').attr('href', 'img/employee/emp.png');
@@ -1131,14 +1132,16 @@ function makeEmpOper() {
                                 <table class="table table-bordered">
                                     <colgroup>
                                         <col width="18%">
-                                        <col width="26%">
-                                        <col width="26%">
+                                        <col width="12%">
+                                        <col width="20%">
+                                        <col width="20%">
                                         <col width="15%">
                                         <col width="15%">
                                     </colgroup>
                                     <thead class="table-light">
                                         <tr>
                                             <th class="sortStrP">날짜</th>
+                                            <th class="sortNumP">차량번호</th>
                                             <th class="sortStrP">고객정보</th>
                                             <th class="sortStrP">목적지</th>
                                             <th class="sortNumP">대당금액</th>
@@ -1179,14 +1182,16 @@ function makeEmpOper() {
                                     <table class="table table-bordered">
                                         <colgroup>
                                             <col width="18%">
-                                            <col width="26%">
-                                            <col width="26%">
+                                            <col width="12%">
+                                            <col width="20%">
+                                            <col width="20%">
                                             <col width="15%">
                                             <col width="15%">
                                         </colgroup>
                                         <thead class="table-light">
                                             <tr>
                                                 <th>날짜</th>
+                                                <th>차량번호</th>
                                                 <th>고객정보</th>
                                                 <th>목적지</th>
                                                 <th>대당금액</th>
@@ -1251,6 +1256,13 @@ function makeEmpOper() {
                             }
                         }
 
+                        let carNNNNNNN = '';
+                        for (let l = 0; l < dbVe.length; l++) {
+                            if (r[i].opercar == dbVe[l].carnumber) {
+                                carNNNNNNN = (dbVe[l].vehicle).substring((dbVe[l].vehicle).length - 4);;
+                            }
+                        }
+
                         arrTmpHtmls[chNum] += `
                         <tr>
                             <td>` + r[i].operday +
@@ -1258,6 +1270,9 @@ function makeEmpOper() {
                                 <input type="hidden" value="` + r[i].operseq +
                                 `">
                             </td>
+                            <td>` +
+                                carNNNNNNN +
+                                `</td>
                             <td>` + r[i].ctmname +
                                 `</td>
                             <td>` + r[i].desty +

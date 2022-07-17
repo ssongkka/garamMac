@@ -121,6 +121,10 @@
     padding: 0 2rem;
 }
 
+.title222 {
+    padding: 0;
+}
+
 .title2 blockquote {
     padding: 0 1.5rem;
 }
@@ -143,6 +147,39 @@
     display: flex;
     flex-direction: row;
     gap: 2rem;
+}
+
+.mdh-gu {
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+}
+
+.mdh-gu-item2 {
+    display: none;
+}
+/* .mdh-gu-item2 {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+} */
+
+.gubtn-group {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.gubtn-group-item1,
+.gubtn-group-item2 {
+    flex: 1;
+}
+
+.nogu-chung-fo {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }
 
 .gumanagesum-item {

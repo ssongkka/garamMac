@@ -54,14 +54,32 @@
                         </table>
                     </div>
                 </div>
-                <div>
-                    <button
-                        type="button"
-                        class="btn btn-default"
-                        id="guManageMdNew"
-                        control-id="ControlID-12">신규입력
-                        <i class="fas fa-plus-square"></i>
-                    </button>
+                <div class="gubtn-group">
+                    <div class="gubtn-group-item1">
+                        <button
+                            type="button"
+                            class="btn btn-default"
+                            id="guManageMdNew"
+                            control-id="ControlID-12">신규입력
+                            <i class="fas fa-plus-square"></i>
+                        </button>
+                    </div>
+                    <div class="gubtn-group-item2">
+                        <form
+                            th:action="@{/dashboardgmanage/makeChungSampleExcel}"
+                            class="nogu-chung-fo">
+                            <select class="form-select" name="company">
+                                <option
+                                    th:each="compa : ${compa}"
+                                    th:value="${compa.company}"
+                                    th:label="${compa.company}"
+                                    th:data-value="${compa.company}"></option>
+                            </select>
+                            <input type="hidden" id="gumnnum" name="gumnnum" value="">
+                            <button type="submit" class="btn btn-success">청구서양식<i class="fa-solid fa-file-excel"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="main-gumanage-item2">
@@ -71,7 +89,7 @@
                         <h2 class="" id="ttl0">거래처명</h2>
                         <h5 class="titlejae" id="ttl00">주소</h5>
                     </div>
-                    <div class="title2">
+                    <div class="title2 title222">
                         <blockquote>
                             <h5 class="titlejae">연락처1</h5>
                             <h5 id="ttl1">&nbsp;</h5>
@@ -237,7 +255,15 @@
             <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id="guManageMdTitle"></h3>
+                        <div class="mdh-gu">
+                            <div class="mdh-gu-item1">
+                                <h3 class="modal-title" id="guManageMdTitle"></h3>
+                            </div>
+                            <div class="mdh-gu-item2">
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
                         <button
                             type="button"
                             class="btn-close"

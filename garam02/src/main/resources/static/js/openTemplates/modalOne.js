@@ -150,6 +150,12 @@ function getMdOneShow(opNum, toDay, sepa) {
                     if (veCnt < 1) {
                         $('#mdOneTr1').addClass('allo3');
                         veh = r[0].opercar;
+
+                        for (let c = 0; c < dbothercompa.length; c++) {
+                            if (r[0].opercar == dbothercompa[c].ctmno) {
+                                veh = dbothercompa[c].ctmname;
+                            }
+                        }
                     }
 
                     $('#mdOneTd1').val(r[0].operseq);
@@ -188,6 +194,12 @@ function getMdOneShow(opNum, toDay, sepa) {
                         if (veCnt < 1) {
                             veh = r[1].opercar;
                             $('#mdOneTr2').addClass('allo3');
+
+                            for (let c = 0; c < dbothercompa.length; c++) {
+                                if (r[1].opercar == dbothercompa[c].ctmno) {
+                                    veh = dbothercompa[c].ctmname;
+                                }
+                            }
                         }
 
                         $('#mdOneTd21').val(r[1].operseq);
@@ -214,7 +226,7 @@ function getMdOneShow(opNum, toDay, sepa) {
 
                             $('#mdOneTrDel2').html(
                                 `<a class="mdOneDel1">
-                                    <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                                    <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey2);"></i>
                                 </a>`
                             );
                         }
@@ -248,6 +260,12 @@ function getMdOneShow(opNum, toDay, sepa) {
                         if (veCnt < 1) {
                             $('#mdOneTr3').addClass('allo3');
                             veh = r[2].opercar;
+
+                            for (let c = 0; c < dbothercompa.length; c++) {
+                                if (r[2].opercar == dbothercompa[c].ctmno) {
+                                    veh = dbothercompa[c].ctmname;
+                                }
+                            }
                         }
 
                         $('#mdOneTd31').val(r[2].operseq);
@@ -276,7 +294,7 @@ function getMdOneShow(opNum, toDay, sepa) {
 
                             $('#mdOneTrDel3').html(
                                 `<a class="mdOneDel2">
-                                    <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                                    <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey2);"></i>
                                 </a>`
                             );
                         }
@@ -309,6 +327,12 @@ function getMdOneShow(opNum, toDay, sepa) {
                         if (veCnt < 1) {
                             $('#mdOneTr4').addClass('allo3');
                             veh = r[3].opercar;
+
+                            for (let c = 0; c < dbothercompa.length; c++) {
+                                if (r[3].opercar == dbothercompa[c].ctmno) {
+                                    veh = dbothercompa[c].ctmname;
+                                }
+                            }
                         }
 
                         $('#mdOneTd41').val(r[3].operseq);
@@ -336,7 +360,7 @@ function getMdOneShow(opNum, toDay, sepa) {
 
                             $('#mdOneTrDel4').html(
                                 `<a class="mdOneDel3">
-                                    <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                                    <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey2);"></i>
                                 </a>`
                             );
                         }
@@ -369,6 +393,12 @@ function getMdOneShow(opNum, toDay, sepa) {
                         if (veCnt < 1) {
                             $('#mdOneTr5').addClass('allo3');
                             veh = r[4].opercar;
+
+                            for (let c = 0; c < dbothercompa.length; c++) {
+                                if (r[4].opercar == dbothercompa[c].ctmno) {
+                                    veh = dbothercompa[c].ctmname;
+                                }
+                            }
                         }
 
                         $('#mdOneTd51').val(r[4].operseq);
@@ -396,7 +426,7 @@ function getMdOneShow(opNum, toDay, sepa) {
 
                             $('#mdOneTrDel5').html(
                                 `<a class="mdOneDel4">
-                                    <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                                    <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey2);"></i>
                                 </a>`
                             );
                         }
@@ -425,7 +455,7 @@ $(document).on('click', '#btn-one-plus2', function () {
         $('#mdOneTr2').css('display', 'table-row');
         $('#mdOneTrDel2').html(
             `<a class="mdOneDel">
-                <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey2);"></i>
             </a>`
         );
         $('#mdOneTd25').val($('#mdOneTd5').val());
@@ -436,7 +466,7 @@ $(document).on('click', '#btn-one-plus2', function () {
         $('#mdOneTr3').css('display', 'table-row');
         $('#mdOneTrDel3').html(
             `<a class="mdOneDel">
-                <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey2);"></i>
             </a>`
         );
         $('#mdOneTd35').val($('#mdOneTd5').val());
@@ -448,7 +478,7 @@ $(document).on('click', '#btn-one-plus2', function () {
         $('#mdOneTr4').css('display', 'table-row');
         $('#mdOneTrDel4').html(
             `<a class="mdOneDel">
-                <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey2);"></i>
             </a>`
         );
         $('#mdOneTd45').val($('#mdOneTd5').val());
@@ -460,7 +490,7 @@ $(document).on('click', '#btn-one-plus2', function () {
         $('#mdOneTr5').css('display', 'table-row');
         $('#mdOneTrDel5').html(
             `<a class="mdOneDel">
-                <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey2);"></i>
             </a>`
         );
         $('#mdOneTd55').val($('#mdOneTd5').val());
@@ -574,7 +604,7 @@ function delOneWay2(doms, num) {
 
             $(iiddd).html(
                 `<a class="mdOneDel">
-                    <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey);"></i>
+                    <i class="fa-solid fa-x" style="font-size: 1rem; color: var(--text-grey2);"></i>
                 </a>`
             );
 
@@ -653,35 +683,32 @@ $(document).on('keyup', '#mdOneTd5', function (eInner) {
     }
 });
 
-$(document).on('keyup', '#mdOneTd23', function (eInner) {
-    var keyValue = eInner.which;
-    if (keyValue == 13) {
+$(document).on("change", "#mdOneTd23", function () {
 
-        const val = $('#mdOneTd23').val();
+    const val = $('#mdOneTd23').val();
 
-        var caridid = $('#car-info option')
-            .filter(function () {
-                return this.value == val;
-            })
-            .data('id');
+    var caridid = $('#car-info option')
+        .filter(function () {
+            return this.value == val;
+        })
+        .data('id');
 
-        $('#mdOneTd24').val(caridid);
+    $('#mdOneTd24').val(caridid);
 
-        let tmpArr = new Array();
+    let tmpArr = new Array();
 
-        tmpArr.push($('#mdOneTd21').val());
-        tmpArr.push($('#mdOneTd22').text());
-        tmpArr.push($('#mdOneTd23').val());
-        tmpArr.push($('#mdOneTd24').val());
-        tmpArr.push($('#mdOneTd25').val().replaceAll(',', ''));
-        tmpArr.push($('#mdOneTd23').val());
+    tmpArr.push($('#mdOneTd21').val());
+    tmpArr.push($('#mdOneTd22').text());
+    tmpArr.push($('#mdOneTd23').val());
+    tmpArr.push($('#mdOneTd24').val());
+    tmpArr.push($('#mdOneTd25').val().replaceAll(',', ''));
+    tmpArr.push($('#mdOneTd23').val());
 
-        const aaa = $(this)
-            .parent()
-            .parent();
+    const aaa = $(this)
+        .parent()
+        .parent();
 
-        insertOperOne2(aaa, tmpArr);
-    }
+    insertOperOne2(aaa, tmpArr);
 });
 
 $(document).on('change', '#mdOneTd24', function () {
@@ -721,35 +748,32 @@ $(document).on('keyup', '#mdOneTd25', function (eInner) {
     }
 });
 
-$(document).on('keyup', '#mdOneTd33', function (eInner) {
-    var keyValue = eInner.which;
-    if (keyValue == 13) {
+$(document).on("change", "#mdOneTd33", function () {
 
-        const val = $('#mdOneTd33').val();
+    const val = $('#mdOneTd33').val();
 
-        var caridid = $('#car-info option')
-            .filter(function () {
-                return this.value == val;
-            })
-            .data('id');
+    var caridid = $('#car-info option')
+        .filter(function () {
+            return this.value == val;
+        })
+        .data('id');
 
-        $('#mdOneTd34').val(caridid);
+    $('#mdOneTd34').val(caridid);
 
-        let tmpArr = new Array();
+    let tmpArr = new Array();
 
-        tmpArr.push($('#mdOneTd31').val());
-        tmpArr.push($('#mdOneTd32').text());
-        tmpArr.push($('#mdOneTd33').val());
-        tmpArr.push($('#mdOneTd34').val());
-        tmpArr.push($('#mdOneTd35').val().replaceAll(',', ''));
-        tmpArr.push($('#mdOneTd33').val());
+    tmpArr.push($('#mdOneTd31').val());
+    tmpArr.push($('#mdOneTd32').text());
+    tmpArr.push($('#mdOneTd33').val());
+    tmpArr.push($('#mdOneTd34').val());
+    tmpArr.push($('#mdOneTd35').val().replaceAll(',', ''));
+    tmpArr.push($('#mdOneTd33').val());
 
-        const aaa = $(this)
-            .parent()
-            .parent();
+    const aaa = $(this)
+        .parent()
+        .parent();
 
-        insertOperOne2(aaa, tmpArr);
-    }
+    insertOperOne2(aaa, tmpArr);
 });
 
 $(document).on('change', '#mdOneTd34', function () {
@@ -789,35 +813,32 @@ $(document).on('keyup', '#mdOneTd35', function (eInner) {
     }
 });
 
-$(document).on('keyup', '#mdOneTd43', function (eInner) {
-    var keyValue = eInner.which;
-    if (keyValue == 13) {
+$(document).on("change", "#mdOneTd43", function () {
 
-        const val = $('#mdOneTd43').val();
+    const val = $('#mdOneTd43').val();
 
-        var caridid = $('#car-info option')
-            .filter(function () {
-                return this.value == val;
-            })
-            .data('id');
+    var caridid = $('#car-info option')
+        .filter(function () {
+            return this.value == val;
+        })
+        .data('id');
 
-        $('#mdOneTd44').val(caridid);
+    $('#mdOneTd44').val(caridid);
 
-        let tmpArr = new Array();
+    let tmpArr = new Array();
 
-        tmpArr.push($('#mdOneTd41').val());
-        tmpArr.push($('#mdOneTd42').text());
-        tmpArr.push($('#mdOneTd43').val());
-        tmpArr.push($('#mdOneTd44').val());
-        tmpArr.push($('#mdOneTd45').val().replaceAll(',', ''));
-        tmpArr.push($('#mdOneTd43').val());
+    tmpArr.push($('#mdOneTd41').val());
+    tmpArr.push($('#mdOneTd42').text());
+    tmpArr.push($('#mdOneTd43').val());
+    tmpArr.push($('#mdOneTd44').val());
+    tmpArr.push($('#mdOneTd45').val().replaceAll(',', ''));
+    tmpArr.push($('#mdOneTd43').val());
 
-        const aaa = $(this)
-            .parent()
-            .parent();
+    const aaa = $(this)
+        .parent()
+        .parent();
 
-        insertOperOne2(aaa, tmpArr);
-    }
+    insertOperOne2(aaa, tmpArr);
 });
 
 $(document).on('change', '#mdOneTd44', function () {
@@ -857,35 +878,32 @@ $(document).on('keyup', '#mdOneTd45', function (eInner) {
     }
 });
 
-$(document).on('keyup', '#mdOneTd53', function (eInner) {
-    var keyValue = eInner.which;
-    if (keyValue == 13) {
+$(document).on("change", "#mdOneTd53", function () {
 
-        const val = $('#mdOneTd53').val();
+    const val = $('#mdOneTd53').val();
 
-        var caridid = $('#car-info option')
-            .filter(function () {
-                return this.value == val;
-            })
-            .data('id');
+    var caridid = $('#car-info option')
+        .filter(function () {
+            return this.value == val;
+        })
+        .data('id');
 
-        $('#mdOneTd54').val(caridid);
+    $('#mdOneTd54').val(caridid);
 
-        let tmpArr = new Array();
+    let tmpArr = new Array();
 
-        tmpArr.push($('#mdOneTd51').val());
-        tmpArr.push($('#mdOneTd52').text());
-        tmpArr.push($('#mdOneTd53').val());
-        tmpArr.push($('#mdOneTd54').val());
-        tmpArr.push($('#mdOneTd55').val().replaceAll(',', ''));
-        tmpArr.push($('#mdOneTd53').val());
+    tmpArr.push($('#mdOneTd51').val());
+    tmpArr.push($('#mdOneTd52').text());
+    tmpArr.push($('#mdOneTd53').val());
+    tmpArr.push($('#mdOneTd54').val());
+    tmpArr.push($('#mdOneTd55').val().replaceAll(',', ''));
+    tmpArr.push($('#mdOneTd53').val());
 
-        const aaa = $(this)
-            .parent()
-            .parent();
+    const aaa = $(this)
+        .parent()
+        .parent();
 
-        insertOperOne2(aaa, tmpArr);
-    }
+    insertOperOne2(aaa, tmpArr);
 });
 
 $(document).on('change', '#mdOneTd54', function () {

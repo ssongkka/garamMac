@@ -28,6 +28,8 @@ public interface MainService {
 
 	public File dwonSampleRsvt() throws Exception;
 
+	public File dwonSampleChung(String company) throws Exception;
+
 	public List<RsvtDTO> uploadExcelRsvt(MultipartFile[] files) throws Exception;
 
 	public List<RsvtDTO> selectCustomerOtherCompa() throws Exception;
@@ -41,6 +43,8 @@ public interface MainService {
 	public int insertOperOne(List<Map<String, Object>> map) throws Exception;
 
 	public int updateOperaltM(List<Map<String, Object>> map) throws Exception;
+
+	public int updateCtm(RsvtDTO rsvtDTO) throws Exception;
 
 	public int updateRsvt(RsvtDTO rsvtDTO) throws Exception;
 
@@ -106,6 +110,8 @@ public interface MainService {
 	public File makePapperContract(String stday, String desty, String rsvpstp, String cont, String ve1, String ve2,
 			String ve3, String id1, String id2, String id3, String conm, String ctmname, String company, String opercom,
 			String opercar) throws Exception;
+
+	public File makeChungExcel(String guManageNum, String company) throws Exception;
 
 	public File dwonSampleContract() throws Exception;
 

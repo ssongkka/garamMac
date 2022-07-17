@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <!-- Modal -->
+    <div
+        th:fragment="ve-MD-insert"
+        class="modal fade"
+        id="modal-insert"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-insert-mh"></h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ve-insert-pic">
+                        <form action="" id="ve-form">
+                            <input type="hidden" id="vecarn" name="vecarn" value="">
+                            <div class="ve-pics">
+                                <img
+                                    src="img/vehicle/bus1.png"
+                                    onerror="this.src='img/vehicle/bus1.png'"
+                                    id="ve-pic-pre1"
+                                    alt=""
+                                    class="cardImg img-thumbnail">
+                                <h5>외부1 사진</h5>
+                                <label class="file-la" for="imgSelector1">사진 파일선택<i class="fas fa-file-upload"></i>
+                                </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    name="uploadfile"
+                                    id="imgSelector1"
+                                    style="display: none;">
+                            </div>
+                            <div class="ve-pics">
+                                <img
+                                    src="img/vehicle/bus2.png"
+                                    onerror="this.src='img/vehicle/bus2.png'"
+                                    id="ve-pic-pre2"
+                                    alt=""
+                                    class="cardImg img-thumbnail">
+                                <h5>외부2 사진</h5>
+                                <label class="file-la" for="imgSelector2">사진 파일선택<i class="fas fa-file-upload"></i>
+                                </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    name="uploadfile"
+                                    id="imgSelector2"
+                                    style="display: none;">
+                            </div>
+                            <div class="ve-pics">
+                                <img
+                                    src="img/vehicle/bus3.png"
+                                    onerror="this.src='img/vehicle/bus3.png'"
+                                    id="ve-pic-pre3"
+                                    alt=""
+                                    class="cardImg img-thumbnail">
+                                <h5>실내 사진</h5>
+                                <label class="file-la" for="imgSelector3">사진 파일선택<i class="fas fa-file-upload"></i>
+                                </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    name="uploadfile"
+                                    id="imgSelector3"
+                                    style="display: none;">
+                            </div>
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="ve-insert row">
+                        <div class="form-group col-md-4 emp-insert-item">
+                            <label>기본정보</label>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="vehicle-1" class="form-label">차량번호&nbsp;&#42;</label>
+                            <select class="form-select" id="vehicle-1">
+                                <option selected="selected">대구</option>
+                                <option>경북</option>
+                                <option>경남</option>
+                                <option>울산</option>
+                                <option>부산</option>
+                                <option>서울</option>
+                                <option>경기</option>
+                                <option>인천</option>
+                                <option>대전</option>
+                                <option>충남</option>
+                                <option>충북</option>
+                                <option>강원</option>
+                                <option>전북</option>
+                                <option>전남</option>
+                                <option>광주</option>
+                                <option>제주</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="vehicle-2" class="form-label">&nbsp;</label>
+                            <select class="form-select" id="vehicle-2">
+                                <option selected="selected">70</option>
+                                <option>71</option>
+                                <option>72</option>
+                                <option>73</option>
+                                <option>74</option>
+                                <option>75</option>
+                                <option>76</option>
+                                <option>77</option>
+                                <option>78</option>
+                                <option>79</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="vehicle-3" class="form-label">&nbsp;</label>
+                            <select class="form-select" id="vehicle-3">
+                                <option selected="selected">바</option>
+                                <option>아</option>
+                                <option>사</option>
+                                <option>자</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="vehicle-4" class="form-label">&nbsp;</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="vehicle-4"
+                                max="9999"
+                                maxlength="4"
+                                onkeyup="onlynumberic(event)"
+                                autocomplete='off'
+                                placeholder="0000">
+                        </div>
+                    </div>
+                    <div class="ve-insert row">
+                        <div class="form-group col-md-4">
+                            <label class="form-label"></label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="company" class="form-label">회사&nbsp;&#42;</label>
+                            <select class="form-select" id="company">
+                                <option
+                                    th:each="company : ${company}"
+                                    th:value="${company.company}"
+                                    th:label="${company.company}"
+                                    th:data-value="${company.company}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="ve-insert row">
+                        <div class="form-group col-md-4 emp-insert-item">
+                            <label for="vehicle-4" class="form-label">소속정보</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="owner" class="form-label">소속(소유주)
+                            </label>
+                            <select class="form-select" id="owner">
+                                <option
+                                    th:each="company : ${company}"
+                                    th:value="${company.company}"
+                                    th:label="${company.company}"
+                                    th:data-value="${company.company}"></option>
+                                <option
+                                    th:each="emp : ${emp}"
+                                    th:value="${emp.name}"
+                                    th:label="${emp.name}"
+                                    th:data-value="${emp.id}"></option>
+                            </select>
+
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="id" class="form-label">승무원</label>
+                            <select class="form-select" id="id">
+                                <option selected="selected" value="미정" label="미정" data-value="미정"></option>
+                                <option
+                                    th:each="emp : ${emp}"
+                                    th:value="${emp.name}"
+                                    th:label="${emp.name}"
+                                    th:data-value="${emp.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="ve-insert row">
+                        <div class="form-group col-md-4 emp-insert-item">
+                            <label class="form-label">차량정보</label>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="bus" class="form-label">종류</label>
+                            <select class="form-select" id="bus">
+                                <option selected="selected">대형</option>
+                                <option>중형</option>
+                                <option>우등</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="brand" class="form-label">제조사</label>
+                            <input list="brandlist" class="form-control" id="brand">
+                            <datalist id="brandlist">
+                                <option value="현대" label="현대"></option>
+                                <option value="기아" label="기아"></option>
+                                <option value="대우" label="대우"></option>
+                            </datalist>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="vename" class="form-label">차명&nbsp;&#42;
+                            </label>
+                            <input type="text" class="form-control" id="vename" autocomplete='off'>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="grade" class="form-label">등급</label>
+                            <input
+                                list="gradelist"
+                                type="text"
+                                class="form-control"
+                                id="grade"
+                                autocomplete='off'>
+                            <datalist id="gradelist">
+                                <option value="노블" label="노블"></option>
+                                <option value="프라임" label="프라임"></option>
+                                <option value="엘레강스" label="엘레강스"></option>
+                                <option value="유니시티" label="유니시티"></option>
+                                <option value="슈퍼에어로시티" label="슈퍼에어로시티"></option>
+                                <option value="그린시티" label="그린시티"></option>
+                                <option value="에어로타운" label="에어로타운"></option>
+                                <option value="카운티" label="카운티"></option>
+                                <option value="실크로드" label="실크로드"></option>
+                                <option value="썬샤인" label="썬샤인"></option>
+                                <option value="블루스카이" label="블루스카이"></option>
+                                <option value="파크웨이" label="파크웨이"></option>
+                                <option value="그린필드" label="그린필드"></option>
+                                <option value="BX212" label="BX212"></option>
+                                <option value="FX212" label="FX212"></option>
+                                <option value="FX120" label="FX120"></option>
+                                <option value="FX116" label="FX116"></option>
+                                <option value="BH090" label="BH090"></option>
+                                <option value="BS090" label="BS090"></option>
+                                <option value="레스타" label="레스타"></option>
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="ve-insert row">
+                        <div class="form-group col-md-4">
+                            <label for="vehicle-4" class="form-label">&nbsp;</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="carn" class="form-label">차대번호&nbsp;&#42;
+                            </label>
+                            <input type="text" class="form-control" id="carn" autocomplete='off'>
+                        </div>
+                    </div>
+
+                    <div class="ve-insert row">
+                        <div class="form-group col-md-4">
+                            <label for="vehicle-4" class="form-label">&nbsp;</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="regist" class="form-label">차량등록일&nbsp;&#42;
+                            </label>
+                            <input type="date" class="form-control" id="regist">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="expire" class="form-label">차량만료일&nbsp;&#42;
+                            </label>
+                            <input type="date" class="form-control" id="expire">
+                        </div>
+                    </div>
+                    <div class="ve-insert row">
+                        <div class="form-group col-md-4">
+                            <label for="vehicle-4" class="form-label">&nbsp;</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="regist" class="form-label">차량구입(인수)일&nbsp;&#42;
+                            </label>
+                            <input type="date" class="form-control" id="inday">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="expire" class="form-label">차량판매일&nbsp;<span style="color: darkred;">(입력시 차량만료됨)</span>
+                            </label>
+                            <input type="date" class="form-control" id="outday">
+                        </div>
+                    </div>
+                    <div class="ve-insert row">
+                        <div class="form-group col-md-4">
+                            <label for="vehicle-4" class="form-label">&nbsp;</label>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="num" class="form-label">승차인원&nbsp;&#42;
+                            </label>
+                            <input type="text" class="form-control" id="num" autocomplete='off'>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="fuel" class="form-label">연료&nbsp;&#42;
+                            </label>
+                            <select class="form-select" id="fuel">
+                                <option selected="selected">경유</option>
+                                <option>CNG</option>
+                                <option>전기</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="price" class="form-label">출고(취득)가격&nbsp;&#42;
+                            </label>
+                            <input
+                                type="text"
+                                data-type="currency"
+                                style="text-align: right;"
+                                class="form-control"
+                                id="price">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="color" class="form-label">색상
+                            </label>
+                            <input type="color" class="form-control" id="color">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="ve-insert row">
+                        <div class="form-group col-md-4 emp-insert-item">
+                            <label class="form-label">특이사항</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="special" class="form-label">특이사항
+                            </label>
+                            <textarea type="text" class="form-control" id="special" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mdf-insert">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫&nbsp;기</button>
+                    <button type="button" class="btn btn-primary" id="btn-insert">입&nbsp;력</button>
+                </div>
+            </div>
+        </div>
+    </div>

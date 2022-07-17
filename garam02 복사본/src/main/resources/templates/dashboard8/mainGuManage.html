@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="main-GuManage" class="manage">
+        <div class="main-gumanage">
+            <div class="main-gumanage-item1 card-song">
+                <div class="scBar">
+                    <div class="gum-search">
+                        <div class="gum-serach-group">
+                            <div class="gum-search-icon">
+                                <i class=" fas fa-search"></i>
+                            </div>
+                            <input
+                                type="text"
+                                id="guMSearch"
+                                autocomplete="off"
+                                oninput="makeGuManageList(this.value)"
+                                placeholder="검색">
+                            <button id="btnGu-x">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-scroll">
+                    <div class="table-scroll-head">
+                        <div class="scBar">
+                            <table class="table table-striped table-hover table-bordered">
+                                <colgroup>
+                                    <col width="30%"/>
+                                    <col width="24%"/>
+                                    <col width="23%"/>
+                                    <col width="23%"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="sortStr">이름</th>
+                                        <th class="sortStr">연락처</th>
+                                        <th class="sortStr">미수금</th>
+                                        <th class="sortStr">배차금액</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="table-scroll-body-guManage scBar">
+                        <table class="table table-striped table-hover table-bordered">
+                            <colgroup>
+                                <col width="30%"/>
+                                <col width="24%"/>
+                                <col width="23%"/>
+                                <col width="23%"/>
+                            </colgroup>
+                            <tbody id="guManageTb"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <button
+                        type="button"
+                        class="btn btn-default"
+                        id="guManageMdNew"
+                        control-id="ControlID-12">신규입력
+                        <i class="fas fa-plus-square"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="main-gumanage-item2">
+                <div class="gumanage-cont1">
+                    <input type="hidden" id="guNo" value="">
+                    <div class="title1">
+                        <h2 class="" id="ttl0">거래처명</h2>
+                        <h5 class="titlejae" id="ttl00">주소</h5>
+                    </div>
+                    <div class="title2">
+                        <blockquote>
+                            <h5 class="titlejae">연락처1</h5>
+                            <h5 id="ttl1">&nbsp;</h5>
+                        </blockquote>
+                        <blockquote>
+                            <h5 class="titlejae">연락처2</h5>
+                            <h5 id="ttl2">&nbsp;</h5>
+                        </blockquote>
+                        <blockquote>
+                            <h5 class="titlejae">팩스</h5>
+                            <h5 id="ttl3">&nbsp;</h5>
+                        </blockquote>
+                        <blockquote>
+                            <h5 class="titlejae">이메일</h5>
+                            <h5 id="ttl4">&nbsp;</h5>
+                        </blockquote>
+                        <blockquote>
+                            <h5 class="titlejae">메모</h5>
+                            <h5 id="ttl5">&nbsp;</h5>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="gumanage-cont2">
+                    <div class="gumanageim card-song">
+                        <h4>저장</h4>
+                        <div>
+                            <div class="table-scroll">
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="8%"/>
+                                                <col width="23%"/>
+                                                <col width="23%"/>
+                                                <col width="23%"/>
+                                                <col width="23%"/>
+                                            </colgroup>
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th class="sortStr">#</th>
+                                                    <th class="sortStr">저장날짜</th>
+                                                    <th class="sortStr">입 금</th>
+                                                    <th class="sortStr">지 불</th>
+                                                    <th class="sortStr">합 계</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-scroll-body-guManageIm scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="8%"/>
+                                            <col width="23%"/>
+                                            <col width="23%"/>
+                                            <col width="23%"/>
+                                            <col width="23%"/>
+                                        </colgroup>
+                                        <tbody id="guManageImTb"></tbody>
+                                    </table>
+                                </div>
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="8%"/>
+                                                <col width="23%"/>
+                                                <col width="23%"/>
+                                                <col width="23%"/>
+                                                <col width="23%"/>
+                                            </colgroup>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="2">합 계</td>
+                                                    <td class="tdRight" id="guManageImTf1"></td>
+                                                    <td class="tdRight" id="guManageImTf2"></td>
+                                                    <td class="tdRight" id="guManageImTf3"></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gumanagegd card-song">
+                        <h4>완료</h4>
+                        <div>
+                            <div class="table-scroll">
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="5%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                            </colgroup>
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th class="sortStr">#</th>
+                                                    <th class="sortStr">저장날짜</th>
+                                                    <th class="sortStr">완료날짜</th>
+                                                    <th class="sortStr">입 금</th>
+                                                    <th class="sortStr">지 불</th>
+                                                    <th class="sortStr">합 계</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-scroll-body-guManageIm scBar">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <colgroup>
+                                            <col width="5%"/>
+                                            <col width="19%"/>
+                                            <col width="19%"/>
+                                            <col width="19%"/>
+                                            <col width="19%"/>
+                                            <col width="19%"/>
+                                        </colgroup>
+                                        <tbody id="guManageOkTb"></tbody>
+                                    </table>
+                                </div>
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <colgroup>
+                                                <col width="5%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                                <col width="19%"/>
+                                            </colgroup>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="3">합 계</td>
+                                                    <td class="tdRight" id="guManageOkTf1"></td>
+                                                    <td class="tdRight" id="guManageOkTf2"></td>
+                                                    <td class="tdRight" id="guManageOkTf3"></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="modal fade"
+            id="guManageMd"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="guManageMdTitle"></h3>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            id="guManageMdFootX"></button>
+                    </div>
+                    <div class="modal-body guMdBD">
+                        <div class="gumanage-go-out">
+                            <div class="gumanage-go card-song">
+                                <input type="hidden" value="" id="guManageSepa">
+                                <input type="hidden" value="" id="guManageImOkSepa">
+                                <input type="hidden" value="" id="guManageNum">
+                                <h4>미 수 금</h4>
+                                <div>
+                                    <div class="table-scroll">
+                                        <div class="table-scroll-head">
+                                            <div class="scBar">
+                                                <table class="table table-striped table-hover table-bordered">
+                                                    <colgroup>
+                                                        <col width="5%"/>
+                                                        <col width="20%"/>
+                                                        <col width="40%"/>
+                                                        <col width="10%"/>
+                                                        <col width="auto"/>
+                                                    </colgroup>
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th><input type="checkbox" id="guMaGo"></th>
+                                                            <th class="sortStr">출발일</th>
+                                                            <th class="sortStr">목적지</th>
+                                                            <th class="sortNum">대수</th>
+                                                            <th class="sortNum">미수금</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="table-scroll-body-guManage-Go scBar">
+                                            <table class="table table-striped table-hover table-bordered">
+                                                <colgroup>
+                                                    <col width="5%"/>
+                                                    <col width="20%"/>
+                                                    <col width="40%"/>
+                                                    <col width="10%"/>
+                                                    <col width="auto"/>
+                                                </colgroup>
+                                                <tbody id="guManageRsvtTb"></tbody>
+                                            </table>
+                                        </div>
+                                        <div class="table-scroll-head">
+                                            <div class="scBar">
+                                                <table class="table table-striped table-hover table-bordered">
+                                                    <colgroup>
+                                                        <col width="5%"/>
+                                                        <col width="20%"/>
+                                                        <col width="40%"/>
+                                                        <col width="10%"/>
+                                                        <col width="auto"/>
+                                                    </colgroup>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="2">합 계</td>
+                                                            <td id="guManageRsvtTf1"></td>
+                                                            <td id="guManageRsvtTf2"></td>
+                                                            <td class="tdRight" id="guManageRsvtTf3"></td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gumanage-out card-song">
+                                <h4>배 차</h4>
+                                <div>
+                                    <div class="table-scroll">
+                                        <div class="table-scroll-head">
+                                            <div class="scBar">
+                                                <table class="table table-striped table-hover table-bordered">
+                                                    <colgroup>
+                                                        <col width="5%"/>
+                                                        <col width="20%"/>
+                                                        <col width="40%"/>
+                                                        <col width="10%"/>
+                                                        <col width="auto"/>
+                                                    </colgroup>
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th><input type="checkbox" id="guMaout"></th>
+                                                            <th class="sortStr">운행일</th>
+                                                            <th class="sortStr">목적지</th>
+                                                            <th class="sortNum">호차</th>
+                                                            <th class="sortNum">배차금액</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="table-scroll-body-guManage-Out scBar">
+                                            <table class="table table-striped table-hover table-bordered">
+                                                <colgroup>
+                                                    <col width="5%"/>
+                                                    <col width="20%"/>
+                                                    <col width="40%"/>
+                                                    <col width="10%"/>
+                                                    <col width="auto"/>
+                                                </colgroup>
+                                                <tbody id="guManageOperTb"></tbody>
+                                            </table>
+                                        </div>
+                                        <div class="table-scroll-head">
+                                            <div class="scBar">
+                                                <table class="table table-striped table-hover table-bordered">
+                                                    <colgroup>
+                                                        <col width="5%"/>
+                                                        <col width="20%"/>
+                                                        <col width="40%"/>
+                                                        <col width="10%"/>
+                                                        <col width="auto"/>
+                                                    </colgroup>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="2">합 계</td>
+                                                            <td>-</td>
+                                                            <td id="guManageOperTf1"></td>
+                                                            <td class="tdRight" id="guManageOperTf2"></td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="guManage-jang card-song">
+                            <h4>종 합</h4>
+                            <div class="table-scroll">
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-bordered">
+                                            <colgroup>
+                                                <col width="5%"/>
+                                                <col width="15%"/>
+                                                <col width="auto"/>
+                                                <col width="18%"/>
+                                                <col width="18%"/>
+                                                <col width="18%"/>
+                                            </colgroup>
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>날 짜</th>
+                                                    <th>내 용</th>
+                                                    <th>입 금</th>
+                                                    <th>지 불</th>
+                                                    <th>누적 합계</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-scroll-body-guManage-Jang scBar">
+                                    <table class="table table-striped table-bordered">
+                                        <colgroup>
+                                            <col width="5%"/>
+                                            <col width="15%"/>
+                                            <col width="auto"/>
+                                            <col width="18%"/>
+                                            <col width="18%"/>
+                                            <col width="18%"/>
+                                        </colgroup>
+                                        <tbody id="guManageJangTb"></tbody>
+                                    </table>
+                                </div>
+                                <div class="table-scroll-head">
+                                    <div class="scBar">
+                                        <table class="table table-striped table-bordered">
+                                            <colgroup>
+                                                <col width="5%"/>
+                                                <col width="15%"/>
+                                                <col width="auto"/>
+                                                <col width="18%"/>
+                                                <col width="18%"/>
+                                                <col width="18%"/>
+                                            </colgroup>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="2">합 계</td>
+                                                    <td id="guManageJangTf1"></td>
+                                                    <td class="tdRight" id="guManageJangTf2"></td>
+                                                    <td class="tdRight" id="guManageJangTf3"></td>
+                                                    <td class="tdRight" id="guManageJangTf4"></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="guManageMdFoot" style="gap: 3rem;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

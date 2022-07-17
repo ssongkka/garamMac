@@ -396,14 +396,20 @@ function makeTableOper(r) {
                     `</td>
         <td class="operChohome tdPerson"></td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="" disabled></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td></td>`;
             if (r[i].vehicle && r[i].dayst == 1) {
-                if (isNaN((r[i].vehicle).substring((r[i].vehicle).length - 4))) {
-                    carcar = r[i]
-                        .vehicle
-                        .replaceAll('고속', '')
-                        .replaceAll('관광', '')
-                        .replaceAll('여행사', '')
-                        .replaceAll('(주)', '');
-                    carHtml = `<td class="operChohome tdPerson">` + carcar +
+
+                let carCla = '';
+
+                carcar = (r[i].vehicle).substring((r[i].vehicle).length - 4);
+                let cnt = 0;
+                for (let k = 0; k < dbCompa.length; k++) {
+                    if (dbCompa[k].company == r[i].opercom) {
+                        cnt++;
+                    }
+                }
+
+                if (cnt > 0) {
+                    carHtml = `<td class="operChohome tdPerson" style="background:var(--compa-color)">` +
+                            carcar +
                             `</td>
                         <td class="operChohome tdPerson">` + r[i].name +
                             `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
@@ -413,28 +419,26 @@ function makeTableOper(r) {
                             `"></div></div></td><td class="tdRight operChohome">` + AddComma(r[i].numm) +
                             `</td>`;
                 } else {
-                    carcar = (r[i].vehicle).substring((r[i].vehicle).length - 4);
-                    let cnt = 0;
-                    for (let k = 0; k < dbCompa.length; k++) {
-                        if (dbCompa[k].company == r[i].opercom) {
-                            cnt++;
-                        }
-                    }
+                    carHtml = `<td class="operChohome tdPerson"  style="background:var(--person-color)">` +
+                            carcar +
+                            `</td>
+                        <td class="operChohome tdPerson">` + r[i].name +
+                            `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
+                            r[i].operseq +
+                            `"></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="` +
+                            AddComma(r[i].atlm) +
+                            `"></div></div></td><td class="tdRight operChohome">` + AddComma(r[i].numm) +
+                            `</td>`;
+                }
 
-                    if (cnt > 0) {
-                        carHtml = `<td class="operChohome tdPerson">` + carcar +
+                for (let c = 0; c < dbothercompa.length; c++) {
+                    if (r[i].opercar == dbothercompa[c].ctmno) {
+                        carcar = dbothercompa[c].ctmname;
+
+                        carHtml = `<td class="operChohome tdPerson" style="background:var(--otherCompa-color)">` +
+                                carcar +
                                 `</td>
-                        <td class="operChohome tdPerson">` + r[i].name +
-                                `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
-                                r[i].operseq +
-                                `"></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="` +
-                                AddComma(r[i].atlm) +
-                                `"></div></div></td><td class="tdRight operChohome">` + AddComma(r[i].numm) +
-                                `</td>`;
-                    } else {
-                        carHtml = `<td class="operChohome tdPerson">` + carcar +
-                                `</td>
-                        <td class="operChohome tdPerson">` + r[i].name +
+                        <td class="operChohome tdPerson">` + carcar +
                                 `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
                                 r[i].operseq +
                                 `"></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="` +
@@ -442,51 +446,57 @@ function makeTableOper(r) {
                                 `"></div></div></td><td class="tdRight operChohome">` + AddComma(r[i].numm) +
                                 `</td>`;
                     }
-
                 }
             } else if (r[i].vehicle && r[i].dayst > 1) {
-                if (isNaN((r[i].vehicle).substring((r[i].vehicle).length - 4))) {
-                    carcar = r[i]
-                        .vehicle
-                        .replaceAll('고속', '')
-                        .replaceAll('관광', '')
-                        .replaceAll('여행사', '')
-                        .replaceAll('(주)', '');
-                    carHtml = `<td class="operChohome tdPerson">` + carcar +
+                carcar = (r[i].vehicle).substring((r[i].vehicle).length - 4);
+                let cnt = 0;
+                for (let k = 0; k < dbCompa.length; k++) {
+                    if (dbCompa[k].company == r[i].opercom) {
+                        cnt++;
+                    }
+                }
+
+                if (cnt > 0) {
+                    carHtml = `<td class="operChohome tdPerson" style="background:var(--compa-color)">` +
+                            carcar +
                             `</td>
                         <td class="operChohome tdPerson">` + r[i].name +
                             `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
                             r[i].operseq +
                             `" disabled></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td class="tdRight operChohome">0</td>`;
                 } else {
-                    carcar = (r[i].vehicle).substring((r[i].vehicle).length - 4);
-                    let cnt = 0;
-                    for (let k = 0; k < dbCompa.length; k++) {
-                        if (dbCompa[k].company == r[i].opercom) {
-                            cnt++;
-                        }
-                    }
+                    carHtml = `<td class="operChohome tdPerson" style="background:var(--person-color)">` +
+                            carcar +
+                            `</td>
+                        <td class="operChohome tdPerson">` + r[i].name +
+                            `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
+                            r[i].operseq +
+                            `" disabled></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td class="tdRight operChohome">0</td>`;
+                }
 
-                    if (cnt > 0) {
-                        carHtml = `<td class="operChohome tdPerson">` + carcar +
+                for (let c = 0; c < dbothercompa.length; c++) {
+                    if (r[i].opercar == dbothercompa[c].ctmno) {
+                        carcar = dbothercompa[c].ctmname;
+
+                        carHtml = `<td class="operChohome tdPerson" style="background:var(--otherCompa-color)">` +
+                                carcar +
                                 `</td>
-                        <td class="operChohome tdPerson">` + r[i].name +
-                                `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
-                                r[i].operseq +
-                                `" disabled></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td class="tdRight operChohome">0</td>`;
-                    } else {
-                        carHtml = `<td class="operChohome tdPerson">` + carcar +
-                                `</td>
-                        <td class="operChohome tdPerson">` + r[i].name +
+                        <td class="operChohome tdPerson">` + carcar +
                                 `</td><td class="tdPerson"><div class="tdMoney"><div class=""><input class="form-check-input" type="checkbox" name="chAtm" value="` +
                                 r[i].operseq +
                                 `" disabled></div><div class=""><input type="text" class="form-control operAltMIn input-ent" style="height: 2rem;" data-type="currency" onfocus="this.select()" value="" disabled></div></div></td><td class="tdRight operChohome">0</td>`;
                     }
-
                 }
             }
 
             if (r[i].dayst) {}
+
+            for (let c = 0; c < dbothercompa.length; c++) {
+                if (r[i].opercar == dbothercompa[c].ctmno) {
+                    veh = dbothercompa[c].ctmname;
+                    idh = dbothercompa[c].ctmname;
+                }
+            }
 
             htmls += `
         <tr>
@@ -615,8 +625,6 @@ function upAltmMany(money) {
         }
     });
 
-    console.table(params);
-
     const url = "/allo/updateAtmMany";
     const headers = {
         "Content-Type": "application/json",
@@ -670,8 +678,6 @@ function upAltmOne(domdom, money) {
         "opertype": $(a4).val()
     };
     params.push(asd);
-
-    console.table(params);
 
     const url = "/allo/updateAtmMany";
     const headers = {

@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+blockquote {
+    padding: 1.2rem 1.6rem;
+    margin: 0;
+    font-size: 2.3rem;
+    border-left: 0.3rem solid #eee;
+}
+
+blockquote .small,
+blockquote footer,
+blockquote small {
+    display: block;
+    font-size: 65%;
+    line-height: 0.8;
+    color: #777;
+}
+
+input:focus {
+    /* box-shadow: none; */
+}
+
+p {
+    margin: 0;
+}
+
+.customRange1,
+.form-check,
+.form-control,
+.form-select,
+.input-group-text {
+    font-size: 1.3rem;
+}
+
+.nav {
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.nav-justified .nav-item,
+.nav-justified > .nav-link {
+    font-size: 1.5rem;
+    letter-spacing: 0.3rem;
+}
+.nav button {
+    letter-spacing: 0.3rem;
+    color: var(--main-color);
+}
+
+.nav-pills .nav-link {
+    border-radius: 3px;
+}
+
+.nav-tabs .nav-link {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.table {
+    font-size: 1.3rem;
+    background-color: #fff;
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--main-color);
+}
+
+.btn {
+    font-size: 1.3rem;
+}
+
+.nav-link {
+    color: var(--sub-color);
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    color: var(--main-color);
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    background-color: var(--sub-color);
+    color: var(--main-color);
+}
+
+.table-hover > tbody > tr:hover > * {
+    --bs-table-accent-bg: var(--main-color);
+    color: var(--sub-color);
+    cursor: pointer;
+}
+
+.accordion-button {
+    font-size: inherit;
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--sub-color);
+    background-color: var(--main-color);
+}
+
+.form-label {
+    font-weight: 600;
+}
+
+.table-responsive {
+    overflow-y: auto;
+
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-color: var(--sub-color);
+    border-radius: 50%;
+}

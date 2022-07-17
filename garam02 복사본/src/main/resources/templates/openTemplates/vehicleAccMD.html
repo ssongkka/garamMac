@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="ve-MD-accCont"
+        class="modal fade"
+        id="modal-accCont"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" value="" id="accCarNum">
+                    <input type="hidden" value="" id="acccontNum">
+                    <h3 class="modal-title" id="modal-accCont-mh"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="accDate" class="form-label">사고일자*</label>
+                            <input type="date" class="form-control" id="accDate">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accTime" class="form-label">사고시간*</label>
+                            <input type="time" class="form-control" id="accTime">
+                        </div>
+                        <div class="col-12">
+                            <label for="accId" class="form-label">승무원*</label>
+                            <select class="form-select" id="accId">
+                                <option selected="selected" value="없음" label="없음" data-value="없음"></option>
+                                <option
+                                    th:each="emp : ${emp}"
+                                    th:value="${emp.name}"
+                                    th:label="${emp.name}"
+                                    th:data-value="${emp.id}"></option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accEndDate" class="form-label">사고종결일</label>
+                            <input type="date" class="form-control" id="accEndDate">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accMoney" class="form-label">발생금액</label>
+                            <input type="text" data-type="currency" class="form-control" id="accMoney">
+                        </div>
+                        <div class="col-12">
+                            <label for="accEndCont" class="form-label">종결내용</label>
+                            <input type="text" class="form-control" id="accEndCont">
+                        </div>
+                        <div class="col-12">
+                            <label for="accCont" class="form-label">사고내용(장소등 구체적으로)*</label>
+                            <textarea type="text" rows="20" class="form-control" id="accCont"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mdaccFoot">
+                    <div style="flex: 1;">
+                        <span id="accContWarring">사고내역 수정은 차량정보에서 가능합니다.</span>
+                        <button type="button" class="btn btn-danger" id="accCont-del">삭&nbsp;제</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫&nbsp;기</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" id="accCont-insert">입&nbsp;력</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="adMDVeCompa"
+        class="modal fade"
+        id="adMDVeCompa"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="adMDVeCompaLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="adMDVeCompaLabel"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body adMDVeCompaMB">
+                    <div class="adMDVeCompa-items adMDVeCompa-items1">
+                        <div class="staticVeTitle1 row">
+                            <div class="col-sm-12">
+                                <div class="card-song">
+                                    <div class="staticVeTitle1-item1">
+                                        <div id="veStaticYearMonth">2022-05</div>
+                                        <div id="veStaticVe">2022-05</div>
+                                        <div id="veStaticBrand">2022-05</div>
+                                        <div id="veStaticGrade">2022-05</div>
+                                        <div id="veStaticNum">2022-05</div>
+                                        <div id="veStaticRegD">2022-05</div>
+                                        <div id="veStaticPer">2022-05</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adMDVeCompa-items adMDVeCompa-items1">
+                        <div class="staticVeTitle2 row">
+                            <div class="col-xl-3 col-sm-6 staticVeTitle-item">
+                                <div class="card-song">
+                                    <div class="vtTitle">수 익</div>
+                                    <div class="vtCont">
+                                        <div class="vtCont-item1">
+                                            <p>
+                                                <span>&#8361;</span><span id="veStaticInM">0</span>
+                                            </p>
+                                            <span class="" id="veStaticInMAve"></span>
+                                        </div>
+                                        <div class="vtCont-item2">
+                                            <div id="staticVe01"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6 staticVeTitle-item">
+                                <div class="card-song">
+                                    <div class="vtTitle">비 용</div>
+                                    <div class="vtCont">
+                                        <div class="vtCont-item1">
+                                            <p>
+                                                <span>&#8361;</span><span id="veStaticOutM">0</span>
+                                            </p>
+                                            <span class="" id="veStaticOutMAve"></span>
+                                        </div>
+                                        <div class="vtCont-item2">
+                                            <div id="staticVe02"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6 staticVeTitle-item">
+                                <div class="card-song">
+                                    <div class="vtTitle">이익</div>
+                                    <div class="vtCont">
+                                        <div class="vtCont-item1">
+                                            <div class="vtCont-item1">
+                                                <p>
+                                                    <span>&#8361;</span><span id="veStaticAllM">0</span>
+                                                </p>
+                                                <span class="" id="veStaticAllMAve"></span>
+                                            </div>
+                                        </div>
+                                        <div class="vtCont-item2">
+                                            <div id="staticVe03"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6 staticVeTitle-item">
+                                <div class="card-song">
+                                    <div class="vtTitle">연비</div>
+                                    <div class="vtCont" style="padding-bottom: 2.1rem;">
+                                        <div class="vtCont-item1">
+                                            <div class="vtCont-item1">
+                                                <p>
+                                                    <span id="veStaticGas1">0</span><span>Km/L</span>
+                                                </p>
+                                                <span class="" id="veStaticGasAve"></span>
+                                            </div>
+                                        </div>
+                                        <div class="vtCont-item3">
+                                            <div class="vtCont-item1">
+                                                <p>
+                                                    <span id="veStaticGas2">0</span><span>&#8361;/Km</span>
+                                                </p>
+                                                <span class="" id="veStaticGasAve"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adMDVeCompa-items adMDVeCompa-items1">
+                        <div class="staticVeTitle1 row">
+                            <div class="col-sm-12">
+                                <div class="card-song">
+                                    <div class="staticVeTitle1-item2">
+                                        <div id="staticVe00"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫&nbsp;기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

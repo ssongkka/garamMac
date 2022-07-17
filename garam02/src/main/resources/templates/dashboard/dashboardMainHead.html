@@ -75,6 +75,16 @@
                     <li class="nav-item" role="presentation">
                         <button
                             class="nav-link"
+                            id="pills-cumanage-tab"
+                            data-bs-toggle="pill"
+                            type="button"
+                            role="tab"
+                            aria-selected="false">고객관리
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link"
                             id="pills-gumanage-tab"
                             data-bs-toggle="pill"
                             type="button"
@@ -94,15 +104,9 @@
                             aria-selected="false">정기운행배차&nbsp;<i class="fa-solid fa-up-right-from-square"></i>
                         </button>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link"
-                            id="pills-rsvt-tab"
-                            type="button"
-                            role="tab"
-                            aria-selected="false">운행예약&nbsp;<i class="fa-solid fa-up-right-from-square"></i>
-                        </button>
-                    </li>
+                    <!-- <li class="nav-item" role="presentation"> <button class="nav-link"
+                    id="pills-rsvt-tab" type="button" role="tab" aria-selected="false">운행예약&nbsp;<i
+                    class="fa-solid fa-up-right-from-square"></i> </button> </li> -->
                 </ul>
             </div>
             <!-- <div class="he-serach-group"> <form th:action="@{/search}" method="post">
@@ -120,10 +124,8 @@
             <div class="fas fa-bars" id="menu-btn"></div>
         </div>
         <div class="deail-form card-song">
-            <a class="deail-form-item">
-                <i class="fa-solid fa-user-pen"></i>
-                내정보
-            </a>
+            <!-- <a class="deail-form-item"> <i class="fa-solid fa-user-pen"></i> 내정보 </a>
+            -->
             <a th:href="@{/approval}" class="deail-form-item">
                 <i class="fa-solid fa-file-signature"></i>
                 결재함

@@ -56,6 +56,8 @@ public interface DashboardMapper {
 
 	public List<RsvtDTO> selectCustomerCheck(RsvtDTO rsvtDTO) throws Exception;
 
+	public List<RsvtDTO> selectCustomerCheck1(RsvtDTO rsvtDTO) throws Exception;
+
 	public List<RsvtDTO> selectAlloRSVT(RsvtDTO rsvtDTO) throws Exception;
 
 	public List<RsvtDTO> selectAlloRSVTSuk(RsvtDTO rsvtDTO) throws Exception;

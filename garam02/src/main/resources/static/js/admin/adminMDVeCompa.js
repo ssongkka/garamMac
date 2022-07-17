@@ -31,8 +31,7 @@ function setAdMDVeStatic(yearMonth, arrInM, arrOutM, allInM, allOutM, allM, gas1
                     namename = dbEmp[i].name;
                 }
             }
-
-            $('#veStaticPer').text(namename);
+            $('#veStaticPer').text(arrVe[9]);
 
             $('#veStaticGas1').text(gas1);
             $('#veStaticGas2').text(gas2);

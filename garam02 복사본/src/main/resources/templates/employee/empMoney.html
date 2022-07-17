@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="emp-money" class="moneyEmp">
+
+        <div class="veMoneyMain">
+            <h3>급여내역</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <colgroup>
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="10%">
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="15%">
+                    </colgroup>
+                    <thead class="table-light">
+                        <tr>
+                            <th>급여연월</th>
+                            <th>차량번호</th>
+                            <th>실지급액</th>
+                            <th colspan="2">운행수당</th>
+                            <th>지급총액</th>
+                            <th>공제총액</th>
+                        </tr>
+                    </thead>
+                    <tbody id="empMoneyTb"></tbody>
+                    <tfoot id="empMoneyTF"></tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="veMoneyMain">
+            <h3>거래내역</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <colgroup>
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="10%">
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="15%">
+                    </colgroup>
+                    <thead class="table-light">
+                        <tr>
+                            <th>거래연월</th>
+                            <th>차량번호</th>
+                            <th>잔액</th>
+                            <th colspan="2">운행수당</th>
+                            <th>입금총액</th>
+                            <th>지출총액</th>
+                        </tr>
+                    </thead>
+                    <tbody id="empMoneyPerTb"></tbody>
+                    <tfoot id="empMoneyPerTF"></tfoot>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</html>

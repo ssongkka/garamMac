@@ -851,8 +851,6 @@ function getRegularAlloCa() {
 
                                         carcar = (r[i].idvehicle).substring((r[i].idvehicle).length - 4);
 
-                                        console.log(r[i].idvehicle);
-
                                         for (let c = 0; c < dbothercompa.length; c++) {
                                             if (r[i].idvehicle == dbothercompa[c].ctmno) {
                                                 carcar = (dbothercompa[c].ctmname)
@@ -995,7 +993,7 @@ function showAlloChModal(param) {
 
             htmlMd = `
         <div class="row mb-3">
-            <label for="" class="col-sm-4 col-form-label regAllAlloLa">` +
+            <label class="col-sm-4 col-form-label regAllAlloLa">` +
                     nosunname +
                     `</label>
             <div class="col-sm-4">
@@ -1031,7 +1029,7 @@ function showAlloChModal(param) {
         } else {
             htmlMd = `
         <div class="row mb-3">
-            <label for="" class="col-sm-4 col-form-label regAllAlloLa" data-bs-toggle="tooltip"
+            <label class="col-sm-4 col-form-label regAllAlloLa" data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="노선 운행정보가없습니다.\n운행정보를입력해주세요.">` +
                     nosunname +
@@ -1585,7 +1583,7 @@ function getAllo(param) {
                     case '1':
                         htmlMd = `
                 <div class="row mb-3">
-                    <label for="" class="col-sm-4 col-form-label regAllAlloLa">` +
+                    <label class="col-sm-4 col-form-label regAllAlloLa">` +
                                 (i + 1) + `. 출근` +
                                 `</label>
                     <div class="col-sm-4">
@@ -1623,7 +1621,7 @@ function getAllo(param) {
                     case '2':
                         htmlMd = `
                 <div class="row mb-3">
-                    <label for="" class="col-sm-4 col-form-label regAllAlloLa">` +
+                    <label class="col-sm-4 col-form-label regAllAlloLa">` +
                                 (i + 1) + `. 퇴근` +
                                 `</label>
                     <div class="col-sm-4">

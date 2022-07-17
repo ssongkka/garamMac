@@ -160,10 +160,12 @@
                         <input type="hidden" id="md-rsvtNum" value="">
                     </div>
                     <div class="modal-body md-rsvt-bdc" id="md-rsvt-bd">
-                        <h2>
-                            고객 정보
-                        </h2>
-                        <div th:replace="openTemplates/updateCustomer :: upCust"></div>
+                        <div class="card-song" style="padding: 1rem;">
+                            <h2>
+                                고객 정보
+                            </h2>
+                            <div th:replace="openTemplates/updateCustomer :: upCust"></div>
+                        </div>
                     </div>
                     <div class="modal-footer mf-ch-rsvt">
                         <div class="mf-ch-rsvt-item">

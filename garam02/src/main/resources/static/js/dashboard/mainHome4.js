@@ -1,4 +1,13 @@
-$(document).ready(function () {});
+$(document).ready(function () {
+
+    const nowDDD = new Date();
+    const nowDDDDD = toStringByFormatting(nowDDD);
+
+    $('#carmandaygi').text('기준일 : ' + nowDDDDD);
+    $('#bomandaygi').text('기준일 : ' + nowDDDDD);
+    $('#gumandaygi').text('기준일 : ' + nowDDDDD);
+
+});
 
 function makeMain2BigCal() {
 
@@ -23,9 +32,8 @@ function makeMain2BigCal() {
         .then(setMonthMiddle)
         .then(getInfo)
         .then(getEndCar)
-        .then(getEndInsu)
-        .then(getEndInspec)
         .then(closeLoadingWithMask);
+    // .then(getEndInspec) .then(getEndInsu)
 
     clTdColor2();
 
@@ -304,7 +312,7 @@ function makeMain2BigCal() {
                 "X-HTTP-Method-Override": "POST"
             };
 
-            const monththth1 = $('#calDay1')
+            let monththth1 = $('#calDay1')
                 .val()
                 .split('-')[0] + '-' + $('#calDay1')
                 .val()
@@ -314,7 +322,7 @@ function makeMain2BigCal() {
                 .split('-')[0] + '-' + $('#calDay42')
                 .val()
                 .split('-')[1];
-            const monththth3 = $('#calDay21')
+            let monththth3 = $('#calDay21')
                 .val()
                 .split('-')[0] + '-' + $('#calDay21')
                 .val()
@@ -338,45 +346,65 @@ function makeMain2BigCal() {
 
                     for (let i = 0; i < r.length; i++) {
 
-                        if (r[i].regist) {
+                        let clasCol = 'ca2Compa1';
 
-                            arrHtmls[checkHolDay1(r[i].regist)] += `
+                        for (let k = 0; k < dbVe.length; k++) {
+                            if (r[i].carnumber == dbVe[k].carnumber) {
+                                for (let l = 0; l < dbCompa.length; l++) {
+                                    if (dbVe[k].owner == dbCompa[l].company) {
+                                        clasCol = 'ca2Compa2';
+                                    }
+                                }
+                            }
+                        }
+
+                        if (monththth1 != monththth3) {
+                            if (r[i].regist) {
+
+                                arrHtmls[checkHolDay1(r[i].regist)] += `
                     <div class="mainCaltd-middle">
-                        <div class="mainCal2td-middle-item middle-loan">
+                        <div class="mainCal2td-middle-item ` +
+                                        clasCol +
+                                        ` middle-loan">
                             <input type="hidden" value="` +
-                                    monththth1 +
-                                    `">
+                                        monththth1 +
+                                        `">
                             <input type="hidden" value="` + r[i].loanno +
-                                    `">
+                                        `">
                             <span class="spNum1"><span class="h2Ve">` + r[i].vehicle2 +
-                                    `</span><span class="h2loan text-decoration-line-through">대출</span></span>
+                                        `</span><span class="h2loan text-decoration-line-through">대출</span></span>
                             <span class="h2ch h2chLoan"></span>
                         </div>
                         <div class="maincaltd-middle-itemb">&nbsp;</div>
                     </div>`;
-                        } else {
+                            } else {
 
-                            arrHtmls[checkHolDay2(r[i].loandayloan)] += `
+                                arrHtmls[checkHolDay2(r[i].loandayloan)] += `
                         <div class="mainCaltd-middle">
-                            <div class="mainCal2td-middle-item middle-loan">
+                            <div class="mainCal2td-middle-item ` +
+                                        clasCol +
+                                        ` middle-loan">
                                 <input type="hidden" value="` +
-                                    monththth1 +
-                                    `">
+                                        monththth1 +
+                                        `">
                                 <input type="hidden" value="` + r[i].loanno +
-                                    `">
+                                        `">
                                 <span class="spNum1"><span class="h2Ve">` +
-                                    r[i].vehicle2 +
-                                    `</span><span class="h2loan">대출</span></span>
+                                        r[i].vehicle2 +
+                                        `</span><span class="h2loan">대출</span></span>
                                 <span class="h2ch h2chLoan"><i class="fa-solid fa-bookmark"></i></span>
                             </div>
                             <div class="maincaltd-middle-itemb">&nbsp;</div>
                         </div>`;
+                            }
                         }
 
                         if (r[i].color) {
                             arrHtmls[checkHolDay1(r[i].color)] += `
                     <div class="mainCaltd-middle">
-                        <div class="mainCal2td-middle-item middle-loan">
+                        <div class="mainCal2td-middle-item ` +
+                                    clasCol +
+                                    ` middle-loan">
                             <input type="hidden" value="` +
                                     monththth3 +
                                     `">
@@ -391,7 +419,9 @@ function makeMain2BigCal() {
                         } else {
                             arrHtmls[checkHolDay(r[i].loandayloan)] += `
                         <div class="mainCaltd-middle">
-                            <div class="mainCal2td-middle-item middle-loan">
+                            <div class="mainCal2td-middle-item ` +
+                                    clasCol +
+                                    ` middle-loan">
                                 <input type="hidden" value="` +
                                     monththth3 +
                                     `">
@@ -406,39 +436,44 @@ function makeMain2BigCal() {
                         </div>`;
                         }
 
-                        if (r[i].expire) {
-                            arrHtmls[checkHolDay1(r[i].expire)] += `
+                        if (monththth2 != monththth3) {
+                            if (r[i].expire) {
+                                arrHtmls[checkHolDay1(r[i].expire)] += `
                     <div class="mainCaltd-middle">
-                        <div class="mainCal2td-middle-item middle-loan">
+                        <div class="mainCal2td-middle-item ` +
+                                        clasCol +
+                                        ` middle-loan">
                             <input type="hidden" value="` +
-                                    monththth2 +
-                                    `">
+                                        monththth2 +
+                                        `">
                             <input type="hidden" value="` + r[i].loanno +
-                                    `">
+                                        `">
                             <span class="spNum1"><span class="h2Ve">` + r[i].vehicle2 +
-                                    `</span><span class="h2loan text-decoration-line-through">대출</span></span>
+                                        `</span><span class="h2loan text-decoration-line-through">대출</span></span>
                             <span class="h2ch h2chLoan"></span>
                         </div>
                         <div class="maincaltd-middle-itemb">&nbsp;</div>
                     </div>`;
-                        } else {
-                            arrHtmls[checkHolDay3(r[i].loandayloan)] += `
+                            } else {
+                                arrHtmls[checkHolDay3(r[i].loandayloan)] += `
                         <div class="mainCaltd-middle">
-                            <div class="mainCal2td-middle-item middle-loan">
+                            <div class="mainCal2td-middle-item ` +
+                                        clasCol +
+                                        ` middle-loan">
                                 <input type="hidden" value="` +
-                                    monththth2 +
-                                    `">
+                                        monththth2 +
+                                        `">
                                 <input type="hidden" value="` + r[i].loanno +
-                                    `">
+                                        `">
                                 <span class="spNum1"><span class="h2Ve">` +
-                                    r[i].vehicle2 +
-                                    `</span><span class="h2loan">대출</span></span>
+                                        r[i].vehicle2 +
+                                        `</span><span class="h2loan">대출</span></span>
                                 <span class="h2ch h2chLoan"><i class="fa-solid fa-bookmark"></i></span>
                             </div>
                             <div class="maincaltd-middle-itemb">&nbsp;</div>
                         </div>`;
+                            }
                         }
-
                     }
                     resolve();
                 },
@@ -472,10 +507,25 @@ function makeMain2BigCal() {
 
                 success: function (r) {
                     for (let i = 0; i < r.length; i++) {
+
+                        let clasCol = 'ca2Compa1';
+
+                        for (let k = 0; k < dbVe.length; k++) {
+                            if (r[i].carnumber == dbVe[k].carnumber) {
+                                for (let l = 0; l < dbCompa.length; l++) {
+                                    if (dbVe[k].owner == dbCompa.company) {
+                                        clasCol = 'ca2Compa2';
+                                    }
+                                }
+                            }
+                        }
+
                         if (r[i].insusepatrash < 1) {
                             arrHtmls[checkHolDay1(r[i].insusepaday)] += `
                         <div class="mainCaltd-middle">
-                            <div class="mainCal2td-middle-item middle-insu">
+                            <div class="mainCal2td-middle-item ` +
+                                    clasCol +
+                                    ` middle-insu">
                                 <input type="hidden" value="` +
                                     r[i].carnumber +
                                     `">
@@ -493,7 +543,9 @@ function makeMain2BigCal() {
                         } else {
                             arrHtmls[checkHolDay1(r[i].insusepaday)] += `
                         <div class="mainCaltd-middle">
-                            <div class="mainCal2td-middle-item middle-insu">
+                            <div class="mainCal2td-middle-item ` +
+                                    clasCol +
+                                    ` middle-insu">
                                 <input type="hidden" value="` +
                                     r[i].carnumber +
                                     `">
@@ -541,11 +593,25 @@ function makeMain2BigCal() {
 
                 success: function (r) {
                     for (let i = 0; i < r.length; i++) {
+
+                        let clasCol = 'ca2Compa1';
+
+                        for (let k = 0; k < dbVe.length; k++) {
+                            if (r[i].carnumber == dbVe[k].carnumber) {
+                                for (let l = 0; l < dbCompa.length; l++) {
+                                    if (dbVe[k].owner == dbCompa.company) {
+                                        clasCol = 'ca2Compa2';
+                                    }
+                                }
+                            }
+                        }
+
                         arrHtmls[checkHolDay1(r[i].expire)] += `
                         <div class="mainCaltd-middle">
-                            <div class="mainCal2td-middle-item middle-end">
-                                <input type="hidden" value="` +
-                                r[i].carnumber +
+                            <div class="mainCal2td-middle-item ` +
+                                clasCol +
+                                ` middle-end">
+                                <input type="hidden" value="` + r[i].carnumber +
                                 `">
                                 <input type="hidden" value="` + r[i].carnumber +
                                 `">
@@ -589,25 +655,85 @@ function makeMain2BigCal() {
                 data: JSON.stringify(params),
 
                 success: function (r) {
+
+                    let htmls = ``;
+
                     for (let i = 0; i < r.length; i++) {
 
-                        arrHtmls[checkHolDay1(r[i].inspecdateend)] += `
+                        let clasCol = 'ca2Compa1';
+
+                        for (let k = 0; k < dbVe.length; k++) {
+                            if (r[i].carnumber == dbVe[k].carnumber) {
+                                for (let l = 0; l < dbCompa.length; l++) {
+                                    if (dbVe[k].owner == dbCompa.company) {
+                                        clasCol = 'ca2Compa2';
+                                    }
+                                }
+                            }
+                        }
+
+                        const stddddd = parseInt($('#calDay1').val().replaceAll('-', ''));
+                        const edddddd = parseInt($('#calDay42').val().replaceAll('-', ''));
+                        const insudedddd = parseInt((r[i].inspecdateend).replaceAll('-', ''));
+
+                        const nowDayyy = new Date();
+
+                        let toDayyy = new Date();
+                        toDayyy.setDate(toDayyy.getDate() + 15);
+                        const nowddd = parseInt(toStringByFormatting(toDayyy).replaceAll('-', ''));
+
+                        if (stddddd <= insudedddd && edddddd >= insudedddd) {
+                            arrHtmls[checkHolDay1(r[i].inspecdateend)] += `
                         <div class="mainCaltd-middle">
-                            <div class="mainCal2td-middle-item middle-end">
-                                <input type="hidden" value="` +
-                                r[i].carnumber +
-                                `">
+                            <div class="mainCal2td-middle-item ` +
+                                    clasCol +
+                                    ` middle-end">
+                                <input type="hidden" value="` + r[i].carnumber +
+                                    `">
                                 <input type="hidden" value="` + r[i].inspecseq +
-                                `">
+                                    `">
                                 <span class="spNum1">
                                     <span class="h2Ve">` +
-                                r[i].vehicle2 +
-                                `</span><span class="h2insuEnd">점검만료</span></span>
+                                    r[i].vehicle2 +
+                                    `</span><span class="h2insuEnd">점검만료</span></span>
                                 <span class="h2ch h2chEnd"><i class="fa-solid fa-wrench"></i></span>
                             </div>
                             <div class="maincaltd-middle-itemb">&nbsp;</div>
                         </div>`;
+                        }
+
+                        if (insudedddd <= nowddd) {
+
+                            let bak = parseInt(
+                                betweenDateNum(r[i].inspecdateend, toStringByFormatting(nowDayyy))
+                            )
+
+                            let dDayyy = ``;
+                            if (parseInt(bak) < 0) {
+                                dDayyy = `<td>` + bak + `일</td>`;
+                            } else {
+                                dDayyy = `<td class="h2chEventgrade">` + bak + `일</td>`;
+                            }
+
+                            htmls += `
+                            <tr class="carAside">
+                                <td>` +
+                                    r[i].vehicle2 +
+                                    `
+                                    <input type="hidden" value="` + r[i].carnumber +
+                                    `">
+                                </td>
+                                <td>` +
+                                    r[i].inspecdateend +
+                                    `</td>
+                                ` + dDayyy +
+                                    `
+                            </tr>`;
+                        }
                     }
+
+                    $('#home4EndInsepcTb').html(htmls);
+
                     resolve();
                 },
                 error: (jqXHR) => {
@@ -639,24 +765,83 @@ function makeMain2BigCal() {
                 data: JSON.stringify(params),
 
                 success: function (r) {
+
+                    let htmlsSide = ``;
+
                     for (let i = 0; i < r.length; i++) {
-                        arrHtmls[checkHolDay1(r[i].insudateend)] += `
+
+                        const stddddd = parseInt($('#calDay1').val().replaceAll('-', ''));
+                        const edddddd = parseInt($('#calDay42').val().replaceAll('-', ''));
+                        const insudedddd = parseInt((r[i].id5).replaceAll('-', ''));
+
+                        const nowDayyy = new Date();
+
+                        let toDayyy = new Date();
+                        toDayyy.setDate(toDayyy.getDate() + 15);
+                        const nowddd = parseInt(toStringByFormatting(toDayyy).replaceAll('-', ''));
+
+                        if (stddddd <= insudedddd && edddddd >= insudedddd) {
+
+                            let clasCol = 'ca2Compa1';
+
+                            for (let k = 0; k < dbVe.length; k++) {
+                                if (r[i].carnumber == dbVe[k].carnumber) {
+                                    for (let l = 0; l < dbCompa.length; l++) {
+                                        if (dbVe[k].owner == dbCompa.company) {
+                                            clasCol = 'ca2Compa2';
+                                        }
+                                    }
+                                }
+                            }
+
+                            arrHtmls[checkHolDay1(r[i].insudateend)] += `
                         <div class="mainCaltd-middle">
-                            <div class="mainCal2td-middle-item middle-end">
-                                <input type="hidden" value="` +
-                                r[i].carnumber +
-                                `">
+                            <div class="mainCal2td-middle-item ` +
+                                    clasCol +
+                                    ` middle-end">
+                                <input type="hidden" value="` + r[i].carnumber +
+                                    `">
                                 <input type="hidden" value="` + r[i].insuno +
-                                `">
+                                    `">
                                 <span class="spNum1">
                                     <span class="h2Ve">` +
-                                r[i].vehicle2 +
-                                `</span><span class="h2insuEnd">보험만료</span></span>
+                                    r[i].vehicle2 +
+                                    `</span><span class="h2insuEnd">보험만료</span></span>
                                 <span class="h2ch h2chEnd"><i class="fa-solid fa-triangle-exclamation"></i></span>
                             </div>
                             <div class="maincaltd-middle-itemb">&nbsp;</div>
                         </div>`;
+                        }
+
+                        if (insudedddd <= nowddd) {
+
+                            let bak = parseInt(betweenDateNum(r[i].id5, toStringByFormatting(nowDayyy)))
+
+                            let dDayyy = ``;
+                            if ((parseInt(bak)) < 0) {
+                                dDayyy = `<td>` + bak + `일</td>`;
+                            } else {
+                                dDayyy = `<td class="h2chEventgrade">` + bak + `일</td>`;
+                            }
+
+                            htmlsSide += `
+                            <tr class="carAside">
+                                <td>` +
+                                    r[i].vehicle2 +
+                                    `
+                                    <input type="hidden" value="` + r[i].carnumber +
+                                    `">
+                                </td>
+                                <td>` +
+                                    r[i].insudateend +
+                                    `</td>
+                                    ` + dDayyy +
+                                    `
+                            </tr>`;
+                        }
                     }
+
+                    $('#home4EndInsuTb').html(htmlsSide);
                     resolve();
                 },
                 error: (jqXHR) => {
@@ -774,10 +959,11 @@ function makeMain2BigCal() {
                     for (let i = 0; i < r.length; i++) {
 
                         let dDayyy = ``;
-                        if (parseInt(r[i].vegasid) < 0) {
-                            dDayyy = `<td class="h2chEventgrade">` + r[i].vegasid + `일</td>`;
+                        if ((parseInt(r[i].vegasid) + 1) < 0) {
+                            dDayyy = `<td class="h2chEventgrade">` + ((parseInt(r[i].vegasid) + 1) * -1) +
+                                    `일</td>`;
                         } else {
-                            dDayyy = `<td>` + r[i].vegasid + `일</td>`;
+                            dDayyy = `<td>` + ((parseInt(r[i].vegasid) + 1) * -1) + `일</td>`;
                         }
 
                         htmls += `
@@ -849,7 +1035,7 @@ function makeMain2BigCal() {
                                 `</td>
                                 ` + dDayyy +
                                 `
-                        </tr>`;;
+                        </tr>`;
                     }
 
                     $('#home4EndInsuTb').html(htmls);

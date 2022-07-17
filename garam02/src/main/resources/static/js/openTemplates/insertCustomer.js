@@ -46,104 +46,138 @@ $(document).on('change', 'input[name=ctmsepaIn]', function () {
     }
 });
 
-$(document).on('change', '#ctmnameIn', function () {
-    var val = $('#ctmnameIn').val();
-    var idNum = $('#name-cho option')
-        .filter(function () {
-            return this.value == val;
-        })
-        .data('value');
+$(document).on(
+    'propertychange change keyup paste input',
+    '#ctmnameIn',
+    function () {
 
-    const url = "/customer/name";
-    const headers = {
-        "Content-Type": "application/json",
-        "X-HTTP-Method-Override": "POST"
-    };
+        var val = $('#ctmnameIn').val();
+        if (val) {
+            var idNum = $('#name-cho option')
+                .filter(function () {
+                    return this.value == val;
+                })
+                .data('value');
 
-    const params = {
-        "ctmno": idNum
-    };
+            const url = "/customer/name";
+            const headers = {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST"
+            };
 
-    $.ajax({
-        url: url,
-        type: "POST",
-        headers: headers,
-        caches: false,
-        dataType: "json",
-        data: JSON.stringify(params),
-        success: function (r) {
-            if (r.length > 0) {
-                $('#ctmlseqqq').val('')
-                $('#ctmnoIn').val('');
-                $('#inCustSepa1').prop('checked', true);
-                $('#ctmtel1In').val('');
-                $('#ctmstpIn').val('');
-                $('#ctmdetailIn').val('');
-                $('#ctmtel2In').val('');
-                $('#ctmfaxIn').val('');
-                $('#ctmaddressIn').val('');
-                $('#ctmemailIn').val('');
-                $('#ctmcompanumIn').val('');
-                $('#ctmhomepageIn').val('');
+            const params = {
+                "ctmno": idNum
+            };
 
-                $('#ctmnoIn').val(r[0].ctmno);
+            $.ajax({
+                url: url,
+                type: "POST",
+                headers: headers,
+                caches: false,
+                dataType: "json",
+                data: JSON.stringify(params),
+                success: function (r) {
+                    if (r.length < 2) {
+                        $('#ctmlseqqq').val('')
+                        $('#ctmnoIn').val('');
+                        $('#inCustSepa1').prop('checked', true);
+                        $('#ctmtel1In').val('');
+                        $('#ctmstpIn').val('');
+                        $('#ctmdetailIn').val('');
+                        $('#ctmtel2In').val('');
+                        $('#ctmfaxIn').val('');
+                        $('#ctmaddressIn').val('');
+                        $('#ctmemailIn').val('');
+                        $('#ctmcompanumIn').val('');
+                        $('#ctmhomepageIn').val('');
 
-                if (r[0].ctmsepa === 0) {
-                    $('#inCustSepa1').prop('checked', true);
-                } else if (r[0].ctmsepa === 1) {
-                    $('#inCustSepa2').prop('checked', true);
-                } else if (r[0].ctmsepa === 2) {
-                    $('#inCustSepa3').prop('checked', true);
-                };
+                        // $('#ctmnoIn').val(r[0].ctmno);
 
-                if (r[0].ctmtel1) {
-                    $('#ctmtel1In').val(r[0].ctmtel1);
+                        if (r[0].ctmsepa === 0) {
+                            $('#inCustSepa1').prop('checked', true);
+                        } else if (r[0].ctmsepa === 1) {
+                            $('#inCustSepa2').prop('checked', true);
+                        } else if (r[0].ctmsepa === 2) {
+                            $('#inCustSepa3').prop('checked', true);
+                        };
+
+                        if (r[0].ctmtel1) {
+                            $('#ctmtel1In').val(r[0].ctmtel1);
+                        }
+                        if (r[0].ctmstp) {
+                            $('#ctmstpIn').val(r[0].ctmstp);
+                            $('#rsvpstp').val($('#ctmstpIn').val());
+                        }
+                        if (r[0].ctmdetail) {
+                            $('#ctmdetailIn').val(r[0].ctmdetail);
+                        }
+                        if (r[0].ctmtel2) {
+                            $('#ctmtel2In').val(r[0].ctmtel2);
+                        }
+                        if (r[0].ctmfax) {
+                            $('#ctmfaxIn').val(r[0].ctmfax);
+                        }
+                        if (r[0].ctmaddress) {
+                            $('#ctmaddressIn').val(r[0].ctmaddress);
+                        }
+                        if (r[0].ctmemail) {
+                            $('#ctmemailIn').val(r[0].ctmemail);
+                        }
+                        if (r[0].ctmcompanum) {
+                            $('#ctmcompanumIn').val(r[0].ctmcompanum);
+                        }
+                        if (r[0].ctmhomepage) {
+                            $('#ctmhomepageIn').val(r[0].ctmhomepage);
+                        }
+                    }
+                },
+                error: (jqXHR) => {
+                    loginSession(jqXHR.status);
                 }
-                if (r[0].ctmstp) {
-                    $('#ctmstpIn').val(r[0].ctmstp);
-                    $('#rsvpstp').val($('#ctmstpIn').val());
-                }
-                if (r[0].ctmdetail) {
-                    $('#ctmdetailIn').val(r[0].ctmdetail);
-                }
-                if (r[0].ctmtel2) {
-                    $('#ctmtel2In').val(r[0].ctmtel2);
-                }
-                if (r[0].ctmfax) {
-                    $('#ctmfaxIn').val(r[0].ctmfax);
-                }
-                if (r[0].ctmaddress) {
-                    $('#ctmaddressIn').val(r[0].ctmaddress);
-                }
-                if (r[0].ctmemail) {
-                    $('#ctmemailIn').val(r[0].ctmemail);
-                }
-                if (r[0].ctmcompanum) {
-                    $('#ctmcompanumIn').val(r[0].ctmcompanum);
-                }
-                if (r[0].ctmhomepage) {
-                    $('#ctmhomepageIn').val(r[0].ctmhomepage);
-                }
-            }
-        },
-        error: (jqXHR) => {
-            loginSession(jqXHR.status);
+            });
         }
-    });
-});
+    }
+);
 
 $(document).on('keyup', '#ctmstpIn', function () {
     $('#rsvpstp').val($('#ctmstpIn').val());
 });
 $(document).on('keyup', '#rsvpstp', function () {
     $('#ctmstpIn').val($('#rsvpstp').val());
+    $('#ctmstpUp').val($('#rsvpstp').val());
 });
 
 $(document).on('keyup', 'input', function (eInner) {
     if ($('#ctmnameIn').is(":focus")) {
         var keyValue = eInner.which; //enter key
-        if (keyValue == 8 || keyValue == 27 || keyValue == 46) {
+        if (keyValue == 27) {
             ernm();
+        } else if (keyValue == 8) {
+            $('#ctmlseqqq').val('')
+            $('#ctmnoIn').val('');
+            $('#inCustSepa1').prop('checked', true);
+            $('#ctmtel1In').val('');
+            $('#ctmstpIn').val('');
+            $('#ctmdetailIn').val('');
+            $('#ctmtel2In').val('');
+            $('#ctmfaxIn').val('');
+            $('#ctmaddressIn').val('');
+            $('#ctmemailIn').val('');
+            $('#ctmcompanumIn').val('');
+            $('#ctmhomepageIn').val('');
+        } else if (keyValue == 46) {
+            $('#ctmlseqqq').val('')
+            $('#ctmnoIn').val('');
+            $('#inCustSepa1').prop('checked', true);
+            $('#ctmtel1In').val('');
+            $('#ctmstpIn').val('');
+            $('#ctmdetailIn').val('');
+            $('#ctmtel2In').val('');
+            $('#ctmfaxIn').val('');
+            $('#ctmaddressIn').val('');
+            $('#ctmemailIn').val('');
+            $('#ctmcompanumIn').val('');
+            $('#ctmhomepageIn').val('');
         }
     }
 });
@@ -188,8 +222,6 @@ function insertCtm() {
             "ctmstp": $('#ctmstpIn').val(),
             "ctmdetail": $('#ctmdetailIn').val()
         };
-
-        console.table(params);
 
         $.ajax({
             url: url,

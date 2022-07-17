@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="ve-money" class="moneyVe">
+        <div class="moneyMainIng">
+            <h3>대출 현황</h3>
+            <div class="Ingtables">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-light">
+                            <th>대출처</th>
+                            <th>대출일</th>
+                            <th>만기일</th>
+                            <th>기간</th>
+                            <th>기산일</th>
+                            <th>월납입금</th>
+                            <th>대출금</th>
+                            <th>잔액</th>
+                        </thead>
+                        <tbody id="moneyIngBd"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="moneyMainEnd">
+            <h3>종료된 대출</h3>
+            <div class="Ingtables">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered tbLoan">
+                        <thead class="table-light">
+                            <th>대출처</th>
+                            <th>대출일</th>
+                            <th>만기일</th>
+                            <th>기간</th>
+                            <th>기산일</th>
+                            <th>월납입금</th>
+                            <th>대출금</th>
+                        </thead>
+                        <tbody id="moneyEndgBd"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="moneyMainEnd">
+            <button class="btn btn-secondary" id="newLoanCont">신규대출정보 입력</button>
+        </div>
+    </div>
+</html>

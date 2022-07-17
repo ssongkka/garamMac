@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <aside th:fragment="approvalSide" id="approvalSide">
+        <div class="logo" id="logoSide">
+            <span class="detail-user-1" th:text="${user.company}"></span>
+        </div>
+        <div class="aside-main">
+            <div class="side-item">
+                <h4 class="">결재 생성</h4>
+                <a href="/approval">일일보고서</a>
+                <a href="">배차보고서</a>
+            </div>
+            <hr>
+            <div class="side-item">
+                <h4 class="">결재 정보</h4>
+                <a href="/approvalgo">결재 대기</a>
+                <a href="">결재 중</a>
+                <a href="">반 려</a>
+            </div>
+        </div>
+    </aside>
+</html>

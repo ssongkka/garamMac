@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="approvalGo-body">
+        <aside th:replace="approval/approvalSide :: approvalSide"></aside>
+        <main class="approvalMain approvalGoMain">
+            <div class="apprGoMain container card-song">
+                <div>
+                    <h2>결재 대기 문서</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <colgroup>
+                            <col width="5%"/>
+                            <col width="20%"/>
+                            <col width="15%"/>
+                            <col width="auto"/>
+                            <col width="10%"/>
+                        </colgroup>
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>기안일자</th>
+                                <th>구분</th>
+                                <th>제목</th>
+                                <th>기안자</th>
+                            </tr>
+                        </thead>
+                        <tbody id="approvalGoTB"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <div th:replace="approval/approvalMD :: apprMD"></div>
+
+        <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/approval/approval.js"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/approval/approvalGo.js"></script>
+        <script
+            language="javascript"
+            type="text/javascript"
+            src="/js/approval/approvalMD.js"></script>
+    </body>
+
+</html>

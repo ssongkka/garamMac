@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div
+        th:fragment="adMDVePer"
+        class="modal fade"
+        id="adMDVePer"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="adMDVePerLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="adMDVePerLabel"></h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body adMDVeCompaMB">
+                    <div class="adMDVeCompa-items adMDVeCompa-items1">
+                        <div class="staticVeTitle1 row">
+                            <div class="col-sm-12">
+                                <div class="card-song">
+                                    <div class="staticVeTitle1-item1">
+                                        <div id="veStaticYearMonth">2022-05</div>
+                                        <div id="veStaticVe">2022-05</div>
+                                        <div id="veStaticPer">2022-05</div>
+                                        <div id="veStaticBrand">2022-05</div>
+                                        <div id="veStaticGrade">2022-05</div>
+                                        <div id="veStaticNum">2022-05</div>
+                                        <div id="veStaticRegD">2022-05</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adMDVeCompa-items adMDVeCompa-items1">
+                        <div class="staticVeTitle2 row">
+                            <div class="col-xl-3 col-sm-6 staticVeTitle-item">
+                                <div class="card-song">
+                                    <div class="vtTitle">운 행</div>
+                                    <div class="vtCont">
+                                        <div class="vtCont-item1">
+                                            <p>
+                                                <span id="veStaticInM">0</span><span>회</span>
+                                            </p>
+                                            <span class="" id="veStaticInMAve"></span>
+                                        </div>
+                                        <div class="vtCont-item2">
+                                            <div id="staticVe01"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6 staticVeTitle-item">
+                                <div class="card-song">
+                                    <div class="vtTitle">배차수익</div>
+                                    <div class="vtCont">
+                                        <div class="vtCont-item1">
+                                            <p>
+                                                <span>&#8361;</span><span id="veStaticOutM">0</span>
+                                            </p>
+                                            <span class="" id="veStaticOutMAve"></span>
+                                        </div>
+                                        <div class="vtCont-item2">
+                                            <div id="staticVe02"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6 staticVeTitle-item">
+                                <div class="card-song">
+                                    <div class="vtTitle">수 익</div>
+                                    <div class="vtCont">
+                                        <div class="vtCont-item1">
+                                            <div class="vtCont-item1">
+                                                <p>
+                                                    <span>&#8361;</span><span id="veStaticAllM">0</span>
+                                                </p>
+                                                <span class="" id="veStaticAllMAve"></span>
+                                            </div>
+                                        </div>
+                                        <div class="vtCont-item2">
+                                            <div id="staticVe03"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6 staticVeTitle-item">
+                                <div class="card-song">
+                                    <div class="vtTitle">잔 액</div>
+                                    <div class="vtCont" style="padding-bottom: 2.1rem;">
+                                        <div class="vtCont-item1">
+                                            <div class="vtCont-item1">
+                                                <p>
+                                                    <span>&#8361;</span><span id="veStaticGas1">0</span>
+                                                </p>
+                                                <span class="" id="veStaticGasAve"></span>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="vtCont-item1">
+                                                <p>
+                                                    <span id="veStaticGas2"></span>
+                                                    <span></span>
+                                                </p>
+                                                <span class="" id="veStaticGasAve"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adMDVeCompa-items adMDVeCompa-items1">
+                        <div class="staticVeTitle1 row">
+                            <div class="col-sm-12">
+                                <div class="card-song">
+                                    <div class="staticVeTitle1-item2">
+                                        <div id="staticVe00"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adMDVeCompa-items adMDVeCompa-items1">
+                        <div class="staticVeTitle1 row">
+                            <div class="col-sm-12">
+                                <div class="card-song">
+                                    <div class="staticVeTitle1-item2">
+                                        <div id="staticVe000"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adMDVeCompa-items adMDVeCompa-items1">
+                        <div class="staticVeTitle1 row">
+                            <div class="col-sm-7">
+                                <div class="card-song">
+                                    <table class="table table-bordered table-striped">
+                                        <colgroup></colgroup>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>날짜</th>
+                                                <th>목적지</th>
+                                                <th>금액</th>
+                                                <th>배차금액</th>
+                                                <th>배차수익</th>
+                                                <th>고객정보</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbStPerMd"></tbody>
+                                        <tfoot id="tfStPerMd"></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="card-song">
+                                    <table class="table table-bordered table-striped">
+                                        <colgroup></colgroup>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>날짜</th>
+                                                <th>입금</th>
+                                                <th>출금</th>
+                                                <th>잔액</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbStPerDealMd"></tbody>
+                                        <tfoot id="tfStPerDealMd"></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫&nbsp;기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

@@ -1744,6 +1744,10 @@ $(document).on('click', '.rsvtDetails', function () {
                         $('#cont-1').val(r[0].cont);
                         $('#conm-1').val(AddComma(r[0].conm));
                         $('#numm-1').val(r[0].numm);
+
+                        $("#rsvtrsvt1").val(r[0].datein);
+                        $("#rsvtrsvt2").val(r[0].datech);
+                        $("#rsvtrsvt3").val(r[0].empin);
                     } else {
                         $('#stday-1').val('');
                         $('#endday-1').val('');
@@ -1757,6 +1761,10 @@ $(document).on('click', '.rsvtDetails', function () {
                         $('#cont-1').val('');
                         $('#conm-1').val('');
                         $('#numm-1').val('');
+
+                        $("#rsvtrsvt1").val("");
+                        $("#rsvtrsvt2").val("");
+                        $("#rsvtrsvt3").val("");
                     }
                     chDateInput();
                     resolve();
@@ -1923,7 +1931,8 @@ function updateRsvt(result) {
                 "cont": $('#cont-1').val(),
                 "conm": $('#conm-1').val(),
                 "numm": $('#numm-1').val(),
-                "rsvt": $('#md-rsvtNum').val()
+                "rsvt": $('#md-rsvtNum').val(),
+                "empin": dbuser.id
             };
 
             $.ajax({

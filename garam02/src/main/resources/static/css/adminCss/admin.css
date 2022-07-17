@@ -4,7 +4,32 @@ main {
     background: #f6f7f9;
     margin-left: 30rem;
     min-height: 100vh;
-    padding: 3rem 8rem;
+    padding: 3rem 5rem;
 }
 
-.amdinSignForm {}
+.amdinSignForm {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.adminuser {
+    padding: 3rem 50rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.adminuser-item1 {
+    padding: 3rem 5rem;
+}
+
+.adminuser-item2 {
+    padding: 3rem 5rem;
+}
+
+#signUpForm {
+    width: 100%;
+}
+

@@ -41,17 +41,18 @@ function getApprIngList() {
                             }
                         }
 
-                        htmls = `
+                        htmls += `
                     <tr class="apprShowMd">
-                        <td>` +
-                                (i + 1) + `<input type="hidden" value="` + r[i].approvalno +
+                        <td>` + (
+                            i + 1
+                        ) + `<input type="hidden" value="` + r[i].approvalno +
                                 `">
                                 </td>
                         <td>` + r[i].approvalupday +
                                 `</td>
                         <td>` + r[i].approvalpaper +
                                 `</td>
-                        <td class="tdLeft">` + r[i].approvaltitle +
+                        <td class="">` + r[i].approvaltitle +
                                 `</td>
                         <td>` + damdang +
                                 `</td>

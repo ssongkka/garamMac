@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="main-body">
+        <!-- 자동완성 방지용 -->
+        <input type="text" style="width:0px;height:0px;position: absolute;">
+        <input type="password" style="width:0px;height:0px;position: absolute;">
+        <!-- 자동완성 방지용 -->
+        <header>
+            <div class="container" tabindex="-1">
+                <div class="headerD">
+                    <input type="hidden" id="rgconum" name="conum" th:value="${code.conum}">
+                    <div class="title1">
+                        <div class="title1-item">
+                            <a class="btn btn-default" role="button" id="md-rgCh">
+                                <i class="fas fa-arrow-left"></i>
+                                뒤로
+                            </a>
+                        </div>
+                        <div class="title1-item">
+                            <h2 id="rgcompa">회사명</h2>
+                            <h5 id="rgadd">주소</h5>
+                        </div>
+                    </div>
+                    <div class="title2">
+                        <blockquote>
+                            <h5 class="titlejae">계약기간</h5>
+                            <h5 id="rgper">&nbsp;</h5>
+                        </blockquote>
+                        <blockquote>
+                            <h5 class="titlejae">담당자</h5>
+                            <h5>
+                                <span id="rgname">&nbsp;</span>
+                                <span>
+                                    <a id="rgtel">&nbsp;</a>
+                                </span>
+                            </h5>
+                        </blockquote>
+                        <blockquote>
+                            <h5 class="titlejae">운행대수</h5>
+                            <h5 id="rgnum">&nbsp;</h5>
+                        </blockquote>
+                        <blockquote>
+                            <h5 class="titlejae">계약</h5>
+                            <h5>
+                                <span id="rgcon">&nbsp;</span>
+                            </h5>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container cont" tabindex="-1">
+                <input type="hidden" id="regcodenum" value="">
+                <div class="cont-item card-song">
+                    <div class="cont-item1">
+                        <div class="table-responsive">
+                            <table class="table table-striped rg-tb-ch">
+                                <colgroup>
+                                    <col width="4%"/>
+                                    <col width="4%"/>
+                                    <col width="17%"/>
+                                    <col width="8%"/>
+                                    <col width="10%"/>
+                                    <col width="10%"/>
+                                    <col width="10%"/>
+                                    <col width="14%"/>
+                                    <col width="3%"/>
+                                    <col width="10%"/>
+                                    <col width="4%"/>
+                                    <col width="3%"/>
+                                    <col width="3%"/>
+                                    <col width="0%"/>
+                                    <col width="0%"/>
+                                </colgroup>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>
+                                            <i class="fas fa-minus"></i>
+                                        </th>
+                                        <th>#</th>
+                                        <th>노선명</th>
+                                        <th>차량</th>
+                                        <th>계약</th>
+                                        <th>계약금액</th>
+                                        <th>배차금액(월)</th>
+                                        <th colspan="2">운행차량</th>
+                                        <th>승무원</th>
+                                        <th>노선</th>
+                                        <th colspan="2">이동</th>
+                                        <th class="thNone"></th>
+                                        <th class="thNone"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rgch-tbb"></tbody>
+                            </table>
+                        </div>
+                        <datalist id="car-info">
+                            <option
+                                th:each="ve : ${ve}"
+                                th:value="${ve.vehicle2}"
+                                th:label="${ve.vehicle2}"
+                                th:data-value="${ve.carnumber}"
+                                th:data-owner="${ve.owner}"></option>
+                            <option
+                                th:each="othercompa : ${othercompa}"
+                                th:value="${othercompa.ctmname}"
+                                th:label="${othercompa.ctmname}"
+                                th:data-value="${othercompa.ctmname}"
+                                th:data-owner="${othercompa.ctmname}"></option>
+                        </datalist>
+                    </div>
+                    <div class="cont-item2">
+                        <div class="cont-item-foot">
+                            <button type="button" class="btn btn-primary" id="insertPlus">
+                                <i class="fas fa-plus"></i>노선추가
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Modal -->
+
+        <div
+            class="modal fade"
+            id="regModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="regModalLabel"></h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                        <input type="hidden" id="modalcodenum" value="">
+                    </div>
+                    <div class="modal-body rcBody">
+                        <div class="rcBody-item form-group card-song">
+                            <label for="chchchch">운행 요일</label>
+                            <div id="chchchch">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="chDow" id="chDow1" value="1">
+                                    월
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="chDow" id="chDow2" value="2">
+                                    화
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="chDow" id="chDow3" value="3">
+                                    수
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="chDow" id="chDow4" value="4">
+                                    목
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="chDow" id="chDow5" value="5">
+                                    금
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="chDow" id="chDow6" value="6">
+                                    토
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="chDow" id="chDow0" value="0">
+                                    일
+                                </label>
+                            </div>
+                        </div>
+                        <div class="rcBody-item form-group card-song">
+                            <label for="chchchch">노선 특이사항</label>
+                            <div id="chchchch">
+                                <input
+                                    class="form-control input-sm input-ent"
+                                    type="text"
+                                    id="rdememoo"
+                                    placeholder="특이사항입력">
+                            </div>
+                        </div>
+                        <div class="rcBody-item form-group card-song">
+                            <label for="gogogogogo">출근</label>
+                            <button type="button" class="btn btn-default btngout" id="plusgoTb">
+                                <i class="fas fa-plus"></i>출근추가</button>
+                            <div id="gogogogogo"></div>
+                        </div>
+                        <div class="rcBody-item form-group card-song">
+                            <label for="goutgoutgout">퇴근</label>
+                            <button type="button" class="btn btn-default btngout" id="plusoutTb">
+                                <i class="fas fa-plus"></i>퇴근추가</button>
+                            <div id="goutgoutgout"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="layout/linkGroupScript :: linkScript"></th:block>
+    <script
+        language="javascript"
+        type="text/javascript"
+        src="/js/regular/regularBodyCh.js?v=2020051201"></script>
+</body>
+</html>
